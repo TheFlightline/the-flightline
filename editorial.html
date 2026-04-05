@@ -5,51 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Flightline — Editorial</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100vh;}
-#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;}
-.login-card{background:white;border:0.5px solid #ddd;border-radius:12px;padding:2rem;width:320px;}
-.login-card h1{font-size:18px;font-weight:500;margin-bottom:4px;}
-.login-card p{font-size:13px;color:#666;margin-bottom:1.5rem;}
-.login-card input{width:100%;padding:8px 12px;border:0.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;margin-bottom:12px;}
-.login-card input:focus{outline:none;border-color:#888;}
-.login-card button{width:100%;padding:9px;background:#1a1a1a;color:white;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;}
+:root{--navy:#1e2d4a;--gold:#d4952b;--bar:#D4871A;--bg:#f4f2ee;--white:#ffffff;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--navy);min-height:100vh;}
+/* ── SITE HEADER ── */
+.site-header{background:var(--navy);padding:0 1.5rem;}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 0;}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-text{line-height:1;}
+.logo-the{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.15em;color:rgba(255,255,255,0.7);text-transform:uppercase;display:block;}
+.logo-name{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#ffffff;letter-spacing:0.02em;display:block;line-height:1;}
+.logo-loc{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:400;letter-spacing:0.12em;color:rgba(255,255,255,0.5);text-transform:uppercase;display:block;}
+.logo-bars{display:flex;flex-direction:column;gap:3px;justify-content:center;}
+.logo-bars span{display:block;background:var(--bar);border-radius:1px;}
+.logo-bars span:nth-child(1){width:18px;height:4px;}
+.logo-bars span:nth-child(2){width:13px;height:4px;}
+.logo-bars span:nth-child(3){width:8px;height:4px;}
+.header-label{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);}
+/* ── LOGIN ── */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 68px);padding:2rem;}
+.login-card{background:var(--white);border:1px solid rgba(30,45,74,0.12);border-radius:12px;padding:2.5rem 2rem;width:340px;}
+.login-card h2{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;color:var(--navy);margin-bottom:2px;}
+.login-card p{font-size:13px;color:#666;margin-bottom:1.75rem;line-height:1.5;}
+.login-card input{width:100%;padding:10px 14px;border:1px solid rgba(30,45,74,0.2);border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;margin-bottom:12px;color:var(--navy);background:white;}
+.login-card input:focus{outline:none;border-color:var(--navy);}
+.login-card button{width:100%;padding:10px;background:var(--navy);color:white;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.01em;}
+.login-card button:hover{background:#162238;}
 .login-error{font-size:12px;color:#a32d2d;margin-top:8px;display:none;}
-#app{display:none;max-width:760px;margin:0 auto;padding:2rem 1rem;}
-.header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1.5rem;border-bottom:0.5px solid #ddd;margin-bottom:1.5rem;}
-.logo{font-size:11px;font-weight:500;color:#888;letter-spacing:0.05em;text-transform:uppercase;}
-.page-title{font-size:22px;font-weight:500;margin-top:4px;}
-.batch-meta{font-size:13px;color:#666;text-align:right;}
-.batch-meta strong{color:#1a1a1a;font-weight:500;}
-.summary-bar{display:flex;gap:10px;margin-bottom:1.5rem;}
-.summary-card{flex:1;background:#f5f5f3;border-radius:8px;padding:12px 14px;}
-.summary-card .num{font-size:22px;font-weight:500;}
-.summary-card .lbl{font-size:11px;color:#888;margin-top:2px;}
+.login-divider{width:32px;height:3px;background:var(--bar);border-radius:2px;margin-bottom:1.25rem;}
+/* ── APP ── */
+#app{display:none;max-width:800px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+.page-header{padding:1.5rem 0 1.5rem;border-bottom:2px solid var(--navy);margin-bottom:1.5rem;}
+.page-header h1{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:0.04em;color:var(--navy);line-height:1;}
+.page-header-sub{display:flex;align-items:center;justify-content:space-between;margin-top:6px;}
+.batch-date{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#666;}
+.batch-count{font-family:'Barlow Condensed',sans-serif;font-size:13px;color:#888;letter-spacing:0.05em;}
+/* ── SUMMARY ── */
+.summary-bar{display:flex;gap:10px;margin-bottom:1.25rem;}
+.s-card{flex:1;background:var(--white);border:1px solid rgba(30,45,74,0.1);border-radius:8px;padding:12px 14px;}
+.s-card .num{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--navy);letter-spacing:0.02em;}
+.s-card .lbl{font-size:11px;color:#888;margin-top:1px;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;text-transform:uppercase;}
+/* ── LEGEND ── */
 .legend{display:flex;gap:16px;margin-bottom:1.5rem;flex-wrap:wrap;}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#666;}
 .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.article-card{background:white;border:0.5px solid #ddd;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem;transition:border-color 0.15s;}
-.article-card.approved{border-color:#1D9E75;}
-.article-card.revision{border-color:#BA7517;}
-.article-card.rejected{border-color:#A32D2D;}
-.cat-badge{font-size:11px;font-weight:500;padding:3px 8px;border-radius:99px;background:#f0f0ee;color:#666;}
-.status-tag{font-size:11px;font-weight:500;padding:3px 8px;border-radius:99px;display:none;}
+/* ── ARTICLE CARDS ── */
+.article-card{background:var(--white);border:1px solid rgba(30,45,74,0.12);border-left:4px solid transparent;border-radius:0 10px 10px 0;padding:1rem 1.25rem;margin-bottom:1rem;transition:border-color 0.15s;}
+.article-card.approved{border-left-color:#1D9E75;}
+.article-card.revision{border-left-color:#BA7517;}
+.article-card.rejected{border-left-color:#A32D2D;}
+.cat-badge{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:3px 8px;border-radius:3px;background:var(--navy);color:white;letter-spacing:0.08em;text-transform:uppercase;}
+.status-tag{font-size:11px;font-weight:500;padding:3px 8px;border-radius:99px;display:none;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.05em;text-transform:uppercase;}
 .status-tag.approved{background:#9FE1CB;color:#085041;display:inline-block;}
 .status-tag.revision{background:#FAC775;color:#412402;display:inline-block;}
 .status-tag.rejected{background:#F7C1C1;color:#501313;display:inline-block;}
-.headline{font-size:15px;font-weight:500;line-height:1.4;margin-bottom:4px;}
+.headline{font-size:16px;font-weight:600;line-height:1.35;margin-bottom:4px;color:var(--navy);}
 .dek{font-size:13px;color:#555;line-height:1.5;margin-bottom:10px;}
 .brief-list{list-style:none;margin-bottom:12px;}
-.brief-list li{font-size:12px;color:#666;padding:3px 0 3px 12px;position:relative;line-height:1.4;}
-.brief-list li::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:#bbb;}
-.card-footer{display:flex;align-items:center;justify-content:space-between;border-top:0.5px solid #eee;padding-top:12px;gap:12px;}
+.brief-list li{font-size:12px;color:#666;padding:3px 0 3px 14px;position:relative;line-height:1.4;}
+.brief-list li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:2px;background:var(--gold);}
+.card-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(30,45,74,0.08);padding-top:12px;gap:12px;}
 .meta{font-size:12px;color:#888;flex:1;}
-.meta a{color:#185FA5;text-decoration:none;}
+.meta a{color:var(--navy);text-decoration:underline;}
 .actions{display:flex;gap:6px;flex-shrink:0;}
-.btn{font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;border:0.5px solid #ddd;background:transparent;cursor:pointer;color:#1a1a1a;white-space:nowrap;font-family:inherit;}
-.btn:hover{background:#f5f5f3;}
+.btn{font-size:12px;font-weight:600;padding:6px 12px;border-radius:6px;border:1px solid rgba(30,45,74,0.2);background:transparent;cursor:pointer;color:var(--navy);white-space:nowrap;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;text-transform:uppercase;}
+.btn:hover{background:var(--bg);}
 .btn.approve{border-color:#1D9E75;color:#085041;}
 .btn.approve:hover{background:#E1F5EE;}
 .btn.revision{border-color:#BA7517;color:#412402;}
@@ -59,54 +81,75 @@ body{font-family:'DM Sans',sans-serif;background:#f5f5f3;color:#1a1a1a;min-heigh
 .btn.active-approve{background:#1D9E75;border-color:#1D9E75;color:white;}
 .btn.active-revision{background:#BA7517;border-color:#BA7517;color:white;}
 .btn.active-reject{background:#A32D2D;border-color:#A32D2D;color:white;}
-.panel{display:none;margin-top:12px;padding-top:12px;border-top:0.5px solid #eee;}
+.panel{display:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(30,45,74,0.08);}
 .panel.open{display:block;}
-.panel-label{font-size:12px;font-weight:500;color:#666;margin-bottom:6px;}
+.panel-label{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#888;margin-bottom:8px;}
 .tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
-.tag-btn{font-size:12px;padding:4px 10px;border-radius:99px;border:0.5px solid #ddd;background:transparent;cursor:pointer;color:#666;font-family:inherit;}
+.tag-btn{font-size:11px;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:4px 10px;border-radius:4px;border:1px solid rgba(30,45,74,0.15);background:transparent;cursor:pointer;color:#666;}
 .tag-btn.sel-revision{background:#FAEEDA;border-color:#BA7517;color:#412402;}
 .tag-btn.sel-rejected{background:#FCEBEB;border-color:#A32D2D;color:#501313;}
-.panel-textarea{width:100%;font-size:13px;font-family:inherit;color:#1a1a1a;background:#f5f5f3;border:0.5px solid #ddd;border-radius:8px;padding:8px 10px;resize:none;min-height:56px;line-height:1.5;}
-.panel-textarea:focus{outline:none;border-color:#888;}
-.panel-submit{margin-top:8px;font-size:13px;font-weight:500;padding:6px 14px;border-radius:8px;background:transparent;cursor:pointer;font-family:inherit;}
-.panel-submit.revision{border:0.5px solid #BA7517;color:#412402;}
+.panel-textarea{width:100%;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--navy);background:var(--bg);border:1px solid rgba(30,45,74,0.15);border-radius:6px;padding:8px 10px;resize:none;min-height:56px;line-height:1.5;}
+.panel-textarea:focus{outline:none;border-color:var(--navy);}
+.panel-submit{margin-top:8px;font-size:12px;font-weight:700;padding:6px 14px;border-radius:6px;background:transparent;cursor:pointer;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;text-transform:uppercase;}
+.panel-submit.revision{border:1px solid #BA7517;color:#412402;}
 .panel-submit.revision:hover{background:#FAEEDA;}
-.panel-submit.rejected{border:0.5px solid #A32D2D;color:#501313;}
+.panel-submit.rejected{border:1px solid #A32D2D;color:#501313;}
 .panel-submit.rejected:hover{background:#FCEBEB;}
-.publish-bar{background:white;border-radius:12px;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:1.5rem;border:0.5px solid #ddd;}
-.publish-info{font-size:13px;color:#666;line-height:1.6;}
-.publish-info strong{color:#1a1a1a;font-weight:500;}
-.btn-publish{font-size:14px;font-weight:500;padding:8px 20px;border-radius:8px;border:none;background:#1a1a1a;color:white;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:inherit;}
+/* ── PUBLISH BAR ── */
+.publish-bar{background:var(--navy);border-radius:10px;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:1.5rem;}
+.publish-info{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;}
+.publish-info strong{color:white;font-weight:500;}
+.btn-publish{font-size:13px;font-weight:700;padding:9px 22px;border-radius:6px;border:none;background:var(--gold);color:var(--navy);cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.08em;text-transform:uppercase;}
+.btn-publish:hover{background:#c4851f;}
 .btn-publish:disabled{opacity:0.35;cursor:default;}
 .empty-state{text-align:center;padding:3rem 1rem;color:#888;font-size:14px;}
-.published-confirm{background:#E1F5EE;border:0.5px solid #1D9E75;border-radius:12px;padding:1.25rem;text-align:center;margin-top:1.5rem;display:none;}
-.published-confirm h3{font-size:16px;font-weight:500;color:#085041;margin-bottom:4px;}
+.published-confirm{background:#E1F5EE;border:1px solid #1D9E75;border-radius:10px;padding:1.5rem;text-align:center;margin-top:1.5rem;display:none;}
+.published-confirm h3{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.04em;color:#085041;margin-bottom:4px;}
 .published-confirm p{font-size:13px;color:#0F6E56;}
 </style>
 </head>
 <body>
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo-wrap">
+      <div class="logo-bars">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="logo-text">
+        <span class="logo-the">The</span>
+        <span class="logo-name">Flightline</span>
+        <span class="logo-loc">Pensacola, FL</span>
+      </div>
+    </a>
+    <span class="header-label">Editorial Dashboard</span>
+  </div>
+</header>
+<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-card">
-    <h1>The Flightline</h1>
-    <p>Editorial dashboard — sign in to review today's batch.</p>
+    <div class="login-divider"></div>
+    <h2>Editorial Access</h2>
+    <p>Review and approve the morning article batch before it publishes to The Flightline.</p>
     <input type="password" id="pwd-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkLogin()">
     <button onclick="checkLogin()">Sign in</button>
-    <div class="login-error" id="login-error">Incorrect password.</div>
+    <div class="login-error" id="login-error">Incorrect password. Try again.</div>
   </div>
 </div>
+<!-- APP -->
 <div id="app">
-  <div class="header">
-    <div>
-      <div class="logo">The Flightline — Editorial</div>
-      <div class="page-title">Morning batch review</div>
+  <div class="page-header">
+    <h1>Morning Batch Review</h1>
+    <div class="page-header-sub">
+      <span class="batch-date" id="batch-date"></span>
+      <span class="batch-count" id="batch-count"></span>
     </div>
-    <div class="batch-meta" id="batch-meta"></div>
   </div>
   <div class="summary-bar">
-    <div class="summary-card"><div class="num" id="n-pending">0</div><div class="lbl">Pending</div></div>
-    <div class="summary-card"><div class="num" id="n-approved">0</div><div class="lbl">Approved</div></div>
-    <div class="summary-card"><div class="num" id="n-revision">0</div><div class="lbl">Needs revision</div></div>
-    <div class="summary-card"><div class="num" id="n-rejected">0</div><div class="lbl">Rejected</div></div>
+    <div class="s-card"><div class="num" id="n-pending">0</div><div class="lbl">Pending</div></div>
+    <div class="s-card"><div class="num" id="n-approved">0</div><div class="lbl">Approved</div></div>
+    <div class="s-card"><div class="num" id="n-revision">0</div><div class="lbl">Revision</div></div>
+    <div class="s-card"><div class="num" id="n-rejected">0</div><div class="lbl">Rejected</div></div>
   </div>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#1D9E75;"></div>Approve — publishes now</div>
@@ -120,7 +163,7 @@ body{font-family:'DM Sans',sans-serif;background:#f5f5f3;color:#1a1a1a;min-heigh
     <button class="btn-publish" id="publish-btn" disabled onclick="publishApproved()">Publish approved</button>
   </div>
   <div class="published-confirm" id="published-confirm">
-    <h3>Published successfully</h3>
+    <h3>Published</h3>
     <p id="published-msg"></p>
   </div>
 </div>
@@ -140,23 +183,17 @@ function checkLogin() {
     document.getElementById('login-error').style.display = 'block';
   }
 }
-function formatDate(d) {
-  return new Date(d).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
-}
 function loadBatch() {
   const params = new URLSearchParams(window.location.search);
   const batchParam = params.get('batch');
   if (batchParam) {
-    try {
-      articles = JSON.parse(atob(batchParam));
-    } catch(e) {
-      articles = [];
-    }
+    try { articles = JSON.parse(atob(batchParam)); } catch(e) { articles = []; }
   } else {
     articles = window._devBatch || [];
   }
-  const meta = document.getElementById('batch-meta');
-  meta.innerHTML = '<strong>' + formatDate(new Date()) + '</strong><br>Generated 6:00 AM &nbsp;·&nbsp; ' + articles.length + ' article' + (articles.length !== 1 ? 's' : '');
+  const now = new Date();
+  document.getElementById('batch-date').textContent = now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  document.getElementById('batch-count').textContent = articles.length + ' article' + (articles.length !== 1 ? 's' : '') + ' · Generated 6:00 AM';
   articles.forEach(a => { state[a.id] = { status: 'pending', tags: [], note: '', type: null }; });
   renderCards();
   updateSummary();
@@ -164,15 +201,12 @@ function loadBatch() {
 function renderCards() {
   const container = document.getElementById('cards');
   container.innerHTML = '';
-  if (!articles.length) {
-    document.getElementById('empty-state').style.display = 'block';
-    return;
-  }
+  if (!articles.length) { document.getElementById('empty-state').style.display = 'block'; return; }
   document.getElementById('publish-bar').style.display = 'flex';
   articles.forEach(a => {
     container.innerHTML += `<div class="article-card" id="card-${a.id}">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-        <span class="cat-badge">${a.label || a.cat}</span>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span class="cat-badge">${a.label||a.cat}</span>
         <span class="status-tag" id="tag-${a.id}"></span>
       </div>
       <div class="headline">${a.headline}</div>
@@ -196,7 +230,7 @@ function clearCard(id) {
   document.getElementById('tag-'+id).className = 'status-tag';
   ['rejected','revision','approve'].forEach(t => {
     const b = document.getElementById('btn-'+t+'-'+id);
-    if(b) b.className = 'btn ' + (t==='approve'?'approve':t);
+    if(b) b.className = 'btn '+(t==='approve'?'approve':t);
   });
   document.getElementById('panel-'+id).className = 'panel';
 }
@@ -205,7 +239,7 @@ function toggleTag(id, tag, type) {
   const i = s.tags.indexOf(tag);
   if (i > -1) s.tags.splice(i,1); else s.tags.push(tag);
   document.querySelectorAll('#tags-'+id+' .tag-btn').forEach(b => {
-    b.className = 'tag-btn' + (s.tags.includes(b.dataset.tag) ? ' sel-'+type : '');
+    b.className = 'tag-btn'+(s.tags.includes(b.dataset.tag)?' sel-'+type:'');
   });
 }
 function openPanel(id, type) {
@@ -217,14 +251,14 @@ function openPanel(id, type) {
   const panel = document.getElementById('panel-'+id);
   panel.innerHTML = `<div class="panel-label">${type==='revision'?'What needs fixing?':'Why reject this article?'}</div>
     <div class="tag-row" id="tags-${id}">${tags.map(t=>`<button class="tag-btn" data-tag="${t}" onclick="toggleTag('${id}','${t}','${type}')">${t}</button>`).join('')}</div>
-    <textarea class="panel-textarea" id="note-${id}" placeholder="${type==='revision'?'Optional: specific notes for the pipeline (e.g. get a quote from the mayor, focus on resident impact)':'Optional: note for your records'}"></textarea>
+    <textarea class="panel-textarea" id="note-${id}" placeholder="${type==='revision'?'Optional: specific notes for the pipeline':'Optional: note for your records'}"></textarea>
     <button class="panel-submit ${type}" onclick="submitDecision('${id}','${type}')">Confirm ${type==='revision'?'revision request':'rejection'}</button>`;
   panel.className = 'panel open';
   document.getElementById('btn-'+type+'-'+id).className = 'btn active-'+type;
   updateSummary();
 }
 function submitDecision(id, type) {
-  state[id].note = (document.getElementById('note-'+id)||{}).value || '';
+  state[id].note = (document.getElementById('note-'+id)||{}).value||'';
   state[id].status = type;
   document.getElementById('card-'+id).className = 'article-card '+type;
   document.getElementById('tag-'+id).className = 'status-tag '+type;
@@ -244,15 +278,14 @@ function setApproved(id) {
 function updateSummary() {
   const c = {pending:0,approved:0,revision:0,rejected:0};
   Object.values(state).forEach(s => c[s.status]++);
-  document.getElementById('n-pending').textContent = c.pending;
-  document.getElementById('n-approved').textContent = c.approved;
-  document.getElementById('n-revision').textContent = c.revision;
-  document.getElementById('n-rejected').textContent = c.rejected;
+  ['pending','approved','revision','rejected'].forEach(k => {
+    document.getElementById('n-'+k).textContent = c[k];
+  });
   const btn = document.getElementById('publish-btn');
   const info = document.getElementById('publish-info');
   if (c.pending > 0) {
     btn.disabled = true;
-    info.textContent = c.pending + ' article' + (c.pending>1?'s':'') + ' still pending review';
+    info.textContent = c.pending + ' article'+(c.pending>1?'s':'')+' still pending review';
     return;
   }
   btn.disabled = c.approved === 0;
@@ -260,7 +293,7 @@ function updateSummary() {
   if (c.approved > 0) parts.push('<strong>'+c.approved+' approved</strong> will publish');
   if (c.revision > 0) parts.push('<strong>'+c.revision+'</strong> sent back for revision');
   if (c.rejected > 0) parts.push('<strong>'+c.rejected+'</strong> permanently rejected');
-  info.innerHTML = parts.join(' &nbsp;·&nbsp; ') || 'Nothing to publish today';
+  info.innerHTML = parts.join(' &nbsp;·&nbsp; ')||'Nothing to publish today';
 }
 function publishApproved() {
   const approved = articles.filter(a => state[a.id].status === 'approved');
@@ -269,21 +302,14 @@ function publishApproved() {
   }));
   const payload = {
     approved: approved.map(a => a.id),
-    revisions: revisions,
+    revisions,
     rejected: articles.filter(a => state[a.id].status === 'rejected').map(a => a.id),
     timestamp: new Date().toISOString()
   };
   const webhookUrl = window._makeWebhook || '';
   if (webhookUrl) {
-    fetch(webhookUrl, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
-    }).then(() => {
-      showConfirmation(approved.length);
-    }).catch(() => {
-      showConfirmation(approved.length);
-    });
+    fetch(webhookUrl, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) })
+      .finally(() => showConfirmation(approved.length));
   } else {
     console.log('Approval payload:', JSON.stringify(payload, null, 2));
     showConfirmation(approved.length);
@@ -291,10 +317,10 @@ function publishApproved() {
 }
 function showConfirmation(count) {
   document.getElementById('publish-bar').style.display = 'none';
-  document.getElementById('cards').style.opacity = '0.5';
-  const confirm = document.getElementById('published-confirm');
-  document.getElementById('published-msg').textContent = count + ' article' + (count>1?'s':'') + ' published to The Flightline. Revision notes sent back to the pipeline.';
-  confirm.style.display = 'block';
+  document.getElementById('cards').style.opacity = '0.4';
+  const el = document.getElementById('published-confirm');
+  document.getElementById('published-msg').textContent = count + ' article'+(count>1?'s':'')+' published to The Flightline. Revision notes sent back to the pipeline.';
+  el.style.display = 'block';
 }
 </script>
 </body>
