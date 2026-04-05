@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Flightline — Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100vh;}
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;}
+.login-card{background:white;border:0.5px solid #ddd;border-radius:12px;padding:2rem;width:320px;}
+.login-card h1{font-size:18px;font-weight:500;margin-bottom:4px;}
+.login-card p{font-size:13px;color:#666;margin-bottom:1.5rem;}
+.login-card input{width:100%;padding:8px 12px;border:0.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;margin-bottom:12px;}
+.login-card input:focus{outline:none;border-color:#888;}
+.login-card button{width:100%;padding:9px;background:#1a1a1a;color:white;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;}
+.login-error{font-size:12px;color:#a32d2d;margin-top:8px;display:none;}
+#app{display:none;max-width:760px;margin:0 auto;padding:2rem 1rem;}
+.header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:1.5rem;border-bottom:0.5px solid #ddd;margin-bottom:1.5rem;}
+.logo{font-size:11px;font-weight:500;color:#888;letter-spacing:0.05em;text-transform:uppercase;}
+.page-title{font-size:22px;font-weight:500;margin-top:4px;}
+.batch-meta{font-size:13px;color:#666;text-align:right;}
+.batch-meta strong{color:#1a1a1a;font-weight:500;}
+.summary-bar{display:flex;gap:10px;margin-bottom:1.5rem;}
+.summary-card{flex:1;background:#f5f5f3;border-radius:8px;padding:12px 14px;}
+.summary-card .num{font-size:22px;font-weight:500;}
+.summary-card .lbl{font-size:11px;color:#888;margin-top:2px;}
+.legend{display:flex;gap:16px;margin-bottom:1.5rem;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#666;}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.article-card{background:white;border:0.5px solid #ddd;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem;transition:border-color 0.15s;}
+.article-card.approved{border-color:#1D9E75;}
+.article-card.revision{border-color:#BA7517;}
+.article-card.rejected{border-color:#A32D2D;}
+.cat-badge{font-size:11px;font-weight:500;padding:3px 8px;border-radius:99px;background:#f0f0ee;color:#666;}
+.status-tag{font-size:11px;font-weight:500;padding:3px 8px;border-radius:99px;display:none;}
+.status-tag.approved{background:#9FE1CB;color:#085041;display:inline-block;}
+.status-tag.revision{background:#FAC775;color:#412402;display:inline-block;}
+.status-tag.rejected{background:#F7C1C1;color:#501313;display:inline-block;}
+.headline{font-size:15px;font-weight:500;line-height:1.4;margin-bottom:4px;}
+.dek{font-size:13px;color:#555;line-height:1.5;margin-bottom:10px;}
+.brief-list{list-style:none;margin-bottom:12px;}
+.brief-list li{font-size:12px;color:#666;padding:3px 0 3px 12px;position:relative;line-height:1.4;}
+.brief-list li::before{content:'';position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:#bbb;}
+.card-footer{display:flex;align-items:center;justify-content:space-between;border-top:0.5px solid #eee;padding-top:12px;gap:12px;}
+.meta{font-size:12px;color:#888;flex:1;}
+.meta a{color:#185FA5;text-decoration:none;}
+.actions{display:flex;gap:6px;flex-shrink:0;}
+.btn{font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;border:0.5px solid #ddd;background:transparent;cursor:pointer;color:#1a1a1a;white-space:nowrap;font-family:inherit;}
+.btn:hover{background:#f5f5f3;}
+.btn.approve{border-color:#1D9E75;color:#085041;}
+.btn.approve:hover{background:#E1F5EE;}
+.btn.revision{border-color:#BA7517;color:#412402;}
+.btn.revision:hover{background:#FAEEDA;}
+.btn.reject{border-color:#A32D2D;color:#501313;}
+.btn.reject:hover{background:#FCEBEB;}
+.btn.active-approve{background:#1D9E75;border-color:#1D9E75;color:white;}
+.btn.active-revision{background:#BA7517;border-color:#BA7517;color:white;}
+.btn.active-reject{background:#A32D2D;border-color:#A32D2D;color:white;}
+.panel{display:none;margin-top:12px;padding-top:12px;border-top:0.5px solid #eee;}
+.panel.open{display:block;}
+.panel-label{font-size:12px;font-weight:500;color:#666;margin-bottom:6px;}
+.tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.tag-btn{font-size:12px;padding:4px 10px;border-radius:99px;border:0.5px solid #ddd;background:transparent;cursor:pointer;color:#666;font-family:inherit;}
+.tag-btn.sel-revision{background:#FAEEDA;border-color:#BA7517;color:#412402;}
+.tag-btn.sel-rejected{background:#FCEBEB;border-color:#A32D2D;color:#501313;}
+.panel-textarea{width:100%;font-size:13px;font-family:inherit;color:#1a1a1a;background:#f5f5f3;border:0.5px solid #ddd;border-radius:8px;padding:8px 10px;resize:none;min-height:56px;line-height:1.5;}
+.panel-textarea:focus{outline:none;border-color:#888;}
+.panel-submit{margin-top:8px;font-size:13px;font-weight:500;padding:6px 14px;border-radius:8px;background:transparent;cursor:pointer;font-family:inherit;}
+.panel-submit.revision{border:0.5px solid #BA7517;color:#412402;}
+.panel-submit.revision:hover{background:#FAEEDA;}
+.panel-submit.rejected{border:0.5px solid #A32D2D;color:#501313;}
+.panel-submit.rejected:hover{background:#FCEBEB;}
+.publish-bar{background:white;border-radius:12px;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:1.5rem;border:0.5px solid #ddd;}
+.publish-info{font-size:13px;color:#666;line-height:1.6;}
+.publish-info strong{color:#1a1a1a;font-weight:500;}
+.btn-publish{font-size:14px;font-weight:500;padding:8px 20px;border-radius:8px;border:none;background:#1a1a1a;color:white;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:inherit;}
+.btn-publish:disabled{opacity:0.35;cursor:default;}
+.empty-state{text-align:center;padding:3rem 1rem;color:#888;font-size:14px;}
+.published-confirm{background:#E1F5EE;border:0.5px solid #1D9E75;border-radius:12px;padding:1.25rem;text-align:center;margin-top:1.5rem;display:none;}
+.published-confirm h3{font-size:16px;font-weight:500;color:#085041;margin-bottom:4px;}
+.published-confirm p{font-size:13px;color:#0F6E56;}
+</style>
+</head>
+<body>
+<div id="login-screen">
+  <div class="login-card">
+    <h1>The Flightline</h1>
+    <p>Editorial dashboard — sign in to review today's batch.</p>
+    <input type="password" id="pwd-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkLogin()">
+    <button onclick="checkLogin()">Sign in</button>
+    <div class="login-error" id="login-error">Incorrect password.</div>
+  </div>
+</div>
+<div id="app">
+  <div class="header">
+    <div>
+      <div class="logo">The Flightline — Editorial</div>
+      <div class="page-title">Morning batch review</div>
+    </div>
+    <div class="batch-meta" id="batch-meta"></div>
+  </div>
+  <div class="summary-bar">
+    <div class="summary-card"><div class="num" id="n-pending">0</div><div class="lbl">Pending</div></div>
+    <div class="summary-card"><div class="num" id="n-approved">0</div><div class="lbl">Approved</div></div>
+    <div class="summary-card"><div class="num" id="n-revision">0</div><div class="lbl">Needs revision</div></div>
+    <div class="summary-card"><div class="num" id="n-rejected">0</div><div class="lbl">Rejected</div></div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#1D9E75;"></div>Approve — publishes now</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#BA7517;"></div>Needs revision — retries tomorrow with your notes</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#A32D2D;"></div>Reject — dropped permanently</div>
+  </div>
+  <div id="cards"></div>
+  <div class="empty-state" id="empty-state" style="display:none;">No articles pending review today.</div>
+  <div class="publish-bar" id="publish-bar" style="display:none;">
+    <div class="publish-info" id="publish-info"></div>
+    <button class="btn-publish" id="publish-btn" disabled onclick="publishApproved()">Publish approved</button>
+  </div>
+  <div class="published-confirm" id="published-confirm">
+    <h3>Published successfully</h3>
+    <p id="published-msg"></p>
+  </div>
+</div>
+<script>
+const PASS = 'flightline2026';
+const REVISION_TAGS = ['Wrong angle','Missing info','Wrong tone','Too short','Needs sources'];
+const REJECT_TAGS = ['Not newsworthy','Duplicate coverage','Factual issues','Outside coverage area','Legal concern'];
+let articles = [];
+let state = {};
+function checkLogin() {
+  const val = document.getElementById('pwd-input').value;
+  if (val === PASS) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadBatch();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+function formatDate(d) {
+  return new Date(d).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+}
+function loadBatch() {
+  const params = new URLSearchParams(window.location.search);
+  const batchParam = params.get('batch');
+  if (batchParam) {
+    try {
+      articles = JSON.parse(atob(batchParam));
+    } catch(e) {
+      articles = [];
+    }
+  } else {
+    articles = window._devBatch || [];
+  }
+  const meta = document.getElementById('batch-meta');
+  meta.innerHTML = '<strong>' + formatDate(new Date()) + '</strong><br>Generated 6:00 AM &nbsp;·&nbsp; ' + articles.length + ' article' + (articles.length !== 1 ? 's' : '');
+  articles.forEach(a => { state[a.id] = { status: 'pending', tags: [], note: '', type: null }; });
+  renderCards();
+  updateSummary();
+}
+function renderCards() {
+  const container = document.getElementById('cards');
+  container.innerHTML = '';
+  if (!articles.length) {
+    document.getElementById('empty-state').style.display = 'block';
+    return;
+  }
+  document.getElementById('publish-bar').style.display = 'flex';
+  articles.forEach(a => {
+    container.innerHTML += `<div class="article-card" id="card-${a.id}">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span class="cat-badge">${a.label || a.cat}</span>
+        <span class="status-tag" id="tag-${a.id}"></span>
+      </div>
+      <div class="headline">${a.headline}</div>
+      <div class="dek" style="margin-top:4px;">${a.dek}</div>
+      <ul class="brief-list">${(a.brief||[]).map(b=>'<li>'+b+'</li>').join('')}</ul>
+      <div class="card-footer">
+        <div class="meta">Source: ${a.source||a.byline} &nbsp;·&nbsp; ${a.date} &nbsp;·&nbsp; <a href="/story/${a.id}" target="_blank">preview →</a></div>
+        <div class="actions">
+          <button class="btn reject" id="btn-rejected-${a.id}" onclick="openPanel('${a.id}','rejected')">Reject</button>
+          <button class="btn revision" id="btn-revision-${a.id}" onclick="openPanel('${a.id}','revision')">Needs revision</button>
+          <button class="btn approve" id="btn-approve-${a.id}" onclick="setApproved('${a.id}')">Approve</button>
+        </div>
+      </div>
+      <div class="panel" id="panel-${a.id}"></div>
+    </div>`;
+  });
+}
+function clearCard(id) {
+  state[id] = { status: 'pending', tags: [], note: '', type: null };
+  document.getElementById('card-'+id).className = 'article-card';
+  document.getElementById('tag-'+id).className = 'status-tag';
+  ['rejected','revision','approve'].forEach(t => {
+    const b = document.getElementById('btn-'+t+'-'+id);
+    if(b) b.className = 'btn ' + (t==='approve'?'approve':t);
+  });
+  document.getElementById('panel-'+id).className = 'panel';
+}
+function toggleTag(id, tag, type) {
+  const s = state[id];
+  const i = s.tags.indexOf(tag);
+  if (i > -1) s.tags.splice(i,1); else s.tags.push(tag);
+  document.querySelectorAll('#tags-'+id+' .tag-btn').forEach(b => {
+    b.className = 'tag-btn' + (s.tags.includes(b.dataset.tag) ? ' sel-'+type : '');
+  });
+}
+function openPanel(id, type) {
+  const current = state[id].type;
+  if (current === type && state[id].status === 'pending') { clearCard(id); updateSummary(); return; }
+  clearCard(id);
+  state[id].type = type;
+  const tags = type === 'revision' ? REVISION_TAGS : REJECT_TAGS;
+  const panel = document.getElementById('panel-'+id);
+  panel.innerHTML = `<div class="panel-label">${type==='revision'?'What needs fixing?':'Why reject this article?'}</div>
+    <div class="tag-row" id="tags-${id}">${tags.map(t=>`<button class="tag-btn" data-tag="${t}" onclick="toggleTag('${id}','${t}','${type}')">${t}</button>`).join('')}</div>
+    <textarea class="panel-textarea" id="note-${id}" placeholder="${type==='revision'?'Optional: specific notes for the pipeline (e.g. get a quote from the mayor, focus on resident impact)':'Optional: note for your records'}"></textarea>
+    <button class="panel-submit ${type}" onclick="submitDecision('${id}','${type}')">Confirm ${type==='revision'?'revision request':'rejection'}</button>`;
+  panel.className = 'panel open';
+  document.getElementById('btn-'+type+'-'+id).className = 'btn active-'+type;
+  updateSummary();
+}
+function submitDecision(id, type) {
+  state[id].note = (document.getElementById('note-'+id)||{}).value || '';
+  state[id].status = type;
+  document.getElementById('card-'+id).className = 'article-card '+type;
+  document.getElementById('tag-'+id).className = 'status-tag '+type;
+  document.getElementById('tag-'+id).textContent = type==='revision'?'needs revision':'rejected';
+  document.getElementById('panel-'+id).className = 'panel';
+  updateSummary();
+}
+function setApproved(id) {
+  clearCard(id);
+  state[id].status = 'approved';
+  document.getElementById('card-'+id).className = 'article-card approved';
+  document.getElementById('tag-'+id).className = 'status-tag approved';
+  document.getElementById('tag-'+id).textContent = 'approved';
+  document.getElementById('btn-approve-'+id).className = 'btn active-approve';
+  updateSummary();
+}
+function updateSummary() {
+  const c = {pending:0,approved:0,revision:0,rejected:0};
+  Object.values(state).forEach(s => c[s.status]++);
+  document.getElementById('n-pending').textContent = c.pending;
+  document.getElementById('n-approved').textContent = c.approved;
+  document.getElementById('n-revision').textContent = c.revision;
+  document.getElementById('n-rejected').textContent = c.rejected;
+  const btn = document.getElementById('publish-btn');
+  const info = document.getElementById('publish-info');
+  if (c.pending > 0) {
+    btn.disabled = true;
+    info.textContent = c.pending + ' article' + (c.pending>1?'s':'') + ' still pending review';
+    return;
+  }
+  btn.disabled = c.approved === 0;
+  const parts = [];
+  if (c.approved > 0) parts.push('<strong>'+c.approved+' approved</strong> will publish');
+  if (c.revision > 0) parts.push('<strong>'+c.revision+'</strong> sent back for revision');
+  if (c.rejected > 0) parts.push('<strong>'+c.rejected+'</strong> permanently rejected');
+  info.innerHTML = parts.join(' &nbsp;·&nbsp; ') || 'Nothing to publish today';
+}
+function publishApproved() {
+  const approved = articles.filter(a => state[a.id].status === 'approved');
+  const revisions = articles.filter(a => state[a.id].status === 'revision').map(a => ({
+    id: a.id, tags: state[a.id].tags, note: state[a.id].note
+  }));
+  const payload = {
+    approved: approved.map(a => a.id),
+    revisions: revisions,
+    rejected: articles.filter(a => state[a.id].status === 'rejected').map(a => a.id),
+    timestamp: new Date().toISOString()
+  };
+  const webhookUrl = window._makeWebhook || '';
+  if (webhookUrl) {
+    fetch(webhookUrl, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    }).then(() => {
+      showConfirmation(approved.length);
+    }).catch(() => {
+      showConfirmation(approved.length);
+    });
+  } else {
+    console.log('Approval payload:', JSON.stringify(payload, null, 2));
+    showConfirmation(approved.length);
+  }
+}
+function showConfirmation(count) {
+  document.getElementById('publish-bar').style.display = 'none';
+  document.getElementById('cards').style.opacity = '0.5';
+  const confirm = document.getElementById('published-confirm');
+  document.getElementById('published-msg').textContent = count + ' article' + (count>1?'s':'') + ' published to The Flightline. Revision notes sent back to the pipeline.';
+  confirm.style.display = 'block';
+}
+</script>
+</body>
+</html>
