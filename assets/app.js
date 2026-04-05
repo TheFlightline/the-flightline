@@ -1,3 +1,18 @@
+// ── ARTICLE DATA LOADER ─────────────────────────────────────────────────────
+let A = {};
+let articlesReady = false;
+const articleReadyCallbacks = [];
+function onArticlesReady(fn) {
+  if (articlesReady) { fn(); } else { articleReadyCallbacks.push(fn); }
+}
+fetch('/articles.json')
+  .then(r => r.json())
+  .then(data => {
+    data.forEach(art => { A[art.id] = art; });
+    articlesReady = true;
+    articleReadyCallbacks.forEach(fn => fn());
+  })
+  .catch(e => console.error('Failed to load articles.json', e));
 function updateBackToTop() {
   const btn = document.getElementById('back-to-top');
   if (!btn) return;
