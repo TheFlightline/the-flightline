@@ -541,6 +541,7 @@ function openArticle(id){
       </div>
     </div>`
   document.getElementById('modal').classList.add('open');
+  history.pushState({articleId: id}, '', '/story/' + id);
   document.getElementById('modal').scrollTop = 0;
   document.body.style.overflow='hidden';
   window._articleFontSize = 16;
@@ -553,6 +554,7 @@ function openArticle(id){
 }
 function closeArticle(){
   document.getElementById('modal').classList.remove('open');
+  if (location.pathname.startsWith('/story/')) history.pushState({}, '', '/');
   document.body.style.overflow='';
   // Destroy any active Leaflet map to avoid ID conflicts
   if (window._articleLeafletMap) {
@@ -2855,3 +2857,22 @@ function filterNeighborhood(nbhd, btn) {
 })();
 
 
+
+// ── URL ROUTING ─────────────────────────────────────────────────────────────
+window.addEventListener('popstate', function(e) {
+  if (e.state && e.state.articleId) {
+    onArticlesReady(function() { openArticle(e.state.articleId); });
+  } else {
+    var modal = document.getElementById('modal');
+    if (modal) modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+// On load — check if URL is /story/slug and open that article
+(function() {
+  var match = location.pathname.match(/^\/story\/(.+)$/);
+  if (match) {
+    var slug = match[1];
+    onArticlesReady(function() { openArticle(slug); });
+  }
+})();
