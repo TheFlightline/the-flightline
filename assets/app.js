@@ -831,71 +831,65 @@ function runSearch(q) {
 
 // ─── COMMUNITY CALENDAR ENGINE ───────────────────────────────────────────────
 
+// ── CALENDAR DATA ─────────────────────────────────────────────────────────
 const CAL_EVENTS = [
-  // ── APRIL 2026 ──────────────────────────────────────────────────
   { id:'santana',        day:1,  month:3, year:2026, title:'Santana: Oneness Tour',               time:'8:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', key:'santana-bay-center' },
   { id:'zztop',          day:2,  month:3, year:2026, title:'ZZ Top',                              time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', key:'zz-top-saenger' },
   { id:'fantasia',       day:3,  month:3, year:2026, title:'Fantasia & Anthony Hamilton',         time:'8:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#8a6e3a', key:'fantasia' },
-  { id:'gary-owen',      day:3,  month:3, year:2026, title:'Gary Owen',                           time:'8:00 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a' , key:'zz-top-saenger' },
+  { id:'gary-owen',      day:3,  month:3, year:2026, title:'Gary Owen',                           time:'8:00 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', key:'zz-top-saenger' },
   { id:'wahoos-open',    day:3,  month:3, year:2026, title:'Blue Wahoos Home Opener',             time:'6:05 PM',                    venue:'Blue Wahoos Stadium',            cat:'sports',        color:'#1a6a9a', key:'wahoos-opening-home' },
-  { id:'egghunt',        day:4,  month:3, year:2026, title:'Egga-Wahooza Easter Egg Hunt',        time:'11:00 AM · Free',            venue:'Community Maritime Park',        cat:'family',        color:'#1a8a6e' , url:'https://pensacolachurch.org/eggawahooza/' },
-  { id:'bandsbeach',     day:7,  month:3, year:2026, title:'Bands on the Beach — Season Opener', time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a', key:'bands-beach-guide' },
-  { id:'escambia-apr8',  day:8,  month:3, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f' , url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
+  { id:'egghunt',        day:4,  month:3, year:2026, title:'Egga-Wahooza Easter Egg Hunt',        time:'11:00 AM · Free',            venue:'Community Maritime Park',        cat:'family',        color:'#1a8a6e', url:'https://pensacolachurch.org/eggawahooza/' },
+  { id:'bandsbeach',     day:7,  month:3, year:2026, title:'Bands on the Beach — Season Opener', time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',     color:'#1e2d4a', key:'bands-beach-guide' },
+  { id:'escambia-apr8',  day:8,  month:3, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f', url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
   { id:'mrs-doubtfire1', day:7,  month:3, year:2026, title:'Mrs. Doubtfire the Musical',         time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#8a6e3a', key:'mrs-doubtfire-saenger' },
   { id:'mrs-doubtfire2', day:8,  month:3, year:2026, title:'Mrs. Doubtfire the Musical',         time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#8a6e3a', key:'mrs-doubtfire-saenger' },
   { id:'iglesias',       day:11, month:3, year:2026, title:'Gabriel Iglesias: The 1976 Tour',    time:'Doors 7PM · Show 8PM',       venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', key:'gabriel-iglesias' },
-  { id:'pso-candlelight',day:11, month:3, year:2026, title:'Candlelight Concert',                time:'TBD',                        venue:'First United Methodist Church',  cat:'entertainment', color:'#8a6e3a' , url:'https://www.eventbrite.com/e/candlelight-pensacola' },
-  { id:'citycouncil',    day:14, month:3, year:2026, title:'Pensacola City Council Meeting',     time:'5:30 PM',                    venue:'City Hall, 222 W Main St',       cat:'government',    color:'#c2553f' , url:'https://www.cityofpensacola.com/193/City-Council' },
-  { id:'bandsbeach2',    day:14, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'pso-candlelight',day:11, month:3, year:2026, title:'Candlelight Concert',                time:'TBD',                        venue:'First United Methodist Church',  cat:'entertainment', color:'#8a6e3a', url:'https://www.eventbrite.com/e/candlelight-pensacola' },
+  { id:'citycouncil',    day:14, month:3, year:2026, title:'Pensacola City Council Meeting',     time:'5:30 PM',                    venue:'City Hall, 222 W Main St',       cat:'government',    color:'#c2553f', url:'https://www.cityofpensacola.com/193/City-Council' },
+  { id:'bandsbeach2',    day:14, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',    color:'#1e2d4a', key:'bands-beach-guide' },
   { id:'gaffigan',       day:16, month:3, year:2026, title:'Jim Gaffigan',                       time:'7:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#1e2d4a', key:'gaffigan' },
   { id:'gallery-apr',    day:17, month:3, year:2026, title:'Gallery Night — Navy Days Theme',    time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b', key:'gallery-night-april' },
   { id:'panchiko',       day:20, month:3, year:2026, title:'Panchiko',                           time:'7:00 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#5a3d7a', key:'panchiko-vinyl' },
-  { id:'bandsbeach3',    day:21, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'sesame',         day:22, month:3, year:2026, title:'Sesame Street Live',                 time:'6:00 PM',                    venue:'Saenger Theatre',                cat:'family',        color:'#1a8a6e' , url:'https://www.ticketmaster.com/sesame-street-live-pensacola' },
-  { id:'escambia-apr22', day:22, month:3, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f' , url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
+  { id:'bandsbeach3',    day:21, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',    color:'#1e2d4a', key:'bands-beach-guide' },
+  { id:'sesame',         day:22, month:3, year:2026, title:'Sesame Street Live',                 time:'6:00 PM',                    venue:'Saenger Theatre',                cat:'family',        color:'#1a8a6e', url:'https://www.ticketmaster.com/sesame-street-live-pensacola' },
+  { id:'escambia-apr22', day:22, month:3, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f', url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
   { id:'crawfishfest',   day:24, month:3, year:2026, title:'Pensacola Crawfish Festival',        time:'All day',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', key:'crawfish' },
   { id:'pso-gala',       day:25, month:3, year:2026, title:'PSO 100th Anniversary Gala',        time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', key:'pso-100th' },
   { id:'mullettoss',     day:26, month:3, year:2026, title:'Flora-Bama Mullet Toss',             time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e', key:'mullet-toss' },
-  { id:'mullettoss2',    day:27, month:3, year:2026, title:'Flora-Bama Mullet Toss — Day 2',    time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e' , key:'mullet-toss' },
-  { id:'bandsbeach4',    day:28, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'mullettoss2',    day:27, month:3, year:2026, title:'Flora-Bama Mullet Toss — Day 2',    time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e', key:'mullet-toss' },
+  { id:'bandsbeach4',    day:28, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',    color:'#1e2d4a', key:'bands-beach-guide' },
   { id:'bavarian1',      day:30, month:3, year:2026, title:'Great Bavarian Circus — Opens',      time:'Multiple shows daily',       venue:'Pensacola Fairgrounds',          cat:'family',        color:'#1a8a6e', key:'bavarian-circus' },
-
-  // ── MAY 2026 ───────────────────────────────────────────────────
   { id:'clutch',         day:1,  month:4, year:2026, title:'Clutch',                             time:'7:30 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#5a3d7a', key:'clutch-vinyl' },
   { id:'krewe-sirens',   day:2,  month:4, year:2026, title:'Krewe of Sirens Beach Day',          time:'3:00–7:00 PM · Free',        venue:'Bounce Beach, Pensacola Beach',  cat:'festival',      color:'#1a8a6e', key:'krewe-sirens-beach' },
   { id:'comedy-may',     day:2,  month:4, year:2026, title:'Pensacola Comedy Club',              time:'7:30 PM',                    venue:"Genie's Coffee Shop",            cat:'entertainment', color:'#8a6e3a', key:'pensacola-comedy-club' },
   { id:'bavarian-may',   day:3,  month:4, year:2026, title:'Great Bavarian Circus',              time:'Multiple shows daily',       venue:'Pensacola Fairgrounds',          cat:'family',        color:'#1a8a6e', key:'bavarian-circus' },
-  { id:'bandsbeach-may1',day:5,  month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'bandsbeach-may1',day:5,  month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',   color:'#1e2d4a', key:'bands-beach-guide' },
   { id:'alice-cooper',   day:8,  month:4, year:2026, title:'Alice Cooper',                       time:'7:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', key:'alice-cooper-bay-center' },
   { id:'beach-art-wine', day:9,  month:4, year:2026, title:'Pensacola Beach Art & Wine Festival',time:'11:00 AM–4:00 PM · Free',    venue:'Pensacola Beach Boardwalk',      cat:'arts',          color:'#d4952b', key:'beach-art-wine' },
   { id:'disney-ice1',    day:9,  month:4, year:2026, title:'Disney on Ice: Jump In! (Noon)',     time:'12:00 PM',                   venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', key:'disney-on-ice' },
   { id:'disney-ice2',    day:9,  month:4, year:2026, title:'Disney on Ice: Jump In! (Evening)',  time:'6:00 PM',                    venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', key:'disney-on-ice' },
   { id:'disney-ice3',    day:10, month:4, year:2026, title:'Disney on Ice: Jump In! (Noon)',     time:'12:00 PM',                   venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', key:'disney-on-ice' },
-  { id:'citycouncil-may',day:12, month:4, year:2026, title:'Pensacola City Council Meeting',     time:'5:30 PM',                    venue:'City Hall, 222 W Main St',       cat:'government',    color:'#c2553f' , url:'https://www.cityofpensacola.com/193/City-Council' },
-  { id:'escambia-may',   day:13, month:4, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f' , url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
-  { id:'bandsbeach-may2',day:12, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'gallery-may',    day:15, month:4, year:2026, title:'Gallery Night — Festa Italiana',     time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
+  { id:'citycouncil-may',day:12, month:4, year:2026, title:'Pensacola City Council Meeting',     time:'5:30 PM',                    venue:'City Hall, 222 W Main St',       cat:'government',    color:'#c2553f', url:'https://www.cityofpensacola.com/193/City-Council' },
+  { id:'escambia-may',   day:13, month:4, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f', url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
+  { id:'bandsbeach-may2',day:12, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',   color:'#1e2d4a', key:'bands-beach-guide' },
+  { id:'gallery-may',    day:15, month:4, year:2026, title:'Gallery Night — Festa Italiana',     time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b', url:'https://gallerynightpensacola.org' },
   { id:'pickles-wings',  day:16, month:4, year:2026, title:'Pickles & Wings Family Festival',    time:'10:00 AM–8:00 PM · Free',    venue:'Seville Square',                 cat:'festival',      color:'#8a6e3a', key:'pickles-wings-festival' },
   { id:'iration',        day:19, month:4, year:2026, title:'Iration',                            time:'7:00 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#1a8a6e', key:'iration-vinyl' },
-  { id:'bandsbeach-may3',day:19, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bandsbeach-may4',day:26, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'fiesta-parade',  day:29, month:4, year:2026, title:'Grand Fiesta Parade',                time:'6:00 PM',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', key:'fiesta-parade' },
+  { id:'bandsbeach-may3',day:19, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',   color:'#1e2d4a', key:'bands-beach-guide' },
   { id:'pride-may',      day:23, month:4, year:2026, title:'Pensacola Pride — Weekend',          time:'All day',                    venue:'Park East, Pensacola Beach',     cat:'festival',      color:'#d4952b', key:'pensacola-pride' },
   { id:'pride-may2',     day:24, month:4, year:2026, title:'Pensacola Pride — Weekend',          time:'All day',                    venue:'Park East, Pensacola Beach',     cat:'festival',      color:'#d4952b', key:'pensacola-pride' },
-
-  // ── JUNE 2026 ──────────────────────────────────────────────────
-  { id:'gallery-jun',    day:19, month:5, year:2026, title:'Gallery Night — Journey to Juneteenth', time:'6:00–10:00 PM · Free',  venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
-  { id:'bandsbeach-jun1',day:2,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bandsbeach-jun2',day:9,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bandsbeach-jun3',day:16, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bandsbeach-jun4',day:23, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bandsbeach-jun5',day:30, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-
-  // ── JULY 2026 ──────────────────────────────────────────────────
-  { id:'4th-july',       day:4,  month:6, year:2026, title:'4th of July Fireworks',              time:'5:00 PM',                    venue:'Bayfront Pkwy, Downtown',        cat:'festival',      color:'#c2553f' , url:'https://www.visitpensacola.com/events/signature-events/' },
-  { id:'airshow1',       day:18, month:6, year:2026, title:'Pensacola Beach Air Show',           time:'All day',                    venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a' , key:'blue-angels-schedule' },
-  { id:'airshow2',       day:19, month:6, year:2026, title:'Pensacola Beach Air Show — Blue Angels', time:'All day',              venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a' , key:'blue-angels-schedule' },
-  { id:'gallery-jul',    day:17, month:6, year:2026, title:'Gallery Night — Future Makers',      time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
+  { id:'bandsbeach-may4',day:26, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',   color:'#1e2d4a', key:'bands-beach-guide' },
+  { id:'fiesta-parade',  day:29, month:4, year:2026, title:'Grand Fiesta Parade',                time:'6:00 PM',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', key:'fiesta-parade' },
+  { id:'gallery-jun',    day:19, month:5, year:2026, title:'Gallery Night — Journey to Juneteenth', time:'6:00–10:00 PM · Free',  venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b', url:'https://gallerynightpensacola.org' },
+  { id:'bandsbeach-jun1',day:2,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',   color:'#1e2d4a', key:'bands-beach-guide' },
+  { id:'bandsbeach-jun2',day:9,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',   color:'#1e2d4a', key:'bands-beach-guide' },
+  { id:'bandsbeach-jun3',day:16, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',   color:'#1e2d4a', key:'bands-beach-guide' },
+  { id:'bandsbeach-jun4',day:23, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',   color:'#1e2d4a', key:'bands-beach-guide' },
+  { id:'bandsbeach-jun5',day:30, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free',venue:'Gulfside Pavilion, Pensacola Beach', cat:'music',   color:'#1e2d4a', key:'bands-beach-guide' },
+  { id:'4th-july',       day:4,  month:6, year:2026, title:'4th of July Fireworks',              time:'5:00 PM',                    venue:'Bayfront Pkwy, Downtown',        cat:'festival',      color:'#c2553f', url:'https://www.visitpensacola.com/events/signature-events/' },
+  { id:'airshow1',       day:18, month:6, year:2026, title:'Pensacola Beach Air Show',           time:'All day',                    venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a', key:'blue-angels-schedule' },
+  { id:'airshow2',       day:19, month:6, year:2026, title:'Pensacola Beach Air Show — Blue Angels', time:'All day',              venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a', key:'blue-angels-schedule' },
+  { id:'gallery-jul',    day:17, month:6, year:2026, title:'Gallery Night — Future Makers',      time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b', url:'https://gallerynightpensacola.org' },
 ];
 
 const CAL_CATS = {
@@ -908,23 +902,35 @@ const CAL_CATS = {
   government:    { label:'Government',     color:'#8a3030' },
 };
 
-let calYear = 2026, calMonth = 3; // 0-indexed month (3 = April)
-let calView = 'grid';
-let calActiveFilters = new Set(Object.keys(CAL_CATS));
-let calSelectedDay = null;
-
+const TODAY       = new Date();
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const TODAY = new Date(2026, 3, 3); // April 3, 2026
+const DAY_NAMES   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const DAY_SHORT   = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 
-// ── SIDEBAR CALENDAR ─────────────────────────────────────────────────────
-let sideCalYear = 2026, sideCalMonth = 3;
-let sideCalSelectedDay = null;
+function _calEventAction(el) {
+  const aid = el.getAttribute('data-aid');
+  const url = el.getAttribute('data-url');
+  const eid = el.getAttribute('data-eid');
+  if (aid) { openArticle(aid); return true; }
+  if (url) { window.open(url, '_blank'); return true; }
+  if (eid) { openEvent(eid); return true; }
+  return false;
+}
+
+let sideCalYear  = TODAY.getFullYear();
+let sideCalMonth = TODAY.getMonth();
+let sideCalSelDay = null;
 
 function sideCalNav(dir) {
   sideCalMonth += dir;
   if (sideCalMonth > 11) { sideCalMonth = 0; sideCalYear++; }
   if (sideCalMonth < 0)  { sideCalMonth = 11; sideCalYear--; }
-  sideCalSelectedDay = null;
+  sideCalSelDay = null;
+  renderSideCal();
+}
+
+function sideCalSelectDay(d) {
+  sideCalSelDay = (sideCalSelDay === d) ? null : d;
   renderSideCal();
 }
 
@@ -941,125 +947,93 @@ function renderSideCal() {
   const daysInMonth = new Date(sideCalYear, sideCalMonth + 1, 0).getDate();
   const daysInPrev  = new Date(sideCalYear, sideCalMonth, 0).getDate();
 
-  let cells = '<div class="cal-day-header">Su</div><div class="cal-day-header">Mo</div><div class="cal-day-header">Tu</div><div class="cal-day-header">We</div><div class="cal-day-header">Th</div><div class="cal-day-header">Fr</div><div class="cal-day-header">Sa</div>';
+  let html = DAY_SHORT.map(d => '<div class="cal-day-header">' + d + '</div>').join('');
 
   for (let i = firstDay - 1; i >= 0; i--)
-    cells += `<div class="cal-day other-month">${daysInPrev - i}</div>`;
+    html += '<div class="cal-day other-month">' + (daysInPrev - i) + '</div>';
 
   for (let d = 1; d <= daysInMonth; d++) {
-    const evs = CAL_EVENTS.filter(e => e.day === d && e.month === sideCalMonth && e.year === sideCalYear);
+    const evs     = CAL_EVENTS.filter(e => e.day === d && e.month === sideCalMonth && e.year === sideCalYear);
     const isToday = d === TODAY.getDate() && sideCalMonth === TODAY.getMonth() && sideCalYear === TODAY.getFullYear();
-    const isSel   = sideCalSelectedDay === d;
-    let cls = 'cal-day';
-    if (evs.length) cls += ' has-event';
-    if (isToday)    cls += ' today';
-    if (isSel)      cls += ' selected';
-    const dotBar = evs.length > 1
-      ? `<span style="display:block;width:${Math.min(evs.length,5)*5}px;height:3px;background:${evs[0].color};border-radius:2px;margin:1px auto 0;"></span>`
+    const isSel   = sideCalSelDay === d;
+    const cls     = ['cal-day', evs.length && 'has-event', isToday && 'today', isSel && 'selected'].filter(Boolean).join(' ');
+    const dots    = evs.length
+      ? '<span class="cal-day-dots">' + evs.slice(0,3).map(e => '<span style="background:' + e.color + '"></span>').join('') + '</span>'
       : '';
-    cells += `<div class="${cls}" onclick="sideCalSelectDay(${d})" title="${evs.map(e=>e.title).join(', ')}">${d}${dotBar}</div>`;
+    html += '<div class="' + cls + '" data-day="' + d + '">' + d + dots + '</div>';
   }
 
-  const total    = firstDay + daysInMonth;
-  const trailing = total % 7 === 0 ? 0 : 7 - (total % 7);
-  for (let d = 1; d <= trailing; d++)
-    cells += `<div class="cal-day other-month">${d}</div>`;
+  const trailing = (firstDay + daysInMonth) % 7;
+  if (trailing) for (let d = 1; d <= 7 - trailing; d++)
+    html += '<div class="cal-day other-month">' + d + '</div>';
 
-  grid.innerHTML = cells;
+  grid.innerHTML = html;
+  grid.onclick = function(e) {
+    const cell = e.target.closest('[data-day]');
+    if (cell) sideCalSelectDay(parseInt(cell.getAttribute('data-day')));
+  };
 
-  // Day popup
-  if (sideCalSelectedDay !== null) {
-    const evs = CAL_EVENTS.filter(e => e.day === sideCalSelectedDay && e.month === sideCalMonth && e.year === sideCalYear);
-    if (evs.length > 0) {
+  if (sideCalSelDay !== null && popup) {
+    const evs = CAL_EVENTS.filter(e => e.day === sideCalSelDay && e.month === sideCalMonth && e.year === sideCalYear);
+    if (evs.length) {
       popup.style.display = 'block';
-      popup.innerHTML = `
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--navy);">${MONTH_NAMES[sideCalMonth]} ${sideCalSelectedDay}</span>
-          <button onclick="sideCalSelectedDay=null;renderSideCal();" style="background:none;border:none;cursor:pointer;font-size:14px;color:var(--g2);line-height:1;padding:0;">&#10005;</button>
-        </div>
-        ${evs.map(e => `
-          <div onclick="${e.key ? "openArticle('"+e.key+"')" : ''}" style="display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px solid var(--bd);cursor:${e.key?'pointer':'default'};">
-            <span style="display:block;width:3px;min-height:32px;background:${e.color};border-radius:2px;flex-shrink:0;margin-top:3px;"></span>
-            <div>
-              <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--navy);line-height:1.3;">${e.title}</div>
-              <div style="font-size:11px;color:var(--g1);margin-top:2px;">${e.time} · ${e.venue}</div>
-            </div>
-          </div>`).join('')}`;
-    } else {
-      popup.style.display = 'none';
-    }
-  } else {
-    popup.style.display = 'none';
-  }
+      popup.innerHTML = '<div class="side-cal-popup-hdr"><span>' + MONTH_NAMES[sideCalMonth] + ' ' + sideCalSelDay + '</span><button data-close>✕</button></div>' +
+        evs.map(e => '<div class="side-cal-popup-event' + (e.key||e.url||e.id?' clickable':'') + '" data-aid="' + (e.key||'') + '" data-url="' + (e.url||'') + '" data-eid="' + (e.id||'') + '">' +
+          '<span class="side-cal-popup-bar" style="background:' + e.color + '"></span>' +
+          '<div><div class="side-cal-popup-title">' + e.title + '</div>' +
+          '<div class="side-cal-popup-meta">' + e.time + ' · ' + e.venue + '</div></div></div>').join('');
+      popup.onclick = function(e) {
+        if (e.target.closest('[data-close]')) { sideCalSelDay = null; renderSideCal(); return; }
+        const ev = e.target.closest('[data-aid]');
+        if (ev) _calEventAction(ev);
+      };
+    } else { popup.style.display = 'none'; }
+  } else if (popup) { popup.style.display = 'none'; }
 
-  // Upcoming events list — next 6 from today in this month
+  const todayDate = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
   const upcoming = CAL_EVENTS
     .filter(e => e.month === sideCalMonth && e.year === sideCalYear)
-    .filter(e => {
-      const eDate = new Date(e.year, e.month, e.day);
-      const tDate = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
-      return sideCalMonth !== TODAY.getMonth() || sideCalYear !== TODAY.getFullYear() || eDate >= tDate;
-    })
-    .sort((a,b) => a.day - b.day)
+    .filter(e => new Date(e.year, e.month, e.day) >= todayDate || sideCalMonth !== TODAY.getMonth() || sideCalYear !== TODAY.getFullYear())
+    .sort((a, b) => a.day - b.day)
     .slice(0, 5);
 
-  if (upcoming.length) {
-    list.innerHTML = upcoming.map(e => `
-      <div class="event-item" onclick="${e.key ? "openArticle('"+e.key+"')" : e.url ? "window.open('"+e.url+"','_blank')" : ''}" style="cursor:${e.key||e.url?'pointer':'default'}">
-        <div class="event-date-box" style="border-left:3px solid ${e.color};">
-          <span class="event-date-month">${MONTH_NAMES[e.month].slice(0,3)}</span>
-          <span class="event-date-num">${e.day}</span>
-        </div>
-        <div>
-          <div class="event-title">${e.title}</div>
-          <div class="event-meta">${e.time} · ${e.venue}</div>
-        </div>
-      </div>`).join('');
-  } else {
-    list.innerHTML = '<div style="padding:12px 0;font-size:13px;color:var(--g2);text-align:center;">No upcoming events this month.</div>';
-  }
+  list.innerHTML = upcoming.length
+    ? upcoming.map(e => '<div class="event-item' + (e.key||e.url||e.id?' clickable':'') + '" data-aid="' + (e.key||'') + '" data-url="' + (e.url||'') + '" data-eid="' + (e.id||'') + '">' +
+        '<div class="event-date-box" style="border-left:3px solid ' + e.color + '">' +
+        '<span class="event-date-month">' + MONTH_NAMES[e.month].slice(0,3) + '</span>' +
+        '<span class="event-date-num">' + e.day + '</span></div>' +
+        '<div><div class="event-title">' + e.title + '</div>' +
+        '<div class="event-meta">' + e.time + ' · ' + e.venue + '</div></div></div>').join('')
+    : '<div style="padding:12px 0;font-size:13px;color:var(--g2);text-align:center;">No upcoming events this month.</div>';
+
+  list.onclick = function(e) {
+    const item = e.target.closest('[data-aid]');
+    if (item) _calEventAction(item);
+  };
 }
 
-function sideCalSelectDay(d) {
-  sideCalSelectedDay = (sideCalSelectedDay === d) ? null : d;
-  renderSideCal();
-}
-
-// Init sidebar cal on page load
 document.addEventListener('DOMContentLoaded', renderSideCal);
+
+let calYear          = TODAY.getFullYear();
+let calMonth         = TODAY.getMonth();
+let calView          = 'grid';
+let calActiveFilters = new Set(Object.keys(CAL_CATS));
+let calSelDay        = null;
 
 function calInit() {
   renderCalFilters();
   renderCalMonth();
 }
 
-function renderCalFilters() {
-  const el = document.getElementById('comm-cal-filters');
-  if (!el) return;
-  el.innerHTML = Object.entries(CAL_CATS).map(([k, c]) => `
-    <div class="comm-cal-filter ${calActiveFilters.has(k) ? 'active' : ''}" 
-         style="color:${c.color}; ${calActiveFilters.has(k) ? 'border-color:'+c.color+';background:'+c.color+'12;' : ''}"
-         onclick="calToggleFilter('${k}')">
-      <span class="comm-cal-filter-dot" style="background:${c.color};opacity:${calActiveFilters.has(k)?1:0.3};"></span>
-      ${c.label}
-    </div>`).join('');
-}
-
-function calToggleFilter(cat) {
-  if (calActiveFilters.has(cat)) {
-    if (calActiveFilters.size > 1) calActiveFilters.delete(cat);
-  } else {
-    calActiveFilters.add(cat);
-  }
-  renderCalFilters();
-  renderCalMonth();
+function eventsForDay(d, m, y) {
+  return CAL_EVENTS.filter(e => e.day === d && e.month === m && e.year === y && calActiveFilters.has(e.cat));
 }
 
 function calNav(dir) {
   calMonth += dir;
   if (calMonth > 11) { calMonth = 0; calYear++; }
   if (calMonth < 0)  { calMonth = 11; calYear--; }
-  calSelectedDay = null;
+  calSelDay = null;
   renderCalMonth();
 }
 
@@ -1072,12 +1046,33 @@ function calSetView(v) {
   renderCalMonth();
 }
 
-function eventsForDay(d, m, y) {
-  return CAL_EVENTS.filter(e => e.day === d && e.month === m && e.year === y && calActiveFilters.has(e.cat));
+function calToggleFilter(cat) {
+  if (calActiveFilters.has(cat)) {
+    if (calActiveFilters.size > 1) calActiveFilters.delete(cat);
+  } else {
+    calActiveFilters.add(cat);
+  }
+  renderCalFilters();
+  renderCalMonth();
+}
+
+function renderCalFilters() {
+  const el = document.getElementById('comm-cal-filters');
+  if (!el) return;
+  el.innerHTML = Object.entries(CAL_CATS).map(([k, c]) =>
+    '<div class="comm-cal-filter' + (calActiveFilters.has(k) ? ' active' : '') + '" data-cat="' + k + '" style="' +
+    (calActiveFilters.has(k) ? 'border-color:' + c.color + ';background:' + c.color + '18;color:' + c.color : 'color:' + c.color) + '">' +
+    '<span class="comm-cal-filter-dot" style="background:' + c.color + ';opacity:' + (calActiveFilters.has(k)?1:0.35) + '"></span>' +
+    c.label + '</div>').join('');
+  el.onclick = function(e) {
+    const btn = e.target.closest('[data-cat]');
+    if (btn) calToggleFilter(btn.getAttribute('data-cat'));
+  };
 }
 
 function renderCalMonth() {
-  document.getElementById('comm-cal-month-label').textContent = MONTH_NAMES[calMonth] + ' ' + calYear;
+  const lbl = document.getElementById('comm-cal-month-label');
+  if (lbl) lbl.textContent = MONTH_NAMES[calMonth] + ' ' + calYear;
   if (calView === 'grid') renderCalGrid();
   else renderCalList();
 }
@@ -1085,133 +1080,87 @@ function renderCalMonth() {
 function renderCalGrid() {
   const grid = document.getElementById('comm-cal-grid');
   if (!grid) return;
-  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const firstDay    = new Date(calYear, calMonth, 1).getDay();
   const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-  const daysInPrev = new Date(calYear, calMonth, 0).getDate();
-
-  let cells = '';
-  // Leading cells from prev month
-  for (let i = firstDay - 1; i >= 0; i--) {
-    const d = daysInPrev - i;
-    cells += `<div class="comm-cal-cell other-month"><div class="comm-cal-cell-num">${d}</div></div>`;
-  }
-  // Current month days
+  const daysInPrev  = new Date(calYear, calMonth, 0).getDate();
+  let html = '';
+  for (let i = firstDay - 1; i >= 0; i--)
+    html += '<div class="comm-cal-cell other-month"><div class="comm-cal-cell-num">' + (daysInPrev - i) + '</div></div>';
   for (let d = 1; d <= daysInMonth; d++) {
+    const evs     = eventsForDay(d, calMonth, calYear);
     const isToday = d === TODAY.getDate() && calMonth === TODAY.getMonth() && calYear === TODAY.getFullYear();
-    const isSelected = calSelectedDay === d;
-    const evs = eventsForDay(d, calMonth, calYear);
-    const extraClass = (isToday ? ' today-cell' : '') + (isSelected ? ' selected-cell' : '');
-    const todayBadge = isToday ? `<span class="comm-cal-cell-today-badge">Today</span>` : '';
-    const maxShow = 3;
-    const pips = evs.slice(0, maxShow).map(e => `
-      <div class="comm-cal-event-pip" style="background:${e.color};" 
-           onclick="event.stopPropagation();calSelectDay(${d})" title="${e.title}">${e.title}</div>`).join('');
-    const more = evs.length > maxShow ? `<div class="comm-cal-more">+${evs.length - maxShow} more</div>` : '';
-    cells += `
-      <div class="comm-cal-cell${extraClass}" onclick="calSelectDay(${d})">
-        <div class="comm-cal-cell-num">${d} ${todayBadge}</div>
-        ${pips}${more}
-      </div>`;
+    const isSel   = calSelDay === d;
+    const cls     = 'comm-cal-cell' + (isToday ? ' today-cell' : '') + (isSel ? ' selected-cell' : '');
+    const badge   = isToday ? '<span class="comm-cal-cell-today-badge">Today</span>' : '';
+    const pips    = evs.slice(0,3).map(e => '<div class="comm-cal-event-pip" style="background:' + e.color + '" title="' + e.title + '">' + e.title + '</div>').join('');
+    const more    = evs.length > 3 ? '<div class="comm-cal-more">+' + (evs.length-3) + ' more</div>' : '';
+    html += '<div class="' + cls + '" data-day="' + d + '"><div class="comm-cal-cell-num">' + d + badge + '</div>' + pips + more + '</div>';
   }
-  // Trailing cells
-  const total = firstDay + daysInMonth;
-  const trailing = total % 7 === 0 ? 0 : 7 - (total % 7);
-  for (let d = 1; d <= trailing; d++) {
-    cells += `<div class="comm-cal-cell other-month"><div class="comm-cal-cell-num">${d}</div></div>`;
-  }
-  grid.innerHTML = cells;
-
-  // Render day panel if a day is selected
-  if (calSelectedDay !== null) renderDayPanel(calSelectedDay);
+  const trailing = (firstDay + daysInMonth) % 7;
+  if (trailing) for (let d = 1; d <= 7 - trailing; d++)
+    html += '<div class="comm-cal-cell other-month"><div class="comm-cal-cell-num">' + d + '</div></div>';
+  grid.innerHTML = html;
+  grid.onclick = function(e) {
+    const cell = e.target.closest('[data-day]');
+    if (cell) { const d = parseInt(cell.getAttribute('data-day')); calSelDay = (calSelDay===d)?null:d; renderCalGrid(); }
+  };
+  if (calSelDay !== null) renderDayPanel(calSelDay);
   else hideDayPanel();
 }
 
-function calSelectDay(d) {
-  calSelectedDay = (calSelectedDay === d) ? null : d;
-  renderCalGrid();
-}
-
 function hideDayPanel() {
-  const panel = document.getElementById('comm-cal-day-panel');
-  if (panel) panel.style.display = 'none';
+  const p = document.getElementById('comm-cal-day-panel');
+  if (p) p.style.display = 'none';
 }
 
 function renderDayPanel(d) {
   const panel = document.getElementById('comm-cal-day-panel');
   if (!panel) return;
-  const evs = eventsForDay(d, calMonth, calYear);
-  const dateLabel = MONTH_NAMES[calMonth] + ' ' + d + ', ' + calYear;
+  const evs     = eventsForDay(d, calMonth, calYear);
   const isToday = d === TODAY.getDate() && calMonth === TODAY.getMonth() && calYear === TODAY.getFullYear();
-  const todayTag = isToday ? ' <span style="font-family:\'DM Sans\';font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:var(--navy);color:white;padding:2px 7px;border-radius:2px;">Today</span>' : '';
-
-  const items = evs.length
-    ? evs.map(e => {
-        const action = e.key ? `openArticle('${e.key}')` : e.url ? `window.open('${e.url}','_blank')` : '';
-        const clickable = action ? `onclick="${action}"` : '';
-        return `
-        <div class="comm-cal-day-event" ${clickable} style="cursor:${action?'pointer':'default'}">
-          <div class="comm-cal-list-bar" style="background:${e.color};"></div>
-          <div>
-            <div class="comm-cal-list-tag" style="background:${e.color};">${CAL_CATS[e.cat]?.label || e.cat}</div>
-            <div class="comm-cal-list-title">${e.title}</div>
-            <div class="comm-cal-list-meta">🕐 ${e.time} &nbsp;·&nbsp; 📍 ${e.venue}</div>
-          </div>
-        </div>`;
-      }).join('')
-    : `<div class="comm-cal-day-panel-empty">No events listed for this day. <a href="#" onclick="document.querySelector('.comm-cal-submit-section').scrollIntoView({behavior:'smooth'});return false;" style="color:var(--gold);font-weight:700;">Submit one →</a></div>`;
-
+  const label   = MONTH_NAMES[calMonth] + ' ' + d + ', ' + calYear;
+  const tag     = isToday ? ' <span class="comm-cal-today-tag">Today</span>' : '';
+  const items   = evs.length
+    ? evs.map(e => '<div class="comm-cal-day-event' + (e.key||e.url||e.id?' clickable':'') + '" data-aid="' + (e.key||'') + '" data-url="' + (e.url||'') + '" data-eid="' + (e.id||'') + '">' +
+        '<div class="comm-cal-list-bar" style="background:' + e.color + '"></div><div>' +
+        '<div class="comm-cal-list-tag" style="background:' + e.color + '">' + (CAL_CATS[e.cat]?.label||e.cat) + '</div>' +
+        '<div class="comm-cal-list-title">' + e.title + '</div>' +
+        '<div class="comm-cal-list-meta">' + e.time + ' · ' + e.venue + '</div></div></div>').join('')
+    : '<div class="comm-cal-day-panel-empty">No events this day. <a href="javascript:void(0)" onclick="document.querySelector('#comm-cal-submit-section,\.comm-cal-submit-section')?.scrollIntoView({behavior:'smooth'})" style="color:var(--gold);font-weight:700;">Submit one →</a></div>';
   panel.style.display = 'block';
-  panel.innerHTML = `
-    <div class="comm-cal-day-panel-title">
-      ${dateLabel}${todayTag}
-      <button class="comm-cal-day-panel-close" onclick="calSelectedDay=null;renderCalGrid()">✕</button>
-    </div>
-    ${items}`;
+  panel.innerHTML = '<div class="comm-cal-day-panel-title">' + label + tag + '<button class="comm-cal-day-panel-close" data-close>✕</button></div>' + items;
+  panel.onclick = function(e) {
+    if (e.target.closest('[data-close]')) { calSelDay = null; renderCalGrid(); return; }
+    const item = e.target.closest('[data-aid]');
+    if (item) _calEventAction(item);
+  };
 }
 
 function renderCalList() {
   const el = document.getElementById('comm-cal-list-view');
   if (!el) return;
   const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-
-  // Group events by day
   const grouped = {};
-  for (let d = 1; d <= daysInMonth; d++) {
-    const evs = eventsForDay(d, calMonth, calYear);
-    if (evs.length) grouped[d] = evs;
-  }
-
+  for (let d = 1; d <= daysInMonth; d++) { const evs = eventsForDay(d, calMonth, calYear); if (evs.length) grouped[d] = evs; }
   if (!Object.keys(grouped).length) {
-    el.innerHTML = `<div style="padding:32px 0;font-size:15px;color:var(--g2);">No events match the selected filters this month.</div>`;
+    el.innerHTML = '<div style="padding:32px 0;font-size:15px;color:var(--g2);">No events match the selected filters this month.</div>';
     return;
   }
-
   el.innerHTML = Object.entries(grouped).map(([d, evs]) => {
-    const date = new Date(calYear, calMonth, parseInt(d));
-    const dayName = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()];
+    const date    = new Date(calYear, calMonth, parseInt(d));
+    const dayName = DAY_NAMES[date.getDay()];
     const isToday = parseInt(d) === TODAY.getDate() && calMonth === TODAY.getMonth() && calYear === TODAY.getFullYear();
-    const items = evs.map(e => {
-      const action = e.key ? `openArticle('${e.key}')` : e.url ? `window.open('${e.url}','_blank')` : '';
-      const clickable = action ? `onclick="${action}"` : '';
-      return `
-        <div class="comm-cal-list-item" ${clickable} style="cursor:${action?'pointer':'default'}">
-          <div class="comm-cal-list-bar" style="background:${e.color};"></div>
-          <div>
-            <div class="comm-cal-list-tag" style="background:${e.color};">${CAL_CATS[e.cat]?.label || e.cat}</div>
-            <div class="comm-cal-list-title">${e.title}</div>
-            <div class="comm-cal-list-meta">🕐 ${e.time} &nbsp;·&nbsp; 📍 ${e.venue}${e.key ? ' &nbsp;· <span style="color:var(--gold);font-weight:700;">Details →</span>' : ''}</div>
-          </div>
-        </div>`;
-    }).join('');
-    return `
-      <div class="comm-cal-list-group">
-        <div class="comm-cal-list-date-hdr">
-          ${dayName}, ${MONTH_NAMES[calMonth]} ${d}
-          ${isToday ? '<span class="today-tag">Today</span>' : ''}
-        </div>
-        ${items}
-      </div>`;
+    const items   = evs.map(e => '<div class="comm-cal-list-item' + (e.key||e.url||e.id?' clickable':'') + '" data-aid="' + (e.key||'') + '" data-url="' + (e.url||'') + '" data-eid="' + (e.id||'') + '">' +
+      '<div class="comm-cal-list-bar" style="background:' + e.color + '"></div><div>' +
+      '<div class="comm-cal-list-tag" style="background:' + e.color + '">' + (CAL_CATS[e.cat]?.label||e.cat) + '</div>' +
+      '<div class="comm-cal-list-title">' + e.title + '</div>' +
+      '<div class="comm-cal-list-meta">' + e.time + ' · ' + e.venue + (e.key||e.url?' · <span style="color:var(--gold);font-weight:700;">Details →</span>':'') + '</div></div></div>').join('');
+    return '<div class="comm-cal-list-group"><div class="comm-cal-list-date-hdr">' + dayName + ', ' + MONTH_NAMES[calMonth] + ' ' + d + (isToday?'<span class="today-tag">Today</span>':'') + '</div>' + items + '</div>';
   }).join('');
+  el.onclick = function(e) {
+    const item = e.target.closest('[data-aid]');
+    if (item) _calEventAction(item);
+  };
 }
 
 // ── LIVE TRAFFIC — Open Route Service (CORS-safe, browser-direct) ────────
