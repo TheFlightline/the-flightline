@@ -1,1 +1,61 @@
-[]
+```json
+[
+  {
+    "id": "20250608-nas-pensacola-runway-expansion",
+    "cat": "military",
+    "label": "Military",
+    "thumbnail": "/images/military_nas-pensacola-airshow_009.jpg",
+    "headline": "Naval Air Station Pensacola begins runway expansion project",
+    "dek": "The $47 million construction project will extend the main runway by 1,200 feet to accommodate larger aircraft.",
+    "byline": "The Flightline Staff",
+    "date": "2025-06-08",
+    "brief": [
+      "Naval Air Station Pensacola started a $47 million runway expansion project to extend the main runway by 1,200 feet.",
+      "The project will allow the base to accommodate C-17 Globemaster III and other larger military aircraft.",
+      "Construction is expected to continue through December 2026 with minimal disruption to flight operations."
+    ],
+    "body": "<p class=\"article-lede\">Orange construction barrels now line the eastern edge of Naval Air Station Pensacola's main runway where crews broke ground Monday on a $47 million expansion project.</p><p>The work will extend Runway 7-25 by 1,200 feet to accommodate C-17 Globemaster III aircraft and other large military transports. Base officials said the current 8,000-foot runway cannot safely handle the heaviest cargo planes used by the Department of Defense.</p><p>Station Commander Captain Brian Erickson said the expansion addresses a critical infrastructure gap. The base hosts more than 16,000 students annually for flight training and technical instruction.</p><p>Construction crews will work in phases to minimize disruption to daily flight operations. The project includes new pavement, lighting systems and navigational aids. Completion is scheduled for December 2026.</p>",
+    "source": "https://www.pnj.com/story/news/military/2025/06/08/nas-pensacola-runway-expansion/",
+    "qc_pass": true,
+    "qc_flags": []
+  },
+  {
+    "id": "20250608-pensacola-beach-erosion-restoration",
+    "cat": "environment",
+    "label": "Environment",
+    "thumbnail": "/images/beach_pensacola-beach-scene_021.jpg",
+    "headline": "Santa Rosa Island erosion prompts emergency beach restoration",
+    "dek": "Escambia County approved $3.2 million to restore 800 feet of critically eroded shoreline near Casino Beach.",
+    "byline": "The Flightline Staff",
+    "date": "2025-06-08",
+    "brief": [
+      "Escambia County commissioners approved $3.2 million in emergency funding to restore 800 feet of eroded beach near Casino Beach.",
+      "Recent storms removed an estimated 35,000 cubic yards of sand and exposed the seawall foundation.",
+      "Restoration work will begin in July with sand from an offshore borrow site approved by state regulators."
+    ],
+    "body": "<p class=\"article-lede\">Waves lap against exposed concrete where sand once stretched 50 feet from the Casino Beach seawall. Escambia County commissioners voted Thursday to fund emergency restoration of the rapidly eroding shoreline.</p><p>The board approved $3.2 million to pump sand onto 800 feet of critically damaged beach. Spring storms stripped an estimated 35,000 cubic yards of material and left the seawall foundation visible in multiple locations.</p><p>County Public Works Director Keith Wilkins said the erosion threatens infrastructure and public safety. The project will use sand from an offshore site three miles south of Pensacola Beach that state regulators approved in 2023.</p><p>Crews will begin mobilizing equipment in July. The work requires favorable weather and calm seas. Officials expect restoration to take six to eight weeks once pumping operations start.</p>",
+    "source": "https://www.pnj.com/story/news/local/escambia-county/2025/06/08/pensacola-beach-erosion/",
+    "qc_pass": true,
+    "qc_flags": []
+  },
+  {
+    "id": "20250608-palafox-street-redevelopment",
+    "cat": "development",
+    "label": "Development",
+    "thumbnail": "/images/downtown_palafox-street-dusk_008.jpg",
+    "headline": "Downtown Pensacola welcomes mixed use development on Palafox",
+    "dek": "A Miami developer plans to convert the former Kress Building into 42 apartments with ground-floor retail space.",
+    "byline": "The Flightline Staff",
+    "date": "2025-06-08",
+    "brief": [
+      "Miami-based Meridian Development Group acquired the historic Kress Building at 118 South Palafox Street for $4.8 million.",
+      "Plans call for 42 apartments on upper floors with retail and restaurant space on the ground level.",
+      "Construction is scheduled to begin in September with completion targeted for late 2026."
+    ],
+    "body": "<p class=\"article-lede\">Scaffolding now surrounds the long-vacant Kress Building as crews prepare the 1920s structure for a $12 million transformation into downtown apartments and retail space.</p><p>Meridian Development Group of Miami purchased the five-story building at 118 South Palafox Street for $4.8 million in April. President Marcus Rivera said the project will create 42 one- and two-bedroom units on floors two through five while restoring ground-level storefronts.</p><p>The Pensacola City Council approved tax incentives for the project in March. Mayor D.C. Reeves said the development addresses demand for downtown housing and fills a prominent gap in the Palafox corridor.</p><p>Rivera said initial work focuses on structural assessment and environmental remediation. Full construction begins in September with occupancy planned for late 2026. Monthly rents will range from $1,200 to $2,400.</p>",
+    "source": "https://www.pnj.com/story/news/local/pensacola/2025/06/08/kress-building-redevelopment/",
+    "qc_pass": true,
+    "qc_flags": []
+  }
+]
+```
