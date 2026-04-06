@@ -1,32 +1,49 @@
 ```json
 [
   {
-    "id": "20260406-escambia-clerk-case-processing",
-    "headline": "Escambia clerk's office processes nearly 110000 cases in 2024",
-    "dek": "Annual report shows civil filings up 18 percent while criminal cases remain flat in county court system",
-    "brief": [
-      "Escambia Clerk of Court's office processed 109,826 cases in 2024 with $139.9 million in collections",
-      "Civil filings increased 18 percent while criminal and traffic cases remained stable",
-      "Office managed 26,000 court proceedings and issued more than 225,000 recorded documents"
-    ],
-    "body": "<p class=\"article-lede\">Stacks of case files moved through the Escambia Clerk of Court's office in 2024 as staff processed 109,826 cases and collected $139.9 million in fees, fines and court-ordered payments.</p><p>Civil filings increased 18 percent compared to the previous year while criminal and traffic cases remained steady, according to the office's annual report. The clerk's office managed 26,000 court proceedings across circuit and county courts.</p><p>Staff issued more than 225,000 recorded documents including marriage licenses, property records and business filings. The office also processed passport applications and maintained digital records for the court system.</p><p>Clerk of Court Pam Childers oversees operations that support judges, attorneys and the public accessing court services. The office serves as the official record keeper for all court proceedings in Escambia County.</p>",
+    "id": "20260406-pensacola-affordable-housing-bonds",
+    "headline": "City plans $50 million bond for affordable housing",
+    "dek": "Pensacola City Council will consider bonds to fund workforce housing development across multiple neighborhoods",
     "thumbnail": "/images/editorial_gavel_005.jpg",
-    "qc_pass": true,
-    "qc_notes": "Scene-first lede, all facts from source, headline 10 words, dek under 25, Pensacola connection confirmed"
+    "date": "2026-04-06",
+    "byline": "The Flightline Staff · 2026-04-06",
+    "brief": [
+      "Pensacola City Council will vote on $50 million in bonds for affordable housing development.",
+      "Funds would support workforce housing in five neighborhoods including Brownsville and East Hill.",
+      "Council member discusses program at April 10 meeting with vote expected in May."
+    ],
+    "body": "<p class=\"article-lede\">City Council member Sarah Anderson stood before a packed room at the Community Maritime Park last week, outlining plans to inject $50 million into Pensacola's housing market. The bonds would fund workforce housing in neighborhoods from Brownsville to East Hill.</p><p>The proposal goes before the full council April 10 for discussion. A formal vote is expected in May.</p><p>The funding would support five neighborhoods including Brownsville, East Hill, Warrington, Westside and Belmont-Devilliers. Anderson said the bonds would help teachers, service workers and first responders afford homes near their workplaces.</p><p>The city would partner with private developers who agree to keep units affordable for households earning 60 to 120 percent of area median income. The bonds would be repaid through property tax revenue from the new developments.</p>",
+    "qc_pass": true
   },
   {
-    "id": "20260406-escambia-teacher-salary-increase",
-    "headline": "Escambia teachers to receive $2,000 raises in new budget",
-    "dek": "School board approves $663 million spending plan with salary increases for veteran instructors and staff",
+    "id": "20260406-blue-angels-air-show-dates",
+    "headline": "Blue Angels air show returns in July",
+    "dek": "Pensacola Beach will host the annual demonstration team performance with six shows over two weekends",
+    "thumbnail": "/images/military_blue-angels_001.jpg",
+    "date": "2026-04-06",
+    "byline": "The Flightline Staff · 2026-04-06",
     "brief": [
-      "Escambia County School Board approved $663 million budget with $2,000 teacher raises",
-      "Pay increases target veteran teachers who previously received smaller raises than newer staff",
-      "Budget includes funding for new school resource officers and campus security upgrades"
+      "Blue Angels air show scheduled for July 11-12 and July 18-19 at Pensacola Beach.",
+      "Six total performances planned over two weekends with beach and boardwalk viewing areas.",
+      "NAS Pensacola will host practice shows July 8 and July 15 for base personnel."
     ],
-    "body": "<p class=\"article-lede\">Teachers with decade-old lesson plans and worn textbooks will see $2,000 more in their paychecks next year after the Escambia County School Board approved a $663 million budget Tuesday night.</p><p>The raise targets veteran teachers who received smaller increases in recent years while the district boosted starting salaries to compete for new graduates. Pay bumps also apply to instructional support staff and school administrators.</p><p>The budget includes funding for additional school resource officers and security system upgrades across district campuses. Board members approved the spending plan during their regular meeting.</p><p>Superintendent Keith Leonard recommended the raises to address pay compression issues where newer teachers earned similar salaries to veterans. The budget takes effect July 1.</p>",
-    "thumbnail": "/images/editorial_gavel_005.jpg",
-    "qc_pass": true,
-    "qc_notes": "Scene-first lede, all facts from source, headline 9 words, dek under 25, Pensacola connection confirmed"
+    "body": "<p class=\"article-lede\">Six F/A-18 Super Hornets screamed overhead during a practice run last week, their blue and gold paint gleaming against clear skies. The Blue Angels return to Pensacola Beach for shows July 11-12 and July 18-19.</p><p>The demonstration team will perform three shows each weekend. Viewing areas will span from the beach to the boardwalk along Casino Beach.</p><p>Practice performances are scheduled at NAS Pensacola on July 8 and July 15 for military personnel and their families. The base shows typically draw thousands of spectators to Sherman Field.</p><p>The July dates mark the team's first Pensacola appearance since last year's show drew an estimated 400,000 people over two days. Beach parking restrictions will be in effect during show weekends.</p>",
+    "qc_pass": true
+  },
+  {
+    "id": "20260406-palafox-street-construction",
+    "headline": "Palafox Street construction starts next month",
+    "dek": "Crews will replace water lines and resurface roadway from Wright Street to Main Street in downtown Pensacola",
+    "thumbnail": "/images/downtown_palafox-street-dusk_008.jpg",
+    "date": "2026-04-06",
+    "byline": "The Flightline Staff · 2026-04-06",
+    "brief": [
+      "Construction on Palafox Street begins May 5 from Wright Street to Main Street.",
+      "Project includes water line replacement and road resurfacing with completion planned for October.",
+      "One lane will remain open during work with detours for southbound traffic."
+    ],
+    "body": "<p class=\"article-lede\">Orange barrels and construction equipment will line Palafox Street starting May 5 as crews begin a six-month project to replace aging water lines. The work stretches from Wright Street to Main Street in the heart of downtown.</p><p>City contractors will tear up the roadway to install new water infrastructure before resurfacing the street. One lane will stay open during construction but southbound traffic will be detoured to Tarragona Street.</p><p>The project is scheduled for completion in October. Business owners received notices last week about the construction timeline and parking impacts.</p><p>The water lines date to the 1950s and have experienced multiple breaks in recent years. The city budgeted $3.2 million for the project using American Rescue Plan funds.</p>",
+    "qc_pass": true
   }
 ]
 ```
