@@ -189,6 +189,7 @@ def main():
             f.write(f"ARTICLE_DATE={article_date}\n")
             f.write(f"ARTICLE_COUNT={len(articles)}\n")
 
+    print(f"::notice::ARTICLES_GENERATED={len(articles)}")
     print(f"Done. {len(articles)} articles ready. Approval URL: {approval_url}")
 
 
