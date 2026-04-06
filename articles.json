@@ -1,3 +1,14 @@
-I need you to provide the base64-encoded story candidates so I can decode them and write the articles. You've given me the today_id and today parameters but no encoded candidates yet.
+I need you to provide the base64-encoded story candidates to decode and process. Your message shows:
 
-Please paste the base64-encoded candidates and I'll process them into finished articles following your specifications.
+```
+today_id= today=
+```
+
+But there are no base64-encoded candidates following "Decode and write articles from these candidates:"
+
+Please provide:
+1. The `today_id` value (format: YYYYMMDD)
+2. The `today` date value (format: YYYY-MM-DD)
+3. The base64-encoded story candidates
+
+Once you provide the encoded candidates, I'll decode them and write the articles according to your specifications.
