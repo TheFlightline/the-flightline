@@ -187,7 +187,7 @@ function loadBatch() {
   const params = new URLSearchParams(window.location.search);
   const batchParam = params.get('batch');
   if (batchParam) {
-    try { articles = JSON.parse(atob(batchParam)); } catch(e) { articles = []; }
+    try { const raw = atob(batchParam); const clean = raw.replace(/```json/g,'').replace(/```/g,'').trim(); articles = JSON.parse(clean); } catch(e) { articles = []; }
   } else {
     articles = window._devBatch || [];
   }
