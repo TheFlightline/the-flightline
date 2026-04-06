@@ -759,9 +759,9 @@ function liveSearch(q, inputEl) {
   const topResults = results.slice(0, 5);
   const itemsHtml = topResults.map(a => {
     const color = CAT_COLORS_MAP[a.cat] || 'var(--navy)';
-    return `<div class="search-drop-item" onmousedown="closeDropdown();(inputEl||document.getElementById('search-input')).value='';openArticle('${a.id}')">
-      <div class="search-drop-cat" style="color:${color}">${a.label}</div>
-      <div class="search-drop-text">
+    return `<div class="search-drop-item" onmousedown="(inputEl||document.getElementById('search-input')).value='';openArticle('${a.id}');setTimeout(closeDropdown,50)">
+      <div class="search-drop-cat" style="color:${color};pointer-events:none">${a.label}</div>
+      <div class="search-drop-text" style="pointer-events:none">
         <div class="search-drop-headline">${a.headline}</div>
         <div class="search-drop-dek">${a.dek}</div>
       </div>
@@ -914,7 +914,7 @@ let calActiveFilters = new Set(Object.keys(CAL_CATS));
 let calSelectedDay = null;
 
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const TODAY = new Date(2026, 3, 3); // April 3, 2026
+const TODAY = new Date();
 
 // ── SIDEBAR CALENDAR ─────────────────────────────────────────────────────
 let sideCalYear = 2026, sideCalMonth = 3;
@@ -978,7 +978,7 @@ function renderSideCal() {
           <button onclick="sideCalSelectedDay=null;renderSideCal();" style="background:none;border:none;cursor:pointer;font-size:14px;color:var(--g2);line-height:1;padding:0;">&#10005;</button>
         </div>
         ${evs.map(e => `
-          <div onclick="${e.key ? "openArticle('"+e.key+"')" : ''}" style="display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px solid var(--bd);cursor:${e.key?'pointer':'default'};">
+          <div onclick="${e.key ? "openArticle('"+e.key+"')" : e.url ? "window.open('"+e.url+"','_blank')" : e.id ? "openEvent('"+e.id+"')" : ''}" style="display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px solid var(--bd);cursor:${e.key?'pointer':'default'};">
             <span style="display:block;width:3px;min-height:32px;background:${e.color};border-radius:2px;flex-shrink:0;margin-top:3px;"></span>
             <div>
               <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--navy);line-height:1.3;">${e.title}</div>
@@ -1005,7 +1005,7 @@ function renderSideCal() {
 
   if (upcoming.length) {
     list.innerHTML = upcoming.map(e => `
-      <div class="event-item" onclick="${e.key ? "openArticle('"+e.key+"')" : e.url ? "window.open('"+e.url+"','_blank')" : ''}" style="cursor:${e.key||e.url?'pointer':'default'}">
+      <div class="event-item" onclick="${e.key ? "openArticle('"+e.key+"')" : e.url ? "window.open('"+e.url+"','_blank')" : e.id ? "openEvent('"+e.id+"')" : ''}" style="cursor:${e.key||e.url||e.id?'pointer':'default'}">
         <div class="event-date-box" style="border-left:3px solid ${e.color};">
           <span class="event-date-month">${MONTH_NAMES[e.month].slice(0,3)}</span>
           <span class="event-date-num">${e.day}</span>
@@ -1158,7 +1158,7 @@ function renderDayPanel(d) {
           </div>
         </div>`;
       }).join('')
-    : `<div class="comm-cal-day-panel-empty">No events listed for this day. <a href="#" onclick="document.querySelector('.comm-cal-submit-section').scrollIntoView({behavior:'smooth'});return false;" style="color:var(--gold);font-weight:700;">Submit one →</a></div>`;
+    : `<div class="comm-cal-day-panel-empty">No events listed for this day. <a href="javascript:void(0)" onclick="document.querySelector('.comm-cal-submit-section').scrollIntoView({behavior:'smooth'});return false;" style="color:var(--gold);font-weight:700;">Submit one →</a></div>`;
 
   panel.style.display = 'block';
   panel.innerHTML = `
