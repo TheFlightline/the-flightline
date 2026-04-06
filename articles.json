@@ -1,48 +1,33 @@
 ```json
 [
   {
-    "id": "20260406-pensacola-affordable-housing-bonds",
-    "headline": "City plans $50 million bond for affordable housing",
-    "dek": "Pensacola City Council will consider bonds to fund workforce housing development across multiple neighborhoods",
-    "thumbnail": "/images/editorial_gavel_005.jpg",
-    "date": "2026-04-06",
+    "id": "20260406-001",
+    "headline": "Naval Aviation Museum Debuts Vietnam War Exhibit With Aircraft",
+    "dek": "The National Naval Aviation Museum opened a new permanent display featuring helicopters and jets from the Vietnam conflict.",
+    "thumbnail": "/images/military_nas-pensacola-airshow_009.jpg",
+    "dates": "2026-04-06",
     "byline": "The Flightline Staff · 2026-04-06",
-    "brief": [
-      "Pensacola City Council will vote on $50 million in bonds for affordable housing development.",
-      "Funds would support workforce housing in five neighborhoods including Brownsville and East Hill.",
-      "Council member discusses program at April 10 meeting with vote expected in May."
+    "brief_json": [
+      "The National Naval Aviation Museum at NAS Pensacola opened a new permanent Vietnam War exhibit featuring aircraft and artifacts.",
+      "The display includes a UH-1 Huey helicopter and an A-4 Skyhawk jet used in combat missions.",
+      "The exhibit also features personal items from Navy and Marine Corps aviators who served in Southeast Asia."
     ],
-    "body": "<p class=\"article-lede\">City Council member Sarah Anderson stood before a packed room at the Community Maritime Park last week, outlining plans to inject $50 million into Pensacola's housing market. The bonds would fund workforce housing in neighborhoods from Brownsville to East Hill.</p><p>The proposal goes before the full council April 10 for discussion. A formal vote is expected in May.</p><p>The funding would support five neighborhoods including Brownsville, East Hill, Warrington, Westside and Belmont-Devilliers. Anderson said the bonds would help teachers, service workers and first responders afford homes near their workplaces.</p><p>The city would partner with private developers who agree to keep units affordable for households earning 60 to 120 percent of area median income. The bonds would be repaid through property tax revenue from the new developments.</p>",
+    "body_html": "<p class=\"article-lede\">The rotor blades of a UH-1 Huey helicopter now hang suspended inside the National Naval Aviation Museum, frozen in the position they held when the aircraft evacuated wounded Marines from landing zones across South Vietnam.</p><p>The museum at Naval Air Station Pensacola opened a new permanent exhibit dedicated to the Vietnam War. The display features aircraft and artifacts from the conflict that lasted from 1955 to 1975.</p><p>An A-4 Skyhawk jet joins the Huey in the exhibit. Navy pilots flew the single-seat attack aircraft on combat missions from aircraft carriers in the Gulf of Tonkin.</p><p>Personal items from Navy and Marine Corps aviators who served in Southeast Asia fill display cases near the aircraft. The museum acquired the artifacts through donations from veterans and their families.</p>",
     "qc_pass": true
   },
   {
-    "id": "20260406-blue-angels-air-show-dates",
-    "headline": "Blue Angels air show returns in July",
-    "dek": "Pensacola Beach will host the annual demonstration team performance with six shows over two weekends",
+    "id": "20260406-002",
+    "headline": "Blue Angels Cancel Weekend Practice Flights Due to Weather",
+    "dek": "High winds and low clouds forced the Navy's flight demonstration team to scrub training sessions at their Pensacola home base.",
     "thumbnail": "/images/military_blue-angels_001.jpg",
-    "date": "2026-04-06",
+    "dates": "2026-04-06",
     "byline": "The Flightline Staff · 2026-04-06",
-    "brief": [
-      "Blue Angels air show scheduled for July 11-12 and July 18-19 at Pensacola Beach.",
-      "Six total performances planned over two weekends with beach and boardwalk viewing areas.",
-      "NAS Pensacola will host practice shows July 8 and July 15 for base personnel."
+    "brief_json": [
+      "The Blue Angels canceled weekend practice flights at Naval Air Station Pensacola due to weather conditions.",
+      "High winds and low cloud ceilings made flying unsafe for the demonstration team's training schedule.",
+      "The team plans to resume practice flights on Monday if conditions improve."
     ],
-    "body": "<p class=\"article-lede\">Six F/A-18 Super Hornets screamed overhead during a practice run last week, their blue and gold paint gleaming against clear skies. The Blue Angels return to Pensacola Beach for shows July 11-12 and July 18-19.</p><p>The demonstration team will perform three shows each weekend. Viewing areas will span from the beach to the boardwalk along Casino Beach.</p><p>Practice performances are scheduled at NAS Pensacola on July 8 and July 15 for military personnel and their families. The base shows typically draw thousands of spectators to Sherman Field.</p><p>The July dates mark the team's first Pensacola appearance since last year's show drew an estimated 400,000 people over two days. Beach parking restrictions will be in effect during show weekends.</p>",
-    "qc_pass": true
-  },
-  {
-    "id": "20260406-palafox-street-construction",
-    "headline": "Palafox Street construction starts next month",
-    "dek": "Crews will replace water lines and resurface roadway from Wright Street to Main Street in downtown Pensacola",
-    "thumbnail": "/images/downtown_palafox-street-dusk_008.jpg",
-    "date": "2026-04-06",
-    "byline": "The Flightline Staff · 2026-04-06",
-    "brief": [
-      "Construction on Palafox Street begins May 5 from Wright Street to Main Street.",
-      "Project includes water line replacement and road resurfacing with completion planned for October.",
-      "One lane will remain open during work with detours for southbound traffic."
-    ],
-    "body": "<p class=\"article-lede\">Orange barrels and construction equipment will line Palafox Street starting May 5 as crews begin a six-month project to replace aging water lines. The work stretches from Wright Street to Main Street in the heart of downtown.</p><p>City contractors will tear up the roadway to install new water infrastructure before resurfacing the street. One lane will stay open during construction but southbound traffic will be detoured to Tarragona Street.</p><p>The project is scheduled for completion in October. Business owners received notices last week about the construction timeline and parking impacts.</p><p>The water lines date to the 1950s and have experienced multiple breaks in recent years. The city budgeted $3.2 million for the project using American Rescue Plan funds.</p>",
+    "body_html": "<p class=\"article-lede\">Six F/A-18 Super Hornets sat silent in their hangar at Naval Air Station Pensacola as clouds hung low over the runway and wind gusts buffeted the flagpole outside the Blue Angels headquarters.</p><p>The Navy's flight demonstration team canceled weekend practice flights due to weather conditions. High winds and low cloud ceilings made flying unsafe for the training schedule.</p><p>The Blue Angels typically practice flight maneuvers on Tuesday and Wednesday mornings when the team is at their Pensacola home base. Weather forced the cancellation of additional sessions planned for Saturday and Sunday.</p><p>The team plans to resume practice flights on Monday if conditions improve. The Blue Angels perform at air shows across the United States from March through November.</p>",
     "qc_pass": true
   }
 ]
