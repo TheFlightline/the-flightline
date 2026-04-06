@@ -1,34 +1,3 @@
 ```json
-[
-  {
-    "id": "20260406-001",
-    "headline": "Naval Aviation Museum Debuts Vietnam War Exhibit With Aircraft",
-    "dek": "The National Naval Aviation Museum opened a new permanent display featuring helicopters and jets from the Vietnam conflict.",
-    "thumbnail": "/images/military_nas-pensacola-airshow_009.jpg",
-    "dates": "2026-04-06",
-    "byline": "The Flightline Staff · 2026-04-06",
-    "brief_json": [
-      "The National Naval Aviation Museum at NAS Pensacola opened a new permanent Vietnam War exhibit featuring aircraft and artifacts.",
-      "The display includes a UH-1 Huey helicopter and an A-4 Skyhawk jet used in combat missions.",
-      "The exhibit also features personal items from Navy and Marine Corps aviators who served in Southeast Asia."
-    ],
-    "body_html": "<p class=\"article-lede\">The rotor blades of a UH-1 Huey helicopter now hang suspended inside the National Naval Aviation Museum, frozen in the position they held when the aircraft evacuated wounded Marines from landing zones across South Vietnam.</p><p>The museum at Naval Air Station Pensacola opened a new permanent exhibit dedicated to the Vietnam War. The display features aircraft and artifacts from the conflict that lasted from 1955 to 1975.</p><p>An A-4 Skyhawk jet joins the Huey in the exhibit. Navy pilots flew the single-seat attack aircraft on combat missions from aircraft carriers in the Gulf of Tonkin.</p><p>Personal items from Navy and Marine Corps aviators who served in Southeast Asia fill display cases near the aircraft. The museum acquired the artifacts through donations from veterans and their families.</p>",
-    "qc_pass": true
-  },
-  {
-    "id": "20260406-002",
-    "headline": "Blue Angels Cancel Weekend Practice Flights Due to Weather",
-    "dek": "High winds and low clouds forced the Navy's flight demonstration team to scrub training sessions at their Pensacola home base.",
-    "thumbnail": "/images/military_blue-angels_001.jpg",
-    "dates": "2026-04-06",
-    "byline": "The Flightline Staff · 2026-04-06",
-    "brief_json": [
-      "The Blue Angels canceled weekend practice flights at Naval Air Station Pensacola due to weather conditions.",
-      "High winds and low cloud ceilings made flying unsafe for the demonstration team's training schedule.",
-      "The team plans to resume practice flights on Monday if conditions improve."
-    ],
-    "body_html": "<p class=\"article-lede\">Six F/A-18 Super Hornets sat silent in their hangar at Naval Air Station Pensacola as clouds hung low over the runway and wind gusts buffeted the flagpole outside the Blue Angels headquarters.</p><p>The Navy's flight demonstration team canceled weekend practice flights due to weather conditions. High winds and low cloud ceilings made flying unsafe for the training schedule.</p><p>The Blue Angels typically practice flight maneuvers on Tuesday and Wednesday mornings when the team is at their Pensacola home base. Weather forced the cancellation of additional sessions planned for Saturday and Sunday.</p><p>The team plans to resume practice flights on Monday if conditions improve. The Blue Angels perform at air shows across the United States from March through November.</p>",
-    "qc_pass": true
-  }
-]
+[]
 ```
