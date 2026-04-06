@@ -55,20 +55,33 @@ jobs:
             git push
           fi
 
-      - name: Send approval email
+      - name: Send approval email via Resend
         if: ${{ github.event.inputs.dry_run != 'true' }}
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          secure: false
-          username: ${{ secrets.EMAIL_USER }}
-          password: ${{ secrets.EMAIL_PASS }}
-          subject: "Flightline: ${{ env.ARTICLE_COUNT }} articles ready — ${{ env.ARTICLE_DATE }}"
-          to: theflightline@protonmail.com
-          from: "The Flightline Bot <${{ secrets.EMAIL_USER }}>"
-          html_body: file://email_body.html
-          priority: normal
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ARTICLE_COUNT: ${{ env.ARTICLE_COUNT }}
+          ARTICLE_DATE: ${{ env.ARTICLE_DATE }}
+        run: |
+          python3 - <<'PYEOF'
+          import os, urllib.request, json
+          html = open('email_body.html').read()
+          data = json.dumps({
+              "from": "Flightline Bot <onboarding@resend.dev>",
+              "to": ["theflightline@protonmail.com"],
+              "subject": f"Flightline: {os.environ['ARTICLE_COUNT']} articles ready — {os.environ['ARTICLE_DATE']}",
+              "html": html
+          }).encode()
+          req = urllib.request.Request(
+              'https://api.resend.com/emails',
+              data=data,
+              headers={
+                  'Authorization': f"Bearer {os.environ['RESEND_API_KEY']}",
+                  'Content-Type': 'application/json'
+              }
+          )
+          resp = urllib.request.urlopen(req)
+          print(resp.read().decode())
+          PYEOF
 
       - name: Upload email preview (dry run)
         if: ${{ github.event.inputs.dry_run == 'true' }}
