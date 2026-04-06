@@ -1,1 +1,7 @@
-[]
+I need the today_id, today date, and the base64-encoded story candidates to proceed. Please provide:
+
+1. `today_id` value (e.g., "20250520")
+2. `today` value (e.g., "May 20, 2025")
+3. The base64-encoded story candidates
+
+Once you provide these, I'll decode the candidates and write the articles according to your specifications.
