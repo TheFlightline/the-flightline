@@ -926,7 +926,7 @@ const CAL_CATS = {
   government:    { label:'Government',     color:'#8a3030' },
 };
 
-let calYear = 2026, calMonth = 3; // 0-indexed month (3 = April)
+let calYear = TODAY.getFullYear(), calMonth = TODAY.getMonth();
 let calView = 'grid';
 let calActiveFilters = new Set(Object.keys(CAL_CATS));
 let calSelectedDay = null;
@@ -935,7 +935,7 @@ const MONTH_NAMES = ['January','February','March','April','May','June','July','A
 const TODAY = new Date();
 
 // ── SIDEBAR CALENDAR ─────────────────────────────────────────────────────
-let sideCalYear = 2026, sideCalMonth = 3;
+let sideCalYear = TODAY.getFullYear(), sideCalMonth = TODAY.getMonth();
 let sideCalSelectedDay = null;
 
 function sideCalNav(dir) {
@@ -1165,7 +1165,7 @@ function renderDayPanel(d) {
   const items = evs.length
     ? evs.map(e => {
         const action = e.key ? `openArticle('${e.key}')` : e.url ? `window.open('${e.url}','_blank')` : '';
-        const clickable = action ? `onclick="${action}"` : '';
+        const clickable = action ? `data-action="${action}"` : '';
         return `
         <div class="comm-cal-day-event" ${clickable} style="cursor:${action?'pointer':'default'}">
           <div class="comm-cal-list-bar" style="background:${e.color};"></div>
