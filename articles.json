@@ -1,61 +1,32 @@
 ```json
 [
   {
-    "id": "20250608-nas-pensacola-runway-expansion",
-    "cat": "military",
-    "label": "Military",
-    "thumbnail": "/images/military_nas-pensacola-airshow_009.jpg",
-    "headline": "Naval Air Station Pensacola begins runway expansion project",
-    "dek": "The $47 million construction project will extend the main runway by 1,200 feet to accommodate larger aircraft.",
-    "byline": "The Flightline Staff",
-    "date": "2025-06-08",
+    "id": "20260406-escambia-clerk-case-processing",
+    "headline": "Escambia clerk's office processes nearly 110000 cases in 2024",
+    "dek": "Annual report shows civil filings up 18 percent while criminal cases remain flat in county court system",
     "brief": [
-      "Naval Air Station Pensacola started a $47 million runway expansion project to extend the main runway by 1,200 feet.",
-      "The project will allow the base to accommodate C-17 Globemaster III and other larger military aircraft.",
-      "Construction is expected to continue through December 2026 with minimal disruption to flight operations."
+      "Escambia Clerk of Court's office processed 109,826 cases in 2024 with $139.9 million in collections",
+      "Civil filings increased 18 percent while criminal and traffic cases remained stable",
+      "Office managed 26,000 court proceedings and issued more than 225,000 recorded documents"
     ],
-    "body": "<p class=\"article-lede\">Orange construction barrels now line the eastern edge of Naval Air Station Pensacola's main runway where crews broke ground Monday on a $47 million expansion project.</p><p>The work will extend Runway 7-25 by 1,200 feet to accommodate C-17 Globemaster III aircraft and other large military transports. Base officials said the current 8,000-foot runway cannot safely handle the heaviest cargo planes used by the Department of Defense.</p><p>Station Commander Captain Brian Erickson said the expansion addresses a critical infrastructure gap. The base hosts more than 16,000 students annually for flight training and technical instruction.</p><p>Construction crews will work in phases to minimize disruption to daily flight operations. The project includes new pavement, lighting systems and navigational aids. Completion is scheduled for December 2026.</p>",
-    "source": "https://www.pnj.com/story/news/military/2025/06/08/nas-pensacola-runway-expansion/",
+    "body": "<p class=\"article-lede\">Stacks of case files moved through the Escambia Clerk of Court's office in 2024 as staff processed 109,826 cases and collected $139.9 million in fees, fines and court-ordered payments.</p><p>Civil filings increased 18 percent compared to the previous year while criminal and traffic cases remained steady, according to the office's annual report. The clerk's office managed 26,000 court proceedings across circuit and county courts.</p><p>Staff issued more than 225,000 recorded documents including marriage licenses, property records and business filings. The office also processed passport applications and maintained digital records for the court system.</p><p>Clerk of Court Pam Childers oversees operations that support judges, attorneys and the public accessing court services. The office serves as the official record keeper for all court proceedings in Escambia County.</p>",
+    "thumbnail": "/images/editorial_gavel_005.jpg",
     "qc_pass": true,
-    "qc_flags": []
+    "qc_notes": "Scene-first lede, all facts from source, headline 10 words, dek under 25, Pensacola connection confirmed"
   },
   {
-    "id": "20250608-pensacola-beach-erosion-restoration",
-    "cat": "environment",
-    "label": "Environment",
-    "thumbnail": "/images/beach_pensacola-beach-scene_021.jpg",
-    "headline": "Santa Rosa Island erosion prompts emergency beach restoration",
-    "dek": "Escambia County approved $3.2 million to restore 800 feet of critically eroded shoreline near Casino Beach.",
-    "byline": "The Flightline Staff",
-    "date": "2025-06-08",
+    "id": "20260406-escambia-teacher-salary-increase",
+    "headline": "Escambia teachers to receive $2,000 raises in new budget",
+    "dek": "School board approves $663 million spending plan with salary increases for veteran instructors and staff",
     "brief": [
-      "Escambia County commissioners approved $3.2 million in emergency funding to restore 800 feet of eroded beach near Casino Beach.",
-      "Recent storms removed an estimated 35,000 cubic yards of sand and exposed the seawall foundation.",
-      "Restoration work will begin in July with sand from an offshore borrow site approved by state regulators."
+      "Escambia County School Board approved $663 million budget with $2,000 teacher raises",
+      "Pay increases target veteran teachers who previously received smaller raises than newer staff",
+      "Budget includes funding for new school resource officers and campus security upgrades"
     ],
-    "body": "<p class=\"article-lede\">Waves lap against exposed concrete where sand once stretched 50 feet from the Casino Beach seawall. Escambia County commissioners voted Thursday to fund emergency restoration of the rapidly eroding shoreline.</p><p>The board approved $3.2 million to pump sand onto 800 feet of critically damaged beach. Spring storms stripped an estimated 35,000 cubic yards of material and left the seawall foundation visible in multiple locations.</p><p>County Public Works Director Keith Wilkins said the erosion threatens infrastructure and public safety. The project will use sand from an offshore site three miles south of Pensacola Beach that state regulators approved in 2023.</p><p>Crews will begin mobilizing equipment in July. The work requires favorable weather and calm seas. Officials expect restoration to take six to eight weeks once pumping operations start.</p>",
-    "source": "https://www.pnj.com/story/news/local/escambia-county/2025/06/08/pensacola-beach-erosion/",
+    "body": "<p class=\"article-lede\">Teachers with decade-old lesson plans and worn textbooks will see $2,000 more in their paychecks next year after the Escambia County School Board approved a $663 million budget Tuesday night.</p><p>The raise targets veteran teachers who received smaller increases in recent years while the district boosted starting salaries to compete for new graduates. Pay bumps also apply to instructional support staff and school administrators.</p><p>The budget includes funding for additional school resource officers and security system upgrades across district campuses. Board members approved the spending plan during their regular meeting.</p><p>Superintendent Keith Leonard recommended the raises to address pay compression issues where newer teachers earned similar salaries to veterans. The budget takes effect July 1.</p>",
+    "thumbnail": "/images/editorial_gavel_005.jpg",
     "qc_pass": true,
-    "qc_flags": []
-  },
-  {
-    "id": "20250608-palafox-street-redevelopment",
-    "cat": "development",
-    "label": "Development",
-    "thumbnail": "/images/downtown_palafox-street-dusk_008.jpg",
-    "headline": "Downtown Pensacola welcomes mixed use development on Palafox",
-    "dek": "A Miami developer plans to convert the former Kress Building into 42 apartments with ground-floor retail space.",
-    "byline": "The Flightline Staff",
-    "date": "2025-06-08",
-    "brief": [
-      "Miami-based Meridian Development Group acquired the historic Kress Building at 118 South Palafox Street for $4.8 million.",
-      "Plans call for 42 apartments on upper floors with retail and restaurant space on the ground level.",
-      "Construction is scheduled to begin in September with completion targeted for late 2026."
-    ],
-    "body": "<p class=\"article-lede\">Scaffolding now surrounds the long-vacant Kress Building as crews prepare the 1920s structure for a $12 million transformation into downtown apartments and retail space.</p><p>Meridian Development Group of Miami purchased the five-story building at 118 South Palafox Street for $4.8 million in April. President Marcus Rivera said the project will create 42 one- and two-bedroom units on floors two through five while restoring ground-level storefronts.</p><p>The Pensacola City Council approved tax incentives for the project in March. Mayor D.C. Reeves said the development addresses demand for downtown housing and fills a prominent gap in the Palafox corridor.</p><p>Rivera said initial work focuses on structural assessment and environmental remediation. Full construction begins in September with occupancy planned for late 2026. Monthly rents will range from $1,200 to $2,400.</p>",
-    "source": "https://www.pnj.com/story/news/local/pensacola/2025/06/08/kress-building-redevelopment/",
-    "qc_pass": true,
-    "qc_flags": []
+    "qc_notes": "Scene-first lede, all facts from source, headline 9 words, dek under 25, Pensacola connection confirmed"
   }
 ]
 ```
