@@ -1,0 +1,79 @@
+name: Generate Daily Articles
+
+on:
+  schedule:
+    # 6 AM Central Daylight Time (UTC-5) = 11:00 UTC
+    # Adjust to 12:00 UTC in winter (CST = UTC-6)
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — generate articles but do not commit or email'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic --quiet
+
+      - name: Generate articles
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          APPROVAL_SECRET: ${{ secrets.APPROVAL_SECRET }}
+          SITE_URL: https://theflightlinepredeploy.netlify.app
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: python scripts/generate_articles.py
+
+      - name: Commit pending articles
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "Flightline Bot"
+          git config user.email "bot@theflightline.com"
+          git add pending_articles.json
+          if git diff --staged --quiet; then
+            echo "Nothing to commit"
+          else
+            git commit -m "chore: pending articles $(date +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Send approval email
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: "Flightline: ${{ env.ARTICLE_COUNT }} articles ready — ${{ env.ARTICLE_DATE }}"
+          to: theflightline@protonmail.com
+          from: "The Flightline Bot <${{ secrets.EMAIL_USER }}>"
+          html_body: file://email_body.html
+          priority: normal
+
+      - name: Upload email preview (dry run)
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: email-preview
+          path: email_body.html
+          retention-days: 1
