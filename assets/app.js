@@ -704,6 +704,25 @@ function closeDropdown() {
   dd.classList.remove('open');
   dd.innerHTML = '';
 }
+// Delegation-based search click handler — attached once, handles all dropdown clicks
+document.addEventListener('DOMContentLoaded', function() {
+  const dd = document.getElementById('search-dropdown');
+  if (!dd) return;
+  dd.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    const item = e.target.closest('[data-article-id]');
+    const footer = e.target.closest('[data-search-q]');
+    if (item) {
+      const id = item.getAttribute('data-article-id');
+      closeDropdown();
+      openArticle(id);
+    } else if (footer) {
+      const q = footer.getAttribute('data-search-q');
+      closeDropdown();
+      runSearch(q);
+    }
+  });
+});
 
 function positionDropdown(inputEl) {
   const input = inputEl || document.getElementById('search-input');
@@ -759,7 +778,7 @@ function liveSearch(q, inputEl) {
   const topResults = results.slice(0, 5);
   const itemsHtml = topResults.map(a => {
     const color = CAT_COLORS_MAP[a.cat] || 'var(--navy)';
-    return `<div class="search-drop-item" onmousedown="(inputEl||document.getElementById('search-input')).value='';openArticle('${a.id}');setTimeout(closeDropdown,50)">
+    return `<div class="search-drop-item" data-article-id="${a.id}" style="cursor:pointer">
       <div class="search-drop-cat" style="color:${color};pointer-events:none">${a.label}</div>
       <div class="search-drop-text" style="pointer-events:none">
         <div class="search-drop-headline">${a.headline}</div>
@@ -768,9 +787,8 @@ function liveSearch(q, inputEl) {
     </div>`;
   }).join('');
 
-  const footerHtml = results.length > 5
-    ? `<div class="search-drop-footer" onmousedown="closeDropdown();runSearch('${q.replace(/'/g,"\\'")}')">See all ${results.length} results for "${q}" →</div>`
-    : `<div class="search-drop-footer" onmousedown="closeDropdown();runSearch('${q.replace(/'/g,"\\'")}')">See all results →</div>`;
+  const safeQ = q.replace(/"/g, '&quot;');
+  const footerHtml = `<div class="search-drop-footer" data-search-q="${safeQ}" style="cursor:pointer">See all ${results.length} result${results.length !== 1 ? 's' : ''} for "${q}" →</div>`;
 
   dd.innerHTML = itemsHtml + footerHtml;
   dd.classList.add('open');
