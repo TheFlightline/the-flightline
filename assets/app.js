@@ -134,6 +134,7 @@ fetch('/articles.json')
     articlesReady = true;
     articleReadyCallbacks.forEach(fn => fn());
     buildHomeFeed();
+    setTimeout(buildHomeFeed, 300);
   })
   .catch(e => console.error('Failed to load articles.json', e));
 function updateBackToTop() {
