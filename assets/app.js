@@ -11,13 +11,16 @@ function onArticlesReady(fn) {
 // ── PUB DATE HELPER — use key prefix not date field for sorting ───────────────
 function pubDate(id) {
   if (!id) return new Date(0);
+  var result;
   var m = id.match(/^(\d{4})(\d{2})(\d{2})/);
-  if (m) return new Date(m[1]+'-'+m[2]+'-'+m[3]);
-  if (A[id] && A[id].date) {
+  if (m) { result = new Date(m[1]+'-'+m[2]+'-'+m[3]); }
+  else if (A[id] && A[id].date) {
     var d = new Date(A[id].date);
-    if (!isNaN(d.getTime())) return d;
+    if (!isNaN(d.getTime())) result = d;
   }
-  return new Date(0);
+  if (!result) return new Date(0);
+  var today = new Date(); today.setHours(23,59,59,999);
+  return result > today ? today : result;
 }
 
 function autoTag(id, art) {
@@ -557,7 +560,7 @@ function goAllArticles(filterTag, page) {
   var filterHtml = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;">';
   for (var t = 0; t < tags.length; t++) {
     var isActive = tags[t][0] === tag;
-    filterHtml += '<button class="nbhd-btn' + (isActive ? ' active' : '') + '" onclick="goAllArticles(\'' + tags[t][0] + '\')" style="cursor:pointer;">' + tags[t][1] + '</button>';
+    filterHtml += '<button onclick="goAllArticles(\'' + tags[t][0] + '\')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (isActive ? '700' : '500') + ';padding:8px 16px;border:1px solid ' + (isActive ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (isActive ? 'var(--navy)' : '#fff') + ';color:' + (isActive ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + tags[t][1] + '</button>';
   }
   filterHtml += '</div>';
 
