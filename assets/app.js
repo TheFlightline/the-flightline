@@ -508,7 +508,7 @@ function goCategory(cat, page) {
   
   var pagHtml = '';
   if (totalPages > 1) {
-    pagHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:32px;padding:20px 0;flex-wrap:wrap;">';
+    pagHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:32px;padding:20px 0;flex-wrap:wrap;grid-column:1/-1;">';
     if (currentPage > 1) {
       pagHtml += '<button onclick="goCategory(\'' + cat + '\',' + (currentPage - 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">\u2190 Previous</button>';
     }
@@ -557,7 +557,7 @@ function goAllArticles(filterTag, page) {
 
   // Tag filter bar
   var tags = [['all','All'],['pensacola','Pensacola'],['downtown','Downtown'],['escambia','Escambia County'],['beach','Pensacola Beach'],['gulfbreeze','Gulf Breeze']];
-  var filterHtml = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;">';
+  var filterHtml = '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;align-items:center;grid-column:1/-1;">';
   for (var t = 0; t < tags.length; t++) {
     var isActive = tags[t][0] === tag;
     filterHtml += '<button onclick="goAllArticles(\'' + tags[t][0] + '\')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (isActive ? '700' : '500') + ';padding:8px 16px;border:1px solid ' + (isActive ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (isActive ? 'var(--navy)' : '#fff') + ';color:' + (isActive ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + tags[t][1] + '</button>';
@@ -583,7 +583,7 @@ function goAllArticles(filterTag, page) {
   // Pagination controls
   var pagHtml = '';
   if (totalPages > 1) {
-    pagHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:32px;padding:20px 0;flex-wrap:wrap;">';
+    pagHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:32px;padding:20px 0;flex-wrap:wrap;grid-column:1/-1;">';
     if (currentPage > 1) {
       pagHtml += '<button onclick="goAllArticles(\'' + tag + '\',' + (currentPage - 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">\u2190 Previous</button>';
     }
