@@ -5,12 +5,88 @@ const articleReadyCallbacks = [];
 function onArticlesReady(fn) {
   if (articlesReady) { fn(); } else { articleReadyCallbacks.push(fn); }
 }
+
+
+// ── HOME FEED — dynamic sorted render ────────────────────────────────────────
+function buildHomeFeed() {
+  const list = document.getElementById('news-article-list');
+  if (!list) return;
+
+  // Neighbourhood map for known article IDs, inferred for new ones
+  const NBHD_MAP = {
+    'military': 'nas', 'Military': 'nas', 'Blue Angels': 'nas',
+    'Gulf Breeze': 'gulf-breeze', 'Gulf Breeze Soccer': 'gulf-breeze',
+    'Pensacola Beach': 'perdido-key', 'Tourism': 'perdido-key',
+    'Warrington': 'warrington', 'Warrington CRA': 'warrington',
+    'East Hill': 'east-hill',
+  };
+  const KNOWN_IDS = {
+    '20260402-escambia-commission-clerk-childers': 'downtown',
+    '20260402-warringtons-damaged-hotel-gets': 'warrington',
+    '20260404-sunshine-escambia-county-pensacolas': 'downtown',
+    '20260327-city-council-awards-78m': 'downtown',
+    '20260116-escambia-zoning-scam-warning': 'downtown',
+    '20260401-flight-line-access-restored': 'nas',
+    '20260402-nas-pensacola-family-housing': 'nas',
+    '20260401-blue-wahoos-complete-ballpark': 'downtown',
+  };
+
+  const HOME_CAT_PHOTOS = {
+    government: ['/images/downtown_pensacola-aerial-downtown_003.jpg','/images/govt_office_007.jpg','/images/editorial_gavel_005.jpg'],
+    govt: ['/images/editorial_gavel_005.jpg','/images/govt_office_007.jpg','/images/govt_public-hearing_009.jpg'],
+    military: ['/images/military_blue-angels_001.jpg','/images/military_nas_002.jpg','/images/military_aircraft_003.jpg'],
+    education: ['/images/education_uwf_001.jpg','/images/education_school_002.jpg','/images/education_campus_003.jpg'],
+    sports: ['/images/sports_wahoos_001.jpg','/images/sports_stadium_002.jpg','/images/community_park_003.jpg'],
+    development: ['/images/development_construction-crane_001.jpg','/images/development_road-work_002.jpg','/images/development_scaffolding_003.jpg'],
+    traffic: ['/images/development_road-work_002.jpg','/images/traffic_highway_001.jpg','/images/development_construction-crane_001.jpg'],
+    environment: ['/images/environment_beach_001.jpg','/images/environment_bay_002.jpg','/images/community_park_003.jpg'],
+    tourism: ['/images/tourism_beach_001.jpg','/images/downtown_waterfront_004.jpg','/images/tourism_pier_002.jpg'],
+    community: ['/images/community_park_003.jpg','/images/downtown_palafox-street-clock_007.jpg','/images/downtown_waterfront_004.jpg'],
+    news: ['/images/downtown_pensacola-aerial-downtown_003.jpg','/images/editorial_press_001.jpg','/images/downtown_waterfront_004.jpg'],
+  };
+
+  function homeNbhd(id, art) {
+    if (KNOWN_IDS[id]) return KNOWN_IDS[id];
+    if (art.cat === 'military' || art.label === 'Military' || art.label === 'Blue Angels') return 'nas';
+    if (art.label && art.label.includes('Gulf Breeze')) return 'gulf-breeze';
+    if (art.label && (art.label.includes('Pensacola Beach') || art.label === 'Tourism')) return 'perdido-key';
+    if (art.label && art.label.includes('Warrington')) return 'warrington';
+    if (art.label && art.label.includes('East Hill')) return 'east-hill';
+    return 'downtown';
+  }
+
+  function homeImg(id, art) {
+    if (art.thumbnail) return `<img src="${art.thumbnail}" alt="${art.cat}" style="width:100%;height:100%;object-fit:cover;">`;
+    const pool = HOME_CAT_PHOTOS[art.cat] || HOME_CAT_PHOTOS.news;
+    const idx = Math.abs(id.split('').reduce((a,c)=>a+c.charCodeAt(0),0)) % pool.length;
+    return `<img src="${pool[idx]}" alt="${art.cat}" style="width:100%;height:100%;object-fit:cover;">`;
+  }
+
+  // Sort all articles by date descending
+  const sorted = Object.entries(A)
+    .sort((a, b) => new Date(b[1].date || 0) - new Date(a[1].date || 0));
+
+  list.innerHTML = sorted.map(([id, art]) => {
+    const nbhd = homeNbhd(id, art);
+    return `<div class="article-card" data-nbhd="${nbhd}" onclick="openArticle('${id}')">
+            <div class="article-card-text">
+              <span class="cat-badge cat-${art.cat}">${art.label || art.cat}</span>
+              <div class="headline-lg">${art.headline}</div>
+              <div class="dek">${art.dek || ''}</div>
+              <div class="byline">By <span>${art.byline || 'The Flightline Staff'}</span> · ${art.date || ''}</div>
+            </div>
+            <div class="article-card-image">${homeImg(id, art)}</div>
+          </div>`;
+  }).join('\n');
+}
+// ─────────────────────────────────────────────────────────────────────────────
 fetch('/articles.json')
   .then(r => r.json())
   .then(data => {
     data.forEach(art => { A[art.id] = art; });
     articlesReady = true;
     articleReadyCallbacks.forEach(fn => fn());
+    buildHomeFeed();
   })
   .catch(e => console.error('Failed to load articles.json', e));
 function updateBackToTop() {
