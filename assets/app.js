@@ -36,11 +36,11 @@ function catDisplay(c){return CAT_DISPLAY[c]||(c.charAt(0).toUpperCase()+c.slice
 
 // ── HOME SECTION UNIFIED PHOTO-GRID RENDER ───────────────────────────────────
 const HOME_SECTION_CATS = [
-  { id: 'section-govt',     cat: 'govt',     label: 'Government',                nbhdFilter: true },
-  { id: 'section-business', cat: 'dev',      label: 'Business & Development',    nbhdFilter: true },
-  { id: 'section-military', cat: 'military', label: 'Military & NAS Pensacola',  nbhdFilter: true },
-  { id: 'section-sports',   cat: 'sports',   label: 'Sports',                    nbhdFilter: true },
-  { id: 'section-opinion',  cat: 'opinion',  label: 'Opinion & Analysis',        nbhdFilter: true },
+  { id: 'news',             cat: 'govt',     label: 'Government',                nbhdFilter: true },
+  { id: 'development',      cat: 'dev',      label: 'Business & Development',    nbhdFilter: true },
+  { id: 'military',         cat: 'military', label: 'Military & NAS Pensacola',  nbhdFilter: true },
+  { id: 'sports',           cat: 'sports',   label: 'Sports',                    nbhdFilter: true },
+  { id: 'opinion-section',  cat: 'opinion',  label: 'Opinion & Analysis',        nbhdFilter: true },
 ];
 
 const HOME_PHOTOS = {
