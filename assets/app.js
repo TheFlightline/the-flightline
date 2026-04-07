@@ -20,7 +20,7 @@ function pubDate(id) {
   }
   if (!result) return new Date(0);
   var today = new Date(); today.setHours(23,59,59,999);
-  return result > today ? today : result;
+  return result > today ? new Date(1) : result;
 }
 
 function autoTag(id, art) {
