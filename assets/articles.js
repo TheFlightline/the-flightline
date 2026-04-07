@@ -1,4 +1,5 @@
-const A = {
+var A = window.A || {};
+Object.assign(A, {
   "uwf": {
     "cat": "education",
     "label": "Education",
@@ -1800,4 +1801,4 @@ const A = {
     ],
     "body": "<p class=\"article-lede\">A city-owned parcel at 801 West Avery Street is headed to Community Health Northwest Florida Foundation, pending City Council approval Thursday night.</p><p>The April 9 agenda includes three related actions: a declaration of surplus, a land donation agreement with Community Health Northwest Florida Foundation Inc., and Resolution 2026-10, which removes 801 West Avery Street from the Pensacola Inner City Community Redevelopment Area.</p><p>Community Health Northwest Florida operates federally qualified health centers — safety-net clinics that provide primary and preventive care on a sliding-fee scale regardless of ability to pay. The organization serves low-income, uninsured and underinsured patients across the region.</p><p>The West Avery Street location places a potential health facility on the city's west side, where access to primary care has historically been limited. Removing the property from the redevelopment area is a procedural step required before the land can be donated for a non-CRA use. Construction and operational timeline details were not available in the posted agenda materials.</p>"
   }
-};
+});
