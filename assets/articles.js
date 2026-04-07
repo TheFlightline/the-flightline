@@ -3,7 +3,7 @@ Object.assign(A, {
   "uwf": {
     "cat": "education",
     "label": "Education",
-    "thumbnail": "/images/uwf_sign.jpg",
+    "thumbnail": "/images/UWF-Sign-Zoom-2025-June-1920x1080.jpeg",
     "headline": "UWF Is Going Division I. The City Should Pay Attention.",
     "dek": "The University of West Florida officially announced its move to NCAA Division I this week. It's the biggest institutional bet Pensacola has made in years — and the returns will reach far beyond the scoreboard.",
     "byline": "The Flightline Staff",
@@ -66,7 +66,7 @@ Object.assign(A, {
   "gasprices": {
     "cat": "news",
     "label": "Local",
-    "thumbnail": "/images/pensacola_beach_watertower.jpg",
+    "thumbnail": "/images/beach_pensacola-beach-ball-tower_017.jpg",
     "headline": "Gas Prices Are Hitting Pensacola Beach Boaters Where It Hurts",
     "dek": "Rising fuel costs tied to ongoing tensions with Iran are pushing marina prices to levels most recreational boaters haven't seen in years.",
     "byline": "The Flightline Staff",
@@ -111,7 +111,7 @@ Object.assign(A, {
   "wahoos": {
     "cat": "sports",
     "label": "Sports",
-    "thumbnail": "/images/downtown_maritime_aerial.jpg",
+    "thumbnail": "/images/downtown_pensacola-maritime-park_006.jpg",
     "mapQuery": "Blue Wahoos Stadium 351 W Cedar St Pensacola FL",
     "mapBbox": "-87.2209,30.4063,-87.2009,30.4163",
     "mapMarker": "30.4113,-87.2109",
@@ -129,7 +129,7 @@ Object.assign(A, {
   "lost": {
     "cat": "dev",
     "label": "Infrastructure",
-    "thumbnail": "/images/downtown_maritime_aerial.jpg",
+    "thumbnail": "/images/downtown_pensacola-maritime-park_006.jpg",
     "headline": "$108 Million Later: What LOST IV Built for Pensacola",
     "dek": "The decade-long Local Option Sales Tax program wrapped in 2025 after generating more than $108 million for city projects. A breakdown of where the money went — and what comes next.",
     "byline": "The Flightline Staff",
@@ -177,7 +177,7 @@ Object.assign(A, {
   "op-uwf": {
     "cat": "opinion",
     "label": "Opinion",
-    "thumbnail": "/images/sports_football_001.jpg",
+    "thumbnail": "/images/UWFFootball_12.jpeg",
     "headline": "Division I Is a Bet on the City, Not Just the University",
     "dek": "The move to NCAA Division I isn't about football or scholarship money. It's about whether Pensacola is serious about competing for the next generation.",
     "byline": "Editorial Board",
@@ -222,7 +222,7 @@ Object.assign(A, {
   "crawfish": {
     "cat": "events",
     "label": "Events",
-    "thumbnail": "/images/downtown_palafox_church.jpg",
+    "thumbnail": "/images/community_palafox-festival_008.jpg",
     "headline": "Pensacola Crawfish Festival Returns April 24 Downtown",
     "dek": "Fiesta Pensacola's annual crawfish festival is back at downtown's core with live entertainment, vendors and large-scale crawfish boils.",
     "byline": "The Flightline Staff",
@@ -591,7 +591,7 @@ Object.assign(A, {
   "uwf-d1-schedule": {
     "cat": "sports",
     "label": "College Sports",
-    "thumbnail": "/images/sports_football_001.jpg",
+    "thumbnail": "/images/UWFFootball_12.jpeg",
     "headline": "UWF's First Division I Football Schedule Is Out. Here's Who They're Playing.",
     "dek": "The Argonauts released their 2026 UAC football schedule the same day as the D-I announcement. It is a real schedule against real programs.",
     "byline": "The Flightline Staff",
@@ -966,7 +966,7 @@ Object.assign(A, {
   "psc-dual-enrollment": {
     "cat": "education",
     "label": "Education",
-    "thumbnail": "/images/education_classroom_002.jpg",
+    "thumbnail": "/images/education_library_004.jpg",
     "headline": "PSC Dual Enrollment Is Growing. The Access Gap Is Not Closing.",
     "dek": "The college served 2,800 high school students last year. Participation rates across the county are deeply uneven.",
     "byline": "The Flightline Staff",
@@ -1356,7 +1356,7 @@ Object.assign(A, {
   "escambia-school-board-calendar": {
     "cat": "education",
     "label": "Education",
-    "thumbnail": "/images/education_classroom_002.jpg",
+    "thumbnail": "/images/education_library_004.jpg",
     "headline": "Escambia School Board Heads Into Spring With Talent Shortages, a Voucher Audit and a Superintendent Ballot Question",
     "dek": "Three issues are converging at the Escambia County School District this spring: a national teacher shortage affecting local classrooms, a state audit documenting accountability failures in the voucher program that drains district enrollment, and an August ballot question on whether voters want to elect or appoint the next superintendent.",
     "byline": "The Flightline Staff",
@@ -1416,7 +1416,7 @@ Object.assign(A, {
   "escambia-school-board-capital": {
     "cat": "education",
     "label": "Education",
-    "thumbnail": "/images/education_campus_001.jpg",
+    "thumbnail": "/images/education_graduation_005.jpg",
     "mapQuery": "Tate High School 1772 Tate Road Cantonment FL",
     "mapBbox": "-87.3309,30.5713,-87.2709,30.6113",
     "mapMarker": "30.5913,-87.3009",
