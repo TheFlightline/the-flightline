@@ -146,17 +146,12 @@ function renderMobileLatest() {
 }
 
 
-fetch('/articles.json')
-  .then(r => r.json())
-  .then(data => {
-    data.forEach(art => { A[art.id] = art; });
-    articlesReady = true;
-    articleReadyCallbacks.forEach(fn => fn());
-    buildHomeFeed();
-    setTimeout(buildHomeFeed, 300);
-    renderMobileLatest();
-  })
-  .catch(e => console.error('Failed to load articles.json', e));
+// articles.js loaded synchronously via <script> tag — boot immediately
+articlesReady = true;
+articleReadyCallbacks.forEach(fn => fn());
+buildHomeFeed();
+setTimeout(buildHomeFeed, 300);
+renderMobileLatest();
 function updateBackToTop() {
   const btn = document.getElementById('back-to-top');
   if (!btn) return;
