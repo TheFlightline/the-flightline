@@ -90,7 +90,7 @@ function buildSection(sectionId, cat, nbhdFilter) {
     var id = entry[0], art = entry[1];
     var nbhd = homeNbhd(id, art);
     var cls = 'story-card' + (i === 0 ? ' gold-top' : '');
-    return '<div class="'+cls+'" data-nbhd="'+nbhd+'" onclick="openArticle(''+id+'')">'
+    return '<div class="'+cls+'" data-nbhd="'+nbhd+'" onclick="openArticle(\''+id+'\')">'
       + '<div class="story-card-img">'+homeCardImg(id, art)+'</div>'
       + '<span class="cat-badge cat-'+art.cat+'">'+catDisplay(art.cat)+'</span>'
       + '<div class="headline-md">'+art.headline+'</div>'
