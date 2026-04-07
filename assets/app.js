@@ -31,17 +31,16 @@ function autoTag(id, art) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-const CAT_DISPLAY={govt:"Government",government:"Government",dev:"Development",development:"Development",military:"Military",news:"News",education:"Education",sports:"Sports",events:"Events",opinion:"Opinion",environment:"Environment",tourism:"Tourism",traffic:"Traffic",community:"Community"};
+const CAT_DISPLAY={govt:"Government",government:"Government",dev:"Business",development:"Business",business:"Business",military:"Military",news:"News",education:"Education",sports:"Sports",events:"Events",opinion:"Opinion",environment:"Environment",tourism:"Tourism",traffic:"Traffic",community:"Community"};
 function catDisplay(c){return CAT_DISPLAY[c]||(c.charAt(0).toUpperCase()+c.slice(1));}
 
 // ── HOME SECTION UNIFIED PHOTO-GRID RENDER ───────────────────────────────────
 const HOME_SECTION_CATS = [
-  { id: 'news',            cat: 'news',     label: 'Local News',                  nbhdFilter: true },
-  { id: 'development',     cat: 'dev',      label: 'Development & Infrastructure', nbhdFilter: true },
-  { id: 'military',        cat: 'military', label: 'Military & NAS Pensacola',     nbhdFilter: true },
-  { id: 'sports',          cat: 'sports',   label: 'Sports',                       nbhdFilter: true },
-  { id: 'opinion-section', cat: 'opinion',  label: 'Opinion & Analysis',           nbhdFilter: true },
-  { id: 'events-section',  cat: 'events',   label: 'Arts & Events',               nbhdFilter: true },
+  { id: 'section-govt',     cat: 'govt',     label: 'Government',                nbhdFilter: true },
+  { id: 'section-business', cat: 'dev',      label: 'Business & Development',    nbhdFilter: true },
+  { id: 'section-military', cat: 'military', label: 'Military & NAS Pensacola',  nbhdFilter: true },
+  { id: 'section-sports',   cat: 'sports',   label: 'Sports',                    nbhdFilter: true },
+  { id: 'section-opinion',  cat: 'opinion',  label: 'Opinion & Analysis',        nbhdFilter: true },
 ];
 
 const HOME_PHOTOS = {
@@ -184,11 +183,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Category labels map
 const CAT_META = {
-  news:      { label:'Local News',              color:'var(--cat-news)' },
+  news:      { label:'News',                    color:'var(--cat-news)' },
   govt:      { label:'Government',              color:'var(--cat-govt)' },
-  dev:       { label:'Development & Infrastructure', color:'var(--cat-dev)' },
+  dev:       { label:'Business & Development',  color:'var(--cat-dev)' },
+  business:  { label:'Business & Development',  color:'var(--cat-dev)' },
   opinion:   { label:'Opinion & Analysis',      color:'var(--cat-opinion)' },
-  events:    { label:'Arts & Events',           color:'var(--cat-events)' },
+  events:    { label:'Events',                  color:'var(--cat-events)' },
   military:  { label:'Military',                color:'var(--cat-military)' },
   education: { label:'Education',               color:'var(--cat-education)' },
   sports:    { label:'Sports',                  color:'var(--cat-sports)' },
