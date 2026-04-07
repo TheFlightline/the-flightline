@@ -23,8 +23,10 @@ function pubDate(id) {
 function autoTag(id, art) {
   if (art.tag) return art.tag;
   var text = ((art.headline || '') + ' ' + (art.dek || '') + ' ' + id + ' ' + (art.label || '')).toLowerCase();
-  if (text.indexOf('beach') > -1 || text.indexOf('perdido') > -1 || text.indexOf('gulf breeze') > -1 || text.indexOf('surf') > -1 || text.indexOf('island') > -1 || text.indexOf('pensacola beach') > -1) return 'beach';
-  if (text.indexOf('escambia county') > -1 || text.indexOf('commission') > -1 || text.indexOf('county') > -1 || text.indexOf('molino') > -1 || text.indexOf('cantonment') > -1 || text.indexOf('warrington') > -1 || text.indexOf('century') > -1) return 'escambia';
+  if (text.indexOf('gulf breeze') > -1 || text.indexOf('gulf-breeze') > -1 || text.indexOf('gulfbreeze') > -1) return 'gulfbreeze';
+  if (text.indexOf('pensacola beach') > -1 || text.indexOf('perdido') > -1 || text.indexOf('beach blvd') > -1 || text.indexOf('beach nourishment') > -1 || text.indexOf('casino beach') > -1 || text.indexOf('fort pickens') > -1) return 'beach';
+  if (text.indexOf('escambia county') > -1 || text.indexOf('escambia commission') > -1 || text.indexOf('county commission') > -1 || text.indexOf('molino') > -1 || text.indexOf('cantonment') > -1 || text.indexOf('century') > -1 || text.indexOf('warrington') > -1 || text.indexOf('brent') > -1 || text.indexOf('bellview') > -1 || text.indexOf('gonzalez') > -1 || text.indexOf('ensley') > -1 || text.indexOf('myrtle grove') > -1) return 'escambia';
+  if (text.indexOf('downtown') > -1 || text.indexOf('palafox') > -1 || text.indexOf('garden street') > -1 || text.indexOf('bayfront') > -1 || text.indexOf('bay center') > -1 || text.indexOf('saenger') > -1 || text.indexOf('maritime park') > -1 || text.indexOf('community maritime') > -1 || text.indexOf('gallery night') > -1 || text.indexOf('vinyl music') > -1 || text.indexOf('fish house') > -1 || text.indexOf('alcaniz') > -1 || text.indexOf('intendencia') > -1) return 'downtown';
   return 'pensacola';
 }
 
@@ -104,7 +106,7 @@ function buildSection(sectionId, cat, nbhdFilter) {
 
   var nbhdHtml = '';
   if (nbhdFilter) {
-    var tags = [['all','All'],['pensacola','Pensacola'],['escambia','Escambia County'],['beach','Pensacola Beach']];
+    var tags = [['all','All'],['pensacola','Pensacola'],['downtown','Downtown'],['escambia','Escambia County'],['beach','Pensacola Beach'],['gulfbreeze','Gulf Breeze']];
     nbhdHtml = '<div class="tag-filters" data-section="' + sectionId + '" style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;">';
     for (var n = 0; n < tags.length; n++) {
       nbhdHtml += '<button class="nbhd-btn' + (tags[n][0] === 'all' ? ' active' : '') + '" data-tag="' + tags[n][0] + '" onclick="filterTag(\'' + sectionId + '\',\'' + tags[n][0] + '\',this)">' + tags[n][1] + '</button>';
