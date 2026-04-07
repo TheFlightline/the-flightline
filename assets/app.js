@@ -162,7 +162,7 @@ function goPage(page) {
 
 function goCategory(cat) {
   const meta = CAT_META[cat] || { label: cat, color:'var(--navy)' };
-  const matches = Object.entries(A).filter(([id, a]) => a.cat === cat);
+  const matches = Object.entries(A).filter(([id, a]) => a.cat === cat).sort((a,b) => new Date(b[1].date||b[1].d||0) - new Date(a[1].date||a[1].d||0));
   if (!matches.length) return;
 
   document.getElementById('cat-page-title').textContent = meta.label;
@@ -766,6 +766,7 @@ function liveSearch(q, inputEl) {
     const searchable = [a.headline, a.dek, a.label].join(' ').toLowerCase();
     if (searchable.includes(lower)) results.push({ id, ...a });
   });
+  results.sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
 
   positionDropdown(inputEl);
 
@@ -813,6 +814,7 @@ function runSearch(q) {
       results.push({ id, ...a });
     }
   });
+  results.sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
 
   // Show search page
   document.querySelectorAll('.home-page,.cat-page,.static-page,.search-page').forEach(el => {
