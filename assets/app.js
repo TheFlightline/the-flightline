@@ -7,6 +7,15 @@ function onArticlesReady(fn) {
 }
 
 
+
+// ── PUB DATE HELPER — use key prefix not date field for sorting ───────────────
+function pubDate(id) {
+  if (!id) return new Date(0);
+  const m = id.match(/^(d{4})(d{2})(d{2})/);
+  if (m) return new Date(m[1]+'-'+m[2]+'-'+m[3]);
+  return new Date(0);
+}
+// ─────────────────────────────────────────────────────────────────────────────
 // ── HOME FEED — dynamic sorted render ────────────────────────────────────────
 function buildHomeFeed() {
   const list = document.getElementById('news-article-list');
@@ -64,7 +73,7 @@ function buildHomeFeed() {
 
   // Sort all articles by date descending
   const sorted = Object.entries(A)
-    .sort((a, b) => new Date(b[1].date || 0) - new Date(a[1].date || 0));
+    .sort((a, b) => pubDate(b[0]) - pubDate(a[0]));
 
   list.innerHTML = sorted.map(([id, art]) => {
     const nbhd = homeNbhd(id, art);
@@ -238,7 +247,7 @@ function goPage(page) {
 
 function goCategory(cat) {
   const meta = CAT_META[cat] || { label: cat, color:'var(--navy)' };
-  const matches = Object.entries(A).filter(([id, a]) => a.cat === cat).sort((a,b) => new Date(b[1].date||b[1].d||0) - new Date(a[1].date||a[1].d||0));
+  const matches = Object.entries(A).filter(([id, a]) => a.cat === cat).sort((a,b) => pubDate(b[0]) - pubDate(a[0]));
   if (!matches.length) return;
 
   document.getElementById('cat-page-title').textContent = meta.label;
@@ -842,7 +851,7 @@ function liveSearch(q, inputEl) {
     const searchable = [a.headline, a.dek, a.label].join(' ').toLowerCase();
     if (searchable.includes(lower)) results.push({ id, ...a });
   });
-  results.sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
+  results.sort((a,b) => pubDate(b.id) - pubDate(a.id));
 
   positionDropdown(inputEl);
 
@@ -890,7 +899,7 @@ function runSearch(q) {
       results.push({ id, ...a });
     }
   });
-  results.sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
+  results.sort((a,b) => pubDate(b.id) - pubDate(a.id));
 
   // Show search page
   document.querySelectorAll('.home-page,.cat-page,.static-page,.search-page').forEach(el => {
