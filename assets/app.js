@@ -19,18 +19,27 @@ function pubDate(id) {
   }
   return new Date(0);
 }
+
+function autoTag(id, art) {
+  if (art.tag) return art.tag;
+  var text = ((art.headline || '') + ' ' + (art.dek || '') + ' ' + id + ' ' + (art.label || '')).toLowerCase();
+  if (text.indexOf('beach') > -1 || text.indexOf('perdido') > -1 || text.indexOf('gulf breeze') > -1 || text.indexOf('surf') > -1 || text.indexOf('island') > -1 || text.indexOf('pensacola beach') > -1) return 'beach';
+  if (text.indexOf('escambia county') > -1 || text.indexOf('commission') > -1 || text.indexOf('county') > -1 || text.indexOf('molino') > -1 || text.indexOf('cantonment') > -1 || text.indexOf('warrington') > -1 || text.indexOf('century') > -1) return 'escambia';
+  return 'pensacola';
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 const CAT_DISPLAY={govt:"Government",government:"Government",dev:"Development",development:"Development",military:"Military",news:"News",education:"Education",sports:"Sports",events:"Events",opinion:"Opinion",environment:"Environment",tourism:"Tourism",traffic:"Traffic",community:"Community"};
 function catDisplay(c){return CAT_DISPLAY[c]||(c.charAt(0).toUpperCase()+c.slice(1));}
 
 // ── HOME SECTION UNIFIED PHOTO-GRID RENDER ───────────────────────────────────
 const HOME_SECTION_CATS = [
-  { id: 'news',            cat: 'news',     label: 'Local News',                nbhdFilter: true },
-  { id: 'development',     cat: 'dev',      label: 'Development & Infrastructure' },
-  { id: 'military',        cat: 'military', label: 'Military & NAS Pensacola' },
-  { id: 'sports',          cat: 'sports',   label: 'Sports' },
-  { id: 'opinion-section', cat: 'opinion',  label: 'Opinion & Analysis' },
-  { id: 'events-section',  cat: 'events',   label: 'Arts & Events' },
+  { id: 'news',            cat: 'news',     label: 'Local News',                  nbhdFilter: true },
+  { id: 'development',     cat: 'dev',      label: 'Development & Infrastructure', nbhdFilter: true },
+  { id: 'military',        cat: 'military', label: 'Military & NAS Pensacola',     nbhdFilter: true },
+  { id: 'sports',          cat: 'sports',   label: 'Sports',                       nbhdFilter: true },
+  { id: 'opinion-section', cat: 'opinion',  label: 'Opinion & Analysis',           nbhdFilter: true },
+  { id: 'events-section',  cat: 'events',   label: 'Arts & Events',               nbhdFilter: true },
 ];
 
 const HOME_PHOTOS = {
@@ -95,12 +104,10 @@ function buildSection(sectionId, cat, nbhdFilter) {
 
   var nbhdHtml = '';
   if (nbhdFilter) {
-    var nbhds = ['all', 'downtown', 'east-hill', 'warrington', 'nas', 'gulf-breeze', 'perdido-key'];
-    nbhdHtml = '<div id="nbhd-filters" style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;">';
-    for (var n = 0; n < nbhds.length; n++) {
-      var nv = nbhds[n];
-      var label = nv.charAt(0).toUpperCase() + nv.slice(1).replace('-', ' ');
-      nbhdHtml += '<button class="nbhd-btn' + (nv === 'all' ? ' active' : '') + '" data-nbhd="' + nv + '" onclick="filterNeighborhood(\'' + nv + '\',this)">' + label + '</button>';
+    var tags = [['all','All'],['pensacola','Pensacola'],['escambia','Escambia County'],['beach','Pensacola Beach']];
+    nbhdHtml = '<div class="tag-filters" data-section="' + sectionId + '" style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;">';
+    for (var n = 0; n < tags.length; n++) {
+      nbhdHtml += '<button class="nbhd-btn' + (tags[n][0] === 'all' ? ' active' : '') + '" data-tag="' + tags[n][0] + '" onclick="filterTag(\'' + sectionId + '\',\'' + tags[n][0] + '\',this)">' + tags[n][1] + '</button>';
     }
     nbhdHtml += '</div>';
   }
@@ -109,9 +116,9 @@ function buildSection(sectionId, cat, nbhdFilter) {
   for (var i = 0; i < articles.length; i++) {
     var id = articles[i][0];
     var art = articles[i][1];
-    var nbhd = homeNbhd(id, art);
+    var tag = autoTag(id, art);
     var cls = 'story-card' + (i === 0 ? ' gold-top' : '');
-    cards += '<div class="' + cls + '" data-nbhd="' + nbhd + '" onclick="openArticle(\'' + id + '\')">';
+    cards += '<div class="' + cls + '" data-tag="' + tag + '" onclick="openArticle(\'' + id + '\')">';
     cards += '<div class="story-card-img">' + homeCardImg(id, art) + '</div>';
     cards += '<span class="cat-badge cat-' + art.cat + '">' + catDisplay(art.cat) + '</span>';
     cards += '<div class="headline-md">' + art.headline + '</div>';
@@ -2772,40 +2779,50 @@ document.addEventListener('DOMContentLoaded', function() {
 // ─────────────────────────────────────────────────────────────────────────────
 // NEIGHBORHOOD FILTER
 // ─────────────────────────────────────────────────────────────────────────────
-function filterNeighborhood(nbhd, btn) {
-  // Update button state
-  document.querySelectorAll('.nbhd-btn').forEach(b => b.classList.remove('active'));
+function filterTag(sectionId, tag, btn) {
+  // Update button state within this section's filter bar
+  var filterBar = btn.parentElement;
+  filterBar.querySelectorAll('.nbhd-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
 
-  // Filter cards
-  const cards = document.querySelectorAll('#news-article-list .article-card');
-  cards.forEach(card => {
-    if (nbhd === 'all') {
-      card.style.display = '';
-    } else {
-      const cardNbhd = card.dataset.nbhd || '';
-      card.style.display = cardNbhd === nbhd ? '' : 'none';
-    }
-  });
+  // Get the section element and find its cards
+  var section = document.getElementById(sectionId);
+  if (!section) return;
 
-  // Show empty state if needed
-  const list = document.getElementById('news-article-list');
-  if (!list) return;
-  const visible = [...cards].filter(c => c.style.display !== 'none');
-  let emptyEl = list.querySelector('.nbhd-empty');
-  if (visible.length === 0 && nbhd !== 'all') {
-    if (!emptyEl) {
-      emptyEl = document.createElement('div');
-      emptyEl.className = 'nbhd-empty';
-      emptyEl.style.cssText = 'padding:20px 0;font-size:13px;color:var(--g2);text-align:center;';
-      emptyEl.textContent = 'No stories tagged for this neighborhood yet.';
-      list.appendChild(emptyEl);
-    }
-    emptyEl.style.display = '';
-  } else if (emptyEl) {
-    emptyEl.style.display = 'none';
+  // Rebuild cards for this section with the selected tag filter
+  var cat = '';
+  for (var i = 0; i < HOME_SECTION_CATS.length; i++) {
+    if (HOME_SECTION_CATS[i].id === sectionId) { cat = HOME_SECTION_CATS[i].cat; break; }
   }
+  if (!cat) return;
+
+  var articles = Object.entries(A)
+    .filter(function(e) { return e[1].cat === cat; })
+    .filter(function(e) { return tag === 'all' || autoTag(e[0], e[1]) === tag; })
+    .sort(function(a, b) { return pubDate(b[0]) - pubDate(a[0]); })
+    .slice(0, 6);
+
+  var cards = '';
+  for (var j = 0; j < articles.length; j++) {
+    var id = articles[j][0];
+    var art = articles[j][1];
+    var artTag = autoTag(id, art);
+    var cls = 'story-card' + (j === 0 ? ' gold-top' : '');
+    cards += '<div class="' + cls + '" data-tag="' + artTag + '" onclick="openArticle(\'' + id + '\')">';
+    cards += '<div class="story-card-img">' + homeCardImg(id, art) + '</div>';
+    cards += '<span class="cat-badge cat-' + art.cat + '">' + catDisplay(art.cat) + '</span>';
+    cards += '<div class="headline-md">' + art.headline + '</div>';
+    cards += '<div class="dek-sm">' + (art.dek || '') + '</div>';
+    cards += '<div class="byline">' + art.date + '</div>';
+    cards += '</div>';
+  }
+
+  var threeCol = section.querySelector('.three-col');
+  if (threeCol) threeCol.innerHTML = cards;
 }
+
+// Keep old name as alias for any remaining references
+function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
 
 
 // ─────────────────────────────────────────────────────────────────────────────
