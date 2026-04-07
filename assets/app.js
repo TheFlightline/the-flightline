@@ -73,7 +73,8 @@ function buildHomeFeed() {
 
   // Sort all articles by date descending
   const sorted = Object.entries(A)
-    .sort((a, b) => pubDate(b[0]) - pubDate(a[0]));
+    .sort((a, b) => pubDate(b[0]) - pubDate(a[0]))
+    .slice(0, 5);
 
   list.innerHTML = sorted.map(([id, art]) => {
     const nbhd = homeNbhd(id, art);
