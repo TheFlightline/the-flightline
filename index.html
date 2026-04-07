@@ -38,13 +38,12 @@
     </div>
     <nav class="main-nav">
       <a href="#" onclick="goHome();return false;" id="nav-home" class="active">Home</a>
-      <a href="/all" onclick="goAllArticles();return false;" id="nav-all">All Stories</a>
-      <a href="#" onclick="goCategory('news')" id="nav-news">News</a>
-      <a href="#" onclick="goCategory('dev')" id="nav-dev">Development</a>
+      <a href="/all" onclick="goAllArticles();return false;" id="nav-latest">Latest</a>
       <a href="#" onclick="goCategory('govt')" id="nav-govt">Government</a>
-      <a href="#" onclick="goCategory('opinion')" id="nav-opinion">Opinion</a>
-      <a href="#" onclick="goCategory('events')" id="nav-events">Events</a>
+      <a href="#" onclick="goCategory('dev')" id="nav-dev">Business</a>
       <a href="#" onclick="goCategory('military')" id="nav-military">Military</a>
+      <a href="#" onclick="goCategory('sports')" id="nav-sports">Sports</a>
+      <a href="#" onclick="goCategory('opinion')" id="nav-opinion">Opinion</a>
     </nav>
     <div class="header-search"><input type="text" placeholder="Search The Flightline…" id="search-input" autocomplete="off" oninput="liveSearch(this.value, this)" onkeydown="if(event.key==='Enter'){closeDropdown();runSearch(this.value)}" onblur="setTimeout(closeDropdown,180)"><button onclick="closeDropdown();runSearch(document.getElementById('search-input').value)">⌕</button></div>
   </div>
@@ -134,7 +133,7 @@
 
       <div id="news">
         <div class="section-label" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
-          <span>Local News <a href="javascript:void(0)" onclick="goCategory('news')">See All →</a></span>
+          <span>Government <a href="javascript:void(0)" onclick="goCategory('govt')">See All →</a></span>
           
         </div>
         <div class="article-list" id="news-article-list">
@@ -271,7 +270,7 @@
       <hr class="divider">
 
       <div id="development">
-        <div class="section-label">Development &amp; Infrastructure <a href="javascript:void(0)" onclick="goCategory('dev')">See All →</a></div>
+        <div class="section-label">Business &amp; Development <a href="javascript:void(0)" onclick="goCategory('dev')">See All →</a></div>
         <div class="three-col">
           <div class="story-card gold-top" onclick="openArticle('20260330-108-million-later-lost')">
             <div class="story-card-img"><img src="/images/downtown_pensacola-aerial-downtown_003.jpg" alt="Aerial Pensacola"></div>
@@ -410,6 +409,8 @@
     </div>
 </div>
 <hr class="divider">
+<!-- EVENTS SECTION HIDDEN - accessible via /category/events -->
+<div style="display:none">
 <!-- EVENTS -->
 <div class="container" id="events-section">
   <div class="events-full-section">
@@ -473,7 +474,8 @@
 
     </div>
 
-    <!-- SIDEBAR -->
+    </div>
+<!-- SIDEBAR -->
     <aside>
       <!-- HURRICANE SEASON SIDEBAR WIDGET -->
       <div style="position:relative;padding-top:13px;margin-bottom:20px;cursor:pointer;" onclick="openArticle('20260403-hurricane-season-58-days')">
