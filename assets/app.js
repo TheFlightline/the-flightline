@@ -3037,6 +3037,27 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
 
 
 // ── URL ROUTING ─────────────────────────────────────────────────────────────
+
+// ─── DYNAMIC TICKER ──────────────────────────────────────────────────────────
+function buildTicker() {
+  var track = document.getElementById('ticker-track');
+  if (!track) return;
+  var sorted = Object.entries(A)
+    .filter(function(e) { return e[1].cat !== 'events' && e[1].cat !== 'opinion'; })
+    .sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); })
+    .slice(0, 15);
+  var html = '';
+  sorted.forEach(function(entry) {
+    var id = entry[0], a = entry[1];
+    var text = a.headline || '';
+    if (text.length > 80) text = text.substring(0, 77) + '...';
+    html += '<span class="ticker-item" onclick="openArticle(\'' + id + '\')">' + text + '</span><span class="ticker-sep">\u00b7</span>';
+  });
+  // Duplicate for seamless scroll
+  track.innerHTML = html + html;
+}
+buildTicker();
+
 window.addEventListener('popstate', function(e) {
   if (e.state && e.state.articleId) {
     onArticlesReady(function() { openArticle(e.state.articleId); });
