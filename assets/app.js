@@ -16,6 +16,9 @@ function pubDate(id) {
   return new Date(0);
 }
 // ─────────────────────────────────────────────────────────────────────────────
+const CAT_DISPLAY={govt:"Government",government:"Government",dev:"Development",development:"Development",military:"Military",news:"News",education:"Education",sports:"Sports",events:"Events",opinion:"Opinion",environment:"Environment",tourism:"Tourism",traffic:"Traffic",community:"Community"};
+function catDisplay(c){return CAT_DISPLAY[c]||(c.charAt(0).toUpperCase()+c.slice(1));}
+
 // ── HOME FEED — dynamic sorted render ────────────────────────────────────────
 function buildHomeFeed() {
   const list = document.getElementById('news-article-list');
@@ -80,7 +83,7 @@ function buildHomeFeed() {
     const nbhd = homeNbhd(id, art);
     return `<div class="article-card" data-nbhd="${nbhd}" onclick="openArticle('${id}')">
             <div class="article-card-text">
-              <span class="cat-badge cat-${art.cat}">${art.label || art.cat}</span>
+              <span class="cat-badge cat-${art.cat}">${catDisplay(art.cat)}</span>
               <div class="headline-lg">${art.headline}</div>
               <div class="dek">${art.dek || ''}</div>
               <div class="byline">By <span>${art.byline || 'The Flightline Staff'}</span> · ${art.date || ''}</div>
@@ -421,7 +424,7 @@ function goCategory(cat) {
     <div class="cat-card" onclick="openArticle('${id}')">
       <div class="cat-card-img" style="overflow:hidden;">${a.thumbnail ? `<img src="${a.thumbnail}" alt="${a.cat}" style="width:100%;height:100%;object-fit:cover;">` : catImg(a.cat, id)}</div>
       <div class="cat-card-body">
-        <span class="cat-badge cat-${a.cat}" style="cursor:default">${a.label}</span>
+        <span class="cat-badge cat-${a.cat}" style="cursor:default">${catDisplay(a.cat)}</span>
         <div class="cat-card-headline">${a.headline}</div>
         <div class="cat-card-dek">${a.dek||''}</div>
         <div class="cat-card-meta">${a.byline} · ${a.date}</div>
@@ -596,7 +599,7 @@ function openArticle(id){
   const shareBody = encodeURIComponent(a.headline + ' — ' + siteUrl);
   document.getElementById('modal-content').innerHTML=`
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bd);padding-right:48px;">
-      <span class="cat-badge cat-${a.cat}" style="font-size:11px;">${a.label}</span>
+      <span class="cat-badge cat-${a.cat}" style="font-size:11px;">${catDisplay(a.cat)}</span>
       <div style="display:flex;align-items:center;gap:6px;">
         <button onclick="adjustArticleSize(-1)" title="Decrease text size" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:4px 8px;font-size:13px;font-weight:700;color:var(--g1);cursor:pointer;line-height:1;">A−</button>
         <button onclick="adjustArticleSize(1)" title="Increase text size" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:4px 8px;font-size:16px;font-weight:700;color:var(--g1);cursor:pointer;line-height:1;">A+</button>
@@ -926,7 +929,7 @@ function runSearch(q) {
 
   list.innerHTML = results.map(a => `
     <div class="search-result-item" onclick="openArticle('${a.id}')">
-      <span class="cat-badge cat-${a.cat}" style="margin-bottom:8px;">${a.label}</span>
+      <span class="cat-badge cat-${a.cat}" style="margin-bottom:8px;">${catDisplay(a.cat)}</span>
       <div class="search-result-headline">${highlight(a.headline, q)}</div>
       <div class="search-result-dek">${highlight(a.dek, q)}</div>
       <div class="search-result-meta">
