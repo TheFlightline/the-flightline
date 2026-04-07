@@ -130,15 +130,21 @@ function buildHomeFeed() {
 function renderMobileLatest() {
   var el = document.getElementById('mobile-latest-list');
   if (!el) return;
-  var keys = Object.keys(A).slice(0, 3);
-  el.innerHTML = keys.map(function(id) {
+  // Sort by key date prefix descending (keys start with YYYYMMDD-)
+  var sorted = Object.keys(A).filter(function(k){ return /^\d{8}-/.test(k); }).sort().reverse();
+  var top3 = sorted.slice(0, 3);
+  el.innerHTML = top3.map(function(id) {
     var art = A[id];
-    return '<div class="sidebar-story" onclick="openArticle(\'' + id + '\')">'
-      + '<div class="sidebar-story-hed">' + art.headline + '</div>'
-      + '<div class="sidebar-story-meta">' + (art.label || '') + '</div>'
+    var cat = art.label || '';
+    var date = art.date || '';
+    var meta = [cat, date].filter(Boolean).join(' · ');
+    return '<div class="mob-latest-item" onclick="event.stopPropagation();openArticle(\'' + id + '\')">'
+      + '<div class="mob-latest-hed">' + art.headline + '</div>'
+      + (meta ? '<div class="mob-latest-meta">' + meta + '</div>' : '')
       + '</div>';
   }).join('');
 }
+
 
 fetch('/articles.json')
   .then(r => r.json())
