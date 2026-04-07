@@ -1,5 +1,5 @@
 // ── ARTICLE DATA LOADER ─────────────────────────────────────────────────────
-let A = {};
+var A = window.A || {};
 let articlesReady = false;
 const articleReadyCallbacks = [];
 function onArticlesReady(fn) {
