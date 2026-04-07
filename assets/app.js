@@ -11,8 +11,12 @@ function onArticlesReady(fn) {
 // ── PUB DATE HELPER — use key prefix not date field for sorting ───────────────
 function pubDate(id) {
   if (!id) return new Date(0);
-  const m = id.match(/^(d{4})(d{2})(d{2})/);
+  var m = id.match(/^(\d{4})(\d{2})(\d{2})/);
   if (m) return new Date(m[1]+'-'+m[2]+'-'+m[3]);
+  if (A[id] && A[id].date) {
+    var d = new Date(A[id].date);
+    if (!isNaN(d.getTime())) return d;
+  }
   return new Date(0);
 }
 // ─────────────────────────────────────────────────────────────────────────────
@@ -131,7 +135,7 @@ function renderMobileLatest() {
   var el = document.getElementById('mobile-latest-list');
   if (!el) return;
   // Sort by key date prefix descending (keys start with YYYYMMDD-)
-  var sorted = Object.keys(A).filter(function(k){ return /^\d{8}-/.test(k); }).sort().reverse();
+  var sorted = Object.keys(A).sort(function(a,b){ return pubDate(b) - pubDate(a); });
   var top3 = sorted.slice(0, 3);
   el.innerHTML = top3.map(function(id) {
     var art = A[id];
