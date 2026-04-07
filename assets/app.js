@@ -19,109 +19,78 @@ function pubDate(id) {
 const CAT_DISPLAY={govt:"Government",government:"Government",dev:"Development",development:"Development",military:"Military",news:"News",education:"Education",sports:"Sports",events:"Events",opinion:"Opinion",environment:"Environment",tourism:"Tourism",traffic:"Traffic",community:"Community"};
 function catDisplay(c){return CAT_DISPLAY[c]||(c.charAt(0).toUpperCase()+c.slice(1));}
 
-// ── HOME FEED — unified photo-grid render ───────────────────────────────────────
-const HOME_SECTION_CATS = [
-  { id:'news',           cat:'news',     label:'Local News',               nbhdFilter:true },
-  { id:'development',    cat:'dev',      label:'Development & Infrastructure' },
-  { id:'military',       cat:'military', label:'Military & NAS Pensacola' },
-  { id:'sports',         cat:'sports',   label:'Sports' },
-  { id:'opinion-section',cat:'opinion',  label:'Opinion & Analysis' },
-  { id:'events-section', cat:'events',   label:'Arts & Events' },
-];
+// ── HOME FEED — dynamic sorted render ────────────────────────────────────────
+function buildHomeFeed() {
+  const list = document.getElementById('news-article-list');
+  if (!list) return;
 
-const HOME_PHOTOS = {
-  govt:      ['/images/downtown_pensacola-aerial-downtown_003.jpg','/images/editorial_gavel_005.jpg','/images/govt_public-hearing_009.jpg'],
-  government:['/images/downtown_pensacola-aerial-downtown_003.jpg','/images/editorial_gavel_005.jpg','/images/govt_public-hearing_009.jpg'],
-  dev:       ['/images/development_construction-crane_001.jpg','/images/development_road-work_002.jpg','/images/development_scaffolding_003.jpg'],
-  development:['/images/development_construction-crane_001.jpg','/images/development_road-work_002.jpg','/images/downtown_pensacola-aerial-downtown_003.jpg'],
-  military:  ['/images/military_blue-angels_001.jpg','/images/military_nas_002.jpg','/images/military_aircraft_003.jpg'],
-  news:      ['/images/downtown_palafox-street-clock_007.jpg','/images/downtown_waterfront_004.jpg','/images/editorial_press_001.jpg'],
-  education: ['/images/education_uwf_001.jpg','/images/education_campus_003.jpg','/images/community_park_003.jpg'],
-  sports:    ['/images/sports_wahoos_001.jpg','/images/sports_stadium_002.jpg','/images/community_park_003.jpg'],
-  events:    ['/images/downtown_palafox-street-dusk_008.jpg','/images/community_park_003.jpg','/images/downtown_waterfront_004.jpg'],
-  opinion:   ['/images/editorial_press_001.jpg','/images/editorial_gavel_005.jpg','/images/downtown_pensacola-aerial-downtown_003.jpg'],
-  environment:['/images/community_park_003.jpg','/images/downtown_waterfront_004.jpg','/images/editorial_press_001.jpg'],
-  tourism:   ['/images/downtown_waterfront_004.jpg','/images/downtown_palafox-street-dusk_008.jpg','/images/community_park_003.jpg'],
-  traffic:   ['/images/development_road-work_002.jpg','/images/development_construction-crane_001.jpg','/images/downtown_pensacola-aerial-downtown_003.jpg'],
-  community: ['/images/community_park_003.jpg','/images/downtown_palafox-street-clock_007.jpg','/images/downtown_waterfront_004.jpg'],
-};
-
-function homeCardImg(id, art) {
-  if (art.thumbnail) return '<img src="'+art.thumbnail+'" alt="'+art.cat+'" style="width:100%;height:100%;object-fit:cover;">';
-  const pool = HOME_PHOTOS[art.cat] || HOME_PHOTOS.news;
-  const idx = Math.abs(id.split('').reduce(function(a,c){return a+c.charCodeAt(0);},0)) % pool.length;
-  return '<img src="'+pool[idx]+'" alt="'+art.cat+'" style="width:100%;height:100%;object-fit:cover;">';
-}
-
-function homeNbhd(id, art) {
-  const KNOWN = {
-    '20260402-escambia-commission-clerk-childers':'downtown',
-    '20260402-warringtons-damaged-hotel-gets':'warrington',
-    '20260404-sunshine-escambia-county-pensacolas':'downtown',
-    '20260327-city-council-awards-78m':'downtown',
-    '20260116-escambia-zoning-scam-warning':'downtown',
-    '20260401-flight-line-access-restored':'nas',
-    '20260402-nas-pensacola-family-housing':'nas',
-    '20260401-blue-wahoos-complete-ballpark':'downtown',
+  // Neighbourhood map for known article IDs, inferred for new ones
+  const NBHD_MAP = {
+    'military': 'nas', 'Military': 'nas', 'Blue Angels': 'nas',
+    'Gulf Breeze': 'gulf-breeze', 'Gulf Breeze Soccer': 'gulf-breeze',
+    'Pensacola Beach': 'perdido-key', 'Tourism': 'perdido-key',
+    'Warrington': 'warrington', 'Warrington CRA': 'warrington',
+    'East Hill': 'east-hill',
   };
-  if (KNOWN[id]) return KNOWN[id];
-  if (art.cat === 'military' || (art.label && (art.label.includes('Military') || art.label.includes('Blue Angels')))) return 'nas';
-  if (art.label && art.label.includes('Gulf Breeze')) return 'gulf-breeze';
-  if (art.label && (art.label.includes('Pensacola Beach') || art.label === 'Tourism')) return 'perdido-key';
-  if (art.label && art.label.includes('Warrington')) return 'warrington';
-  if (art.label && art.label.includes('East Hill')) return 'east-hill';
-  return 'downtown';
-}
+  const KNOWN_IDS = {
+    '20260402-escambia-commission-clerk-childers': 'downtown',
+    '20260402-warringtons-damaged-hotel-gets': 'warrington',
+    '20260404-sunshine-escambia-county-pensacolas': 'downtown',
+    '20260327-city-council-awards-78m': 'downtown',
+    '20260116-escambia-zoning-scam-warning': 'downtown',
+    '20260401-flight-line-access-restored': 'nas',
+    '20260402-nas-pensacola-family-housing': 'nas',
+    '20260401-blue-wahoos-complete-ballpark': 'downtown',
+  };
 
-function buildSection(sectionId, cat, nbhdFilter) {
-  const el = document.getElementById(sectionId);
-  if (!el) return;
+  const HOME_CAT_PHOTOS = {
+    government: ['/images/downtown_pensacola-aerial-downtown_003.jpg','/images/govt_office_007.jpg','/images/editorial_gavel_005.jpg'],
+    govt: ['/images/editorial_gavel_005.jpg','/images/govt_office_007.jpg','/images/govt_public-hearing_009.jpg'],
+    military: ['/images/military_blue-angels_001.jpg','/images/military_nas_002.jpg','/images/military_aircraft_003.jpg'],
+    education: ['/images/education_uwf_001.jpg','/images/education_school_002.jpg','/images/education_campus_003.jpg'],
+    sports: ['/images/sports_wahoos_001.jpg','/images/sports_stadium_002.jpg','/images/community_park_003.jpg'],
+    development: ['/images/development_construction-crane_001.jpg','/images/development_road-work_002.jpg','/images/development_scaffolding_003.jpg'],
+    traffic: ['/images/development_road-work_002.jpg','/images/traffic_highway_001.jpg','/images/development_construction-crane_001.jpg'],
+    environment: ['/images/environment_beach_001.jpg','/images/environment_bay_002.jpg','/images/community_park_003.jpg'],
+    tourism: ['/images/tourism_beach_001.jpg','/images/downtown_waterfront_004.jpg','/images/tourism_pier_002.jpg'],
+    community: ['/images/community_park_003.jpg','/images/downtown_palafox-street-clock_007.jpg','/images/downtown_waterfront_004.jpg'],
+    news: ['/images/downtown_pensacola-aerial-downtown_003.jpg','/images/editorial_press_001.jpg','/images/downtown_waterfront_004.jpg'],
+  };
 
-  // Get 3 most recent articles for this category
-  const articles = Object.entries(A)
-    .filter(function(e){ return e[1].cat === cat; })
-    .sort(function(a,b){ return pubDate(b[0]) - pubDate(a[0]); })
-    .slice(0, 3);
-
-  if (!articles.length) return;
-
-  // Build three-col grid
-  var cards = articles.map(function(entry, i) {
-    var id = entry[0], art = entry[1];
-    var nbhd = homeNbhd(id, art);
-    var cls = 'story-card' + (i === 0 ? ' gold-top' : '');
-    return '<div class="'+cls+'" data-nbhd="'+nbhd+'" onclick="openArticle(\''+id+'\')">'
-      + '<div class="story-card-img">'+homeCardImg(id, art)+'</div>'
-      + '<span class="cat-badge cat-'+art.cat+'">'+catDisplay(art.cat)+'</span>'
-      + '<div class="headline-md">'+art.headline+'</div>'
-      + '<div class="dek-sm">'+(art.dek||'')+'</div>'
-      + '<div class="byline">'+art.date+'</div>'
-      + '</div>';
-  }).join('');
-
-  // Rebuild the section label + grid
-  var seeAllCat = cat;
-  var sectionLabel = el.querySelector('.section-label');
-  var labelHtml = sectionLabel ? sectionLabel.outerHTML : '';
-
-  // Build nbhd filter row if needed
-  var nbhdHtml = '';
-  if (nbhdFilter) {
-    nbhdHtml = '<div id="nbhd-filters" style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;">'
-      + ['all','downtown','east-hill','warrington','nas','gulf-breeze','perdido-key'].map(function(n){
-          return '<button class="nbhd-btn'+(n==='all'?' active':'')+'" data-nbhd="'+n+'" onclick="filterNeighborhood(''+n+'',this)">'
-            + n.charAt(0).toUpperCase()+n.slice(1).replace('-',' ')+'</button>';
-        }).join('')
-      + '</div>';
+  function homeNbhd(id, art) {
+    if (KNOWN_IDS[id]) return KNOWN_IDS[id];
+    if (art.cat === 'military' || art.label === 'Military' || art.label === 'Blue Angels') return 'nas';
+    if (art.label && art.label.includes('Gulf Breeze')) return 'gulf-breeze';
+    if (art.label && (art.label.includes('Pensacola Beach') || art.label === 'Tourism')) return 'perdido-key';
+    if (art.label && art.label.includes('Warrington')) return 'warrington';
+    if (art.label && art.label.includes('East Hill')) return 'east-hill';
+    return 'downtown';
   }
 
-  el.innerHTML = labelHtml + nbhdHtml + '<div class="three-col">' + cards + '</div>';
-}
+  function homeImg(id, art) {
+    if (art.thumbnail) return `<img src="${art.thumbnail}" alt="${art.cat}" style="width:100%;height:100%;object-fit:cover;">`;
+    const pool = HOME_CAT_PHOTOS[art.cat] || HOME_CAT_PHOTOS.news;
+    const idx = Math.abs(id.split('').reduce((a,c)=>a+c.charCodeAt(0),0)) % pool.length;
+    return `<img src="${pool[idx]}" alt="${art.cat}" style="width:100%;height:100%;object-fit:cover;">`;
+  }
 
-function buildHomeFeed() {
-  HOME_SECTION_CATS.forEach(function(s) {
-    buildSection(s.id, s.cat, s.nbhdFilter);
-  });
+  // Sort all articles by date descending
+  const sorted = Object.entries(A)
+    .sort((a, b) => pubDate(b[0]) - pubDate(a[0]))
+    .slice(0, 5);
+
+  list.innerHTML = sorted.map(([id, art]) => {
+    const nbhd = homeNbhd(id, art);
+    return `<div class="article-card" data-nbhd="${nbhd}" onclick="openArticle('${id}')">
+            <div class="article-card-text">
+              <span class="cat-badge cat-${art.cat}">${catDisplay(art.cat)}</span>
+              <div class="headline-lg">${art.headline}</div>
+              <div class="dek">${art.dek || ''}</div>
+              <div class="byline">By <span>${art.byline || 'The Flightline Staff'}</span> · ${art.date || ''}</div>
+            </div>
+            <div class="article-card-image">${homeImg(id, art)}</div>
+          </div>`;
+  }).join('\n');
 }
 // ─────────────────────────────────────────────────────────────────────────────
 fetch('/articles.json')
