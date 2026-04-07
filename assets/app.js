@@ -507,11 +507,23 @@ function goCategory(cat) {
   window.scrollTo(0,0);
 }
 
-function goAllArticles() {
-  var allArticles = Object.entries(A).sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); });
+function goAllArticles(filterTag) {
+  var tag = filterTag || 'all';
+  var allArticles = Object.entries(A)
+    .filter(function(e) { return tag === 'all' || autoTag(e[0], e[1]) === tag; })
+    .sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); });
 
-  document.getElementById('cat-page-title').textContent = 'All Stories';
-  document.getElementById('cat-page-sub').textContent = allArticles.length + ' stories';
+  document.getElementById('cat-page-title').textContent = tag === 'all' ? 'Latest' : { pensacola:'Pensacola', downtown:'Downtown Pensacola', escambia:'Escambia County', beach:'Pensacola Beach', gulfbreeze:'Gulf Breeze' }[tag] || tag;
+  var totalAll = Object.keys(A).length;
+  document.getElementById('cat-page-sub').textContent = allArticles.length + (tag === 'all' ? '' : ' of ' + totalAll) + ' ' + (allArticles.length === 1 ? 'story' : 'stories');
+
+  var tags = [['all','All'],['pensacola','Pensacola'],['downtown','Downtown'],['escambia','Escambia County'],['beach','Pensacola Beach'],['gulfbreeze','Gulf Breeze']];
+  var filterHtml = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;">';
+  for (var t = 0; t < tags.length; t++) {
+    var isActive = tags[t][0] === tag;
+    filterHtml += '<button class="nbhd-btn' + (isActive ? ' active' : '') + '" onclick="goAllArticles(\'' + tags[t][0] + '\')" style="cursor:pointer;">' + tags[t][1] + '</button>';
+  }
+  filterHtml += '</div>';
 
   var cards = allArticles.map(function(entry) {
     var id = entry[0], a = entry[1];
@@ -528,7 +540,7 @@ function goAllArticles() {
       + '</div></div>';
   }).join('');
 
-  document.getElementById('cat-card-grid').innerHTML = cards;
+  document.getElementById('cat-card-grid').innerHTML = filterHtml + cards;
   document.getElementById('page-home').classList.add('hidden');
   document.getElementById('page-cat').classList.add('active');
   document.getElementById('page-search').classList.remove('active');
@@ -538,7 +550,9 @@ function goAllArticles() {
   var payPage = document.getElementById('page-pay');
   if (payPage) payPage.classList.remove('active');
   document.querySelectorAll('.main-nav a').forEach(function(a) { a.classList.remove('active'); });
-  window.scrollTo(0,0);
+  var latestNav = document.getElementById('nav-latest');
+  if (latestNav) latestNav.classList.add('active');
+  if (!filterTag) window.scrollTo(0,0);
   history.pushState(null, '', '/all');
 }
 
