@@ -1482,6 +1482,7 @@ Object.assign(A, {
   "20260406-fricker-renovation": {
     "cat": "government",
     "label": "City of Pensacola",
+    "thumbnail": "/images/development_construction-crane_001.jpg",
     "headline": "Fricker Resource Center to Close for $10M Overhaul. Here's the Timeline.",
     "dek": "City Council awarded the construction contract March 26. After-school and senior programs move to alternate sites. The rebuilt facility reopens June 2027.",
     "byline": "The Flightline Staff",
@@ -1496,6 +1497,7 @@ Object.assign(A, {
   "20260406-nas-weekday-closure": {
     "cat": "military",
     "label": "Military",
+    "thumbnail": "/images/military_nas-pensacola-airshow_009.jpg",
     "headline": "NAS Pensacola Is Closed to the Public on Weekdays. What That Means for Visitors.",
     "dek": "The base restricted civilian access to weekends only starting March 23. Everyone 18 and older now needs a background check before entering.",
     "byline": "The Flightline Staff",
@@ -1510,6 +1512,7 @@ Object.assign(A, {
   "20260406-blue-angels-schedule": {
     "cat": "military",
     "label": "Blue Angels",
+    "thumbnail": "/images/military_blue-angels-over-pensacola_008.jpg",
     "headline": "Blue Angels 2026 Practice Schedule Is Out. Here Are the Dates — and the Catches.",
     "dek": "The team flies over Pensacola from April through October. But flight line viewing at the museum is suspended and the base is weekend-only.",
     "byline": "The Flightline Staff",
@@ -1524,6 +1527,7 @@ Object.assign(A, {
   "20260406-project-maeve": {
     "cat": "development",
     "label": "Economic Development",
+    "thumbnail": "/images/development_construction-crane_001.jpg",
     "headline": "A $76M Shipbuilding Facility Could Come to the Port of Pensacola. Here's Where It Stands.",
     "dek": "Triumph Gulf Coast gave initial approval in January to Project Maeve — bringing shipbuilder Birdon America to the city-owned port. A final grant agreement is still pending.",
     "byline": "The Flightline Staff",
@@ -1538,6 +1542,7 @@ Object.assign(A, {
   "20260406-easter-beach-tourism": {
     "cat": "tourism",
     "label": "Tourism",
+    "thumbnail": "/images/beach_pensacola-beach-crowd_016.jpg",
     "headline": "Pensacola Beach Had 18 Hotel Rooms Left on Easter Weekend. The Season Is Already Here.",
     "dek": "Gas hit $4 a gallon and airfares climbed, but visitors still packed the beach. Businesses reported summer-level crowds as early as spring break.",
     "byline": "The Flightline Staff",
@@ -1552,6 +1557,7 @@ Object.assign(A, {
   "20260406-tunnel-road-closure": {
     "cat": "traffic",
     "label": "Santa Rosa County",
+    "thumbnail": "/images/development_road-work_002.jpg",
     "headline": "Tunnel Road Closes at the Bridge for Repairs Through Friday",
     "dek": "Santa Rosa County says the week-long closure wraps April 10 weather permitting. Residents west of the bridge detour via Quintette and Curtis roads.",
     "byline": "The Flightline Staff",
@@ -1566,6 +1572,7 @@ Object.assign(A, {
   "20260406-chumuckla-highway": {
     "cat": "traffic",
     "label": "Santa Rosa County",
+    "thumbnail": "/images/development_road-work_002.jpg",
     "headline": "Chumuckla Highway Has a Lane Shift at Giddens Road. Expect Minor Delays.",
     "dek": "Contractors moved the northbound right lane to the center on March 31 as part of a new turn lane project at the Giddens Lane intersection.",
     "byline": "The Flightline Staff",
@@ -1580,6 +1587,7 @@ Object.assign(A, {
   "20260406-escambia-roads": {
     "cat": "government",
     "label": "Escambia County",
+    "thumbnail": "/images/development_road-work_002.jpg",
     "headline": "Escambia County Is Repaving 47 Roads This Year. Here's Where the Money Is Going.",
     "dek": "The commission awarded an $8M contract to Roads Inc. of NWF in February, advancing 2027 funds to cover high-traffic routes across all five districts.",
     "byline": "The Flightline Staff",
@@ -1594,6 +1602,7 @@ Object.assign(A, {
   "20260406-beach-blvd-lane": {
     "cat": "traffic",
     "label": "Pensacola Beach",
+    "thumbnail": "/images/beach_pensacola-beach-road-aerial_013.jpg",
     "headline": "Pensacola Beach Boulevard Lane Closure Extended Through Friday",
     "dek": "Work on the new toll plaza has kept the inside northbound exit lane closed since March 23. It should reopen Friday evening, April 10.",
     "byline": "The Flightline Staff",
@@ -1608,6 +1617,7 @@ Object.assign(A, {
   "20260406-fish-house-merger": {
     "cat": "community",
     "label": "Downtown Pensacola",
+    "thumbnail": "/images/community_food-trucks_004.jpg",
     "headline": "Atlas Oyster House Is Gone. The Fish House Absorbed It — and Got Bigger.",
     "dek": "Great Southern Restaurants merged its two waterfront properties on April 1, creating a single expanded Fish House with over 300 feet of Pensacola Bay frontage.",
     "byline": "The Flightline Staff",
@@ -1622,6 +1632,7 @@ Object.assign(A, {
   "20260406-restaurants": {
     "cat": "community",
     "label": "Pensacola",
+    "thumbnail": "/images/downtown_cafe-sidewalk_006.jpg",
     "headline": "Nine New Restaurants Opened in the Pensacola Area in March",
     "dek": "From a coastal Mexican spot on the beach to the first Florida location of a Southern chain, last month brought a sustained wave of new dining.",
     "byline": "The Flightline Staff",
@@ -1636,6 +1647,7 @@ Object.assign(A, {
   "20260406-beach-vitex": {
     "cat": "environment",
     "label": "Environment",
+    "thumbnail": "/images/beach_dunes-sea-oats_005.jpg",
     "headline": "An Invasive Plant From Asia Is Spreading Across Pensacola Beach. UWF Wants Help Pulling It.",
     "dek": "Beach vitex has spread to 69 sites on Pensacola Beach since 2012. The annual April Weed Wrangle targets public land — but 47 of the 84 non-park sites are on private property.",
     "byline": "The Flightline Staff",
@@ -1650,6 +1662,7 @@ Object.assign(A, {
   "20260406-drought": {
     "cat": "environment",
     "label": "Environment",
+    "thumbnail": "/images/weather_sunset-sky_005.jpg",
     "headline": "All of Escambia County Is Now in Severe Drought",
     "dek": "The U.S. Drought Monitor shows the entire county under severe drought, with extreme drought in the eastern portion. A chance of rain Sunday could provide some relief.",
     "byline": "The Flightline Staff",
@@ -1664,6 +1677,7 @@ Object.assign(A, {
   "20260406-wahoos-skyjockeys": {
     "cat": "sports",
     "label": "Blue Wahoos",
+    "thumbnail": "/images/sports_baseball_002.jpg",
     "headline": "The Blue Wahoos Have a New Alternate Identity That Pays Tribute to Naval Aviation",
     "dek": "The Pensacola Sky Jockeys debuted this season with a blue and gold color scheme borrowed directly from the Blue Angels. It's the team's first military-themed alternate brand.",
     "byline": "The Flightline Staff",
@@ -1678,6 +1692,7 @@ Object.assign(A, {
   "20260406-wahoos-tv": {
     "cat": "sports",
     "label": "Blue Wahoos",
+    "thumbnail": "/images/sports_baseball_002.jpg",
     "headline": "Blue Wahoos Games Are Back on Local TV — With a New Weekly Show",
     "dek": "All 69 home games return to local television on Blab TV and YurView Florida. A new behind-the-scenes program called Wahoos Weekly debuts Fridays at 5:30 p.m.",
     "byline": "The Flightline Staff",
@@ -1692,6 +1707,7 @@ Object.assign(A, {
   "20260406-wahoos-rickwood": {
     "cat": "sports",
     "label": "Blue Wahoos",
+    "thumbnail": "/images/sports_baseball_002.jpg",
     "headline": "The Blue Wahoos Play at Rickwood Field on May 27. Here's Why That Matters.",
     "dek": "Rickwood Field in Birmingham is the oldest professional ballpark in America, built in 1910. It will be the Wahoos' first appearance there.",
     "byline": "The Flightline Staff",
@@ -1706,6 +1722,7 @@ Object.assign(A, {
   "20260406-uwf-artifacts": {
     "cat": "education",
     "label": "UWF",
+    "thumbnail": "/images/UWF-Sign-Zoom-2025-June-1920x1080.jpeg",
     "headline": "UWF Found Pre-Columbian Native American Artifacts on Campus While Prepping for a New Stadium",
     "dek": "An archaeological survey required before Darrell Gooden Stadium construction uncovered ceramics from two distinct Native American cultures — the oldest possibly dating to A.D. 600.",
     "byline": "The Flightline Staff",
@@ -1720,6 +1737,7 @@ Object.assign(A, {
   "20260406-bay-center": {
     "cat": "government",
     "label": "City of Pensacola",
+    "thumbnail": "/images/downtown_pensacola-bay-center_004.jpg",
     "headline": "The City Is Reviewing What to Do With the Bay Center",
     "dek": "The Community Redevelopment Agency took up a draft convention center analysis at its April 6 meeting — the latest sign the future of the Pensacola Bay Center is an active policy question.",
     "byline": "The Flightline Staff",
@@ -1734,6 +1752,7 @@ Object.assign(A, {
   "20260406-alcaniz-streetscape": {
     "cat": "development",
     "label": "Downtown Pensacola",
+    "thumbnail": "/images/development_road-work_002.jpg",
     "headline": "Alcaniz Street Is Getting a Streetscape Overhaul From Garden Street to the Bayfront",
     "dek": "The CRA approved plans April 6 for improvements along Alcaniz Street, a downtown corridor connecting the historic district to Bayfront Parkway.",
     "byline": "The Flightline Staff",
@@ -1748,6 +1767,7 @@ Object.assign(A, {
   "20260406-uscgc-eagle": {
     "cat": "military",
     "label": "Military",
+    "thumbnail": "/images/military_ceremony_005.jpg",
     "headline": "The USCGC Eagle Is Coming to Pensacola This Spring. The City Waived Its Docking Fee.",
     "dek": "The Coast Guard's 295-foot training barque — in service since 1946 — will berth at Plaza de Luna in May. The CRA voted Monday to waive docking fees.",
     "byline": "The Flightline Staff",
@@ -1762,6 +1782,7 @@ Object.assign(A, {
   "20260406-city-county-joint": {
     "cat": "government",
     "label": "Government",
+    "thumbnail": "/images/govt_public-hearing_009.jpg",
     "headline": "City Council and County Commission Are Meeting Together on April 16. That's Unusual.",
     "dek": "A formal joint session between the two governing bodies is rare. It is scheduled at the Bay Center — the same week the CRA is reviewing a convention center analysis.",
     "byline": "The Flightline Staff",
@@ -1776,6 +1797,7 @@ Object.assign(A, {
   "20260406-affordable-housing": {
     "cat": "government",
     "label": "City of Pensacola",
+    "thumbnail": "/images/development_residential_004.jpg",
     "headline": "Pensacola Is Launching a Small-Scale Affordable Rental Housing Pilot",
     "dek": "The CRA approved a new program policy and issued an RFQ Monday for a pilot that would support small affordable rental developments in the city's redevelopment districts.",
     "byline": "The Flightline Staff",
@@ -1790,6 +1812,7 @@ Object.assign(A, {
   "20260406-community-health-land": {
     "cat": "government",
     "label": "City of Pensacola",
+    "thumbnail": "/images/govt_office_007.jpg",
     "headline": "The City Is Donating Land on West Avery Street for a Community Health Facility",
     "dek": "City Council votes Thursday to give 801 West Avery Street to Community Health Northwest Florida Foundation — removing it from the redevelopment area and transferring it for a health clinic.",
     "byline": "The Flightline Staff",
@@ -1804,6 +1827,7 @@ Object.assign(A, {
 ,"port-birdon-project-maeve": {
   "cat": "dev",
   "label": "Development",
+    "thumbnail": "/images/development_construction-crane_001.jpg",
   "headline": "Birdon America Is Building a $275M Shipyard at the Port of Pensacola, Bringing Up to 2,000 Jobs to the Region",
   "dek": "The Triumph Gulf Coast board approved an initial $76 million grant for the project in January, clearing the way for a 400,000-square-foot naval manufacturing facility that would become the company's Southeastern U.S. headquarters.",
   "byline": "The Flightline Staff",
@@ -1814,6 +1838,7 @@ Object.assign(A, {
 ,"nas-dod-personal-firearms-policy": {
   "cat": "military",
   "label": "Military",
+    "thumbnail": "/images/military_nas-pensacola-airshow_009.jpg",
   "headline": "Pentagon Ends 30-Year Personal Firearms Ban at Military Bases, Directly Citing the 2019 NAS Pensacola Terror Attack",
   "dek": "Secretary of Defense Pete Hegseth signed the directive April 2, ordering base commanders to treat personal carry requests from service members with a presumption of approval — a policy that applies to NAS Pensacola, Whiting Field, Eglin and Hurlburt.",
   "byline": "The Flightline Staff",
@@ -1824,6 +1849,7 @@ Object.assign(A, {
 ,"801-avery-community-health-clinic": {
   "cat": "govt",
   "label": "Government",
+    "thumbnail": "/images/govt_office_007.jpg",
   "headline": "Pensacola Is Donating City-Owned Land in West Pensacola to Bring Medical and Dental Care to the Neighborhood",
   "dek": "The Pensacola City Council votes Thursday on three linked agenda items that would transfer 801 W. Avery Street to Community Health Northwest Florida Foundation, the nonprofit arm of the region's largest federally qualified health center operator.",
   "byline": "The Flightline Staff",
