@@ -312,7 +312,7 @@ function goPage(page) {
   if (page === 'pay') setTimeout(initPayCharts, 0);
 }
 
-function goCategory(cat) {
+function goCategory(cat, page) {
   const meta = CAT_META[cat] || { label: cat, color:'var(--navy)' };
   const matches = Object.entries(A).filter(([id, a]) => a.cat === cat).sort((a,b) => pubDate(b[0]) - pubDate(a[0]));
   if (!matches.length) return;
@@ -483,7 +483,15 @@ function goCategory(cat) {
     spotlightHtml = calSpotlight + spotlightHtml;
   }
 
-  const cards = regularMatches.map(([id, a]) => `
+  
+  var perPage = 25;
+  var currentPage = page || 1;
+  var totalPages = Math.ceil(regularMatches.length / perPage);
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
+  var pageMatches = regularMatches.slice((currentPage - 1) * perPage, currentPage * perPage);
+
+  const cards = pageMatches.map(([id, a]) => `
     <div class="cat-card" onclick="openArticle('${id}')">
       <div class="cat-card-img" style="overflow:hidden;">${a.thumbnail ? `<img src="${a.thumbnail}" alt="${a.cat}" style="width:100%;height:100%;object-fit:cover;">` : catImg(a.cat, id)}</div>
       <div class="cat-card-body">
@@ -494,7 +502,23 @@ function goCategory(cat) {
       </div>
     </div>`).join('');
 
-  document.getElementById('cat-card-grid').innerHTML = spotlightHtml + cards;
+  
+  var pagHtml = '';
+  if (totalPages > 1) {
+    pagHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:32px;padding:20px 0;flex-wrap:wrap;">';
+    if (currentPage > 1) {
+      pagHtml += '<button onclick="goCategory(\'' + cat + '\',' + (currentPage - 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">\u2190 Previous</button>';
+    }
+    for (var p = 1; p <= totalPages; p++) {
+      pagHtml += '<button onclick="goCategory(\'' + cat + '\',' + p + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (p === currentPage ? '800' : '600') + ';padding:8px 12px;border:1px solid ' + (p === currentPage ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (p === currentPage ? 'var(--navy)' : '#fff') + ';color:' + (p === currentPage ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + p + '</button>';
+    }
+    if (currentPage < totalPages) {
+      pagHtml += '<button onclick="goCategory(\'' + cat + '\',' + (currentPage + 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">Next \u2192</button>';
+    }
+    pagHtml += '</div>';
+  }
+
+  document.getElementById('cat-card-grid').innerHTML = spotlightHtml + cards + pagHtml;
   document.getElementById('page-home').classList.add('hidden');
   document.getElementById('page-cat').classList.add('active');
   document.getElementById('page-search').classList.remove('active');
@@ -507,16 +531,28 @@ function goCategory(cat) {
   window.scrollTo(0,0);
 }
 
-function goAllArticles(filterTag) {
+function goAllArticles(filterTag, page) {
   var tag = filterTag || 'all';
-  var allArticles = Object.entries(A)
+  var currentPage = page || 1;
+  var perPage = 25;
+
+  var allFiltered = Object.entries(A)
     .filter(function(e) { return tag === 'all' || autoTag(e[0], e[1]) === tag; })
     .sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); });
 
-  document.getElementById('cat-page-title').textContent = tag === 'all' ? 'Latest' : { pensacola:'Pensacola', downtown:'Downtown Pensacola', escambia:'Escambia County', beach:'Pensacola Beach', gulfbreeze:'Gulf Breeze' }[tag] || tag;
-  var totalAll = Object.keys(A).length;
-  document.getElementById('cat-page-sub').textContent = allArticles.length + (tag === 'all' ? '' : ' of ' + totalAll) + ' ' + (allArticles.length === 1 ? 'story' : 'stories');
+  var totalArticles = allFiltered.length;
+  var totalPages = Math.ceil(totalArticles / perPage);
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
 
+  var startIdx = (currentPage - 1) * perPage;
+  var pageArticles = allFiltered.slice(startIdx, startIdx + perPage);
+
+  var tagNames = { pensacola:'Pensacola', downtown:'Downtown Pensacola', escambia:'Escambia County', beach:'Pensacola Beach', gulfbreeze:'Gulf Breeze' };
+  document.getElementById('cat-page-title').textContent = tag === 'all' ? 'Latest' : (tagNames[tag] || tag);
+  document.getElementById('cat-page-sub').textContent = totalArticles + (tag === 'all' ? '' : ' of ' + Object.keys(A).length) + ' ' + (totalArticles === 1 ? 'story' : 'stories');
+
+  // Tag filter bar
   var tags = [['all','All'],['pensacola','Pensacola'],['downtown','Downtown'],['escambia','Escambia County'],['beach','Pensacola Beach'],['gulfbreeze','Gulf Breeze']];
   var filterHtml = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;">';
   for (var t = 0; t < tags.length; t++) {
@@ -525,7 +561,8 @@ function goAllArticles(filterTag) {
   }
   filterHtml += '</div>';
 
-  var cards = allArticles.map(function(entry) {
+  // Article cards
+  var cards = pageArticles.map(function(entry) {
     var id = entry[0], a = entry[1];
     var imgHtml = a.thumbnail
       ? '<img src="' + a.thumbnail + '" alt="' + (a.cat||'') + '" style="width:100%;height:100%;object-fit:cover;">'
@@ -540,7 +577,24 @@ function goAllArticles(filterTag) {
       + '</div></div>';
   }).join('');
 
-  document.getElementById('cat-card-grid').innerHTML = filterHtml + cards;
+  // Pagination controls
+  var pagHtml = '';
+  if (totalPages > 1) {
+    pagHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:32px;padding:20px 0;flex-wrap:wrap;">';
+    if (currentPage > 1) {
+      pagHtml += '<button onclick="goAllArticles(\'' + tag + '\',' + (currentPage - 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">\u2190 Previous</button>';
+    }
+    for (var p = 1; p <= totalPages; p++) {
+      var isCurrent = p === currentPage;
+      pagHtml += '<button onclick="goAllArticles(\'' + tag + '\',' + p + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (isCurrent ? '800' : '600') + ';padding:8px 12px;border:1px solid ' + (isCurrent ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (isCurrent ? 'var(--navy)' : '#fff') + ';color:' + (isCurrent ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + p + '</button>';
+    }
+    if (currentPage < totalPages) {
+      pagHtml += '<button onclick="goAllArticles(\'' + tag + '\',' + (currentPage + 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">Next \u2192</button>';
+    }
+    pagHtml += '</div>';
+  }
+
+  document.getElementById('cat-card-grid').innerHTML = filterHtml + cards + pagHtml;
   document.getElementById('page-home').classList.add('hidden');
   document.getElementById('page-cat').classList.add('active');
   document.getElementById('page-search').classList.remove('active');
@@ -552,7 +606,7 @@ function goAllArticles(filterTag) {
   document.querySelectorAll('.main-nav a').forEach(function(a) { a.classList.remove('active'); });
   var latestNav = document.getElementById('nav-latest');
   if (latestNav) latestNav.classList.add('active');
-  if (!filterTag) window.scrollTo(0,0);
+  window.scrollTo(0,0);
   history.pushState(null, '', '/all');
 }
 
