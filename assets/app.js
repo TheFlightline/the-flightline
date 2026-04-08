@@ -618,6 +618,28 @@ function selectTier(el) {
   el.classList.add('selected');
 }
 
+
+function toggleMobileNav() {
+  const nav = document.getElementById('mobile-nav');
+  const btn = document.getElementById('hamburger-btn');
+  if (!nav) return;
+  const isOpen = nav.classList.contains('open');
+  nav.classList.toggle('open', !isOpen);
+  nav.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+  btn && btn.classList.toggle('open', !isOpen);
+}
+
+document.addEventListener('click', function(e) {
+  const nav = document.getElementById('mobile-nav');
+  const btn = document.getElementById('hamburger-btn');
+  if (!nav || !nav.classList.contains('open')) return;
+  if (!nav.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+    nav.classList.remove('open');
+    nav.setAttribute('aria-hidden', 'true');
+    btn && btn.classList.remove('open');
+  }
+});
+
 function goHome() {
   closeDropdown();
   document.getElementById('search-input').value = '';
