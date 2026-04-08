@@ -49,9 +49,22 @@
       <a href="#" onclick="goCategory('sports')" id="nav-sports">Sports</a>
       <a href="#" onclick="goCategory('opinion')" id="nav-opinion">Opinion</a>
     </nav>
+
+    <button class="hamburger" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
     <div class="header-search"><input type="text" placeholder="Search The Flightline…" id="search-input" autocomplete="off" oninput="liveSearch(this.value, this)" onkeydown="if(event.key==='Enter'){closeDropdown();runSearch(this.value)}" onblur="setTimeout(closeDropdown,180)"><button onclick="closeDropdown();runSearch(document.getElementById('search-input').value)">⌕</button></div>
   </div>
 </header>
+<div id="mobile-nav" class="mobile-nav" aria-hidden="true">
+  <a href="#" onclick="toggleMobileNav();goHome();return false;" id="mnav-home">Home</a>
+  <a href="/all" onclick="toggleMobileNav();goAllArticles();return false;" id="mnav-latest">Latest</a>
+  <a href="#" onclick="toggleMobileNav();goCategory('govt');return false;" id="mnav-govt">Government</a>
+  <a href="#" onclick="toggleMobileNav();goCategory('dev');return false;" id="mnav-dev">Business</a>
+  <a href="#" onclick="toggleMobileNav();goCategory('military');return false;" id="mnav-military">Military</a>
+  <a href="#" onclick="toggleMobileNav();goCategory('sports');return false;" id="mnav-sports">Sports</a>
+  <a href="#" onclick="toggleMobileNav();goCategory('opinion');return false;" id="mnav-opinion">Opinion</a>
+</div>
 
 <div class="ticker">
   <div class="ticker-inner">
