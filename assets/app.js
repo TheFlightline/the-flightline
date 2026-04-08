@@ -3045,7 +3045,7 @@ function buildTicker() {
   var sorted = Object.entries(A)
     .filter(function(e) { return e[1].cat !== 'events' && e[1].cat !== 'opinion'; })
     .sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); })
-    .slice(0, 15);
+    .slice(0, 5);
   var html = '';
   sorted.forEach(function(entry) {
     var id = entry[0], a = entry[1];
