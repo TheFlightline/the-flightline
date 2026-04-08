@@ -6,10 +6,22 @@ function onArticlesReady(fn) {
   if (articlesReady) { fn(); } else { articleReadyCallbacks.push(fn); }
 }
 
-
+// --- LIVE DATE ---
+(function() {
+  var el = document.getElementById('topbar-date');
+  if (!el) return;
+  var d = new Date();
+  var h = d.getHours();
+  var greeting = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  el.textContent = greeting + ', it\u2019s ' + days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+})();
 
 // ── PUB DATE HELPER — use key prefix not date field for sorting ───────────────
-function pubDate(id) {
+function 
+  // --- LIVE DATE ---
+  (function() {pubDate(id) {
   if (!id) return new Date(0);
   var result;
   var m = id.match(/^(\d{4})(\d{2})(\d{2})/);
