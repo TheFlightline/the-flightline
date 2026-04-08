@@ -6,22 +6,10 @@ function onArticlesReady(fn) {
   if (articlesReady) { fn(); } else { articleReadyCallbacks.push(fn); }
 }
 
-// --- LIVE DATE ---
-(function() {
-  var el = document.getElementById('topbar-date');
-  if (!el) return;
-  var d = new Date();
-  var h = d.getHours();
-  var greeting = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
-  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  el.textContent = greeting + ', it\u2019s ' + days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-})();
+
 
 // ── PUB DATE HELPER — use key prefix not date field for sorting ───────────────
-function 
-  // --- LIVE DATE ---
-  (function() {pubDate(id) {
+function pubDate(id) {
   if (!id) return new Date(0);
   var result;
   var m = id.match(/^(\d{4})(\d{2})(\d{2})/);
@@ -631,23 +619,22 @@ function selectTier(el) {
 }
 
 function toggleMobileNav() {
-  const nav = document.getElementById('mobile-nav');
-  const btn = document.getElementById('hamburger-btn');
+  var nav = document.getElementById('mobile-nav');
+  var btn = document.getElementById('hamburger-btn');
   if (!nav) return;
-  const isOpen = nav.classList.contains('open');
+  var isOpen = nav.classList.contains('open');
   nav.classList.toggle('open', !isOpen);
   nav.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
-  btn && btn.classList.toggle('open', !isOpen);
+  if (btn) btn.classList.toggle('open', !isOpen);
 }
-
 document.addEventListener('click', function(e) {
-  const nav = document.getElementById('mobile-nav');
-  const btn = document.getElementById('hamburger-btn');
+  var nav = document.getElementById('mobile-nav');
+  var btn = document.getElementById('hamburger-btn');
   if (!nav || !nav.classList.contains('open')) return;
   if (!nav.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
     nav.classList.remove('open');
     nav.setAttribute('aria-hidden', 'true');
-    btn && btn.classList.remove('open');
+    if (btn) btn.classList.remove('open');
   }
 });
 
@@ -3078,7 +3065,7 @@ function buildTicker() {
   var sorted = Object.entries(A)
     .filter(function(e) { return e[1].cat !== 'events' && e[1].cat !== 'opinion'; })
     .sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); })
-    .slice(0, 5);
+    .slice(0, 15);
   var html = '';
   sorted.forEach(function(entry) {
     var id = entry[0], a = entry[1];
