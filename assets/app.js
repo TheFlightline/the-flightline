@@ -1,172 +1,18 @@
-// ââ ARTICLE DATA LOADER âââââââââââââââââââââââââââââââââââââââââââââââââââââ
-var A = window.A || {};
+// ── ARTICLE DATA LOADER ─────────────────────────────────────────────────────
+let A = {};
 let articlesReady = false;
 const articleReadyCallbacks = [];
 function onArticlesReady(fn) {
   if (articlesReady) { fn(); } else { articleReadyCallbacks.push(fn); }
 }
-
-
-
-// ââ PUB DATE HELPER â use key prefix not date field for sorting âââââââââââââââ
-function pubDate(id) {
-  if (!id) return new Date(0);
-  var result;
-  var m = id.match(/^(\d{4})(\d{2})(\d{2})/);
-  if (m) { result = new Date(m[1]+'-'+m[2]+'-'+m[3]); }
-  else if (A[id] && A[id].date) {
-    var d = new Date(A[id].date);
-    if (!isNaN(d.getTime())) result = d;
-  }
-  if (!result) return new Date(0);
-  var today = new Date(); today.setHours(23,59,59,999);
-  return result > today ? new Date(1) : result;
-}
-
-function autoTag(id, art) {
-  if (art.tag) return art.tag;
-  var text = ((art.headline || '') + ' ' + (art.dek || '') + ' ' + id + ' ' + (art.label || '')).toLowerCase();
-  if (text.indexOf('gulf breeze') > -1 || text.indexOf('gulf-breeze') > -1 || text.indexOf('gulfbreeze') > -1) return 'gulfbreeze';
-  if (text.indexOf('pensacola beach') > -1 || text.indexOf('perdido') > -1 || text.indexOf('beach blvd') > -1 || text.indexOf('beach nourishment') > -1 || text.indexOf('casino beach') > -1 || text.indexOf('fort pickens') > -1) return 'beach';
-  if (text.indexOf('escambia county') > -1 || text.indexOf('escambia commission') > -1 || text.indexOf('county commission') > -1 || text.indexOf('molino') > -1 || text.indexOf('cantonment') > -1 || text.indexOf('century') > -1 || text.indexOf('warrington') > -1 || text.indexOf('brent') > -1 || text.indexOf('bellview') > -1 || text.indexOf('gonzalez') > -1 || text.indexOf('ensley') > -1 || text.indexOf('myrtle grove') > -1) return 'escambia';
-  if (text.indexOf('downtown') > -1 || text.indexOf('palafox') > -1 || text.indexOf('garden street') > -1 || text.indexOf('bayfront') > -1 || text.indexOf('bay center') > -1 || text.indexOf('saenger') > -1 || text.indexOf('maritime park') > -1 || text.indexOf('community maritime') > -1 || text.indexOf('gallery night') > -1 || text.indexOf('vinyl music') > -1 || text.indexOf('fish house') > -1 || text.indexOf('alcaniz') > -1 || text.indexOf('intendencia') > -1) return 'downtown';
-  return 'pensacola';
-}
-
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-const CAT_DISPLAY={govt:"Government",government:"Government",dev:"Business",development:"Business",business:"Business",military:"Military",news:"News",education:"Education",sports:"Sports",events:"Events",opinion:"Opinion",environment:"Environment",tourism:"Tourism",traffic:"Traffic",community:"Community"};
-function catDisplay(c){return CAT_DISPLAY[c]||(c.charAt(0).toUpperCase()+c.slice(1));}
-
-// ââ HOME SECTION UNIFIED PHOTO-GRID RENDER âââââââââââââââââââââââââââââââââââ
-const HOME_SECTION_CATS = [
-  { id: 'news',             cat: 'govt',     label: 'Government',                nbhdFilter: true },
-  { id: 'development',      cat: 'dev',      label: 'Business & Development',    nbhdFilter: true },
-  { id: 'military',         cat: 'military', label: 'Military & NAS Pensacola',  nbhdFilter: true },
-  { id: 'sports',           cat: 'sports',   label: 'Sports',                    nbhdFilter: true },
-  { id: 'opinion-section',  cat: 'opinion',  label: 'Opinion & Analysis',        nbhdFilter: true },
-];
-
-const HOME_PHOTOS = {
-  govt:        ['/images/downtown_pensacola-aerial-downtown_003.jpg', '/images/editorial_gavel_005.jpg', '/images/govt_public-hearing_009.jpg'],
-  government:  ['/images/downtown_pensacola-aerial-downtown_003.jpg', '/images/editorial_gavel_005.jpg', '/images/govt_public-hearing_009.jpg'],
-  dev:         ['/images/development_construction-crane_001.jpg', '/images/development_road-work_002.jpg', '/images/development_scaffolding_003.jpg'],
-  development: ['/images/development_construction-crane_001.jpg', '/images/development_road-work_002.jpg', '/images/downtown_pensacola-aerial-downtown_003.jpg'],
-  military:    ['/images/military_blue-angels_001.jpg', '/images/military_nas_002.jpg', '/images/military_aircraft_003.jpg'],
-  news:        ['/images/downtown_palafox-street-clock_007.jpg', '/images/downtown_waterfront_004.jpg', '/images/editorial_press_001.jpg'],
-  education:   ['/images/education_uwf_001.jpg', '/images/education_campus_003.jpg', '/images/community_park_003.jpg'],
-  sports:      ['/images/sports_wahoos_001.jpg', '/images/sports_stadium_002.jpg', '/images/community_park_003.jpg'],
-  events:      ['/images/downtown_palafox-street-dusk_008.jpg', '/images/community_park_003.jpg', '/images/downtown_waterfront_004.jpg'],
-  opinion:     ['/images/editorial_press_001.jpg', '/images/editorial_gavel_005.jpg', '/images/downtown_pensacola-aerial-downtown_003.jpg'],
-  environment: ['/images/community_park_003.jpg', '/images/downtown_waterfront_004.jpg', '/images/editorial_press_001.jpg'],
-  tourism:     ['/images/downtown_waterfront_004.jpg', '/images/downtown_palafox-street-dusk_008.jpg', '/images/community_park_003.jpg'],
-  traffic:     ['/images/development_road-work_002.jpg', '/images/development_construction-crane_001.jpg', '/images/downtown_pensacola-aerial-downtown_003.jpg'],
-  community:   ['/images/community_park_003.jpg', '/images/downtown_palafox-street-clock_007.jpg', '/images/downtown_waterfront_004.jpg'],
-};
-
-function homeCardImg(id, art) {
-  if (art.thumbnail) {
-    return '<img src="' + art.thumbnail + '" alt="' + art.cat + '" style="width:100%;height:100%;object-fit:cover;">';
-  }
-  var pool = HOME_PHOTOS[art.cat] || HOME_PHOTOS.news;
-  var idx = Math.abs(id.split('').reduce(function(a, c) { return a + c.charCodeAt(0); }, 0)) % pool.length;
-  return '<img src="' + pool[idx] + '" alt="' + art.cat + '" style="width:100%;height:100%;object-fit:cover;">';
-}
-
-function homeNbhd(id, art) {
-  var KNOWN = {
-    '20260402-escambia-commission-clerk-childers': 'downtown',
-    '20260402-warringtons-damaged-hotel-gets': 'warrington',
-    '20260404-sunshine-escambia-county-pensacolas': 'downtown',
-    '20260327-city-council-awards-78m': 'downtown',
-    '20260116-escambia-zoning-scam-warning': 'downtown',
-    '20260401-flight-line-access-restored': 'nas',
-    '20260402-nas-pensacola-family-housing': 'nas',
-    '20260401-blue-wahoos-complete-ballpark': 'downtown',
-  };
-  if (KNOWN[id]) return KNOWN[id];
-  if (art.cat === 'military') return 'nas';
-  if (art.label && art.label.indexOf('Gulf Breeze') > -1) return 'gulf-breeze';
-  if (art.label && art.label.indexOf('Pensacola Beach') > -1) return 'perdido-key';
-  if (art.label && art.label.indexOf('Warrington') > -1) return 'warrington';
-  if (art.label && art.label.indexOf('East Hill') > -1) return 'east-hill';
-  return 'downtown';
-}
-
-function buildSection(sectionId, cat, nbhdFilter) {
-  var el = document.getElementById(sectionId);
-  if (!el) return;
-
-  var articles = Object.entries(A)
-    .filter(function(e) { return e[1].cat === cat; })
-    .sort(function(a, b) { return pubDate(b[0]) - pubDate(a[0]); })
-    .slice(0, 3);
-
-  if (!articles.length) return;
-
-  var sectionLabel = el.querySelector('.section-label');
-  var labelHtml = sectionLabel ? sectionLabel.outerHTML : '';
-
-  var nbhdHtml = '';
-  if (nbhdFilter) {
-    var tags = [['all','All'],['pensacola','Pensacola'],['downtown','Downtown'],['escambia','Escambia County'],['beach','Pensacola Beach'],['gulfbreeze','Gulf Breeze']];
-    nbhdHtml = '<div class="tag-filters" data-section="' + sectionId + '" style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;">';
-    for (var n = 0; n < tags.length; n++) {
-      nbhdHtml += '<button class="nbhd-btn' + (tags[n][0] === 'all' ? ' active' : '') + '" data-tag="' + tags[n][0] + '" onclick="filterTag(\'' + sectionId + '\',\'' + tags[n][0] + '\',this)">' + tags[n][1] + '</button>';
-    }
-    nbhdHtml += '</div>';
-  }
-
-  var cards = '';
-  for (var i = 0; i < articles.length; i++) {
-    var id = articles[i][0];
-    var art = articles[i][1];
-    var tag = autoTag(id, art);
-    var cls = 'story-card' + (i === 0 ? ' gold-top' : '');
-    cards += '<div class="' + cls + '" data-tag="' + tag + '" onclick="openArticle(\'' + id + '\')">';
-    cards += '<div class="story-card-img">' + homeCardImg(id, art) + '</div>';
-    cards += '<span class="cat-badge cat-' + art.cat + '">' + catDisplay(art.cat) + '</span>';
-    cards += '<div class="headline-md">' + art.headline + '</div>';
-    cards += '<div class="dek-sm">' + (art.dek || '') + '</div>';
-    cards += '<div class="byline">' + art.date + '</div>';
-    cards += '</div>';
-  }
-
-  el.innerHTML = labelHtml + nbhdHtml + '<div class="three-col">' + cards + '</div>';
-}
-
-function buildHomeFeed() {
-  for (var s = 0; s < HOME_SECTION_CATS.length; s++) {
-    var sec = HOME_SECTION_CATS[s];
-    buildSection(sec.id, sec.cat, sec.nbhdFilter);
-  }
-}
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-
-function renderMobileLatest() {
-  var el = document.getElementById('mobile-latest-list');
-  if (!el) return;
-  // Sort by key date prefix descending (keys start with YYYYMMDD-)
-  var sorted = Object.keys(A).sort(function(a,b){ return pubDate(b) - pubDate(a); });
-  var top3 = sorted.slice(0, 3);
-  el.innerHTML = top3.map(function(id) {
-    var art = A[id];
-    var cat = art.label || '';
-    var date = art.date || '';
-    var meta = [cat, date].filter(Boolean).join(' Â· ');
-    return '<div class="mob-latest-item" onclick="event.stopPropagation();openArticle(\'' + id + '\')">'
-      + '<div class="mob-latest-hed">' + art.headline + '</div>'
-      + (meta ? '<div class="mob-latest-meta">' + meta + '</div>' : '')
-      + '</div>';
-  }).join('');
-}
-
-
-// articles.js loaded synchronously via <script> tag â boot immediately
-articlesReady = true;
-articleReadyCallbacks.forEach(fn => fn());
-buildHomeFeed();
-setTimeout(buildHomeFeed, 300);
-renderMobileLatest();
+fetch('/articles.json')
+  .then(r => r.json())
+  .then(data => {
+    data.forEach(art => { A[art.id] = art; });
+    articlesReady = true;
+    articleReadyCallbacks.forEach(fn => fn());
+  })
+  .catch(e => console.error('Failed to load articles.json', e));
 function updateBackToTop() {
   const btn = document.getElementById('back-to-top');
   if (!btn) return;
@@ -186,12 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Category labels map
 const CAT_META = {
-  news:      { label:'News',                    color:'var(--cat-news)' },
+  news:      { label:'Local News',              color:'var(--cat-news)' },
   govt:      { label:'Government',              color:'var(--cat-govt)' },
-  dev:       { label:'Business & Development',  color:'var(--cat-dev)' },
-  business:  { label:'Business & Development',  color:'var(--cat-dev)' },
+  dev:       { label:'Development & Infrastructure', color:'var(--cat-dev)' },
   opinion:   { label:'Opinion & Analysis',      color:'var(--cat-opinion)' },
-  events:    { label:'Events',                  color:'var(--cat-events)' },
+  events:    { label:'Arts & Events',           color:'var(--cat-events)' },
   military:  { label:'Military',                color:'var(--cat-military)' },
   education: { label:'Education',               color:'var(--cat-education)' },
   sports:    { label:'Sports',                  color:'var(--cat-sports)' },
@@ -215,13 +60,13 @@ async function populateWeatherModal() {
     80:'Showers',81:'Heavy Showers',82:'Violent Showers',95:'Thunderstorm',96:'Thunderstorm',99:'Thunderstorm'
   };
   const WMO_ICON = {
-    0:'âï¸',1:'ð¤',2:'â',3:'âï¸',45:'ð«',48:'ð«',51:'ð¦',53:'ð§',55:'ð§',
-    61:'ð¦',63:'ð§',65:'â',71:'ð¨',73:'âï¸',75:'âï¸',80:'ð¦',81:'ð§',82:'â',
-    95:'â',96:'â',99:'â'
+    0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌦',53:'🌧',55:'🌧',
+    61:'🌦',63:'🌧',65:'⛈',71:'🌨',73:'❄️',75:'❄️',80:'🌦',81:'🌧',82:'⛈',
+    95:'⛈',96:'⛈',99:'⛈'
   };
   const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const fmt = t => Math.round(t * 9/5 + 32);
-  const icon = c => WMO_ICON[c] || 'ð¡';
+  const icon = c => WMO_ICON[c] || '🌡';
   const desc = c => WMO[c] || 'Unknown';
   const now = new Date();
   const dateLabel = now.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
@@ -249,30 +94,30 @@ async function populateWeatherModal() {
       return `<div class="weather-day${isToday ? ' today-col' : ''}">
         <div class="weather-day-name">${day}</div>
         <div class="weather-day-icon">${icon(daily.weathercode[i])}</div>
-        <div class="weather-day-hi">${fmt(daily.temperature_2m_max[i])}Â°</div>
-        <div class="weather-day-lo">${fmt(daily.temperature_2m_min[i])}Â°</div>
-        ${pop > 20 ? `<div class="weather-day-pop">ð§${pop}%</div>` : ''}
+        <div class="weather-day-hi">${fmt(daily.temperature_2m_max[i])}°</div>
+        <div class="weather-day-lo">${fmt(daily.temperature_2m_min[i])}°</div>
+        ${pop > 20 ? `<div class="weather-day-pop">💧${pop}%</div>` : ''}
       </div>`;
     }).join('');
 
     document.getElementById('weather-modal-content').innerHTML = `
       <div class="weather-modal-header">
-        <button class="weather-modal-close" onclick="closeWeather()">â</button>
-        <div class="weather-modal-location">ð Pensacola, FL Â· ${dateLabel}</div>
+        <button class="weather-modal-close" onclick="closeWeather()">✕</button>
+        <div class="weather-modal-location">📍 Pensacola, FL · ${dateLabel}</div>
         <div class="weather-modal-current">
-          <div class="weather-modal-temp">${fmt(c.temperature_2m)}Â°</div>
+          <div class="weather-modal-temp">${fmt(c.temperature_2m)}°</div>
           <div class="weather-modal-current-detail">
             <div class="weather-modal-condition">${icon(c.weathercode)} ${desc(c.weathercode)}</div>
-            <div class="weather-modal-feel">Feels like ${fmt(c.apparent_temperature)}Â° Â· Wind ${windDir} ${Math.round(c.windspeed_10m)} mph</div>
+            <div class="weather-modal-feel">Feels like ${fmt(c.apparent_temperature)}° · Wind ${windDir} ${Math.round(c.windspeed_10m)} mph</div>
           </div>
         </div>
         <div class="weather-modal-stats">
-          <div class="weather-stat"><div class="weather-stat-label">High</div><div class="weather-stat-val">${fmt(daily.temperature_2m_max[0])}Â°</div></div>
-          <div class="weather-stat"><div class="weather-stat-label">Low</div><div class="weather-stat-val">${fmt(daily.temperature_2m_min[0])}Â°</div></div>
+          <div class="weather-stat"><div class="weather-stat-label">High</div><div class="weather-stat-val">${fmt(daily.temperature_2m_max[0])}°</div></div>
+          <div class="weather-stat"><div class="weather-stat-label">Low</div><div class="weather-stat-val">${fmt(daily.temperature_2m_min[0])}°</div></div>
           <div class="weather-stat"><div class="weather-stat-label">Humidity</div><div class="weather-stat-val">${c.relativehumidity_2m}%</div></div>
           <div class="weather-stat"><div class="weather-stat-label">Wind</div><div class="weather-stat-val">${windDir} ${Math.round(c.windspeed_10m)}</div></div>
           <div class="weather-stat"><div class="weather-stat-label">UV Index</div><div class="weather-stat-val">${daily.uv_index_max[0]?.toFixed(0) || '--'}</div></div>
-          <div class="weather-stat"><div class="weather-stat-label">Dew Point</div><div class="weather-stat-val">${dewPoint}Â°</div></div>
+          <div class="weather-stat"><div class="weather-stat-label">Dew Point</div><div class="weather-stat-val">${dewPoint}°</div></div>
           <div class="weather-stat"><div class="weather-stat-label">Pressure</div><div class="weather-stat-val">${pressureIn}"</div></div>
           <div class="weather-stat"><div class="weather-stat-label">Rain Chance</div><div class="weather-stat-val">${daily.precipitation_probability_max[0]}%</div></div>
         </div>
@@ -282,22 +127,22 @@ async function populateWeatherModal() {
         <div class="weather-forecast-grid">${forecastHTML}</div>
       </div>
       <div class="weather-modal-footer">
-        <span>Source: Open-Meteo Â· Updated ${now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}</span>
-        <a href="https://forecast.weather.gov/MapClick.php?CityName=Pensacola&state=FL&site=MOB&textField1=30.4213&textField2=-87.2169" target="_blank" rel="noopener">NWS Forecast â</a>
+        <span>Source: Open-Meteo · Updated ${now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}</span>
+        <a href="https://forecast.weather.gov/MapClick.php?CityName=Pensacola&state=FL&site=MOB&textField1=30.4213&textField2=-87.2169" target="_blank" rel="noopener">NWS Forecast ↗</a>
       </div>`;
   } catch(e) {
     document.getElementById('weather-modal-content').innerHTML = `
       <div class="weather-modal-header">
-        <button class="weather-modal-close" onclick="closeWeather()">â</button>
-        <div class="weather-modal-location">ð Pensacola, FL</div>
-        <div style="color:rgba(255,255,255,0.5);padding:20px 0;font-size:13px;">Weather data unavailable. <a href="https://forecast.weather.gov" target="_blank" style="color:var(--gold);">Check NWS â</a></div>
+        <button class="weather-modal-close" onclick="closeWeather()">✕</button>
+        <div class="weather-modal-location">📍 Pensacola, FL</div>
+        <div style="color:rgba(255,255,255,0.5);padding:20px 0;font-size:13px;">Weather data unavailable. <a href="https://forecast.weather.gov" target="_blank" style="color:var(--gold);">Check NWS ↗</a></div>
       </div>`;
   }
 }
 
 const ALL_STATIC_PAGES = ['subscribe','newsletter','about','our-mission','letters','community-calendar','tips','advertise','privacy','terms','contact'];
 
-// ââ PAY PAGE NAVIGATION ââââââââââââââââââââââââââââââââââââââ
+// ── PAY PAGE NAVIGATION ──────────────────────────────────────
 function goPage(page) {
   document.getElementById('page-home').classList.add('hidden');
   document.getElementById('page-cat').classList.remove('active');
@@ -315,9 +160,9 @@ function goPage(page) {
   if (page === 'pay') setTimeout(initPayCharts, 0);
 }
 
-function goCategory(cat, page) {
+function goCategory(cat) {
   const meta = CAT_META[cat] || { label: cat, color:'var(--navy)' };
-  const matches = Object.entries(A).filter(([id, a]) => a.cat === cat).sort((a,b) => pubDate(b[0]) - pubDate(a[0]));
+  const matches = Object.entries(A).filter(([id, a]) => a.cat === cat);
   if (!matches.length) return;
 
   document.getElementById('cat-page-title').textContent = meta.label;
@@ -458,14 +303,14 @@ function goCategory(cat, page) {
     spotlightHtml = `
     <div onclick="openArticle('${sid}')" style="cursor:pointer;background:var(--navy);border-radius:4px;padding:28px 32px;margin-bottom:28px;display:flex;flex-direction:column;gap:12px;">
       <div style="display:flex;align-items:center;gap:10px;">
-        <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);">â Government in the Sunshine</span>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);">☀ Government in the Sunshine</span>
       </div>
       <div style="font-family:'DM Sans',sans-serif;font-weight:900;font-size:26px;line-height:1.1;color:#fff;">${sa.headline}</div>
       <div style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.55;max-width:680px;">${sa.dek}</div>
-      <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);">${sa.byline} Â· ${sa.date}</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.45);">${sa.byline} · ${sa.date}</div>
       <div style="display:flex;gap:12px;margin-top:4px;">
-        <span style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--gold);border:1px solid var(--gold);border-radius:3px;padding:5px 12px;">Read the investigation â</span>
-        <span onclick="event.stopPropagation();goPage('pay')" style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);border-radius:3px;padding:5px 12px;cursor:pointer;">Open salary database â</span>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--gold);border:1px solid var(--gold);border-radius:3px;padding:5px 12px;">Read the investigation →</span>
+        <span onclick="event.stopPropagation();goPage('pay')" style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.25);border-radius:3px;padding:5px 12px;cursor:pointer;">Open salary database →</span>
       </div>
     </div>`;
   }
@@ -475,53 +320,29 @@ function goCategory(cat, page) {
     const calSpotlight = `
     <div onclick="goPage('community-calendar')" style="cursor:pointer;background:var(--navy);border-radius:4px;padding:28px 32px;margin-bottom:28px;display:flex;flex-direction:column;gap:12px;">
       <div>
-        <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);">ð Community Calendar</span>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);">📅 Community Calendar</span>
       </div>
       <div style="font-family:'DM Sans',sans-serif;font-weight:900;font-size:26px;line-height:1.1;color:#fff;">What's Happening in Pensacola</div>
-      <div style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.55;max-width:680px;">The full Pensacola area event calendar â festivals, concerts, markets, arts, sports and community events across Escambia and Santa Rosa counties. Updated continuously.</div>
+      <div style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.55;max-width:680px;">The full Pensacola area event calendar — festivals, concerts, markets, arts, sports and community events across Escambia and Santa Rosa counties. Updated continuously.</div>
       <div style="display:flex;gap:12px;margin-top:4px;">
-        <span style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--gold);border:1px solid var(--gold);border-radius:3px;padding:5px 12px;">Open full calendar â</span>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--gold);border:1px solid var(--gold);border-radius:3px;padding:5px 12px;">Open full calendar →</span>
       </div>
     </div>`;
     spotlightHtml = calSpotlight + spotlightHtml;
   }
 
-  
-  var perPage = 25;
-  var currentPage = page || 1;
-  var totalPages = Math.ceil(regularMatches.length / perPage);
-  if (currentPage > totalPages) currentPage = totalPages;
-  if (currentPage < 1) currentPage = 1;
-  var pageMatches = regularMatches.slice((currentPage - 1) * perPage, currentPage * perPage);
-
-  const cards = pageMatches.map(([id, a]) => `
+  const cards = regularMatches.map(([id, a]) => `
     <div class="cat-card" onclick="openArticle('${id}')">
       <div class="cat-card-img" style="overflow:hidden;">${a.thumbnail ? `<img src="${a.thumbnail}" alt="${a.cat}" style="width:100%;height:100%;object-fit:cover;">` : catImg(a.cat, id)}</div>
       <div class="cat-card-body">
-        <span class="cat-badge cat-${a.cat}" style="cursor:default">${catDisplay(a.cat)}</span>
+        <span class="cat-badge cat-${a.cat}" style="cursor:default">${a.label}</span>
         <div class="cat-card-headline">${a.headline}</div>
         <div class="cat-card-dek">${a.dek||''}</div>
-        <div class="cat-card-meta">${a.byline} Â· ${a.date}</div>
+        <div class="cat-card-meta">${a.byline} · ${a.date}</div>
       </div>
     </div>`).join('');
 
-  
-  var pagHtml = '';
-  if (totalPages > 1) {
-    pagHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:32px;padding:20px 0;flex-wrap:wrap;grid-column:1/-1;">';
-    if (currentPage > 1) {
-      pagHtml += '<button onclick="goCategory(\'' + cat + '\',' + (currentPage - 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">\u2190 Previous</button>';
-    }
-    for (var p = 1; p <= totalPages; p++) {
-      pagHtml += '<button onclick="goCategory(\'' + cat + '\',' + p + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (p === currentPage ? '800' : '600') + ';padding:8px 12px;border:1px solid ' + (p === currentPage ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (p === currentPage ? 'var(--navy)' : '#fff') + ';color:' + (p === currentPage ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + p + '</button>';
-    }
-    if (currentPage < totalPages) {
-      pagHtml += '<button onclick="goCategory(\'' + cat + '\',' + (currentPage + 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">Next \u2192</button>';
-    }
-    pagHtml += '</div>';
-  }
-
-  document.getElementById('cat-card-grid').innerHTML = spotlightHtml + cards + pagHtml;
+  document.getElementById('cat-card-grid').innerHTML = spotlightHtml + cards;
   document.getElementById('page-home').classList.add('hidden');
   document.getElementById('page-cat').classList.add('active');
   document.getElementById('page-search').classList.remove('active');
@@ -532,85 +353,6 @@ function goCategory(cat, page) {
   const navEl = document.getElementById('nav-' + cat);
   if (navEl) navEl.classList.add('active');
   window.scrollTo(0,0);
-}
-
-function goAllArticles(filterTag, page) {
-  var tag = filterTag || 'all';
-  var currentPage = page || 1;
-  var perPage = 25;
-
-  var allFiltered = Object.entries(A)
-    .filter(function(e) { return tag === 'all' || autoTag(e[0], e[1]) === tag; })
-    .sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); });
-
-  var totalArticles = allFiltered.length;
-  var totalPages = Math.ceil(totalArticles / perPage);
-  if (currentPage > totalPages) currentPage = totalPages;
-  if (currentPage < 1) currentPage = 1;
-
-  var startIdx = (currentPage - 1) * perPage;
-  var pageArticles = allFiltered.slice(startIdx, startIdx + perPage);
-
-  var tagNames = { pensacola:'Pensacola', downtown:'Downtown Pensacola', escambia:'Escambia County', beach:'Pensacola Beach', gulfbreeze:'Gulf Breeze' };
-  document.getElementById('cat-page-title').textContent = tag === 'all' ? 'Latest' : (tagNames[tag] || tag);
-  document.getElementById('cat-page-sub').textContent = totalArticles + (tag === 'all' ? '' : ' of ' + Object.keys(A).length) + ' ' + (totalArticles === 1 ? 'story' : 'stories');
-
-  // Tag filter bar
-  var tags = [['all','All'],['pensacola','Pensacola'],['downtown','Downtown'],['escambia','Escambia County'],['beach','Pensacola Beach'],['gulfbreeze','Gulf Breeze']];
-  var filterHtml = '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;align-items:center;grid-column:1/-1;">';
-  for (var t = 0; t < tags.length; t++) {
-    var isActive = tags[t][0] === tag;
-    filterHtml += '<button onclick="goAllArticles(\'' + tags[t][0] + '\')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (isActive ? '700' : '500') + ';padding:8px 16px;border:1px solid ' + (isActive ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (isActive ? 'var(--navy)' : '#fff') + ';color:' + (isActive ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + tags[t][1] + '</button>';
-  }
-  filterHtml += '</div>';
-
-  // Article cards
-  var cards = pageArticles.map(function(entry) {
-    var id = entry[0], a = entry[1];
-    var imgHtml = a.thumbnail
-      ? '<img src="' + a.thumbnail + '" alt="' + (a.cat||'') + '" style="width:100%;height:100%;object-fit:cover;">'
-      : '<div style="width:100%;height:100%;background:var(--g4);display:flex;align-items:center;justify-content:center;color:var(--g2);font-size:12px;">' + (a.cat||'') + '</div>';
-    return '<div class="cat-card" onclick="openArticle(\'' + id + '\')">'
-      + '<div class="cat-card-img" style="overflow:hidden;">' + imgHtml + '</div>'
-      + '<div class="cat-card-body">'
-      + '<span class="cat-badge cat-' + a.cat + '" style="cursor:default">' + catDisplay(a.cat) + '</span>'
-      + '<div class="cat-card-headline">' + a.headline + '</div>'
-      + '<div class="cat-card-dek">' + (a.dek||'') + '</div>'
-      + '<div class="cat-card-meta">' + (a.byline||'') + ' \u00b7 ' + (a.date||'') + '</div>'
-      + '</div></div>';
-  }).join('');
-
-  // Pagination controls
-  var pagHtml = '';
-  if (totalPages > 1) {
-    pagHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:32px;padding:20px 0;flex-wrap:wrap;grid-column:1/-1;">';
-    if (currentPage > 1) {
-      pagHtml += '<button onclick="goAllArticles(\'' + tag + '\',' + (currentPage - 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">\u2190 Previous</button>';
-    }
-    for (var p = 1; p <= totalPages; p++) {
-      var isCurrent = p === currentPage;
-      pagHtml += '<button onclick="goAllArticles(\'' + tag + '\',' + p + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (isCurrent ? '800' : '600') + ';padding:8px 12px;border:1px solid ' + (isCurrent ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (isCurrent ? 'var(--navy)' : '#fff') + ';color:' + (isCurrent ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + p + '</button>';
-    }
-    if (currentPage < totalPages) {
-      pagHtml += '<button onclick="goAllArticles(\'' + tag + '\',' + (currentPage + 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">Next \u2192</button>';
-    }
-    pagHtml += '</div>';
-  }
-
-  document.getElementById('cat-card-grid').innerHTML = filterHtml + cards + pagHtml;
-  document.getElementById('page-home').classList.add('hidden');
-  document.getElementById('page-cat').classList.add('active');
-  document.getElementById('page-search').classList.remove('active');
-  if (typeof ALL_STATIC_PAGES !== 'undefined') {
-    ALL_STATIC_PAGES.forEach(function(p) { var el = document.getElementById('page-'+p); if (el) el.classList.remove('active'); });
-  }
-  var payPage = document.getElementById('page-pay');
-  if (payPage) payPage.classList.remove('active');
-  document.querySelectorAll('.main-nav a').forEach(function(a) { a.classList.remove('active'); });
-  var latestNav = document.getElementById('nav-latest');
-  if (latestNav) latestNav.classList.add('active');
-  window.scrollTo(0,0);
-  history.pushState(null, '', '/all');
 }
 
 function selectTier(el) {
@@ -656,13 +398,13 @@ function goHome() {
 
 
 const EVENTS = {
-  fantasia:    { color:'#8a6e3a', label:'Entertainment Â· Tonight',       title:'Fantasia & Anthony Hamilton',    date:'Friday, April 3, 2026',            time:'8:00 PM',               venue:'Pensacola Bay Center', address:'201 E Gregory St, Pensacola',       startISO:'20260403T200000', endISO:'20260403T230000', desc:'R&B royalty Fantasia and Anthony Hamilton bring a double-bill show to the Pensacola Bay Center. Two of the most acclaimed voices in contemporary soul on one stage â this one will sell out. Doors open at 7PM.', cta:'Get Tickets', url:'https://www.ticketmaster.com/fantasia-anthony-hamilton-pensacola-florida-04-03-2026/event/1B0062FCCF9854B5' },
-  egghunt:     { color:'#1a8a6e', label:'Family Â· This Weekend',          title:'Egga-Wahooza Easter Egg Hunt',   date:'Saturday, April 4, 2026',          time:'11:00 AM Â· Free',           venue:'Community Maritime Park', address:'301 W Main St, Pensacola',        startISO:'20260404T110000', endISO:'20260404T130000', desc:"Pensacola's annual Easter tradition, hosted by Marcus Pointe Baptist Church at Community Maritime Park. Over 50,000 eggs spread across age-divided zones. Special needs and 0â4 year olds hunt at 11AM, K5â5th grade at noon. Free admission â bring your own basket.", cta:'Free â Event Info', url:'https://pensacolachurch.org/eggawahooza/' },
-  bandsbeach:  { color:'#1e2d4a', label:'Music Â· Every Tuesday',          title:'Bands on the Beach â 2026 Season', date:'Starting Tuesday, April 7',      time:'Gates 6PM Â· Music 7PM', venue:'Gulfside Pavilion', address:'Pensacola Beach, FL',             startISO:'20260407T190000', endISO:'20260407T210000', desc:"Pensacola Beach's beloved Tuesday night concert series opens its 2026 season April 7 at the Gulfside Pavilion. Free live music every Tuesday through the summer on the shores of the Gulf. Bring chairs and coolers. No pets on the beach stage area.", cta:'Free â View Schedule', url:'https://www.visitpensacolabeach.com/events/bands-on-the-beach/' },
-  iglesias:    { color:'#5a3d7a', label:'Comedy Â· April 11',              title:'Gabriel Iglesias: The 1976 Tour', date:'Saturday, April 11, 2026',         time:'Doors 7PM Â· Show 8PM',   venue:'Pensacola Bay Center', address:'201 E Gregory St, Pensacola',       startISO:'20260411T200000', endISO:'20260411T223000', desc:'"Fluffy" brings his new stand-up special "The 1976 Tour: A Fluffy Celebration" to the Bay Center. One night only. One of the highest-grossing touring comedians in the country â limited seats remain.', cta:'Get Tickets', url:'https://www.ticketmaster.com/gabriel-fluffy-iglesias-the-1976-tour-pensacola-florida-04-11-2026/event/1B006390CD61D0CB' },
-  gaffigan:    { color:'#1e2d4a', label:'Comedy Â· April 16',              title:'Jim Gaffigan: Everything is Wonderful!', date:'Thursday, April 16, 2026', time:'7:00 PM',               venue:'Pensacola Bay Center', address:'201 E Gregory St, Pensacola',       startISO:'20260416T190000', endISO:'20260416T210000', desc:"Jim Gaffigan brings his 'Everything is Wonderful!' tour to Pensacola Bay Center. Sharp observational comedy, clean material, sold-out crowds. One of the most reliably good touring acts working today.", cta:'Get Tickets', url:'https://www.ticketmaster.com/jim-gaffigan-everything-is-wonderful-pensacola-florida-04-16-2026/event/1B006437A483B11B' },
-  crawfishfest:{ color:'#8a6e3a', label:'Festival Â· April 24',            title:'Pensacola Crawfish Festival',    date:'Thursday, April 24, 2026',         time:'All day',               venue:'Downtown Pensacola', address:'Palafox Street, Pensacola',         startISO:'20260424T100000', endISO:'20260424T210000', desc:"Fiesta Pensacola's annual Crawfish Festival returns to downtown. Multiple crawfish boils running simultaneously, live entertainment across stages, and a vendor lineup that draws crowds from across the region. Arrive early â Palafox fills up fast. Bring cash for vendors.", cta:'Event Info', url:'https://www.fiestapensacola.org' },
-  mullettoss:  { color:'#1a8a6e', label:'Gulf Coast Tradition Â· April 26', title:'Flora-Bama Mullet Toss',        date:'SaturdayâSunday, April 26â27, 2026', time:'All day',             venue:'Flora-Bama Lounge', address:'17401 Perdido Key Dr, Perdido Key',  startISO:'20260426T100000', endISO:'20260427T200000', desc:"The annual Flora-Bama Mullet Toss â contestants throw dead mullet from Florida into Alabama, competing for distance. A full weekend of live music, food, and the organized chaos only the Flora-Bama can pull off. Draws enormous crowds. Go if you haven't been.", cta:'Event Info', url:'https://www.florabama.com/mullet-toss' },
+  fantasia:    { color:'#8a6e3a', label:'Entertainment · Tonight',       title:'Fantasia & Anthony Hamilton',    date:'Friday, April 3, 2026',            time:'8:00 PM',               venue:'Pensacola Bay Center', address:'201 E Gregory St, Pensacola',       startISO:'20260403T200000', endISO:'20260403T230000', desc:'R&B royalty Fantasia and Anthony Hamilton bring a double-bill show to the Pensacola Bay Center. Two of the most acclaimed voices in contemporary soul on one stage — this one will sell out. Doors open at 7PM.', cta:'Get Tickets', url:'https://www.ticketmaster.com/fantasia-anthony-hamilton-pensacola-florida-04-03-2026/event/1B0062FCCF9854B5' },
+  egghunt:     { color:'#1a8a6e', label:'Family · This Weekend',          title:'Egga-Wahooza Easter Egg Hunt',   date:'Saturday, April 4, 2026',          time:'11:00 AM · Free',           venue:'Community Maritime Park', address:'301 W Main St, Pensacola',        startISO:'20260404T110000', endISO:'20260404T130000', desc:"Pensacola's annual Easter tradition, hosted by Marcus Pointe Baptist Church at Community Maritime Park. Over 50,000 eggs spread across age-divided zones. Special needs and 0–4 year olds hunt at 11AM, K5–5th grade at noon. Free admission — bring your own basket.", cta:'Free — Event Info', url:'https://pensacolachurch.org/eggawahooza/' },
+  bandsbeach:  { color:'#1e2d4a', label:'Music · Every Tuesday',          title:'Bands on the Beach — 2026 Season', date:'Starting Tuesday, April 7',      time:'Gates 6PM · Music 7PM', venue:'Gulfside Pavilion', address:'Pensacola Beach, FL',             startISO:'20260407T190000', endISO:'20260407T210000', desc:"Pensacola Beach's beloved Tuesday night concert series opens its 2026 season April 7 at the Gulfside Pavilion. Free live music every Tuesday through the summer on the shores of the Gulf. Bring chairs and coolers. No pets on the beach stage area.", cta:'Free — View Schedule', url:'https://www.visitpensacolabeach.com/events/bands-on-the-beach/' },
+  iglesias:    { color:'#5a3d7a', label:'Comedy · April 11',              title:'Gabriel Iglesias: The 1976 Tour', date:'Saturday, April 11, 2026',         time:'Doors 7PM · Show 8PM',   venue:'Pensacola Bay Center', address:'201 E Gregory St, Pensacola',       startISO:'20260411T200000', endISO:'20260411T223000', desc:'"Fluffy" brings his new stand-up special "The 1976 Tour: A Fluffy Celebration" to the Bay Center. One night only. One of the highest-grossing touring comedians in the country — limited seats remain.', cta:'Get Tickets', url:'https://www.ticketmaster.com/gabriel-fluffy-iglesias-the-1976-tour-pensacola-florida-04-11-2026/event/1B006390CD61D0CB' },
+  gaffigan:    { color:'#1e2d4a', label:'Comedy · April 16',              title:'Jim Gaffigan: Everything is Wonderful!', date:'Thursday, April 16, 2026', time:'7:00 PM',               venue:'Pensacola Bay Center', address:'201 E Gregory St, Pensacola',       startISO:'20260416T190000', endISO:'20260416T210000', desc:"Jim Gaffigan brings his 'Everything is Wonderful!' tour to Pensacola Bay Center. Sharp observational comedy, clean material, sold-out crowds. One of the most reliably good touring acts working today.", cta:'Get Tickets', url:'https://www.ticketmaster.com/jim-gaffigan-everything-is-wonderful-pensacola-florida-04-16-2026/event/1B006437A483B11B' },
+  crawfishfest:{ color:'#8a6e3a', label:'Festival · April 24',            title:'Pensacola Crawfish Festival',    date:'Thursday, April 24, 2026',         time:'All day',               venue:'Downtown Pensacola', address:'Palafox Street, Pensacola',         startISO:'20260424T100000', endISO:'20260424T210000', desc:"Fiesta Pensacola's annual Crawfish Festival returns to downtown. Multiple crawfish boils running simultaneously, live entertainment across stages, and a vendor lineup that draws crowds from across the region. Arrive early — Palafox fills up fast. Bring cash for vendors.", cta:'Event Info', url:'https://www.fiestapensacola.org' },
+  mullettoss:  { color:'#1a8a6e', label:'Gulf Coast Tradition · April 26', title:'Flora-Bama Mullet Toss',        date:'Saturday–Sunday, April 26–27, 2026', time:'All day',             venue:'Flora-Bama Lounge', address:'17401 Perdido Key Dr, Perdido Key',  startISO:'20260426T100000', endISO:'20260427T200000', desc:"The annual Flora-Bama Mullet Toss — contestants throw dead mullet from Florida into Alabama, competing for distance. A full weekend of live music, food, and the organized chaos only the Flora-Bama can pull off. Draws enormous crowds. Go if you haven't been.", cta:'Event Info', url:'https://www.florabama.com/mullet-toss' },
 };
 
 function generateICS(e) {
@@ -744,23 +486,23 @@ function openEvent(id) {
   document.getElementById('event-modal-label').textContent = e.label;
   document.getElementById('event-modal-title').textContent = e.title;
   document.getElementById('event-modal-meta').innerHTML =
-    `<div class="event-modal-meta-item"><span>ð</span> ${e.date}</div>` +
-    `<div class="event-modal-meta-item"><span>ð</span> ${e.time}</div>` +
-    `<div class="event-modal-meta-item"><span>ð</span> ${e.venue}</div>`;
+    `<div class="event-modal-meta-item"><span>📅</span> ${e.date}</div>` +
+    `<div class="event-modal-meta-item"><span>🕐</span> ${e.time}</div>` +
+    `<div class="event-modal-meta-item"><span>📍</span> ${e.venue}</div>`;
   document.getElementById('event-modal-desc').textContent = e.desc;
   const ctaEl = document.getElementById('event-modal-cta');
   if (e.url) {
-    ctaEl.outerHTML = `<a id="event-modal-cta" class="event-modal-btn" href="${e.url}" target="_blank" rel="noopener">${e.cta} â</a>`;
+    ctaEl.outerHTML = `<a id="event-modal-cta" class="event-modal-btn" href="${e.url}" target="_blank" rel="noopener">${e.cta} ↗</a>`;
   } else {
     ctaEl.outerHTML = `<button id="event-modal-cta" class="event-modal-btn">${e.cta}</button>`;
   }
 
   // Calendar buttons
   document.getElementById('cal-btn-row').innerHTML = `
-    <button class="cal-btn" onclick="generateICS(EVENTS['${id}'])"><span class="cal-btn-icon">ð</span> Apple</button>
-    <a class="cal-btn" href="${googleCalUrl(e)}" target="_blank" rel="noopener"><span class="cal-btn-icon">ð</span> Google</a>
-    <a class="cal-btn" href="${outlookCalUrl(e)}" target="_blank" rel="noopener"><span class="cal-btn-icon">ðª</span> Outlook</a>
-    <button class="cal-btn" onclick="generateICS(EVENTS['${id}'])"><span class="cal-btn-icon">ð²</span> Android / Other</button>`;
+    <button class="cal-btn" onclick="generateICS(EVENTS['${id}'])"><span class="cal-btn-icon">🍎</span> Apple</button>
+    <a class="cal-btn" href="${googleCalUrl(e)}" target="_blank" rel="noopener"><span class="cal-btn-icon">📅</span> Google</a>
+    <a class="cal-btn" href="${outlookCalUrl(e)}" target="_blank" rel="noopener"><span class="cal-btn-icon">🪟</span> Outlook</a>
+    <button class="cal-btn" onclick="generateICS(EVENTS['${id}'])"><span class="cal-btn-icon">📲</span> Android / Other</button>`;
 
   document.getElementById('event-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -777,7 +519,7 @@ function openArticle(id){
   const briefHTML = bullets.length ? `
     <div class="flightline-brief">
       <div class="brief-header">
-        <span class="brief-plane">â</span>
+        <span class="brief-plane">✈</span>
         <span class="brief-label">Flightline Brief</span>
       </div>
       <ul class="brief-items">
@@ -787,27 +529,27 @@ function openArticle(id){
   const siteUrl = window.location.origin + window.location.pathname;
   const shareUrl = encodeURIComponent(siteUrl);
   const shareTitle = encodeURIComponent(a.headline);
-  const shareBody = encodeURIComponent(a.headline + ' â ' + siteUrl);
+  const shareBody = encodeURIComponent(a.headline + ' — ' + siteUrl);
   document.getElementById('modal-content').innerHTML=`
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bd);padding-right:48px;">
-      <span class="cat-badge cat-${a.cat}" style="font-size:11px;">${catDisplay(a.cat)}</span>
+      <span class="cat-badge cat-${a.cat}" style="font-size:11px;">${a.label}</span>
       <div style="display:flex;align-items:center;gap:6px;">
-        <button onclick="adjustArticleSize(-1)" title="Decrease text size" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:4px 8px;font-size:13px;font-weight:700;color:var(--g1);cursor:pointer;line-height:1;">Aâ</button>
+        <button onclick="adjustArticleSize(-1)" title="Decrease text size" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:4px 8px;font-size:13px;font-weight:700;color:var(--g1);cursor:pointer;line-height:1;">A−</button>
         <button onclick="adjustArticleSize(1)" title="Increase text size" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:4px 8px;font-size:16px;font-weight:700;color:var(--g1);cursor:pointer;line-height:1;">A+</button>
         <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank" rel="noopener" title="Share on Facebook" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:5px 9px;font-size:13px;font-weight:700;color:var(--g1);cursor:pointer;text-decoration:none;line-height:1;">f</a>
         <a href="https://www.linkedin.com/shareArticle?mini=true&url=${shareUrl}&title=${shareTitle}" target="_blank" rel="noopener" title="Share on LinkedIn" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:5px 9px;font-size:13px;font-weight:700;color:var(--g1);cursor:pointer;text-decoration:none;line-height:1;">in</a>
-        <button onclick="navigator.share ? navigator.share({title:'${a.headline.replace(/'/g,"\\'")}',url:window.location.href}) : navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'))" title="Share" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:5px 9px;font-size:13px;color:var(--g1);cursor:pointer;line-height:1;">â¬</button>
+        <button onclick="navigator.share ? navigator.share({title:'${a.headline.replace(/'/g,"\\'")}',url:window.location.href}) : navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'))" title="Share" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:5px 9px;font-size:13px;color:var(--g1);cursor:pointer;line-height:1;">⬆</button>
       </div>
     </div>
     <h1 style="font-family:'DM Sans',sans-serif;font-weight:900;font-size:30px;line-height:1.12;color:var(--navy);margin-bottom:12px;">${a.headline}</h1>
     <p style="font-size:16px;color:var(--g1);margin-bottom:12px;font-weight:400;line-height:1.55;">${a.dek}</p>
-    <p style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--g2);margin-bottom:26px;padding-bottom:18px;border-bottom:1px solid var(--bd);">By <span style="color:var(--gold);">${a.byline}</span> Â· ${a.date}</p>
+    <p style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--g2);margin-bottom:26px;padding-bottom:18px;border-bottom:1px solid var(--bd);">By <span style="color:var(--gold);">${a.byline}</span> · ${a.date}</p>
     ${briefHTML}
     <div class="article-body" id="article-body-text">${a.body}</div>
     <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--bd);">
       <div style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--g2);margin-bottom:10px;">React to this story</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;" id="reaction-row-${id}">
-        ${[['ð','Helpful'],['â¤ï¸','Love it'],['ð®','Surprising'],['ð¡','Frustrated'],['ð¤','More questions']].map(([emoji,label])=>`
+        ${[['👍','Helpful'],['❤️','Love it'],['😮','Surprising'],['😡','Frustrated'],['🤔','More questions']].map(([emoji,label])=>`
           <button onclick="handleReaction('${id}','${emoji}',this)" style="display:inline-flex;align-items:center;gap:5px;padding:6px 12px;background:var(--surface);border:1.5px solid var(--bd);border-radius:20px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;color:var(--g1);transition:all 0.15s;" title="${label}">${emoji} <span class="rxn-count">0</span></button>`).join('')}
       </div>
     </div>
@@ -816,8 +558,8 @@ function openArticle(id){
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#1877f2;color:white;border-radius:3px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;text-decoration:none;">f Share on Facebook</a>
         <a href="https://www.linkedin.com/shareArticle?mini=true&url=${shareUrl}&title=${shareTitle}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#0077b5;color:white;border-radius:3px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;text-decoration:none;">in Share on LinkedIn</a>
-        <a href="mailto:?subject=${shareTitle}&body=${shareBody}" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--surface);border:1.5px solid var(--bd);color:var(--navy);border-radius:3px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;text-decoration:none;">â Share via Email</a>
-        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'))" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--surface);border:1.5px solid var(--bd);color:var(--navy);border-radius:3px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;cursor:pointer;">ð Copy Link</button>
+        <a href="mailto:?subject=${shareTitle}&body=${shareBody}" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--surface);border:1.5px solid var(--bd);color:var(--navy);border-radius:3px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;text-decoration:none;">✉ Share via Email</a>
+        <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'))" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--surface);border:1.5px solid var(--bd);color:var(--navy);border-radius:3px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;cursor:pointer;">🔗 Copy Link</button>
       </div>
     </div>`
   document.getElementById('modal').classList.add('open');
@@ -917,10 +659,10 @@ function renderArticleMap(a) {
   const wrap = document.createElement('div');
   wrap.className = 'article-map-wrap';
   wrap.innerHTML = `
-    <div class="article-map-label">ð Location</div>
+    <div class="article-map-label">📍 Location</div>
     <div id="${mapId}" class="article-map"></div>
     <div class="article-map-sublabel">
-      <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" rel="noopener">Open in Google Maps â</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" rel="noopener">Open in Google Maps ↗</a>
     </div>`;
 
   // Insert after last data-callout, or after first <p> if none
@@ -949,7 +691,7 @@ function renderArticleMap(a) {
       });
       window._articleLeafletMap = map;
 
-      // Esri World Imagery â satellite, free, no API key
+      // Esri World Imagery — satellite, free, no API key
       L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
         maxZoom: 19
@@ -984,7 +726,7 @@ function closeDropdown() {
   dd.classList.remove('open');
   dd.innerHTML = '';
 }
-// Delegation-based search click handler â attached once, handles all dropdown clicks
+// Delegation-based search click handler — attached once, handles all dropdown clicks
 document.addEventListener('DOMContentLoaded', function() {
   const dd = document.getElementById('search-dropdown');
   if (!dd) return;
@@ -1046,7 +788,6 @@ function liveSearch(q, inputEl) {
     const searchable = [a.headline, a.dek, a.label].join(' ').toLowerCase();
     if (searchable.includes(lower)) results.push({ id, ...a });
   });
-  results.sort((a,b) => pubDate(b.id) - pubDate(a.id));
 
   positionDropdown(inputEl);
 
@@ -1069,7 +810,7 @@ function liveSearch(q, inputEl) {
   }).join('');
 
   const safeQ = q.replace(/"/g, '&quot;');
-  const footerHtml = `<div class="search-drop-footer" data-search-q="${safeQ}" style="cursor:pointer">See all ${results.length} result${results.length !== 1 ? 's' : ''} for "${q}" â</div>`;
+  const footerHtml = `<div class="search-drop-footer" data-search-q="${safeQ}" style="cursor:pointer">See all ${results.length} result${results.length !== 1 ? 's' : ''} for "${q}" →</div>`;
 
   dd.innerHTML = itemsHtml + footerHtml;
   dd.classList.add('open');
@@ -1094,7 +835,6 @@ function runSearch(q) {
       results.push({ id, ...a });
     }
   });
-  results.sort((a,b) => pubDate(b.id) - pubDate(a.id));
 
   // Show search page
   document.querySelectorAll('.home-page,.cat-page,.static-page,.search-page').forEach(el => {
@@ -1114,88 +854,88 @@ function runSearch(q) {
 
   const list = document.getElementById('search-results-list');
   if (!results.length) {
-    list.innerHTML = `<div class="search-no-results">No articles matched "<strong>${q}</strong>." Try a different term â a name, neighborhood, topic or keyword.</div>`;
+    list.innerHTML = `<div class="search-no-results">No articles matched "<strong>${q}</strong>." Try a different term — a name, neighborhood, topic or keyword.</div>`;
     return;
   }
 
   list.innerHTML = results.map(a => `
     <div class="search-result-item" onclick="openArticle('${a.id}')">
-      <span class="cat-badge cat-${a.cat}" style="margin-bottom:8px;">${catDisplay(a.cat)}</span>
+      <span class="cat-badge cat-${a.cat}" style="margin-bottom:8px;">${a.label}</span>
       <div class="search-result-headline">${highlight(a.headline, q)}</div>
       <div class="search-result-dek">${highlight(a.dek, q)}</div>
       <div class="search-result-meta">
-        <span>${a.byline}</span><span>Â·</span><span>${a.date}</span>
+        <span>${a.byline}</span><span>·</span><span>${a.date}</span>
       </div>
     </div>`).join('');
 }
 
-// âââ COMMUNITY CALENDAR ENGINE âââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── COMMUNITY CALENDAR ENGINE ───────────────────────────────────────────────
 
 const CAL_EVENTS = [
-  // ââ APRIL 2026 ââââââââââââââââââââââââââââââââââââââââââââââââââ
-  { id:'santana',        day:1,  month:3, year:2026, title:'Santana: Oneness Tour',               time:'8:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', url:'https://www.pensacolabaycenter.com/events/detail/santana-tour' },
-  { id:'zztop',          day:2,  month:3, year:2026, title:'ZZ Top',                              time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', url:'https://www.pensacolasaenger.com/events/zz-top-the-big-one' },
-  { id:'fantasia',       day:3,  month:3, year:2026, title:'Fantasia & Anthony Hamilton',         time:'8:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#8a6e3a', url:'https://www.ticketmaster.com/fantasia-anthony-hamilton-pensacola-florida-04-03-2026/event/1B0062FCCF9854B5' },
-  { id:'gary-owen',      day:3,  month:3, year:2026, title:'Gary Owen',                           time:'8:00 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a' , url:'https://www.pensacolasaenger.com/events/gary-owen' },
-  { id:'wahoos-open',    day:3,  month:3, year:2026, title:'Blue Wahoos Home Opener',             time:'6:05 PM',                    venue:'Blue Wahoos Stadium',            cat:'sports',        color:'#1a6a9a', url:'https://www.milb.com/pensacola/tickets' },
-  { id:'egghunt',        day:4,  month:3, year:2026, title:'Egga-Wahooza Easter Egg Hunt',        time:'11:00 AM Â· Free',            venue:'Community Maritime Park',        cat:'family',        color:'#1a8a6e' , url:'https://pensacolachurch.org/eggawahooza/' },
-  { id:'bandsbeach',     day:7,  month:3, year:2026, title:'Bands on the Beach â Season Opener', time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a', url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  // ── APRIL 2026 ──────────────────────────────────────────────────
+  { id:'santana',        day:1,  month:3, year:2026, title:'Santana: Oneness Tour',               time:'8:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', key:'santana-bay-center' },
+  { id:'zztop',          day:2,  month:3, year:2026, title:'ZZ Top',                              time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', key:'zz-top-saenger' },
+  { id:'fantasia',       day:3,  month:3, year:2026, title:'Fantasia & Anthony Hamilton',         time:'8:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#8a6e3a', key:'fantasia' },
+  { id:'gary-owen',      day:3,  month:3, year:2026, title:'Gary Owen',                           time:'8:00 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a' , key:'zz-top-saenger' },
+  { id:'wahoos-open',    day:3,  month:3, year:2026, title:'Blue Wahoos Home Opener',             time:'6:05 PM',                    venue:'Blue Wahoos Stadium',            cat:'sports',        color:'#1a6a9a', key:'wahoos-opening-home' },
+  { id:'egghunt',        day:4,  month:3, year:2026, title:'Egga-Wahooza Easter Egg Hunt',        time:'11:00 AM · Free',            venue:'Community Maritime Park',        cat:'family',        color:'#1a8a6e' , url:'https://pensacolachurch.org/eggawahooza/' },
+  { id:'bandsbeach',     day:7,  month:3, year:2026, title:'Bands on the Beach — Season Opener', time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a', key:'bands-beach-guide' },
   { id:'escambia-apr8',  day:8,  month:3, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f' , url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
-  { id:'mrs-doubtfire1', day:7,  month:3, year:2026, title:'Mrs. Doubtfire the Musical',         time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#8a6e3a', url:'https://www.pensacolasaenger.com/events/mrs-doubtfire-the-musical' },
-  { id:'mrs-doubtfire2', day:8,  month:3, year:2026, title:'Mrs. Doubtfire the Musical',         time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#8a6e3a', url:'https://www.pensacolasaenger.com/events/mrs-doubtfire-the-musical' },
-  { id:'iglesias',       day:11, month:3, year:2026, title:'Gabriel Iglesias: The 1976 Tour',    time:'Doors 7PM Â· Show 8PM',       venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', url:'https://www.ticketmaster.com/gabriel-fluffy-iglesias-the-1976-tour-pensacola-florida-04-11-2026/event/1B006390CD61D0CB' },
+  { id:'mrs-doubtfire1', day:7,  month:3, year:2026, title:'Mrs. Doubtfire the Musical',         time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#8a6e3a', key:'mrs-doubtfire-saenger' },
+  { id:'mrs-doubtfire2', day:8,  month:3, year:2026, title:'Mrs. Doubtfire the Musical',         time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#8a6e3a', key:'mrs-doubtfire-saenger' },
+  { id:'iglesias',       day:11, month:3, year:2026, title:'Gabriel Iglesias: The 1976 Tour',    time:'Doors 7PM · Show 8PM',       venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', key:'gabriel-iglesias' },
   { id:'pso-candlelight',day:11, month:3, year:2026, title:'Candlelight Concert',                time:'TBD',                        venue:'First United Methodist Church',  cat:'entertainment', color:'#8a6e3a' , url:'https://www.eventbrite.com/e/candlelight-pensacola' },
   { id:'citycouncil',    day:14, month:3, year:2026, title:'Pensacola City Council Meeting',     time:'5:30 PM',                    venue:'City Hall, 222 W Main St',       cat:'government',    color:'#c2553f' , url:'https://www.cityofpensacola.com/193/City-Council' },
-  { id:'bandsbeach2',    day:14, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
-  { id:'gaffigan',       day:16, month:3, year:2026, title:'Jim Gaffigan',                       time:'7:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#1e2d4a', url:'https://www.pensacolabaycenter.com/events/detail/jim-gaffigan' },
-  { id:'gallery-apr',    day:17, month:3, year:2026, title:'Gallery Night â Navy Days Theme',    time:'6:00â10:00 PM Â· Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b', url:'https://gallerynightpensacola.org' },
-  { id:'panchiko',       day:20, month:3, year:2026, title:'Panchiko',                           time:'7:00 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#5a3d7a', url:'https://www.vinylmusichall.com' },
-  { id:'bandsbeach3',    day:21, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  { id:'bandsbeach2',    day:14, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'gaffigan',       day:16, month:3, year:2026, title:'Jim Gaffigan',                       time:'7:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#1e2d4a', key:'gaffigan' },
+  { id:'gallery-apr',    day:17, month:3, year:2026, title:'Gallery Night — Navy Days Theme',    time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b', key:'gallery-night-april' },
+  { id:'panchiko',       day:20, month:3, year:2026, title:'Panchiko',                           time:'7:00 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#5a3d7a', key:'panchiko-vinyl' },
+  { id:'bandsbeach3',    day:21, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
   { id:'sesame',         day:22, month:3, year:2026, title:'Sesame Street Live',                 time:'6:00 PM',                    venue:'Saenger Theatre',                cat:'family',        color:'#1a8a6e' , url:'https://www.ticketmaster.com/sesame-street-live-pensacola' },
   { id:'escambia-apr22', day:22, month:3, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f' , url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
-  { id:'crawfishfest',   day:24, month:3, year:2026, title:'Pensacola Crawfish Festival',        time:'All day',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', url:'https://pensacolabeachcrawfishfestival.com/' },
-  { id:'pso-gala',       day:25, month:3, year:2026, title:'PSO 100th Anniversary Gala',        time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', url:'https://www.ticketmaster.com/pensacola-symphony-orchestra-100th-anniversary-gala-pensacola-florida-04-25-2026/event/1B0062AEE7FB7374' },
-  { id:'mullettoss',     day:26, month:3, year:2026, title:'Flora-Bama Mullet Toss',             time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e', url:'https://www.florabama.com/mullet-toss' },
-  { id:'mullettoss2',    day:27, month:3, year:2026, title:'Flora-Bama Mullet Toss â Day 2',    time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e' , url:'https://www.florabama.com/mullet-toss' },
-  { id:'bandsbeach4',    day:28, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
-  { id:'bavarian1',      day:30, month:3, year:2026, title:'Great Bavarian Circus â Opens',      time:'Multiple shows daily',       venue:'Pensacola Fairgrounds',          cat:'family',        color:'#1a8a6e', url:'https://www.visitpensacola.com/events/' },
+  { id:'crawfishfest',   day:24, month:3, year:2026, title:'Pensacola Crawfish Festival',        time:'All day',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', key:'crawfish' },
+  { id:'pso-gala',       day:25, month:3, year:2026, title:'PSO 100th Anniversary Gala',        time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', key:'pso-100th' },
+  { id:'mullettoss',     day:26, month:3, year:2026, title:'Flora-Bama Mullet Toss',             time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e', key:'mullet-toss' },
+  { id:'mullettoss2',    day:27, month:3, year:2026, title:'Flora-Bama Mullet Toss — Day 2',    time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e' , key:'mullet-toss' },
+  { id:'bandsbeach4',    day:28, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'bavarian1',      day:30, month:3, year:2026, title:'Great Bavarian Circus — Opens',      time:'Multiple shows daily',       venue:'Pensacola Fairgrounds',          cat:'family',        color:'#1a8a6e', key:'bavarian-circus' },
 
-  // ââ MAY 2026 âââââââââââââââââââââââââââââââââââââââââââââââââââ
-  { id:'clutch',         day:1,  month:4, year:2026, title:'Clutch',                             time:'7:30 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#5a3d7a', url:'https://www.vinylmusichall.com' },
-  { id:'krewe-sirens',   day:2,  month:4, year:2026, title:'Krewe of Sirens Beach Day',          time:'3:00â7:00 PM Â· Free',        venue:'Bounce Beach, Pensacola Beach',  cat:'festival',      color:'#1a8a6e', url:'https://visitpensacolabeach.com/event-calendar/' },
-  { id:'comedy-may',     day:2,  month:4, year:2026, title:'Pensacola Comedy Club',              time:'7:30 PM',                    venue:"Genie's Coffee Shop",            cat:'entertainment', color:'#8a6e3a', url:'https://visitpensacolabeach.com/event-calendar/' },
-  { id:'bavarian-may',   day:3,  month:4, year:2026, title:'Great Bavarian Circus',              time:'Multiple shows daily',       venue:'Pensacola Fairgrounds',          cat:'family',        color:'#1a8a6e', url:'https://www.visitpensacola.com/events/' },
-  { id:'bandsbeach-may1',day:5,  month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
-  { id:'alice-cooper',   day:8,  month:4, year:2026, title:'Alice Cooper',                       time:'7:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', url:'https://www.pensacolabaycenter.com/events/detail/alice-cooper' },
-  { id:'beach-art-wine', day:9,  month:4, year:2026, title:'Pensacola Beach Art & Wine Festival',time:'11:00 AMâ4:00 PM Â· Free',    venue:'Pensacola Beach Boardwalk',      cat:'arts',          color:'#d4952b', url:'https://www.visitpensacola.com/events/2026-pensacola-beach-art-and-wine-festival/' },
-  { id:'disney-ice1',    day:9,  month:4, year:2026, title:'Disney on Ice: Jump In! (Noon)',     time:'12:00 PM',                   venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', url:'https://www.pensacolabaycenter.com/events/detail/disney-on-ice' },
-  { id:'disney-ice2',    day:9,  month:4, year:2026, title:'Disney on Ice: Jump In! (Evening)',  time:'6:00 PM',                    venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', url:'https://www.pensacolabaycenter.com/events/detail/disney-on-ice' },
-  { id:'disney-ice3',    day:10, month:4, year:2026, title:'Disney on Ice: Jump In! (Noon)',     time:'12:00 PM',                   venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', url:'https://www.pensacolabaycenter.com/events/detail/disney-on-ice' },
+  // ── MAY 2026 ───────────────────────────────────────────────────
+  { id:'clutch',         day:1,  month:4, year:2026, title:'Clutch',                             time:'7:30 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#5a3d7a', key:'clutch-vinyl' },
+  { id:'krewe-sirens',   day:2,  month:4, year:2026, title:'Krewe of Sirens Beach Day',          time:'3:00–7:00 PM · Free',        venue:'Bounce Beach, Pensacola Beach',  cat:'festival',      color:'#1a8a6e', key:'krewe-sirens-beach' },
+  { id:'comedy-may',     day:2,  month:4, year:2026, title:'Pensacola Comedy Club',              time:'7:30 PM',                    venue:"Genie's Coffee Shop",            cat:'entertainment', color:'#8a6e3a', key:'pensacola-comedy-club' },
+  { id:'bavarian-may',   day:3,  month:4, year:2026, title:'Great Bavarian Circus',              time:'Multiple shows daily',       venue:'Pensacola Fairgrounds',          cat:'family',        color:'#1a8a6e', key:'bavarian-circus' },
+  { id:'bandsbeach-may1',day:5,  month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'alice-cooper',   day:8,  month:4, year:2026, title:'Alice Cooper',                       time:'7:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', key:'alice-cooper-bay-center' },
+  { id:'beach-art-wine', day:9,  month:4, year:2026, title:'Pensacola Beach Art & Wine Festival',time:'11:00 AM–4:00 PM · Free',    venue:'Pensacola Beach Boardwalk',      cat:'arts',          color:'#d4952b', key:'beach-art-wine' },
+  { id:'disney-ice1',    day:9,  month:4, year:2026, title:'Disney on Ice: Jump In! (Noon)',     time:'12:00 PM',                   venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', key:'disney-on-ice' },
+  { id:'disney-ice2',    day:9,  month:4, year:2026, title:'Disney on Ice: Jump In! (Evening)',  time:'6:00 PM',                    venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', key:'disney-on-ice' },
+  { id:'disney-ice3',    day:10, month:4, year:2026, title:'Disney on Ice: Jump In! (Noon)',     time:'12:00 PM',                   venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', key:'disney-on-ice' },
   { id:'citycouncil-may',day:12, month:4, year:2026, title:'Pensacola City Council Meeting',     time:'5:30 PM',                    venue:'City Hall, 222 W Main St',       cat:'government',    color:'#c2553f' , url:'https://www.cityofpensacola.com/193/City-Council' },
   { id:'escambia-may',   day:13, month:4, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f' , url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
-  { id:'bandsbeach-may2',day:12, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
-  { id:'gallery-may',    day:15, month:4, year:2026, title:'Gallery Night â Festa Italiana',     time:'6:00â10:00 PM Â· Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
-  { id:'pickles-wings',  day:16, month:4, year:2026, title:'Pickles & Wings Family Festival',    time:'10:00 AMâ8:00 PM Â· Free',    venue:'Seville Square',                 cat:'festival',      color:'#8a6e3a', url:'https://visitpensacolabeach.com/event-calendar/' },
-  { id:'iration',        day:19, month:4, year:2026, title:'Iration',                            time:'7:00 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#1a8a6e', url:'https://www.vinylmusichall.com' },
-  { id:'bandsbeach-may3',day:19, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
-  { id:'bandsbeach-may4',day:26, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
-  { id:'fiesta-parade',  day:29, month:4, year:2026, title:'Grand Fiesta Parade',                time:'6:00 PM',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', url:'https://www.fiestapensacola.org/' },
-  { id:'pride-may',      day:23, month:4, year:2026, title:'Pensacola Pride â Weekend',          time:'All day',                    venue:'Park East, Pensacola Beach',     cat:'festival',      color:'#d4952b', url:'https://pensapride.org/festival/' },
-  { id:'pride-may2',     day:24, month:4, year:2026, title:'Pensacola Pride â Weekend',          time:'All day',                    venue:'Park East, Pensacola Beach',     cat:'festival',      color:'#d4952b', url:'https://pensapride.org/festival/' },
+  { id:'bandsbeach-may2',day:12, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'gallery-may',    day:15, month:4, year:2026, title:'Gallery Night — Festa Italiana',     time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
+  { id:'pickles-wings',  day:16, month:4, year:2026, title:'Pickles & Wings Family Festival',    time:'10:00 AM–8:00 PM · Free',    venue:'Seville Square',                 cat:'festival',      color:'#8a6e3a', key:'pickles-wings-festival' },
+  { id:'iration',        day:19, month:4, year:2026, title:'Iration',                            time:'7:00 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#1a8a6e', key:'iration-vinyl' },
+  { id:'bandsbeach-may3',day:19, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'bandsbeach-may4',day:26, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'fiesta-parade',  day:29, month:4, year:2026, title:'Grand Fiesta Parade',                time:'6:00 PM',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', key:'fiesta-parade' },
+  { id:'pride-may',      day:23, month:4, year:2026, title:'Pensacola Pride — Weekend',          time:'All day',                    venue:'Park East, Pensacola Beach',     cat:'festival',      color:'#d4952b', key:'pensacola-pride' },
+  { id:'pride-may2',     day:24, month:4, year:2026, title:'Pensacola Pride — Weekend',          time:'All day',                    venue:'Park East, Pensacola Beach',     cat:'festival',      color:'#d4952b', key:'pensacola-pride' },
 
-  // ââ JUNE 2026 ââââââââââââââââââââââââââââââââââââââââââââââââââ
-  { id:'gallery-jun',    day:19, month:5, year:2026, title:'Gallery Night â Journey to Juneteenth', time:'6:00â10:00 PM Â· Free',  venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
-  { id:'bandsbeach-jun1',day:2,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
-  { id:'bandsbeach-jun2',day:9,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
-  { id:'bandsbeach-jun3',day:16, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
-  { id:'bandsbeach-jun4',day:23, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
-  { id:'bandsbeach-jun5',day:30, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM Â· Music 7PM Â· Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  // ── JUNE 2026 ──────────────────────────────────────────────────
+  { id:'gallery-jun',    day:19, month:5, year:2026, title:'Gallery Night — Journey to Juneteenth', time:'6:00–10:00 PM · Free',  venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
+  { id:'bandsbeach-jun1',day:2,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'bandsbeach-jun2',day:9,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'bandsbeach-jun3',day:16, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'bandsbeach-jun4',day:23, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'bandsbeach-jun5',day:30, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
 
-  // ââ JULY 2026 ââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── JULY 2026 ──────────────────────────────────────────────────
   { id:'4th-july',       day:4,  month:6, year:2026, title:'4th of July Fireworks',              time:'5:00 PM',                    venue:'Bayfront Pkwy, Downtown',        cat:'festival',      color:'#c2553f' , url:'https://www.visitpensacola.com/events/signature-events/' },
-  { id:'airshow1',       day:18, month:6, year:2026, title:'Pensacola Beach Air Show',           time:'All day',                    venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-calendar/' },
-  { id:'airshow2',       day:19, month:6, year:2026, title:'Pensacola Beach Air Show â Blue Angels', time:'All day',              venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-calendar/' },
-  { id:'gallery-jul',    day:17, month:6, year:2026, title:'Gallery Night â Future Makers',      time:'6:00â10:00 PM Â· Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
+  { id:'airshow1',       day:18, month:6, year:2026, title:'Pensacola Beach Air Show',           time:'All day',                    venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a' , key:'blue-angels-schedule' },
+  { id:'airshow2',       day:19, month:6, year:2026, title:'Pensacola Beach Air Show — Blue Angels', time:'All day',              venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a' , key:'blue-angels-schedule' },
+  { id:'gallery-jul',    day:17, month:6, year:2026, title:'Gallery Night — Future Makers',      time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
 ];
 
 const CAL_CATS = {
@@ -1216,7 +956,117 @@ let calSelectedDay = null;
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const TODAY = new Date();
 
-// ââ SIDEBAR CALENDAR âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ── SIDEBAR CALENDAR ─────────────────────────────────────────────────────
+let sideCalYear = 2026, sideCalMonth = 3;
+let sideCalSelectedDay = null;
+
+function sideCalNav(dir) {
+  sideCalMonth += dir;
+  if (sideCalMonth > 11) { sideCalMonth = 0; sideCalYear++; }
+  if (sideCalMonth < 0)  { sideCalMonth = 11; sideCalYear--; }
+  sideCalSelectedDay = null;
+  renderSideCal();
+}
+
+function renderSideCal() {
+  const label = document.getElementById('side-cal-label');
+  const grid  = document.getElementById('side-cal-grid');
+  const list  = document.getElementById('side-cal-list');
+  const popup = document.getElementById('side-cal-popup');
+  if (!label || !grid || !list) return;
+
+  label.textContent = MONTH_NAMES[sideCalMonth] + ' ' + sideCalYear;
+
+  const firstDay    = new Date(sideCalYear, sideCalMonth, 1).getDay();
+  const daysInMonth = new Date(sideCalYear, sideCalMonth + 1, 0).getDate();
+  const daysInPrev  = new Date(sideCalYear, sideCalMonth, 0).getDate();
+
+  let cells = '<div class="cal-day-header">Su</div><div class="cal-day-header">Mo</div><div class="cal-day-header">Tu</div><div class="cal-day-header">We</div><div class="cal-day-header">Th</div><div class="cal-day-header">Fr</div><div class="cal-day-header">Sa</div>';
+
+  for (let i = firstDay - 1; i >= 0; i--)
+    cells += `<div class="cal-day other-month">${daysInPrev - i}</div>`;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const evs = CAL_EVENTS.filter(e => e.day === d && e.month === sideCalMonth && e.year === sideCalYear);
+    const isToday = d === TODAY.getDate() && sideCalMonth === TODAY.getMonth() && sideCalYear === TODAY.getFullYear();
+    const isSel   = sideCalSelectedDay === d;
+    let cls = 'cal-day';
+    if (evs.length) cls += ' has-event';
+    if (isToday)    cls += ' today';
+    if (isSel)      cls += ' selected';
+    const dotBar = evs.length > 1
+      ? `<span style="display:block;width:${Math.min(evs.length,5)*5}px;height:3px;background:${evs[0].color};border-radius:2px;margin:1px auto 0;"></span>`
+      : '';
+    cells += `<div class="${cls}" onclick="sideCalSelectDay(${d})" title="${evs.map(e=>e.title).join(', ')}">${d}${dotBar}</div>`;
+  }
+
+  const total    = firstDay + daysInMonth;
+  const trailing = total % 7 === 0 ? 0 : 7 - (total % 7);
+  for (let d = 1; d <= trailing; d++)
+    cells += `<div class="cal-day other-month">${d}</div>`;
+
+  grid.innerHTML = cells;
+
+  // Day popup
+  if (sideCalSelectedDay !== null) {
+    const evs = CAL_EVENTS.filter(e => e.day === sideCalSelectedDay && e.month === sideCalMonth && e.year === sideCalYear);
+    if (evs.length > 0) {
+      popup.style.display = 'block';
+      popup.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--navy);">${MONTH_NAMES[sideCalMonth]} ${sideCalSelectedDay}</span>
+          <button onclick="sideCalSelectedDay=null;renderSideCal();" style="background:none;border:none;cursor:pointer;font-size:14px;color:var(--g2);line-height:1;padding:0;">&#10005;</button>
+        </div>
+        ${evs.map(e => `
+          <div onclick="${e.key ? "openArticle('"+e.key+"')" : e.url ? "window.open('"+e.url+"','_blank')" : e.id ? "openEvent('"+e.id+"')" : ''}" style="display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px solid var(--bd);cursor:${e.key?'pointer':'default'};">
+            <span style="display:block;width:3px;min-height:32px;background:${e.color};border-radius:2px;flex-shrink:0;margin-top:3px;"></span>
+            <div>
+              <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--navy);line-height:1.3;">${e.title}</div>
+              <div style="font-size:11px;color:var(--g1);margin-top:2px;">${e.time} · ${e.venue}</div>
+            </div>
+          </div>`).join('')}`;
+    } else {
+      popup.style.display = 'none';
+    }
+  } else {
+    popup.style.display = 'none';
+  }
+
+  // Upcoming events list — next 6 from today in this month
+  const upcoming = CAL_EVENTS
+    .filter(e => e.month === sideCalMonth && e.year === sideCalYear)
+    .filter(e => {
+      const eDate = new Date(e.year, e.month, e.day);
+      const tDate = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
+      return sideCalMonth !== TODAY.getMonth() || sideCalYear !== TODAY.getFullYear() || eDate >= tDate;
+    })
+    .sort((a,b) => a.day - b.day)
+    .slice(0, 5);
+
+  if (upcoming.length) {
+    list.innerHTML = upcoming.map(e => `
+      <div class="event-item" onclick="${e.key ? "openArticle('"+e.key+"')" : e.url ? "window.open('"+e.url+"','_blank')" : e.id ? "openEvent('"+e.id+"')" : ''}" style="cursor:${e.key||e.url||e.id?'pointer':'default'}">
+        <div class="event-date-box" style="border-left:3px solid ${e.color};">
+          <span class="event-date-month">${MONTH_NAMES[e.month].slice(0,3)}</span>
+          <span class="event-date-num">${e.day}</span>
+        </div>
+        <div>
+          <div class="event-title">${e.title}</div>
+          <div class="event-meta">${e.time} · ${e.venue}</div>
+        </div>
+      </div>`).join('');
+  } else {
+    list.innerHTML = '<div style="padding:12px 0;font-size:13px;color:var(--g2);text-align:center;">No upcoming events this month.</div>';
+  }
+}
+
+function sideCalSelectDay(d) {
+  sideCalSelectedDay = (sideCalSelectedDay === d) ? null : d;
+  renderSideCal();
+}
+
+// Init sidebar cal on page load
+document.addEventListener('DOMContentLoaded', renderSideCal);
 
 function calInit() {
   renderCalFilters();
@@ -1344,17 +1194,17 @@ function renderDayPanel(d) {
           <div>
             <div class="comm-cal-list-tag" style="background:${e.color};">${CAL_CATS[e.cat]?.label || e.cat}</div>
             <div class="comm-cal-list-title">${e.title}</div>
-            <div class="comm-cal-list-meta">ð ${e.time} &nbsp;Â·&nbsp; ð ${e.venue}</div>
+            <div class="comm-cal-list-meta">🕐 ${e.time} &nbsp;·&nbsp; 📍 ${e.venue}</div>
           </div>
         </div>`;
       }).join('')
-    : `<div class="comm-cal-day-panel-empty">No events listed for this day. <a href="javascript:void(0)" onclick="document.querySelector('.comm-cal-submit-section').scrollIntoView({behavior:'smooth'});return false;" style="color:var(--gold);font-weight:700;">Submit one â</a></div>`;
+    : `<div class="comm-cal-day-panel-empty">No events listed for this day. <a href="javascript:void(0)" onclick="document.querySelector('.comm-cal-submit-section').scrollIntoView({behavior:'smooth'});return false;" style="color:var(--gold);font-weight:700;">Submit one →</a></div>`;
 
   panel.style.display = 'block';
   panel.innerHTML = `
     <div class="comm-cal-day-panel-title">
       ${dateLabel}${todayTag}
-      <button class="comm-cal-day-panel-close" onclick="calSelectedDay=null;renderCalGrid()">â</button>
+      <button class="comm-cal-day-panel-close" onclick="calSelectedDay=null;renderCalGrid()">✕</button>
     </div>
     ${items}`;
 }
@@ -1389,7 +1239,7 @@ function renderCalList() {
           <div>
             <div class="comm-cal-list-tag" style="background:${e.color};">${CAL_CATS[e.cat]?.label || e.cat}</div>
             <div class="comm-cal-list-title">${e.title}</div>
-            <div class="comm-cal-list-meta">ð ${e.time} &nbsp;Â·&nbsp; ð ${e.venue}${e.key ? ' &nbsp;Â· <span style="color:var(--gold);font-weight:700;">Details â</span>' : ''}</div>
+            <div class="comm-cal-list-meta">🕐 ${e.time} &nbsp;·&nbsp; 📍 ${e.venue}${e.key ? ' &nbsp;· <span style="color:var(--gold);font-weight:700;">Details →</span>' : ''}</div>
           </div>
         </div>`;
     }).join('');
@@ -1404,11 +1254,11 @@ function renderCalList() {
   }).join('');
 }
 
-// ââ LIVE TRAFFIC â Open Route Service (CORS-safe, browser-direct) ââââââââ
+// ── LIVE TRAFFIC — Open Route Service (CORS-safe, browser-direct) ────────
 // ORS Matrix API is free, browser-accessible, and needs no server proxy.
 // HERE was blocked by CORS for cross-origin browser requests.
 (function() {
-  // Open Route Service free tier â no CORS restrictions on browser calls
+  // Open Route Service free tier — no CORS restrictions on browser calls
   const ORS_KEY = '5b3ce3597851110001cf62484aef3f0d40a04c0fbbaf1fcc29ef36d6';
 
   const ORIGINS = {
@@ -1420,7 +1270,7 @@ function renderCalList() {
 
   // Route destinations: [lng, lat] for ORS
   const DESTINATIONS = {
-    '98':    { coords:[-87.1605, 30.3353], label:'Via US-98 Â· Beach Blvd',      via:'Main route',           miles:'11.2' },
+    '98':    { coords:[-87.1605, 30.3353], label:'Via US-98 · Beach Blvd',      via:'Main route',           miles:'11.2' },
     'alt':   { coords:[-87.1240, 30.3571], label:'Via Gulf Breeze Pkwy',         via:'Alt route',             miles:'13.8' },
     'sikes': { coords:[-86.9830, 30.3267], label:'Bob Sikes Bridge',             via:'Via Navarre / Hwy 98',  miles:'18.4' }
   };
@@ -1436,24 +1286,24 @@ function renderCalList() {
   // Route label/via overrides per origin
   const ROUTE_LABELS = {
     downtown: {
-      '98':    { name:'Via US-98 Â· Beach Blvd',     via:'Main route',              miles:'11.2' },
+      '98':    { name:'Via US-98 · Beach Blvd',     via:'Main route',              miles:'11.2' },
       'alt':   { name:'Via Gulf Breeze Pkwy',        via:'Alt route',               miles:'13.8' },
-      'sikes': { name:'Bob Sikes Bridge',            via:'Via Navarre Â· Hwy 98',    miles:'18.4' }
+      'sikes': { name:'Bob Sikes Bridge',            via:'Via Navarre · Hwy 98',    miles:'18.4' }
     },
     nas: {
-      '98':    { name:'Via Blue Angel Pkwy â US-98', via:'Main route',              miles:'14.1' },
-      'alt':   { name:'Via Navy Blvd â Hwy 98',      via:'Navy Blvd alt',           miles:'16.2' },
+      '98':    { name:'Via Blue Angel Pkwy → US-98', via:'Main route',              miles:'14.1' },
+      'alt':   { name:'Via Navy Blvd → Hwy 98',      via:'Navy Blvd alt',           miles:'16.2' },
       'sikes': { name:'Bob Sikes Bridge',             via:'Via US-98 East',          miles:'24.1' }
     },
     airport: {
-      '98':    { name:'Via Airport Blvd â US-98',    via:'Main route',              miles:'12.8' },
-      'alt':   { name:'Via Cervantes â Hwy 98',      via:'Surface route',           miles:'14.3' },
+      '98':    { name:'Via Airport Blvd → US-98',    via:'Main route',              miles:'12.8' },
+      'alt':   { name:'Via Cervantes → Hwy 98',      via:'Surface route',           miles:'14.3' },
       'sikes': { name:'Bob Sikes Bridge',             via:'Via US-98 E to Navarre',  miles:'22.6' }
     },
     beulah: {
-      '98':    { name:'Via Nine Mile â US-98',        via:'Main route',             miles:'19.4' },
-      'alt':   { name:'Via I-10 â Gulf Breeze Pkwy',  via:'Freeway alt',            miles:'21.2' },
-      'sikes': { name:'Bob Sikes Bridge',              via:'I-10 E â Navarre',       miles:'28.8' }
+      '98':    { name:'Via Nine Mile → US-98',        via:'Main route',             miles:'19.4' },
+      'alt':   { name:'Via I-10 → Gulf Breeze Pkwy',  via:'Freeway alt',            miles:'21.2' },
+      'sikes': { name:'Bob Sikes Bridge',              via:'I-10 E → Navarre',       miles:'28.8' }
     }
   };
 
@@ -1479,7 +1329,7 @@ function renderCalList() {
   let lastIncidents = [];
   window._trafficState = { currentOrigin, lastResults, lastIncidents };
 
-  // ââ Label updater ââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Label updater ──────────────────────────────────────────────────
   function updateRouteLabels() {
     const labels = ROUTE_LABELS[currentOrigin];
     const keys = ['98','alt','sikes'];
@@ -1487,11 +1337,11 @@ function renderCalList() {
       const nameEl = document.getElementById('traffic-name-' + k);
       const viaEl  = document.getElementById('traffic-via-'  + k);
       if (nameEl) nameEl.textContent = labels[k].name;
-      if (viaEl)  viaEl.textContent  = labels[k].via + ' Â· ' + labels[k].miles + ' mi';
+      if (viaEl)  viaEl.textContent  = labels[k].via + ' · ' + labels[k].miles + ' mi';
     });
   }
 
-  // ââ ORS Matrix â one call gets all 3 route durations ââââââââââââââ
+  // ── ORS Matrix — one call gets all 3 route durations ──────────────
   async function fetchAllRoutes() {
     const orig = ORIGINS[currentOrigin].coords; // [lng, lat]
     const dests = [
@@ -1521,11 +1371,11 @@ function renderCalList() {
 
     if (!res.ok) throw new Error('ORS ' + res.status);
     const data = await res.json();
-    // durations[0] is the source row â [dur_to_dest0, dur_to_dest1, dur_to_dest2]
+    // durations[0] is the source row → [dur_to_dest0, dur_to_dest1, dur_to_dest2]
     return data.durations?.[0] ?? [null, null, null];
   }
 
-  // ââ Main update âââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Main update ───────────────────────────────────────────────────
   async function updateTraffic() {
     const keys     = ['98','alt','sikes'];
     const baselines = BASELINES[currentOrigin];
@@ -1544,7 +1394,7 @@ function renderCalList() {
         if (!pill) return;
         const dur = durations[i];
         if (dur == null || dur === 0) {
-          pill.textContent = 'â';
+          pill.textContent = '—';
           return;
         }
         const mins  = Math.round(dur / 60);
@@ -1561,9 +1411,9 @@ function renderCalList() {
         const avg = totalRatio / validCount;
         window._trafficState.avgRatio = avg;
         const st  = document.getElementById('traffic-status');
-        if (st) st.textContent = avg < 1.15 ? 'ð¢ Clear â moving well' :
-                                  avg < 1.4  ? 'ð¡ Moderate â some delays' :
-                                               'ð´ Heavy â significant delays';
+        if (st) st.textContent = avg < 1.15 ? '🟢 Clear — moving well' :
+                                  avg < 1.4  ? '🟡 Moderate — some delays' :
+                                               '🔴 Heavy — significant delays';
       }
       const tu = document.getElementById('traffic-time-updated');
       if (tu) tu.textContent = 'Updated ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
@@ -1583,14 +1433,14 @@ function renderCalList() {
         pill.className   = 'traffic-time-pill ' + cls;
       });
       const tu = document.getElementById('traffic-time-updated');
-      if (tu) tu.textContent = 'Est. Â· ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+      if (tu) tu.textContent = 'Est. · ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
       const st = document.getElementById('traffic-status');
-      if (st) st.textContent = 'â± Estimated â live data unavailable';
+      if (st) st.textContent = '⏱ Estimated — live data unavailable';
       window._trafficState.avgRatio = mult;
     }
   }
 
-  // ââ Origin switcher ââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Origin switcher ──────────────────────────────────────────────
   window.setTrafficOrigin = async function(key, btn) {
     currentOrigin = key;
     window._trafficState.currentOrigin = key;
@@ -1599,16 +1449,16 @@ function renderCalList() {
 
     ['98','alt','sikes'].forEach(id => {
       const pill = document.getElementById('traffic-' + id);
-      if (pill) { pill.textContent = 'â¦'; pill.className = 'traffic-time-pill traffic-normal'; }
+      if (pill) { pill.textContent = '…'; pill.className = 'traffic-time-pill traffic-normal'; }
     });
     const tu = document.getElementById('traffic-time-updated');
-    if (tu) tu.textContent = 'Updatingâ¦';
+    if (tu) tu.textContent = 'Updating…';
 
     updateRouteLabels();
     await updateTraffic();
   };
 
-  // ââ Google Maps route opener âââââââââââââââââââââââââââââââââââââ
+  // ── Google Maps route opener ─────────────────────────────────────
   window.openGoogleMapsRoute = function(idx) {
     const orig    = ORIGINS[currentOrigin].coords;
     const keys    = ['98','alt','sikes'];
@@ -1617,7 +1467,7 @@ function renderCalList() {
     window.open(`https://www.google.com/maps/dir/${origStr}/${destStr}`, '_blank');
   };
 
-  // ââ Traffic detail modal ââââââââââââââââââââââââââââââââââââââââââ
+  // ── Traffic detail modal ──────────────────────────────────────────
   window.openTrafficModal = function() {
     const overlay = document.getElementById('traffic-modal-overlay');
     const body    = document.getElementById('traffic-modal-body');
@@ -1628,11 +1478,11 @@ function renderCalList() {
     const baselines = BASELINES[currentOrigin];
     const results  = window._trafficState.lastResults || [null, null, null];
     const incs     = window._trafficState.lastIncidents || [];
-    const icons_inc = { ACCIDENT:'ð¨', CONSTRUCTION:'ð§', CONGESTION:'ð', ROAD_CLOSED:'ð«', default:'â ï¸' };
+    const icons_inc = { ACCIDENT:'🚨', CONSTRUCTION:'🚧', CONGESTION:'🚗', ROAD_CLOSED:'🚫', default:'⚠️' };
 
     const routeRows = keys.map((k, i) => {
       const dur   = results[i];
-      const mins  = dur ? Math.round(dur / 60) : 'â';
+      const mins  = dur ? Math.round(dur / 60) : '—';
       const ratio = dur ? dur / baselines[k] : 1;
       const color = ratio < 1.15 ? '#2a8a4e' : ratio < 1.4 ? '#d4952b' : '#c2553f';
       const pill  = `<span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:20px;color:${color};">${mins}${dur?' min':''}</span>`;
@@ -1642,10 +1492,10 @@ function renderCalList() {
         <div class="traffic-modal-route-row">
           <div class="traffic-modal-route-info">
             <div class="traffic-modal-route-name">${labels[k].name}</div>
-            <div class="traffic-modal-route-via">${labels[k].via} Â· ${labels[k].miles} mi</div>
+            <div class="traffic-modal-route-via">${labels[k].via} · ${labels[k].miles} mi</div>
           </div>
           ${pill}
-          <button class="traffic-modal-map-btn" onclick="window.open('${gmaps}','_blank')">Maps â</button>
+          <button class="traffic-modal-map-btn" onclick="window.open('${gmaps}','_blank')">Maps →</button>
         </div>`;
     }).join('');
 
@@ -1688,15 +1538,15 @@ function renderCalList() {
 
     body.innerHTML = originTabsHtml + routeRows + incHtml + `
       <div class="traffic-modal-section">
-        <div class="traffic-modal-section-label">Typical ${dayNames[dayIdx]} Traffic Pattern Â· Beach Corridor</div>
+        <div class="traffic-modal-section-label">Typical ${dayNames[dayIdx]} Traffic Pattern · Beach Corridor</div>
         <div class="traffic-pattern-grid">${patternCells}</div>
         <div style="display:flex;gap:10px;margin-top:8px;font-size:10px;color:var(--g2);">
-          <span>ð¢ Clear</span><span style="color:#d4952b;">ð¡ Moderate</span><span style="color:#c2553f;">ð´ Heavy</span><span style="border:1px solid #aaa;padding:0 3px;">Now</span>
+          <span>🟢 Clear</span><span style="color:#d4952b;">🟡 Moderate</span><span style="color:#c2553f;">🔴 Heavy</span><span style="border:1px solid #aaa;padding:0 3px;">Now</span>
         </div>
       </div>
       <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--bd);font-size:10px;color:var(--g2);">
-        Data: Open Route Service Â· Updated ${new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
-        &nbsp;Â·&nbsp; Click any route to open in Google Maps
+        Data: Open Route Service · Updated ${new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+        &nbsp;·&nbsp; Click any route to open in Google Maps
       </div>`;
 
     overlay.classList.add('open');
@@ -1711,7 +1561,7 @@ function renderCalList() {
     });
     ['98','alt','sikes'].forEach(id => {
       const pill = document.getElementById('traffic-' + id);
-      if (pill) { pill.textContent = 'â¦'; pill.className = 'traffic-time-pill traffic-normal'; }
+      if (pill) { pill.textContent = '…'; pill.className = 'traffic-time-pill traffic-normal'; }
     });
     updateRouteLabels();
     await updateTraffic();
@@ -1731,32 +1581,32 @@ function renderCalList() {
 
 })();
 
-// ââ BLUE ANGELS PRACTICE COUNTDOWN ââââââââââââââââââââââââââââââââââââââ
+// ── BLUE ANGELS PRACTICE COUNTDOWN ──────────────────────────────────────
 // Schedule sourced from navalaviationmuseum.org/blueangels/ (2026 season)
 // Practices run Tuesday & Wednesday mornings at Sherman Field, NAS Pensacola.
 // * = Autograph session following Wednesday practice.
 (function() {
-  // 2026 practice dates â [year, month(0-indexed), day]
-  // Source: navalaviationmuseum.org/blueangels/ Â· All Tue/Wed mornings
+  // 2026 practice dates — [year, month(0-indexed), day]
+  // Source: navalaviationmuseum.org/blueangels/ · All Tue/Wed mornings
   // * April 1 = autograph session Wednesday
   window.PRACTICES = window.PRACTICES || [];
   const PRACTICES = window.PRACTICES = [
     [2026,2,31],  // March 31 (Tue)
     [2026,3,1],   // April 1 (Wed) *
-    [2026,3,7],[2026,3,8],    // April 7â8
-    [2026,3,14],[2026,3,15],  // April 14â15
-    [2026,3,21],[2026,3,22],  // April 21â22
-    [2026,3,28],[2026,3,29],  // April 28â29
-    [2026,4,5],[2026,4,6],    // May 5â6
-    [2026,4,12],[2026,4,13],  // May 12â13
+    [2026,3,7],[2026,3,8],    // April 7–8
+    [2026,3,14],[2026,3,15],  // April 14–15
+    [2026,3,21],[2026,3,22],  // April 21–22
+    [2026,3,28],[2026,3,29],  // April 28–29
+    [2026,4,5],[2026,4,6],    // May 5–6
+    [2026,4,12],[2026,4,13],  // May 12–13
     [2026,4,27],              // May 27
-    [2026,5,2],[2026,5,3],    // June 2â3
-    [2026,5,9],[2026,5,10],   // June 9â10
-    [2026,5,16],[2026,5,17],  // June 16â17
-    [2026,5,23],[2026,5,24],  // June 23â24
+    [2026,5,2],[2026,5,3],    // June 2–3
+    [2026,5,9],[2026,5,10],   // June 9–10
+    [2026,5,16],[2026,5,17],  // June 16–17
+    [2026,5,23],[2026,5,24],  // June 23–24
     [2026,5,30],              // June 30
     [2026,6,1],               // July 1
-    [2026,6,21],[2026,6,22],  // July 21â22
+    [2026,6,21],[2026,6,22],  // July 21–22
     [2026,6,28],              // July 28
     [2026,7,26],              // August 26
     [2026,8,1],[2026,8,9],[2026,8,15],[2026,8,22],  // September 1,9,15,22
@@ -1813,9 +1663,9 @@ function renderCalList() {
 
     if (dateLabel) dateLabel.textContent = dayName + ', ' + monthName + ' ' + dayNum;
     if (dateSub) {
-      const parts = ['8:00 AM Â· Sherman Field'];
-      if (autograph) parts.push('â Autograph session');
-      dateSub.textContent = parts.join(' Â· ');
+      const parts = ['8:00 AM · Sherman Field'];
+      if (autograph) parts.push('✍ Autograph session');
+      dateSub.textContent = parts.join(' · ');
     }
 
     // Countdown
@@ -1823,12 +1673,12 @@ function renderCalList() {
     const diff = next - now;
 
     if (diff <= 0) {
-      // Practice is happening now â show "Today"
+      // Practice is happening now — show "Today"
       if (daysEl)  daysEl.textContent  = '0';
       if (hoursEl) hoursEl.textContent = '00';
       if (minsEl)  minsEl.textContent  = '00';
       if (secsEl)  secsEl.textContent  = '00';
-      if (dateLabel) dateLabel.textContent = 'ðµ Flying Now';
+      if (dateLabel) dateLabel.textContent = '🔵 Flying Now';
       return;
     }
 
@@ -1842,15 +1692,15 @@ function renderCalList() {
     if (minsEl)  minsEl.textContent  = pad2(mins);
     if (secsEl)  secsEl.textContent  = pad2(secs);
 
-    // Access note â weekend vs weekday matters for base access policy
+    // Access note — weekend vs weekday matters for base access policy
     if (accessNote) {
       const dayOfWeek = next.getDay(); // 0=Sun, 2=Tue, 3=Wed
-      // Current NAS policy: civilian access SatâSun only 9AMâ3PM
-      // Practices run Tue/Wed â so civilians cannot access the flight line on practice days
+      // Current NAS policy: civilian access Sat–Sun only 9AM–3PM
+      // Practices run Tue/Wed — so civilians cannot access the flight line on practice days
       if (dayOfWeek === 0 || dayOfWeek === 6) {
-        accessNote.textContent = 'Civilian access: weekend schedule â check VCC at Navy Blvd';
+        accessNote.textContent = 'Civilian access: weekend schedule — check VCC at Navy Blvd';
       } else {
-        accessNote.innerHTML = 'Note: Base access SatâSun only per current NAS policy.<br>Flight line viewing may be restricted weekdays.';
+        accessNote.innerHTML = 'Note: Base access Sat–Sun only per current NAS policy.<br>Flight line viewing may be restricted weekdays.';
       }
     }
   }
@@ -1877,7 +1727,7 @@ function renderCalList() {
   setInterval(tick, 1000);
 })();
 
-// ââ LIVE WEATHER â Open-Meteo (free, no key) ââââââââââââââââââââââââââââââ
+// ── LIVE WEATHER — Open-Meteo (free, no key) ──────────────────────────────
 (function() {
   const WMO = {
     0:'Clear',1:'Mainly Clear',2:'Partly Cloudy',3:'Overcast',
@@ -1887,12 +1737,12 @@ function renderCalList() {
     95:'Thunderstorm',96:'Thunderstorm',99:'Thunderstorm'
   };
   const WMO_ICON = {
-    0:'âï¸',1:'ð¤',2:'â',3:'âï¸',45:'ð«',48:'ð«',
-    51:'ð¦',53:'ð§',55:'ð§',61:'ð¦',63:'ð§',65:'â',
-    71:'ð¨',73:'âï¸',75:'âï¸',80:'ð¦',81:'ð§',82:'â',
-    95:'â',96:'â',99:'â'
+    0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',
+    51:'🌦',53:'🌧',55:'🌧',61:'🌦',63:'🌧',65:'⛈',
+    71:'🌨',73:'❄️',75:'❄️',80:'🌦',81:'🌧',82:'⛈',
+    95:'⛈',96:'⛈',99:'⛈'
   };
-  function icon(code) { return WMO_ICON[code] || 'ð¡'; }
+  function icon(code) { return WMO_ICON[code] || '🌡'; }
   function desc(code) { return WMO[code] || 'Unknown'; }
   function fmt(t) { return Math.round(t * 9/5 + 32); }
   const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -1918,29 +1768,29 @@ function renderCalList() {
         return `<div style="padding:6px;background:var(--surface);border-radius:2px;text-align:center;">
           ${day}<br>
           <span style="font-size:16px;line-height:1.4;">${icon(daily.weathercode[i])}</span><br>
-          <strong style="color:var(--navy);font-size:13px;">${fmt(daily.temperature_2m_max[i])}Â°</strong>
-          <span style="color:var(--g2);font-size:11px;"> / ${fmt(daily.temperature_2m_min[i])}Â°</span>
-          ${pop > 20 ? `<br><span style="font-size:10px;color:#2a5a8a;">ð§${pop}%</span>` : ''}
+          <strong style="color:var(--navy);font-size:13px;">${fmt(daily.temperature_2m_max[i])}°</strong>
+          <span style="color:var(--g2);font-size:11px;"> / ${fmt(daily.temperature_2m_min[i])}°</span>
+          ${pop > 20 ? `<br><span style="font-size:10px;color:#2a5a8a;">💧${pop}%</span>` : ''}
         </div>`;
       }).join('');
 
       document.getElementById('weather-widget-body').innerHTML = `
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
           <div style="text-align:center;padding:10px;background:var(--surface);border-radius:3px;">
-            <div style="font-family:'Bebas Neue';font-size:36px;color:var(--navy);line-height:1;">${fmt(c.temperature_2m)}Â°</div>
+            <div style="font-family:'Bebas Neue';font-size:36px;color:var(--navy);line-height:1;">${fmt(c.temperature_2m)}°</div>
             <div style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--g2);margin-top:3px;">Now</div>
           </div>
           <div style="font-size:13px;color:var(--g1);padding:8px;">
             <div style="font-weight:600;">${icon(c.weathercode)} ${desc(c.weathercode)}</div>
-            <div style="margin-top:4px;font-size:12px;color:var(--g2);">Hi ${fmt(daily.temperature_2m_max[0])}Â° Â· Lo ${fmt(daily.temperature_2m_min[0])}Â°</div>
-            <div style="margin-top:4px;font-size:11px;color:var(--g2);">Feels ${fmt(c.apparent_temperature)}Â° Â· ${c.windspeed_10m} mph wind</div>
+            <div style="margin-top:4px;font-size:12px;color:var(--g2);">Hi ${fmt(daily.temperature_2m_max[0])}° · Lo ${fmt(daily.temperature_2m_min[0])}°</div>
+            <div style="margin-top:4px;font-size:11px;color:var(--g2);">Feels ${fmt(c.apparent_temperature)}° · ${c.windspeed_10m} mph wind</div>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;">${forecastHTML}</div>
         <div style="font-size:10px;color:var(--g2);margin-top:8px;text-align:right;">Updated ${timeStr}</div>`;
       // Update topbar weather text
       const topbarEl = document.getElementById('topbar-weather');
-      if (topbarEl) topbarEl.textContent = `${fmt(c.temperature_2m)}Â°F Â· ${desc(c.weathercode)}`;
+      if (topbarEl) topbarEl.textContent = `${fmt(c.temperature_2m)}°F · ${desc(c.weathercode)}`;
     } catch(e) {
       document.getElementById('weather-widget-body').innerHTML =
         '<div style="padding:12px;font-size:12px;color:var(--g2);">Weather unavailable</div>';
@@ -1950,7 +1800,7 @@ function renderCalList() {
   setInterval(loadWeather, 900000); // refresh every 15 min
 })();
 
-// ââ LIVE BEACH CONDITIONS â Open-Meteo Marine + Air Quality + NOAA Tides ââââ
+// ── LIVE BEACH CONDITIONS — Open-Meteo Marine + Air Quality + NOAA Tides ────
 (function() {
   function degToCompass(deg) {
     const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
@@ -1960,20 +1810,20 @@ function renderCalList() {
   function cToF(c)  { return Math.round(c * 9/5 + 32); }
 
   function surfRating(waveHtM, period, windSpeed) {
-    if (waveHtM < 0.15)                                      return {label:'Flat',      icon:'ð', cls:'surf-poor'};
-    if (windSpeed > 20)                                      return {label:'Blown Out',  icon:'ð¨', cls:'surf-poor'};
-    if (waveHtM >= 0.6 && period >= 8 && windSpeed < 12)    return {label:'Good',       icon:'ð¤', cls:'surf-good'};
-    if (waveHtM >= 0.3 && period >= 6)                      return {label:'Fair',       icon:'â¡', cls:'surf-fair'};
-    return {label:'Poor', icon:'ð', cls:'surf-poor'};
+    if (waveHtM < 0.15)                                      return {label:'Flat',      icon:'😐', cls:'surf-poor'};
+    if (windSpeed > 20)                                      return {label:'Blown Out',  icon:'💨', cls:'surf-poor'};
+    if (waveHtM >= 0.6 && period >= 8 && windSpeed < 12)    return {label:'Good',       icon:'🤙', cls:'surf-good'};
+    if (waveHtM >= 0.3 && period >= 6)                      return {label:'Fair',       icon:'⚡', cls:'surf-fair'};
+    return {label:'Poor', icon:'👎', cls:'surf-poor'};
   }
 
   // Pensacola Beach flag system based on UV + wave height + wind
   function beachFlag(uvIndex, waveHtM, windSpd) {
-    if (waveHtM > 1.5 || windSpd > 25) return { color:'#c0392b', label:'Double Red', sub:'Water closed to swimmers', swatch:'ð©ð©' };
-    if (waveHtM > 0.9 || windSpd > 18) return { color:'#c0392b', label:'Red Flag',   sub:'High surf / strong currents', swatch:'ð©' };
-    if (uvIndex >= 8 || waveHtM > 0.5) return { color:'#8e44ad', label:'Purple Flag', sub:'Dangerous marine life possible', swatch:'ð£' };
-    if (waveHtM > 0.2 || windSpd > 10) return { color:'#f39c12', label:'Yellow Flag', sub:'Medium hazard â swim with care', swatch:'ð¡' };
-    return { color:'#27ae60', label:'Green Flag', sub:'Low hazard â calm conditions', swatch:'ð¢' };
+    if (waveHtM > 1.5 || windSpd > 25) return { color:'#c0392b', label:'Double Red', sub:'Water closed to swimmers', swatch:'🚩🚩' };
+    if (waveHtM > 0.9 || windSpd > 18) return { color:'#c0392b', label:'Red Flag',   sub:'High surf / strong currents', swatch:'🚩' };
+    if (uvIndex >= 8 || waveHtM > 0.5) return { color:'#8e44ad', label:'Purple Flag', sub:'Dangerous marine life possible', swatch:'🟣' };
+    if (waveHtM > 0.2 || windSpd > 10) return { color:'#f39c12', label:'Yellow Flag', sub:'Medium hazard — swim with care', swatch:'🟡' };
+    return { color:'#27ae60', label:'Green Flag', sub:'Low hazard — calm conditions', swatch:'🟢' };
   }
 
   // Store last-fetched data for modal
@@ -2001,7 +1851,7 @@ function renderCalList() {
         '&hourly=uv_index' +
         '&wind_speed_unit=mph&timezone=America%2FChicago';
 
-      // 3. NOAA Tides â full day hi/lo predictions
+      // 3. NOAA Tides — full day hi/lo predictions
       const tidesUrl = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${dateStr}&range=24&station=8729840&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=theflightline&format=json`;
 
       // 4. NOAA real-time water temperature
@@ -2034,18 +1884,18 @@ function renderCalList() {
       const airFeels    = wc.apparent_temperature != null ? cToF(wc.apparent_temperature) : null;
       const precipProb  = wc.precipitation_probability ?? null;
 
-      // UV â current hour
+      // UV — current hour
       const uvIndex = wind.hourly?.uv_index?.[now.getHours()] ?? 0;
 
-      // Water temp â prefer real-time NOAA sensor, fall back to marine model
+      // Water temp — prefer real-time NOAA sensor, fall back to marine model
       let waterTempF = '--';
       if (waterTempData?.data?.length) {
         const lastReading = waterTempData.data[waterTempData.data.length - 1];
-        if (lastReading?.v) waterTempF = Math.round(parseFloat(lastReading.v)) + 'Â°';
+        if (lastReading?.v) waterTempF = Math.round(parseFloat(lastReading.v)) + '°';
       }
       if (waterTempF === '--') {
         const sst = marine.hourly?.sea_surface_temperature?.[now.getHours()];
-        if (sst != null) waterTempF = cToF(sst) + 'Â°';
+        if (sst != null) waterTempF = cToF(sst) + '°';
       }
 
       const rating = surfRating(waveHtM, parseFloat(wavePeriod), windSpd);
@@ -2054,14 +1904,14 @@ function renderCalList() {
       // Wave height display
       const waveDisplay = waveHtFt < 0.5 ? 'Flat' :
         waveHtFt < 1.5 ? `${waveHtFt} ft` :
-        `${Math.floor(waveHtFt)}â${Math.ceil(waveHtFt)} ft`;
+        `${Math.floor(waveHtFt)}–${Math.ceil(waveHtFt)} ft`;
 
       // All tides today
       const allTides = tides.predictions || [];
       const upcomingTides = allTides.filter(t => new Date(t.t) > now);
       const nextTide = upcomingTides[0];
       const nextTideStr = nextTide
-        ? `${nextTide.type === 'H' ? 'â High' : 'â Low'} ${new Date(nextTide.t).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`
+        ? `${nextTide.type === 'H' ? '↑ High' : '↓ Low'} ${new Date(nextTide.t).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`
         : '--';
 
       // 3-day wave forecast (skip today = index 0)
@@ -2084,7 +1934,7 @@ function renderCalList() {
       // Update Right Now strip
       updateRightNow({ flag, nextTideStr, uvIndex, uvLabel });
 
-      // ââ RENDER WIDGET ââââââââââââââââââââââââââââââââââââââââââââââââââ
+      // ── RENDER WIDGET ──────────────────────────────────────────────────
       // Beach flag row
       const flagHtml = `
         <div class="beach-flag-row">
@@ -2093,7 +1943,7 @@ function renderCalList() {
             <div class="beach-flag-label">${flag.label}</div>
             <div class="beach-flag-sub">${flag.sub}</div>
           </div>
-          <div style="font-family:'DM Sans';font-weight:800;font-size:11px;color:${uvColor};">UV ${uvIndex} Â· ${uvLabel}</div>
+          <div style="font-family:'DM Sans';font-weight:800;font-size:11px;color:${uvColor};">UV ${uvIndex} · ${uvLabel}</div>
         </div>`;
 
       // Main wave display
@@ -2104,11 +1954,11 @@ function renderCalList() {
           </div>
           <div>
             <div class="surf-rating ${rating.cls}">${rating.icon} ${rating.label}</div>
-            <div class="surf-condition">${swellDir} swell Â· ${swellPeriod}s</div>
+            <div class="surf-condition">${swellDir} swell · ${swellPeriod}s</div>
           </div>
         </div>`;
 
-      // Stats grid â 6 stats, 3 cols Ã 2 rows
+      // Stats grid — 6 stats, 3 cols × 2 rows
       const statsHtml = `
         <div class="surf-grid" style="grid-template-columns:repeat(3,1fr);">
           <div class="surf-stat"><div class="surf-stat-val">${windDir} ${windSpd}</div><div class="surf-stat-label">Wind (mph)</div></div>
@@ -2116,10 +1966,10 @@ function renderCalList() {
           <div class="surf-stat"><div class="surf-stat-val">${waterTempF}</div><div class="surf-stat-label">Water</div></div>
           <div class="surf-stat"><div class="surf-stat-val">${swellPeriod}s</div><div class="surf-stat-label">Period</div></div>
           <div class="surf-stat"><div class="surf-stat-val">${nextTideStr}</div><div class="surf-stat-label">Next Tide</div></div>
-          <div class="surf-stat"><div class="surf-stat-val">${airFeels !== null ? airFeels+'Â°' : '--'}</div><div class="surf-stat-label">Feels Like</div></div>
+          <div class="surf-stat"><div class="surf-stat-val">${airFeels !== null ? airFeels+'°' : '--'}</div><div class="surf-stat-label">Feels Like</div></div>
         </div>`;
 
-      // 3-day forecast mini bars (days 1â3, skip today)
+      // 3-day forecast mini bars (days 1–3, skip today)
       let forecastHtml = '';
       if (dailyMaxWave.length > 1) {
         const barDays = dailyDates.slice(1,4);
@@ -2148,7 +1998,7 @@ function renderCalList() {
           </div>`;
       }
 
-      // Cam links row â minimal, opens in new tab
+      // Cam links row — minimal, opens in new tab
       const camLinksHtml = `
         <div style="margin-top:8px;padding-top:7px;border-top:1px solid var(--bd);display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;">
           <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--g2);flex-shrink:0;">Cams:</span>
@@ -2160,7 +2010,7 @@ function renderCalList() {
 
       el.innerHTML = flagHtml + mainHtml + statsHtml + forecastHtml + `
         <div class="traffic-updated" style="margin-top:8px;">
-          <span style="color:var(--gold);font-weight:700;font-size:9px;cursor:pointer;">Tap for full conditions â</span>
+          <span style="color:var(--gold);font-weight:700;font-size:9px;cursor:pointer;">Tap for full conditions ↗</span>
           <span>Updated ${timeStr}</span>
         </div>` + camLinksHtml;
 
@@ -2171,14 +2021,14 @@ function renderCalList() {
     }
   }
 
-  // ââ Beach modal âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Beach modal ─────────────────────────────────────────────────────
   window.openBeachModal = function() {
     const overlay = document.getElementById('beach-modal-overlay');
     const body    = document.getElementById('beach-modal-body');
     if (!overlay || !body) return;
 
     if (!_beachData) {
-      body.innerHTML = '<div style="padding:24px;text-align:center;color:var(--g2);">Loading conditionsâ¦</div>';
+      body.innerHTML = '<div style="padding:24px;text-align:center;color:var(--g2);">Loading conditions…</div>';
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
       return;
@@ -2208,11 +2058,11 @@ function renderCalList() {
           ${[
             ['Wave Height', d.waveDisplay],
             ['Surf Rating', d.rating.icon + ' ' + d.rating.label],
-            ['Swell', d.swellDir + ' ' + d.swellHtFt + 'ft Â· ' + d.swellPeriod + 's'],
+            ['Swell', d.swellDir + ' ' + d.swellHtFt + 'ft · ' + d.swellPeriod + 's'],
             ['Wind Waves', d.windWaveHtFt !== null ? d.windWaveHtFt + ' ft' : '--'],
             ['Wind', d.windDir + ' ' + d.windSpd + ' mph'],
             ['Water Temp', d.waterTempF],
-            ['Air (Feels Like)', d.airFeels !== null ? d.airFeels + 'Â°F' : '--'],
+            ['Air (Feels Like)', d.airFeels !== null ? d.airFeels + '°F' : '--'],
             ['Rain Chance', d.precipProb !== null ? d.precipProb + '%' : '--'],
           ].map(([label, val]) => `
             <div style="background:var(--surface);border-radius:2px;padding:8px 10px;">
@@ -2230,7 +2080,7 @@ function renderCalList() {
       const isHigh  = t.type === 'H';
       const timeStr = dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
       return `<div class="tide-item" style="opacity:${isPast?0.45:1};">
-        <div class="tide-item-type" style="color:${isHigh?'#1a5fa8':'#2a8a4e'}">${isHigh?'â High':'â Low'}</div>
+        <div class="tide-item-type" style="color:${isHigh?'#1a5fa8':'#2a8a4e'}">${isHigh?'↑ High':'↓ Low'}</div>
         <div class="tide-item-time">${timeStr}</div>
         <div class="tide-item-ht">${parseFloat(t.v).toFixed(1)} ft</div>
       </div>`;
@@ -2238,7 +2088,7 @@ function renderCalList() {
 
     const tidesSection = `
       <div class="traffic-modal-section">
-        <div class="traffic-modal-section-label">Today's Tide Schedule Â· NOAA Station 8729840</div>
+        <div class="traffic-modal-section-label">Today's Tide Schedule · NOAA Station 8729840</div>
         <div class="tide-schedule">${tideItems || '<div style="font-size:12px;color:var(--g2);">Tide data unavailable</div>'}</div>
       </div>`;
 
@@ -2279,21 +2129,21 @@ function renderCalList() {
       { label:'Pensacola Beach South', loc:'Gulf-facing, pier view',     url:'https://www.visitpensacola.com/webcams/south-view-webcam/' },
       { label:'Pensacola Beach East',  loc:'East of Casino Beach',       url:'https://www.visitpensacola.com/webcams/east-view-webcam/' },
       { label:'Bamboo Willie\'s',      loc:'Santa Rosa Sound / Quietwater', url:'https://bamboowillies.com/beach-camera' },
-      { label:'CafÃ© NOLA',             loc:'Pensacola Beach boardwalk',  url:'https://www.earthcam.com/usa/florida/pensacola/beach/' },
+      { label:'Café NOLA',             loc:'Pensacola Beach boardwalk',  url:'https://www.earthcam.com/usa/florida/pensacola/beach/' },
       { label:'Portofino Resort',      loc:'East Pensacola Beach',       url:'https://www.portofino-island.com/webcam/' },
-      { label:'NPS Perdido Key',       loc:'Gulf Islands Nat\'l Seashore Â· updates every 15 min', url:'https://www.nps.gov/media/webcam/view.htm?id=81B4662E-1DD8-B71B-0B01D8503D5C98F4' },
+      { label:'NPS Perdido Key',       loc:'Gulf Islands Nat\'l Seashore · updates every 15 min', url:'https://www.nps.gov/media/webcam/view.htm?id=81B4662E-1DD8-B71B-0B01D8503D5C98F4' },
       { label:'Mirabella / Perdido Key', loc:'Perdido Key Gulf-side',    url:'https://www.skylinewebcams.com/en/webcam/united-states/florida/perdido-key/mirabella-beach.html' },
     ];
     const camSection = `
       <div class="traffic-modal-section">
-        <div class="traffic-modal-section-label">Live Beach Cams Â· Opens in New Tab</div>
+        <div class="traffic-modal-section-label">Live Beach Cams · Opens in New Tab</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
           ${cams.map(c => `
             <a href="${c.url}" target="_blank" rel="noopener"
                style="display:block;padding:8px 10px;border:1px solid var(--bd);border-radius:2px;text-decoration:none;transition:border-color 0.12s,background 0.12s;"
                onmouseover="this.style.borderColor='var(--gold)';this.style.background='#fff8ed'"
                onmouseout="this.style.borderColor='var(--bd)';this.style.background='white'">
-              <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--navy);">ð¹ ${c.label}</div>
+              <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--navy);">📹 ${c.label}</div>
               <div style="font-size:10px;color:var(--g2);margin-top:2px;">${c.loc}</div>
             </a>`).join('')}
         </div>
@@ -2301,8 +2151,8 @@ function renderCalList() {
 
     body.innerHTML = flagBanner + condGrid + tidesSection + forecastSection + camSection + `
       <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--bd);font-size:10px;color:var(--g2);">
-        Sources: Open-Meteo Marine API Â· NOAA Tides &amp; Currents Station 8729840 Â· Updated ${d.timeStr}
-        &nbsp;Â·&nbsp; <a href="https://visitpensacolabeach.com" target="_blank" style="color:var(--gold);">visitpensacolabeach.com â</a>
+        Sources: Open-Meteo Marine API · NOAA Tides &amp; Currents Station 8729840 · Updated ${d.timeStr}
+        &nbsp;·&nbsp; <a href="https://visitpensacolabeach.com" target="_blank" style="color:var(--gold);">visitpensacolabeach.com ↗</a>
       </div>`;
 
     overlay.classList.add('open');
@@ -2390,11 +2240,11 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-// PUBLIC PAY PAGE â Charts, Tabs, Search
-// ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ══════════════════════════════════════════════════════════════
+// PUBLIC PAY PAGE — Charts, Tabs, Search
+// ══════════════════════════════════════════════════════════════
 
-// ââ Tab switching ââââââââââââââââââââââââââââââââââââââââââââ
+// ── Tab switching ────────────────────────────────────────────
 window.payTab = function(name, btn) {
   ['officials','frontline','peers'].forEach(t => {
     const p = document.getElementById('pay-panel-' + t);
@@ -2412,14 +2262,14 @@ window.payTab = function(name, btn) {
   if (name === 'peers'     && !window._payChartPR) _initPayPeers();
 };
 
-// ââ Chart init (lazy â only when page opens) âââââââââââââââââ
+// ── Chart init (lazy — only when page opens) ─────────────────
 const _payTip = { callbacks:{ label: ctx => ctx.raw != null ? '$' + Number(ctx.raw).toLocaleString() : '' } };
 
 window._payChartsReady = false;
 window.initPayCharts = function() {
   if (window._payChartsReady) return;
   if (typeof Chart === 'undefined') {
-    // Chart.js not loaded yet â load it, then init
+    // Chart.js not loaded yet — load it, then init
     const s = document.createElement('script');
     s.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js';
     s.onload = function() { _initPayOfficials(); window._payChartsReady = true; };
@@ -2433,7 +2283,7 @@ window.initPayCharts = function() {
 function _initPayOfficials() {
   const ctx = document.getElementById('payChartOfficials');
   if (!ctx) return;
-  // Fix: single dataset with per-bar color array â no multi-dataset null alignment issues
+  // Fix: single dataset with per-bar color array — no multi-dataset null alignment issues
   const rows = [
     {l:'Escambia County Sheriff',                 v:251114, color:'#1a8a6e'},
     {l:'State Atty / Public Defender (1st Cir.)', v:223318, color:'#9ca3af'},
@@ -2477,12 +2327,12 @@ function _initPayFrontline() {
   const ctx = document.getElementById('payChartFrontline');
   if (!ctx) return;
   const median = 67500;
-  // BLS OEWS Pensacola-Ferry Pass-Brent MSA, May 2024 â mean annual wages
+  // BLS OEWS Pensacola-Ferry Pass-Brent MSA, May 2024 — mean annual wages
   const rows = [
     {l:'Food prep & serving (mean)',    v:33830},
     {l:'Building/grounds cleaning',     v:34410},
     {l:'Personal care & service',       v:35520},
-    {l:'Min. teacher â ECSD (FY24-25)', v:48300},
+    {l:'Min. teacher — ECSD (FY24-25)', v:48300},
     {l:'Elementary teacher (mean)',     v:58460},
     {l:'Firefighter (mean)',            v:56180},
     {l:'Police & sheriff officer (mean)',v:66470},
@@ -2518,7 +2368,7 @@ function _initPayPeers() {
   // Alachua (293k, Group IV) as a comparable mid-size FL county: Sheriff $240,632, Commissioner $98,450, PA $174,065
   // Broward (large, Group V/VI) shown for contrast on teacher
   // Teacher: FL statewide minimum $47,500 (FL DOE), vs Escambia $48,300
-  // Mayor: no direct state formula â Jacksonville CAO $330k+ shown as large-city contrast; Tallahassee mayor ~$80k
+  // Mayor: no direct state formula — Jacksonville CAO $330k+ shown as large-city contrast; Tallahassee mayor ~$80k
   // Council: FL Legislature members $29,697 shown as state comparison point
   window._payChartPR = new Chart(ctx, {
     type: 'bar',
@@ -2535,7 +2385,7 @@ function _initPayPeers() {
       ],
       datasets: [
         {
-          label: 'Escambia / Pensacola Â· FY2025-26',
+          label: 'Escambia / Pensacola · FY2025-26',
           data: [251114, 210938, 182644, 104696, 210938, 50299, 48300, 134000],
           backgroundColor: '#c2553f',
           borderRadius: 2
@@ -2569,75 +2419,75 @@ function _initPayPeers() {
   });
 }
 
-// ââ Confirmed officials data (indexed for search) ââââââââââââ
+// ── Confirmed officials data (indexed for search) ────────────
 const PAY_CONFIRMED = [
 
-  // ââ CITY OF PENSACOLA âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── CITY OF PENSACOLA ─────────────────────────────────────────────────────
   // Mayor salary set by City Ordinance, July 28, 2022. Source: WUWF Nov. 2025
-  { name:'D.C. Reeves', title:'Mayor', employer:'City of Pensacola', tag:'city', salary:134000, year:'FY2025-26', source:'City Ordinance July 28, 2022 â WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
-  // City Council â salary tied to school board formula per charter amendment after 2024 election
-  { name:'Jennifer Brahier', title:'City Council Member, District 1', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election â WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
-  { name:'Charles L. Bare', title:'City Council Member, District 2', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election â WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
-  { name:'Casey Jones', title:'City Council Member, District 3', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election â WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
-  { name:'Jared Moore', title:'City Council Member, District 4', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election â WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
-  { name:'TeniadÃ© Broughton', title:'City Council Member, District 5', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election â WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
-  { name:'Allison D. Patton', title:'City Council Member, District 6', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election â WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
-  { name:'Delarian Wiggins', title:'City Council Member, District 7', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election â WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
+  { name:'D.C. Reeves', title:'Mayor', employer:'City of Pensacola', tag:'city', salary:134000, year:'FY2025-26', source:'City Ordinance July 28, 2022 — WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
+  // City Council — salary tied to school board formula per charter amendment after 2024 election
+  { name:'Jennifer Brahier', title:'City Council Member, District 1', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election — WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
+  { name:'Charles L. Bare', title:'City Council Member, District 2', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election — WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
+  { name:'Casey Jones', title:'City Council Member, District 3', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election — WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
+  { name:'Jared Moore', title:'City Council Member, District 4', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election — WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
+  { name:'Teniadé Broughton', title:'City Council Member, District 5', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election — WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
+  { name:'Allison D. Patton', title:'City Council Member, District 6', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election — WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
+  { name:'Delarian Wiggins', title:'City Council Member, District 7', employer:'City of Pensacola', tag:'city', salary:38204, year:'FY2025-26', source:'City Charter formula, eff. post-2024 election — WUWF Nov. 2025', url:'https://www.wuwf.org/local-news/2025-11-11/pensacola-to-consider-raising-next-mayors-salary' },
 
-  // ââ ESCAMBIA COUNTY BCC âââââââââââââââââââââââââââââââââââââââââââââââââââ
-  // All five commissioners â FL EDR Ch. 145 formula, Escambia County population group
-  { name:'Steve Stroberger', title:'County Commissioner, District 1', employer:'Escambia County BCC', tag:'county', salary:104696, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Mike Kohler', title:'County Commissioner, District 2', employer:'Escambia County BCC', tag:'county', salary:104696, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Lumon May', title:'County Commissioner, District 3', employer:'Escambia County BCC', tag:'county', salary:104696, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Ashlee Hofberger', title:'County Commissioner, District 4', employer:'Escambia County BCC', tag:'county', salary:104696, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Steven Barry', title:'County Commissioner, District 5', employer:'Escambia County BCC', tag:'county', salary:104696, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  // County Administrator â appointed, contract salary confirmed August 2022
-  { name:'Wes Moreno', title:'County Administrator', employer:'Escambia County BCC', tag:'county', salary:191287, year:'2022 (contract)', source:'BCC contract vote Aug. 18, 2022 â NorthEscambia.com', url:'http://www.northescambia.com/2022/08/escambia-officially-hires-wes-moreno-as-permanent-county-administrator' },
+  // ── ESCAMBIA COUNTY BCC ───────────────────────────────────────────────────
+  // All five commissioners — FL EDR Ch. 145 formula, Escambia County population group
+  { name:'Steve Stroberger', title:'County Commissioner, District 1', employer:'Escambia County BCC', tag:'county', salary:104696, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Mike Kohler', title:'County Commissioner, District 2', employer:'Escambia County BCC', tag:'county', salary:104696, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Lumon May', title:'County Commissioner, District 3', employer:'Escambia County BCC', tag:'county', salary:104696, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Ashlee Hofberger', title:'County Commissioner, District 4', employer:'Escambia County BCC', tag:'county', salary:104696, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Steven Barry', title:'County Commissioner, District 5', employer:'Escambia County BCC', tag:'county', salary:104696, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  // County Administrator — appointed, contract salary confirmed August 2022
+  { name:'Wes Moreno', title:'County Administrator', employer:'Escambia County BCC', tag:'county', salary:191287, year:'2022 (contract)', source:'BCC contract vote Aug. 18, 2022 — NorthEscambia.com', url:'http://www.northescambia.com/2022/08/escambia-officially-hires-wes-moreno-as-permanent-county-administrator' },
 
-  // ââ ESCAMBIA COUNTY CONSTITUTIONAL OFFICERS ââââââââââââââââââââââââââââââ
-  // All set by FL EDR Ch. 145 F.S. formula â finsal25.pdf Oct. 2025
-  { name:'Chip Simmons', title:'Sheriff', employer:'Escambia County Sheriff\u2019s Office', tag:'county', salary:251114, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Scott Lunsford', title:'Tax Collector', employer:'Escambia County', tag:'county', salary:210938, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Pam Childers', title:'Clerk of Circuit Court', employer:'Escambia County', tag:'county', salary:182644, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Gary "Bubba" Peters', title:'Property Appraiser', employer:'Escambia County', tag:'county', salary:182644, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Robert Bender', title:'Supervisor of Elections', employer:'Escambia County', tag:'county', salary:182644, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  // ── ESCAMBIA COUNTY CONSTITUTIONAL OFFICERS ──────────────────────────────
+  // All set by FL EDR Ch. 145 F.S. formula — finsal25.pdf Oct. 2025
+  { name:'Chip Simmons', title:'Sheriff', employer:'Escambia County Sheriff\u2019s Office', tag:'county', salary:251114, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Scott Lunsford', title:'Tax Collector', employer:'Escambia County', tag:'county', salary:210938, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Pam Childers', title:'Clerk of Circuit Court', employer:'Escambia County', tag:'county', salary:182644, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Gary "Bubba" Peters', title:'Property Appraiser', employer:'Escambia County', tag:'county', salary:182644, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Robert Bender', title:'Supervisor of Elections', employer:'Escambia County', tag:'county', salary:182644, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
 
-  // ââ ESCAMBIA COUNTY SCHOOL DISTRICT ââââââââââââââââââââââââââââââââââââââ
-  { name:'Keith Leonard', title:'School Superintendent (appointed)', employer:'Escambia County School District', tag:'school', salary:210938, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Kevin Adams', title:'School Board Member, District 1', employer:'Escambia County School District', tag:'school', salary:50299, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Paul Fetsko', title:'School Board Member, District 2', employer:'Escambia County School District', tag:'school', salary:50299, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'David Williams', title:'School Board Member, District 3', employer:'Escambia County School District', tag:'school', salary:50299, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Carissa Bergosh', title:'School Board Member, District 4', employer:'Escambia County School District', tag:'school', salary:50299, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Thomas Harrell', title:'School Board Member, District 5', employer:'Escambia County School District', tag:'school', salary:50299, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 â Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  // Minimum starting teacher salary â ECPS/EEA Board-approved agreement, March 2025
-  { name:'Minimum starting teacher', title:'Classroom Teacher (minimum, ECSD)', employer:'Escambia County School District', tag:'school', salary:48300, year:'FY2024-25', source:'ECPS/EEA salary agreement, Board vote March 18, 2025 â WEAR-TV', url:'https://weartv.com/news/local/escambia-schools-set-to-raise-teacher-salaries-up-to-3000-for-the-2024-25-school-year' },
+  // ── ESCAMBIA COUNTY SCHOOL DISTRICT ──────────────────────────────────────
+  { name:'Keith Leonard', title:'School Superintendent (appointed)', employer:'Escambia County School District', tag:'school', salary:210938, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Kevin Adams', title:'School Board Member, District 1', employer:'Escambia County School District', tag:'school', salary:50299, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Paul Fetsko', title:'School Board Member, District 2', employer:'Escambia County School District', tag:'school', salary:50299, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'David Williams', title:'School Board Member, District 3', employer:'Escambia County School District', tag:'school', salary:50299, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Carissa Bergosh', title:'School Board Member, District 4', employer:'Escambia County School District', tag:'school', salary:50299, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Thomas Harrell', title:'School Board Member, District 5', employer:'Escambia County School District', tag:'school', salary:50299, year:'FY2025-26', source:'FL EDR finsal25.pdf, Table 3 — Ch. 145 F.S. formula', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  // Minimum starting teacher salary — ECPS/EEA Board-approved agreement, March 2025
+  { name:'Minimum starting teacher', title:'Classroom Teacher (minimum, ECSD)', employer:'Escambia County School District', tag:'school', salary:48300, year:'FY2024-25', source:'ECPS/EEA salary agreement, Board vote March 18, 2025 — WEAR-TV', url:'https://weartv.com/news/local/escambia-schools-set-to-raise-teacher-salaries-up-to-3000-for-the-2024-25-school-year' },
 
-  // ââ ECUA BOARD âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── ECUA BOARD ───────────────────────────────────────────────────────────
   // ECUA board paid on school board salary formula + $200/month expense stipend
   // Per FL House Bill analysis CS/HB 1583 (2022): ECUA board compensation = school board formula
-  { name:'Kevin Stephens', title:'ECUA Board Chair, District 5', employer:'Emerald Coast Utilities Authority', tag:'county', salary:50299, year:'FY2025-26', source:'ECUA charter â school board formula + $200/mo expense stipend, CS/HB 1583 (2022)', url:'https://www.flsenate.gov/Session/Bill/2022/1583/Analyses/h1583b.SAC.PDF' },
-  { name:'Larry Williams', title:'ECUA Board Vice Chair, District 3', employer:'Emerald Coast Utilities Authority', tag:'county', salary:50299, year:'FY2025-26', source:'ECUA charter â school board formula + $200/mo expense stipend, CS/HB 1583 (2022)', url:'https://www.flsenate.gov/Session/Bill/2022/1583/Analyses/h1583b.SAC.PDF' },
-  { name:'Vicki Campbell', title:'ECUA Board Member, District 1', employer:'Emerald Coast Utilities Authority', tag:'county', salary:50299, year:'FY2025-26', source:'ECUA charter â school board formula + $200/mo expense stipend, CS/HB 1583 (2022)', url:'https://www.flsenate.gov/Session/Bill/2022/1583/Analyses/h1583b.SAC.PDF' },
-  { name:'Lois Benson', title:'ECUA Board Member, District 2', employer:'Emerald Coast Utilities Authority', tag:'county', salary:50299, year:'FY2025-26', source:'ECUA charter â school board formula + $200/mo expense stipend, CS/HB 1583 (2022)', url:'https://www.flsenate.gov/Session/Bill/2022/1583/Analyses/h1583b.SAC.PDF' },
-  { name:'Dale Perkins', title:'ECUA Board Member, District 4', employer:'Emerald Coast Utilities Authority', tag:'county', salary:50299, year:'FY2025-26', source:'ECUA charter â school board formula + $200/mo expense stipend, CS/HB 1583 (2022)', url:'https://www.flsenate.gov/Session/Bill/2022/1583/Analyses/h1583b.SAC.PDF' },
+  { name:'Kevin Stephens', title:'ECUA Board Chair, District 5', employer:'Emerald Coast Utilities Authority', tag:'county', salary:50299, year:'FY2025-26', source:'ECUA charter — school board formula + $200/mo expense stipend, CS/HB 1583 (2022)', url:'https://www.flsenate.gov/Session/Bill/2022/1583/Analyses/h1583b.SAC.PDF' },
+  { name:'Larry Williams', title:'ECUA Board Vice Chair, District 3', employer:'Emerald Coast Utilities Authority', tag:'county', salary:50299, year:'FY2025-26', source:'ECUA charter — school board formula + $200/mo expense stipend, CS/HB 1583 (2022)', url:'https://www.flsenate.gov/Session/Bill/2022/1583/Analyses/h1583b.SAC.PDF' },
+  { name:'Vicki Campbell', title:'ECUA Board Member, District 1', employer:'Emerald Coast Utilities Authority', tag:'county', salary:50299, year:'FY2025-26', source:'ECUA charter — school board formula + $200/mo expense stipend, CS/HB 1583 (2022)', url:'https://www.flsenate.gov/Session/Bill/2022/1583/Analyses/h1583b.SAC.PDF' },
+  { name:'Lois Benson', title:'ECUA Board Member, District 2', employer:'Emerald Coast Utilities Authority', tag:'county', salary:50299, year:'FY2025-26', source:'ECUA charter — school board formula + $200/mo expense stipend, CS/HB 1583 (2022)', url:'https://www.flsenate.gov/Session/Bill/2022/1583/Analyses/h1583b.SAC.PDF' },
+  { name:'Dale Perkins', title:'ECUA Board Member, District 4', employer:'Emerald Coast Utilities Authority', tag:'county', salary:50299, year:'FY2025-26', source:'ECUA charter — school board formula + $200/mo expense stipend, CS/HB 1583 (2022)', url:'https://www.flsenate.gov/Session/Bill/2022/1583/Analyses/h1583b.SAC.PDF' },
 
-  // ââ STATE OFFICIALS (serve Escambia) âââââââââââââââââââââââââââââââââââââ
-  // State Attorney and Public Defender â FL General Appropriations Act Ch. 2025-198, s.8
-  { name:'Ginger Bowden Madden', title:'State Attorney, 1st Circuit', employer:'State of Florida', tag:'state', salary:223318, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198, s.8 â EDR finsal25.pdf p.6', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  { name:'Bruce A. Miller', title:'Public Defender, 1st Circuit', employer:'State of Florida', tag:'state', salary:223318, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198, s.8 â EDR finsal25.pdf p.6', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
-  // Florida State Senator â salary frozen at 2010 level per s.109, Ch. 2025-199 L.O.F.
-  { name:'Don Gaetz', title:'State Senator, District 1', employer:'Florida Senate', tag:'state', salary:29697, year:'FY2025-26', source:'FL Statutes s.11.13 â frozen at 2010 level, Ch. 2025-199, s.109', url:'https://www.flsenate.gov/reference/publicrecords/salaries' },
-  // Florida State Representatives â same frozen salary
-  { name:'Michelle Salzman', title:'State Representative, District 1', employer:'Florida House', tag:'state', salary:29697, year:'FY2025-26', source:'FL Statutes s.11.13 â frozen at 2010 level, Ch. 2025-199, s.109', url:'https://www.flsenate.gov/reference/publicrecords/salaries' },
-  { name:'Alex Andrade', title:'State Representative, District 2', employer:'Florida House', tag:'state', salary:29697, year:'FY2025-26', source:'FL Statutes s.11.13 â frozen at 2010 level, Ch. 2025-199, s.109', url:'https://www.flsenate.gov/reference/publicrecords/salaries' },
+  // ── STATE OFFICIALS (serve Escambia) ─────────────────────────────────────
+  // State Attorney and Public Defender — FL General Appropriations Act Ch. 2025-198, s.8
+  { name:'Ginger Bowden Madden', title:'State Attorney, 1st Circuit', employer:'State of Florida', tag:'state', salary:223318, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198, s.8 — EDR finsal25.pdf p.6', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  { name:'Bruce A. Miller', title:'Public Defender, 1st Circuit', employer:'State of Florida', tag:'state', salary:223318, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198, s.8 — EDR finsal25.pdf p.6', url:'https://edr.state.fl.us/Content/local-government/reports/finsal25.pdf' },
+  // Florida State Senator — salary frozen at 2010 level per s.109, Ch. 2025-199 L.O.F.
+  { name:'Don Gaetz', title:'State Senator, District 1', employer:'Florida Senate', tag:'state', salary:29697, year:'FY2025-26', source:'FL Statutes s.11.13 — frozen at 2010 level, Ch. 2025-199, s.109', url:'https://www.flsenate.gov/reference/publicrecords/salaries' },
+  // Florida State Representatives — same frozen salary
+  { name:'Michelle Salzman', title:'State Representative, District 1', employer:'Florida House', tag:'state', salary:29697, year:'FY2025-26', source:'FL Statutes s.11.13 — frozen at 2010 level, Ch. 2025-199, s.109', url:'https://www.flsenate.gov/reference/publicrecords/salaries' },
+  { name:'Alex Andrade', title:'State Representative, District 2', employer:'Florida House', tag:'state', salary:29697, year:'FY2025-26', source:'FL Statutes s.11.13 — frozen at 2010 level, Ch. 2025-199, s.109', url:'https://www.flsenate.gov/reference/publicrecords/salaries' },
 
-  // ââ COUNTY COURT JUDGES âââââââââââââââââââââââââââââââââââââââââââââââââââ
-  // County court judges â FL General Appropriations Act, state salary schedule
-  { name:'Scott Ritchie', title:'County Court Judge, Group 1', employer:'Escambia County', tag:'state', salary:172693, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198 â county court judge salary', url:'https://www.flsenate.gov/Session/Bill/2025/2500/BillText/er/PDF' },
-  { name:'Charles Young', title:'County Court Judge, Group 2', employer:'Escambia County', tag:'state', salary:172693, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198 â county court judge salary', url:'https://www.flsenate.gov/Session/Bill/2025/2500/BillText/er/PDF' },
-  { name:'Barry E. Dickson Jr.', title:'County Court Judge, Group 3', employer:'Escambia County', tag:'state', salary:172693, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198 â county court judge salary', url:'https://www.flsenate.gov/Session/Bill/2025/2500/BillText/er/PDF' },
-  { name:'Kristina Lightel', title:'County Court Judge, Group 4', employer:'Escambia County', tag:'state', salary:172693, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198 â county court judge salary', url:'https://www.flsenate.gov/Session/Bill/2025/2500/BillText/er/PDF' },
-  { name:'Kerra A. Smith', title:'County Court Judge, Group 5', employer:'Escambia County', tag:'state', salary:172693, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198 â county court judge salary', url:'https://www.flsenate.gov/Session/Bill/2025/2500/BillText/er/PDF' },
+  // ── COUNTY COURT JUDGES ───────────────────────────────────────────────────
+  // County court judges — FL General Appropriations Act, state salary schedule
+  { name:'Scott Ritchie', title:'County Court Judge, Group 1', employer:'Escambia County', tag:'state', salary:172693, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198 — county court judge salary', url:'https://www.flsenate.gov/Session/Bill/2025/2500/BillText/er/PDF' },
+  { name:'Charles Young', title:'County Court Judge, Group 2', employer:'Escambia County', tag:'state', salary:172693, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198 — county court judge salary', url:'https://www.flsenate.gov/Session/Bill/2025/2500/BillText/er/PDF' },
+  { name:'Barry E. Dickson Jr.', title:'County Court Judge, Group 3', employer:'Escambia County', tag:'state', salary:172693, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198 — county court judge salary', url:'https://www.flsenate.gov/Session/Bill/2025/2500/BillText/er/PDF' },
+  { name:'Kristina Lightel', title:'County Court Judge, Group 4', employer:'Escambia County', tag:'state', salary:172693, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198 — county court judge salary', url:'https://www.flsenate.gov/Session/Bill/2025/2500/BillText/er/PDF' },
+  { name:'Kerra A. Smith', title:'County Court Judge, Group 5', employer:'Escambia County', tag:'state', salary:172693, year:'FY2025-26', source:'FL General Appropriations Act Ch. 2025-198 — county court judge salary', url:'https://www.flsenate.gov/Session/Bill/2025/2500/BillText/er/PDF' },
 ];
 window.PAY_DATA = PAY_CONFIRMED;
 
@@ -2649,7 +2499,7 @@ function _payTagHtml(tag) {
   return m[tag] ? '<span class="pay-emp-tag '+cls[tag]+'">'+m[tag]+'</span>' : '';
 }
 
-// Live-as-you-type pay search â instant results from local index, no AI call
+// Live-as-you-type pay search — instant results from local index, no AI call
 window.livePaySearch = function(q) {
   const resultsBox = document.getElementById('payTopResults');
   const noDBBox    = document.getElementById('payNoDB');
@@ -2681,7 +2531,7 @@ window.livePaySearch = function(q) {
           <div style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:14px;color:white;margin-bottom:2px;">
             ${r.name} ${payEmpTag(r.tag)}
           </div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.55);">${r.title} Â· ${r.employer}</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.55);">${r.title} · ${r.employer}</div>
         </div>
         <div style="text-align:right;flex-shrink:0;">
           <div style="font-family:'DM Sans',sans-serif;font-weight:900;font-size:18px;color:var(--gold);">$${Number(r.salary).toLocaleString()}</div>
@@ -2692,14 +2542,14 @@ window.livePaySearch = function(q) {
     resultsBox.style.display = '';
     if (noDBBox) noDBBox.style.display = 'none';
   } else {
-    // Not in index â show DB links inline
+    // Not in index — show DB links inline
     const encQ = encodeURIComponent(q.trim());
     resultsBox.innerHTML = `<div style="font-size:12px;color:rgba(255,255,255,0.5);padding:8px 0 4px;font-style:italic;">Not in our elected-official index. Search the full public databases:</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-        <a href="https://myescambia.com/open-government/employee-wages" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:var(--gold);text-decoration:none;background:rgba(212,149,43,0.12);border:1px solid rgba(212,149,43,0.3);border-radius:999px;padding:4px 12px;">Escambia County wages â</a>
-        <a href="https://govsalaries.com/salaries/FL/city-of-pensacola?search=${encQ}" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:var(--gold);text-decoration:none;background:rgba(212,149,43,0.12);border:1px solid rgba(212,149,43,0.3);border-radius:999px;padding:4px 12px;">City of Pensacola â</a>
-        <a href="https://govsalaries.com/salaries/FL/escambia-county-school-district?search=${encQ}" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:var(--gold);text-decoration:none;background:rgba(212,149,43,0.12);border:1px solid rgba(212,149,43,0.3);border-radius:999px;padding:4px 12px;">ECSD Salaries â</a>
-        <a href="https://salaries.myflorida.com/employees?search=${encQ}" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:var(--gold);text-decoration:none;background:rgba(212,149,43,0.12);border:1px solid rgba(212,149,43,0.3);border-radius:999px;padding:4px 12px;">FL State Employees â</a>
+        <a href="https://myescambia.com/open-government/employee-wages" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:var(--gold);text-decoration:none;background:rgba(212,149,43,0.12);border:1px solid rgba(212,149,43,0.3);border-radius:999px;padding:4px 12px;">Escambia County wages ↗</a>
+        <a href="https://govsalaries.com/salaries/FL/city-of-pensacola?search=${encQ}" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:var(--gold);text-decoration:none;background:rgba(212,149,43,0.12);border:1px solid rgba(212,149,43,0.3);border-radius:999px;padding:4px 12px;">City of Pensacola ↗</a>
+        <a href="https://govsalaries.com/salaries/FL/escambia-county-school-district?search=${encQ}" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:var(--gold);text-decoration:none;background:rgba(212,149,43,0.12);border:1px solid rgba(212,149,43,0.3);border-radius:999px;padding:4px 12px;">ECSD Salaries ↗</a>
+        <a href="https://salaries.myflorida.com/employees?search=${encQ}" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;color:var(--gold);text-decoration:none;background:rgba(212,149,43,0.12);border:1px solid rgba(212,149,43,0.3);border-radius:999px;padding:4px 12px;">FL State Employees ↗</a>
       </div>`;
     resultsBox.style.display = '';
     if (noDBBox) noDBBox.style.display = 'none';
@@ -2722,12 +2572,12 @@ window.runPaySearch = async function() {
 
   // Show loading state
   resultsBox.style.display = '';
-  resultsBox.innerHTML = `<div style="font-size:13px;color:rgba(255,255,255,0.5);padding:8px 0;font-style:italic;">Searchingâ¦</div>`;
+  resultsBox.innerHTML = `<div style="font-size:13px;color:rgba(255,255,255,0.5);padding:8px 0;font-style:italic;">Searching…</div>`;
   if (noDBBox) noDBBox.style.display = 'none';
 
   const qLow = q.toLowerCase();
 
-  // Local confirmed index â elected/appointed officials only
+  // Local confirmed index — elected/appointed officials only
   const localHits = PAY_CONFIRMED.filter(r =>
     r.name.toLowerCase().includes(qLow) ||
     r.title.toLowerCase().includes(qLow) ||
@@ -2739,15 +2589,15 @@ window.runPaySearch = async function() {
     `${r.name} | ${r.title} | ${r.employer} | $${Number(r.salary).toLocaleString()} | ${r.year} | ${r.source}`
   ).join('\n');
 
-  // Deep-link URLs for the real databases â pre-filled with the search query
+  // Deep-link URLs for the real databases — pre-filled with the search query
   const encQ = encodeURIComponent(q);
   const dbLinks = [
-    { label:'Escambia County BCC wages', url:`https://myescambia.com/open-government/employee-wages`, note:'1,500+ BCC employees Â· official county database' },
-    { label:'GovSalaries â Escambia County', url:`https://govsalaries.com/salaries/FL/escambia-county?search=${encQ}`, note:'1,494 employees Â· 2023 payroll data' },
-    { label:'GovSalaries â City of Pensacola', url:`https://govsalaries.com/salaries/FL/city-of-pensacola?search=${encQ}`, note:'836 employees Â· 2023 payroll data' },
-    { label:'GovSalaries â Escambia School District', url:`https://govsalaries.com/salaries/FL/escambia-county-school-district?search=${encQ}`, note:'6,998 employees Â· 2024 payroll data' },
+    { label:'Escambia County BCC wages', url:`https://myescambia.com/open-government/employee-wages`, note:'1,500+ BCC employees · official county database' },
+    { label:'GovSalaries — Escambia County', url:`https://govsalaries.com/salaries/FL/escambia-county?search=${encQ}`, note:'1,494 employees · 2023 payroll data' },
+    { label:'GovSalaries — City of Pensacola', url:`https://govsalaries.com/salaries/FL/city-of-pensacola?search=${encQ}`, note:'836 employees · 2023 payroll data' },
+    { label:'GovSalaries — Escambia School District', url:`https://govsalaries.com/salaries/FL/escambia-county-school-district?search=${encQ}`, note:'6,998 employees · 2024 payroll data' },
     { label:'Florida state employees', url:`https://salaries.myflorida.com/employees?search=${encQ}`, note:'State attorneys, judges, state agency staff' },
-    { label:'OpenPayrolls â Florida', url:`https://openpayrolls.com/search?name=${encQ}&state=florida`, note:'Multi-year Florida government payroll records' },
+    { label:'OpenPayrolls — Florida', url:`https://openpayrolls.com/search?name=${encQ}&state=florida`, note:'Multi-year Florida government payroll records' },
   ];
 
   let aiText = '';
@@ -2765,7 +2615,7 @@ window.runPaySearch = async function() {
 Here is The Flightline's confirmed elected/appointed officials index:
 ${confirmedContext}
 
-Answer directly in 2-3 sentences. If the query matches someone in the confirmed index, state their exact salary, year, and source. If the query is for a non-elected employee (teacher, deputy, clerk, etc.), explain that individual employee salaries for all city and county workers are public record in Florida and are searchable in the databases listed below â be specific about which database covers which employer (Escambia County BCC, City of Pensacola, ECSD, Sheriff's Office, or state agencies). Never fabricate a specific salary for someone not in the confirmed index. Plain language, no bullet points.`
+Answer directly in 2-3 sentences. If the query matches someone in the confirmed index, state their exact salary, year, and source. If the query is for a non-elected employee (teacher, deputy, clerk, etc.), explain that individual employee salaries for all city and county workers are public record in Florida and are searchable in the databases listed below — be specific about which database covers which employer (Escambia County BCC, City of Pensacola, ECSD, Sheriff's Office, or state agencies). Never fabricate a specific salary for someone not in the confirmed index. Plain language, no bullet points.`
         }]
       })
     });
@@ -2786,13 +2636,13 @@ Answer directly in 2-3 sentences. If the query matches someone in the confirmed 
           <div style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:14px;color:white;margin-bottom:2px;">
             ${r.name} <span style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);padding:2px 5px;border-radius:2px;margin-left:4px;">${r.tag.toUpperCase()}</span>
           </div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.55);">${r.title} Â· ${r.employer}</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.55);">${r.title} · ${r.employer}</div>
           <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px;">Source: ${r.source}</div>
         </div>
         <div style="text-align:right;flex-shrink:0;">
           <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);line-height:1;">$${Number(r.salary).toLocaleString()}</div>
           <div style="font-size:10px;color:rgba(255,255,255,0.45);">${r.year}</div>
-          <div style="font-size:10px;color:var(--gold);margin-top:2px;">Source â</div>
+          <div style="font-size:10px;color:var(--gold);margin-top:2px;">Source ↗</div>
         </div>
       </a>`).join('');
   }
@@ -2809,7 +2659,7 @@ Answer directly in 2-3 sentences. If the query matches someone in the confirmed 
       <a href="${d.url}" target="_blank" rel="noopener"
          style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-decoration:none;gap:12px;">
         <div>
-          <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;color:var(--gold);">${d.label} â</div>
+          <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;color:var(--gold);">${d.label} ↗</div>
           <div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:1px;">${d.note}</div>
         </div>
       </a>`).join('')}
@@ -2837,9 +2687,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─────────────────────────────────────────────────────────────────────────────
 // RIGHT NOW IN PENSACOLA strip
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─────────────────────────────────────────────────────────────────────────────
 (function() {
   const strip = document.getElementById('right-now-strip');
   const elTemp    = document.getElementById('rn-temp');
@@ -2854,10 +2704,10 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   function renderStrip() {
-    // Temp â pulled from topbar text
+    // Temp — pulled from topbar text
     const topbar = document.getElementById('topbar-weather');
-    const tempTxt = topbar ? topbar.textContent.split('Â·')[0].trim() : '';
-    if (elTemp && tempTxt) elTemp.innerHTML = 'ð¡ ' + tempTxt;
+    const tempTxt = topbar ? topbar.textContent.split('·')[0].trim() : '';
+    if (elTemp && tempTxt) elTemp.innerHTML = '🌡 ' + tempTxt;
 
     // Beach flag
     if (elFlag && _rnData.flag) {
@@ -2870,9 +2720,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (elTraffic && window._trafficState) {
       const avg = window._trafficState.avgRatio;
       if (avg != null) {
-        const dot   = avg < 1.15 ? '<span style="color:#22c55e;font-size:10px;">â</span>'
-                    : avg < 1.4  ? '<span style="color:#f59e0b;font-size:10px;">â</span>'
-                    :              '<span style="color:#ef4444;font-size:10px;">â</span>';
+        const dot   = avg < 1.15 ? '<span style="color:#22c55e;font-size:10px;">●</span>'
+                    : avg < 1.4  ? '<span style="color:#f59e0b;font-size:10px;">●</span>'
+                    :              '<span style="color:#ef4444;font-size:10px;">●</span>';
         const label = avg < 1.15 ? 'Traffic: Clear'
                     : avg < 1.4  ? 'Traffic: Moderate'
                     :              'Traffic: Heavy';
@@ -2895,9 +2745,9 @@ document.addEventListener('DOMContentLoaded', function() {
   setInterval(renderStrip, 60000);
 })();
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─────────────────────────────────────────────────────────────────────────────
 // LAST UPDATED TIMESTAMP
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─────────────────────────────────────────────────────────────────────────────
 (function() {
   const el = document.getElementById('last-updated-stamp');
   if (!el) return;
@@ -2906,68 +2756,58 @@ document.addEventListener('DOMContentLoaded', function() {
   el.textContent = 'Updated ' + t;
 })();
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─────────────────────────────────────────────────────────────────────────────
 // NEIGHBORHOOD FILTER
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-function filterTag(sectionId, tag, btn) {
-  // Update button state within this section's filter bar
-  var filterBar = btn.parentElement;
-  filterBar.querySelectorAll('.nbhd-btn').forEach(function(b) { b.classList.remove('active'); });
+// ─────────────────────────────────────────────────────────────────────────────
+function filterNeighborhood(nbhd, btn) {
+  // Update button state
+  document.querySelectorAll('.nbhd-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  // Get the section element and find its cards
-  var section = document.getElementById(sectionId);
-  if (!section) return;
+  // Filter cards
+  const cards = document.querySelectorAll('#news-article-list .article-card');
+  cards.forEach(card => {
+    if (nbhd === 'all') {
+      card.style.display = '';
+    } else {
+      const cardNbhd = card.dataset.nbhd || '';
+      card.style.display = cardNbhd === nbhd ? '' : 'none';
+    }
+  });
 
-  // Rebuild cards for this section with the selected tag filter
-  var cat = '';
-  for (var i = 0; i < HOME_SECTION_CATS.length; i++) {
-    if (HOME_SECTION_CATS[i].id === sectionId) { cat = HOME_SECTION_CATS[i].cat; break; }
+  // Show empty state if needed
+  const list = document.getElementById('news-article-list');
+  if (!list) return;
+  const visible = [...cards].filter(c => c.style.display !== 'none');
+  let emptyEl = list.querySelector('.nbhd-empty');
+  if (visible.length === 0 && nbhd !== 'all') {
+    if (!emptyEl) {
+      emptyEl = document.createElement('div');
+      emptyEl.className = 'nbhd-empty';
+      emptyEl.style.cssText = 'padding:20px 0;font-size:13px;color:var(--g2);text-align:center;';
+      emptyEl.textContent = 'No stories tagged for this neighborhood yet.';
+      list.appendChild(emptyEl);
+    }
+    emptyEl.style.display = '';
+  } else if (emptyEl) {
+    emptyEl.style.display = 'none';
   }
-  if (!cat) return;
-
-  var articles = Object.entries(A)
-    .filter(function(e) { return e[1].cat === cat; })
-    .filter(function(e) { return tag === 'all' || autoTag(e[0], e[1]) === tag; })
-    .sort(function(a, b) { return pubDate(b[0]) - pubDate(a[0]); })
-    .slice(0, 6);
-
-  var cards = '';
-  for (var j = 0; j < articles.length; j++) {
-    var id = articles[j][0];
-    var art = articles[j][1];
-    var artTag = autoTag(id, art);
-    var cls = 'story-card' + (j === 0 ? ' gold-top' : '');
-    cards += '<div class="' + cls + '" data-tag="' + artTag + '" onclick="openArticle(\'' + id + '\')">';
-    cards += '<div class="story-card-img">' + homeCardImg(id, art) + '</div>';
-    cards += '<span class="cat-badge cat-' + art.cat + '">' + catDisplay(art.cat) + '</span>';
-    cards += '<div class="headline-md">' + art.headline + '</div>';
-    cards += '<div class="dek-sm">' + (art.dek || '') + '</div>';
-    cards += '<div class="byline">' + art.date + '</div>';
-    cards += '</div>';
-  }
-
-  var threeCol = section.querySelector('.three-col');
-  if (threeCol) threeCol.innerHTML = cards;
 }
 
-// Keep old name as alias for any remaining references
-function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
 
-
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─────────────────────────────────────────────────────────────────────────────
 // ON THIS DAY IN PENSACOLA
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─────────────────────────────────────────────────────────────────────────────
 (function() {
   // Keyed by MM-DD, entries: { text, articleId (optional) }
   const ON_THIS_DAY = {
-    '01-01': { text: 'Pensacola, founded 1559, is the oldest European settlement site in the continental U.S. â older than St. Augustine by six years.', articleId: 'history-galvez' },
-    '01-08': { text: 'NAS Pensacola commissioned in 1914 â the first naval air station in the United States.', articleId: 'history-naval-aviation' },
-    '03-18': { text: 'In 1781, Bernardo de GÃ¡lvez sailed alone into Pensacola Bay under British cannon fire â forcing the rest of his fleet to follow.', articleId: 'history-galvez' },
-    '05-10': { text: 'On May 10, 1781, Pensacola surrendered to Spain after a 61-day siege â ending British West Florida for good.', articleId: 'history-galvez' },
-    '09-16': { text: 'Hurricane Sally made landfall near Gulf Shores in 2020 at 2 mph â dropping 30 inches of rain on Pensacola in 24 hours and damaging both bay bridges.', articleId: null },
-    '04-04': { text: 'The Blue Wahoos open their 2026 season at Blue Wahoos Stadium this week â one of the best minor league ballparks in the country.', articleId: 'wahoos' },
-    '04-07': { text: 'Bands on the Beach returns tonight at Gulfside Pavilion on Pensacola Beach â free admission, gates at 6 PM.', articleId: null },
+    '01-01': { text: 'Pensacola, founded 1559, is the oldest European settlement site in the continental U.S. — older than St. Augustine by six years.', articleId: 'history-galvez' },
+    '01-08': { text: 'NAS Pensacola commissioned in 1914 — the first naval air station in the United States.', articleId: 'history-naval-aviation' },
+    '03-18': { text: 'In 1781, Bernardo de Gálvez sailed alone into Pensacola Bay under British cannon fire — forcing the rest of his fleet to follow.', articleId: 'history-galvez' },
+    '05-10': { text: 'On May 10, 1781, Pensacola surrendered to Spain after a 61-day siege — ending British West Florida for good.', articleId: 'history-galvez' },
+    '09-16': { text: 'Hurricane Sally made landfall near Gulf Shores in 2020 at 2 mph — dropping 30 inches of rain on Pensacola in 24 hours and damaging both bay bridges.', articleId: null },
+    '04-04': { text: 'The Blue Wahoos open their 2026 season at Blue Wahoos Stadium this week — one of the best minor league ballparks in the country.', articleId: 'wahoos' },
+    '04-07': { text: 'Bands on the Beach returns tonight at Gulfside Pavilion on Pensacola Beach — free admission, gates at 6 PM.', articleId: null },
   };
 
   const body = document.getElementById('on-this-day-body');
@@ -2979,18 +2819,18 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
 
   if (entry) {
     const linkHtml = entry.articleId
-      ? `<a href="javascript:void(0)" onclick="openArticle('${entry.articleId}')" style="font-family:'DM Sans';font-size:9px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:block;margin-top:7px;">Read the story â</a>`
+      ? `<a href="javascript:void(0)" onclick="openArticle('${entry.articleId}')" style="font-family:'DM Sans';font-size:9px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:block;margin-top:7px;">Read the story →</a>`
       : '';
     body.innerHTML = `<div style="font-size:11px;line-height:1.55;color:rgba(255,255,255,0.75);">${entry.text}</div>${linkHtml}`;
   } else {
-    // Fallback â always show something
-    body.innerHTML = `<div style="font-size:11px;line-height:1.55;color:rgba(255,255,255,0.75);">Pensacola was first settled by Spanish colonists in 1559 â making it the oldest European settlement site in the continental United States.</div><a href="javascript:void(0)" onclick="openArticle('history-galvez')" style="font-family:'DM Sans';font-size:9px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:block;margin-top:7px;">Read the story â</a>`;
+    // Fallback — always show something
+    body.innerHTML = `<div style="font-size:11px;line-height:1.55;color:rgba(255,255,255,0.75);">Pensacola was first settled by Spanish colonists in 1559 — making it the oldest European settlement site in the continental United States.</div><a href="javascript:void(0)" onclick="openArticle('history-galvez')" style="font-family:'DM Sans';font-size:9px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:block;margin-top:7px;">Read the story →</a>`;
   }
 })();
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─────────────────────────────────────────────────────────────────────────────
 // PENSACOLA TIDES SIDEBAR WIDGET
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─────────────────────────────────────────────────────────────────────────────
 (function() {
   const body = document.getElementById('tides-sidebar-body');
   if (!body) return;
@@ -3019,7 +2859,7 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
       // Next tide highlight
       const next = items.find(i => !i.isPast);
 
-      // Build bar chart â normalize heights to % bar
+      // Build bar chart — normalize heights to % bar
       const heights = items.map(i => parseFloat(i.ht));
       const maxH = Math.max(...heights);
       const minH = Math.min(...heights);
@@ -3039,7 +2879,7 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
       }).join('');
 
       const nextStr = next
-        ? `<div style="font-size:10px;color:var(--g1);margin-top:6px;padding-top:6px;border-top:1px solid var(--bd);">Next: <strong style="color:var(--navy);">${next.isHigh ? 'â High' : 'â Low'} ${next.ht} ft</strong> at ${next.timeStr} Â· Station 8729840</div>`
+        ? `<div style="font-size:10px;color:var(--g1);margin-top:6px;padding-top:6px;border-top:1px solid var(--bd);">Next: <strong style="color:var(--navy);">${next.isHigh ? '↑ High' : '↓ Low'} ${next.ht} ft</strong> at ${next.timeStr} · Station 8729840</div>`
         : '';
 
       body.innerHTML = `
@@ -3058,28 +2898,7 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
 
 
 
-// ââ URL ROUTING âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-
-// âââ DYNAMIC TICKER ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-function buildTicker() {
-  var track = document.getElementById('ticker-track');
-  if (!track) return;
-  var sorted = Object.entries(A)
-    .filter(function(e) { return e[1].cat !== 'events' && e[1].cat !== 'opinion'; })
-    .sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); })
-    .slice(0, 5);
-  var html = '';
-  sorted.forEach(function(entry) {
-    var id = entry[0], a = entry[1];
-    var text = a.headline || '';
-    if (text.length > 80) text = text.substring(0, 77) + '...';
-    html += '<span class="ticker-item" onclick="openArticle(\'' + id + '\')">' + text + '</span><span class="ticker-sep">\u00b7</span>';
-  });
-  // Duplicate for seamless scroll
-  track.innerHTML = html + html;
-}
-buildTicker();
-
+// ── URL ROUTING ─────────────────────────────────────────────────────────────
 window.addEventListener('popstate', function(e) {
   if (e.state && e.state.articleId) {
     onArticlesReady(function() { openArticle(e.state.articleId); });
@@ -3089,19 +2908,11 @@ window.addEventListener('popstate', function(e) {
     document.body.style.overflow = '';
   }
 });
-// On load â check if URL is /story/slug and open that article
+// On load — check if URL is /story/slug and open that article
 (function() {
-  var storyMatch = location.pathname.match(/^\/story\/(.+)$/);
-  if (storyMatch) {
-    onArticlesReady(function() { openArticle(storyMatch[1]); });
-    return;
-  }
-  if (location.pathname === '/all') {
-    onArticlesReady(function() { goAllArticles(); });
-    return;
-  }
-  var catMatch = location.pathname.match(/^\/category\/(.+)$/);
-  if (catMatch) {
-    onArticlesReady(function() { goCategory(catMatch[1]); });
+  var match = location.pathname.match(/^\/story\/(.+)$/);
+  if (match) {
+    var slug = match[1];
+    onArticlesReady(function() { openArticle(slug); });
   }
 })();
