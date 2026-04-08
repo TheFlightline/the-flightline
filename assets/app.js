@@ -1,18 +1,184 @@
 // ── ARTICLE DATA LOADER ─────────────────────────────────────────────────────
-let A = {};
+var A = window.A || {};
 let articlesReady = false;
 const articleReadyCallbacks = [];
 function onArticlesReady(fn) {
   if (articlesReady) { fn(); } else { articleReadyCallbacks.push(fn); }
 }
-fetch('/articles.json')
-  .then(r => r.json())
-  .then(data => {
-    data.forEach(art => { A[art.id] = art; });
-    articlesReady = true;
-    articleReadyCallbacks.forEach(fn => fn());
-  })
-  .catch(e => console.error('Failed to load articles.json', e));
+
+// --- LIVE DATE ---
+(function() {
+  var el = document.getElementById('topbar-date');
+  if (!el) return;
+  var d = new Date();
+  var h = d.getHours();
+  var greeting = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  el.textContent = greeting + ', it\u2019s ' + days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+})();
+
+// ── PUB DATE HELPER — use key prefix not date field for sorting ───────────────
+function 
+  // --- LIVE DATE ---
+  (function() {pubDate(id) {
+  if (!id) return new Date(0);
+  var result;
+  var m = id.match(/^(\d{4})(\d{2})(\d{2})/);
+  if (m) { result = new Date(m[1]+'-'+m[2]+'-'+m[3]); }
+  else if (A[id] && A[id].date) {
+    var d = new Date(A[id].date);
+    if (!isNaN(d.getTime())) result = d;
+  }
+  if (!result) return new Date(0);
+  var today = new Date(); today.setHours(23,59,59,999);
+  return result > today ? new Date(1) : result;
+}
+
+function autoTag(id, art) {
+  if (art.tag) return art.tag;
+  var text = ((art.headline || '') + ' ' + (art.dek || '') + ' ' + id + ' ' + (art.label || '')).toLowerCase();
+  if (text.indexOf('gulf breeze') > -1 || text.indexOf('gulf-breeze') > -1 || text.indexOf('gulfbreeze') > -1) return 'gulfbreeze';
+  if (text.indexOf('pensacola beach') > -1 || text.indexOf('perdido') > -1 || text.indexOf('beach blvd') > -1 || text.indexOf('beach nourishment') > -1 || text.indexOf('casino beach') > -1 || text.indexOf('fort pickens') > -1) return 'beach';
+  if (text.indexOf('escambia county') > -1 || text.indexOf('escambia commission') > -1 || text.indexOf('county commission') > -1 || text.indexOf('molino') > -1 || text.indexOf('cantonment') > -1 || text.indexOf('century') > -1 || text.indexOf('warrington') > -1 || text.indexOf('brent') > -1 || text.indexOf('bellview') > -1 || text.indexOf('gonzalez') > -1 || text.indexOf('ensley') > -1 || text.indexOf('myrtle grove') > -1) return 'escambia';
+  if (text.indexOf('downtown') > -1 || text.indexOf('palafox') > -1 || text.indexOf('garden street') > -1 || text.indexOf('bayfront') > -1 || text.indexOf('bay center') > -1 || text.indexOf('saenger') > -1 || text.indexOf('maritime park') > -1 || text.indexOf('community maritime') > -1 || text.indexOf('gallery night') > -1 || text.indexOf('vinyl music') > -1 || text.indexOf('fish house') > -1 || text.indexOf('alcaniz') > -1 || text.indexOf('intendencia') > -1) return 'downtown';
+  return 'pensacola';
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+const CAT_DISPLAY={govt:"Government",government:"Government",dev:"Business",development:"Business",business:"Business",military:"Military",news:"News",education:"Education",sports:"Sports",events:"Events",opinion:"Opinion",environment:"Environment",tourism:"Tourism",traffic:"Traffic",community:"Community"};
+function catDisplay(c){return CAT_DISPLAY[c]||(c.charAt(0).toUpperCase()+c.slice(1));}
+
+// ── HOME SECTION UNIFIED PHOTO-GRID RENDER ───────────────────────────────────
+const HOME_SECTION_CATS = [
+  { id: 'news',             cat: 'govt',     label: 'Government',                nbhdFilter: true },
+  { id: 'development',      cat: 'dev',      label: 'Business & Development',    nbhdFilter: true },
+  { id: 'military',         cat: 'military', label: 'Military & NAS Pensacola',  nbhdFilter: true },
+  { id: 'sports',           cat: 'sports',   label: 'Sports',                    nbhdFilter: true },
+  { id: 'opinion-section',  cat: 'opinion',  label: 'Opinion & Analysis',        nbhdFilter: true },
+];
+
+const HOME_PHOTOS = {
+  govt:        ['/images/downtown_pensacola-aerial-downtown_003.jpg', '/images/editorial_gavel_005.jpg', '/images/govt_public-hearing_009.jpg'],
+  government:  ['/images/downtown_pensacola-aerial-downtown_003.jpg', '/images/editorial_gavel_005.jpg', '/images/govt_public-hearing_009.jpg'],
+  dev:         ['/images/development_construction-crane_001.jpg', '/images/development_road-work_002.jpg', '/images/development_scaffolding_003.jpg'],
+  development: ['/images/development_construction-crane_001.jpg', '/images/development_road-work_002.jpg', '/images/downtown_pensacola-aerial-downtown_003.jpg'],
+  military:    ['/images/military_blue-angels_001.jpg', '/images/military_nas_002.jpg', '/images/military_aircraft_003.jpg'],
+  news:        ['/images/downtown_palafox-street-clock_007.jpg', '/images/downtown_waterfront_004.jpg', '/images/editorial_press_001.jpg'],
+  education:   ['/images/education_uwf_001.jpg', '/images/education_campus_003.jpg', '/images/community_park_003.jpg'],
+  sports:      ['/images/sports_wahoos_001.jpg', '/images/sports_stadium_002.jpg', '/images/community_park_003.jpg'],
+  events:      ['/images/downtown_palafox-street-dusk_008.jpg', '/images/community_park_003.jpg', '/images/downtown_waterfront_004.jpg'],
+  opinion:     ['/images/editorial_press_001.jpg', '/images/editorial_gavel_005.jpg', '/images/downtown_pensacola-aerial-downtown_003.jpg'],
+  environment: ['/images/community_park_003.jpg', '/images/downtown_waterfront_004.jpg', '/images/editorial_press_001.jpg'],
+  tourism:     ['/images/downtown_waterfront_004.jpg', '/images/downtown_palafox-street-dusk_008.jpg', '/images/community_park_003.jpg'],
+  traffic:     ['/images/development_road-work_002.jpg', '/images/development_construction-crane_001.jpg', '/images/downtown_pensacola-aerial-downtown_003.jpg'],
+  community:   ['/images/community_park_003.jpg', '/images/downtown_palafox-street-clock_007.jpg', '/images/downtown_waterfront_004.jpg'],
+};
+
+function homeCardImg(id, art) {
+  if (art.thumbnail) {
+    return '<img src="' + art.thumbnail + '" alt="' + art.cat + '" style="width:100%;height:100%;object-fit:cover;">';
+  }
+  var pool = HOME_PHOTOS[art.cat] || HOME_PHOTOS.news;
+  var idx = Math.abs(id.split('').reduce(function(a, c) { return a + c.charCodeAt(0); }, 0)) % pool.length;
+  return '<img src="' + pool[idx] + '" alt="' + art.cat + '" style="width:100%;height:100%;object-fit:cover;">';
+}
+
+function homeNbhd(id, art) {
+  var KNOWN = {
+    '20260402-escambia-commission-clerk-childers': 'downtown',
+    '20260402-warringtons-damaged-hotel-gets': 'warrington',
+    '20260404-sunshine-escambia-county-pensacolas': 'downtown',
+    '20260327-city-council-awards-78m': 'downtown',
+    '20260116-escambia-zoning-scam-warning': 'downtown',
+    '20260401-flight-line-access-restored': 'nas',
+    '20260402-nas-pensacola-family-housing': 'nas',
+    '20260401-blue-wahoos-complete-ballpark': 'downtown',
+  };
+  if (KNOWN[id]) return KNOWN[id];
+  if (art.cat === 'military') return 'nas';
+  if (art.label && art.label.indexOf('Gulf Breeze') > -1) return 'gulf-breeze';
+  if (art.label && art.label.indexOf('Pensacola Beach') > -1) return 'perdido-key';
+  if (art.label && art.label.indexOf('Warrington') > -1) return 'warrington';
+  if (art.label && art.label.indexOf('East Hill') > -1) return 'east-hill';
+  return 'downtown';
+}
+
+function buildSection(sectionId, cat, nbhdFilter) {
+  var el = document.getElementById(sectionId);
+  if (!el) return;
+
+  var articles = Object.entries(A)
+    .filter(function(e) { return e[1].cat === cat; })
+    .sort(function(a, b) { return pubDate(b[0]) - pubDate(a[0]); })
+    .slice(0, 3);
+
+  if (!articles.length) return;
+
+  var sectionLabel = el.querySelector('.section-label');
+  var labelHtml = sectionLabel ? sectionLabel.outerHTML : '';
+
+  var nbhdHtml = '';
+  if (nbhdFilter) {
+    var tags = [['all','All'],['pensacola','Pensacola'],['downtown','Downtown'],['escambia','Escambia County'],['beach','Pensacola Beach'],['gulfbreeze','Gulf Breeze']];
+    nbhdHtml = '<div class="tag-filters" data-section="' + sectionId + '" style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;">';
+    for (var n = 0; n < tags.length; n++) {
+      nbhdHtml += '<button class="nbhd-btn' + (tags[n][0] === 'all' ? ' active' : '') + '" data-tag="' + tags[n][0] + '" onclick="filterTag(\'' + sectionId + '\',\'' + tags[n][0] + '\',this)">' + tags[n][1] + '</button>';
+    }
+    nbhdHtml += '</div>';
+  }
+
+  var cards = '';
+  for (var i = 0; i < articles.length; i++) {
+    var id = articles[i][0];
+    var art = articles[i][1];
+    var tag = autoTag(id, art);
+    var cls = 'story-card' + (i === 0 ? ' gold-top' : '');
+    cards += '<div class="' + cls + '" data-tag="' + tag + '" onclick="openArticle(\'' + id + '\')">';
+    cards += '<div class="story-card-img">' + homeCardImg(id, art) + '</div>';
+    cards += '<span class="cat-badge cat-' + art.cat + '">' + catDisplay(art.cat) + '</span>';
+    cards += '<div class="headline-md">' + art.headline + '</div>';
+    cards += '<div class="dek-sm">' + (art.dek || '') + '</div>';
+    cards += '<div class="byline">' + art.date + '</div>';
+    cards += '</div>';
+  }
+
+  el.innerHTML = labelHtml + nbhdHtml + '<div class="three-col">' + cards + '</div>';
+}
+
+function buildHomeFeed() {
+  for (var s = 0; s < HOME_SECTION_CATS.length; s++) {
+    var sec = HOME_SECTION_CATS[s];
+    buildSection(sec.id, sec.cat, sec.nbhdFilter);
+  }
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
+function renderMobileLatest() {
+  var el = document.getElementById('mobile-latest-list');
+  if (!el) return;
+  // Sort by key date prefix descending (keys start with YYYYMMDD-)
+  var sorted = Object.keys(A).sort(function(a,b){ return pubDate(b) - pubDate(a); });
+  var top3 = sorted.slice(0, 3);
+  el.innerHTML = top3.map(function(id) {
+    var art = A[id];
+    var cat = art.label || '';
+    var date = art.date || '';
+    var meta = [cat, date].filter(Boolean).join(' · ');
+    return '<div class="mob-latest-item" onclick="event.stopPropagation();openArticle(\'' + id + '\')">'
+      + '<div class="mob-latest-hed">' + art.headline + '</div>'
+      + (meta ? '<div class="mob-latest-meta">' + meta + '</div>' : '')
+      + '</div>';
+  }).join('');
+}
+
+
+// articles.js loaded synchronously via <script> tag — boot immediately
+articlesReady = true;
+articleReadyCallbacks.forEach(fn => fn());
+buildHomeFeed();
+setTimeout(buildHomeFeed, 300);
+renderMobileLatest();
 function updateBackToTop() {
   const btn = document.getElementById('back-to-top');
   if (!btn) return;
@@ -32,11 +198,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Category labels map
 const CAT_META = {
-  news:      { label:'Local News',              color:'var(--cat-news)' },
+  news:      { label:'News',                    color:'var(--cat-news)' },
   govt:      { label:'Government',              color:'var(--cat-govt)' },
-  dev:       { label:'Development & Infrastructure', color:'var(--cat-dev)' },
+  dev:       { label:'Business & Development',  color:'var(--cat-dev)' },
+  business:  { label:'Business & Development',  color:'var(--cat-dev)' },
   opinion:   { label:'Opinion & Analysis',      color:'var(--cat-opinion)' },
-  events:    { label:'Arts & Events',           color:'var(--cat-events)' },
+  events:    { label:'Events',                  color:'var(--cat-events)' },
   military:  { label:'Military',                color:'var(--cat-military)' },
   education: { label:'Education',               color:'var(--cat-education)' },
   sports:    { label:'Sports',                  color:'var(--cat-sports)' },
@@ -160,9 +327,9 @@ function goPage(page) {
   if (page === 'pay') setTimeout(initPayCharts, 0);
 }
 
-function goCategory(cat) {
+function goCategory(cat, page) {
   const meta = CAT_META[cat] || { label: cat, color:'var(--navy)' };
-  const matches = Object.entries(A).filter(([id, a]) => a.cat === cat);
+  const matches = Object.entries(A).filter(([id, a]) => a.cat === cat).sort((a,b) => pubDate(b[0]) - pubDate(a[0]));
   if (!matches.length) return;
 
   document.getElementById('cat-page-title').textContent = meta.label;
@@ -331,18 +498,42 @@ function goCategory(cat) {
     spotlightHtml = calSpotlight + spotlightHtml;
   }
 
-  const cards = regularMatches.map(([id, a]) => `
+  
+  var perPage = 25;
+  var currentPage = page || 1;
+  var totalPages = Math.ceil(regularMatches.length / perPage);
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
+  var pageMatches = regularMatches.slice((currentPage - 1) * perPage, currentPage * perPage);
+
+  const cards = pageMatches.map(([id, a]) => `
     <div class="cat-card" onclick="openArticle('${id}')">
       <div class="cat-card-img" style="overflow:hidden;">${a.thumbnail ? `<img src="${a.thumbnail}" alt="${a.cat}" style="width:100%;height:100%;object-fit:cover;">` : catImg(a.cat, id)}</div>
       <div class="cat-card-body">
-        <span class="cat-badge cat-${a.cat}" style="cursor:default">${a.label}</span>
+        <span class="cat-badge cat-${a.cat}" style="cursor:default">${catDisplay(a.cat)}</span>
         <div class="cat-card-headline">${a.headline}</div>
         <div class="cat-card-dek">${a.dek||''}</div>
         <div class="cat-card-meta">${a.byline} · ${a.date}</div>
       </div>
     </div>`).join('');
 
-  document.getElementById('cat-card-grid').innerHTML = spotlightHtml + cards;
+  
+  var pagHtml = '';
+  if (totalPages > 1) {
+    pagHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:32px;padding:20px 0;flex-wrap:wrap;grid-column:1/-1;">';
+    if (currentPage > 1) {
+      pagHtml += '<button onclick="goCategory(\'' + cat + '\',' + (currentPage - 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">\u2190 Previous</button>';
+    }
+    for (var p = 1; p <= totalPages; p++) {
+      pagHtml += '<button onclick="goCategory(\'' + cat + '\',' + p + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (p === currentPage ? '800' : '600') + ';padding:8px 12px;border:1px solid ' + (p === currentPage ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (p === currentPage ? 'var(--navy)' : '#fff') + ';color:' + (p === currentPage ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + p + '</button>';
+    }
+    if (currentPage < totalPages) {
+      pagHtml += '<button onclick="goCategory(\'' + cat + '\',' + (currentPage + 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">Next \u2192</button>';
+    }
+    pagHtml += '</div>';
+  }
+
+  document.getElementById('cat-card-grid').innerHTML = spotlightHtml + cards + pagHtml;
   document.getElementById('page-home').classList.add('hidden');
   document.getElementById('page-cat').classList.add('active');
   document.getElementById('page-search').classList.remove('active');
@@ -355,11 +546,89 @@ function goCategory(cat) {
   window.scrollTo(0,0);
 }
 
+function goAllArticles(filterTag, page) {
+  var tag = filterTag || 'all';
+  var currentPage = page || 1;
+  var perPage = 25;
+
+  var allFiltered = Object.entries(A)
+    .filter(function(e) { return tag === 'all' || autoTag(e[0], e[1]) === tag; })
+    .sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); });
+
+  var totalArticles = allFiltered.length;
+  var totalPages = Math.ceil(totalArticles / perPage);
+  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage < 1) currentPage = 1;
+
+  var startIdx = (currentPage - 1) * perPage;
+  var pageArticles = allFiltered.slice(startIdx, startIdx + perPage);
+
+  var tagNames = { pensacola:'Pensacola', downtown:'Downtown Pensacola', escambia:'Escambia County', beach:'Pensacola Beach', gulfbreeze:'Gulf Breeze' };
+  document.getElementById('cat-page-title').textContent = tag === 'all' ? 'Latest' : (tagNames[tag] || tag);
+  document.getElementById('cat-page-sub').textContent = totalArticles + (tag === 'all' ? '' : ' of ' + Object.keys(A).length) + ' ' + (totalArticles === 1 ? 'story' : 'stories');
+
+  // Tag filter bar
+  var tags = [['all','All'],['pensacola','Pensacola'],['downtown','Downtown'],['escambia','Escambia County'],['beach','Pensacola Beach'],['gulfbreeze','Gulf Breeze']];
+  var filterHtml = '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;align-items:center;grid-column:1/-1;">';
+  for (var t = 0; t < tags.length; t++) {
+    var isActive = tags[t][0] === tag;
+    filterHtml += '<button onclick="goAllArticles(\'' + tags[t][0] + '\')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (isActive ? '700' : '500') + ';padding:8px 16px;border:1px solid ' + (isActive ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (isActive ? 'var(--navy)' : '#fff') + ';color:' + (isActive ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + tags[t][1] + '</button>';
+  }
+  filterHtml += '</div>';
+
+  // Article cards
+  var cards = pageArticles.map(function(entry) {
+    var id = entry[0], a = entry[1];
+    var imgHtml = a.thumbnail
+      ? '<img src="' + a.thumbnail + '" alt="' + (a.cat||'') + '" style="width:100%;height:100%;object-fit:cover;">'
+      : '<div style="width:100%;height:100%;background:var(--g4);display:flex;align-items:center;justify-content:center;color:var(--g2);font-size:12px;">' + (a.cat||'') + '</div>';
+    return '<div class="cat-card" onclick="openArticle(\'' + id + '\')">'
+      + '<div class="cat-card-img" style="overflow:hidden;">' + imgHtml + '</div>'
+      + '<div class="cat-card-body">'
+      + '<span class="cat-badge cat-' + a.cat + '" style="cursor:default">' + catDisplay(a.cat) + '</span>'
+      + '<div class="cat-card-headline">' + a.headline + '</div>'
+      + '<div class="cat-card-dek">' + (a.dek||'') + '</div>'
+      + '<div class="cat-card-meta">' + (a.byline||'') + ' \u00b7 ' + (a.date||'') + '</div>'
+      + '</div></div>';
+  }).join('');
+
+  // Pagination controls
+  var pagHtml = '';
+  if (totalPages > 1) {
+    pagHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:32px;padding:20px 0;flex-wrap:wrap;grid-column:1/-1;">';
+    if (currentPage > 1) {
+      pagHtml += '<button onclick="goAllArticles(\'' + tag + '\',' + (currentPage - 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">\u2190 Previous</button>';
+    }
+    for (var p = 1; p <= totalPages; p++) {
+      var isCurrent = p === currentPage;
+      pagHtml += '<button onclick="goAllArticles(\'' + tag + '\',' + p + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (isCurrent ? '800' : '600') + ';padding:8px 12px;border:1px solid ' + (isCurrent ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (isCurrent ? 'var(--navy)' : '#fff') + ';color:' + (isCurrent ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + p + '</button>';
+    }
+    if (currentPage < totalPages) {
+      pagHtml += '<button onclick="goAllArticles(\'' + tag + '\',' + (currentPage + 1) + ')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;padding:8px 14px;border:1px solid var(--bd);border-radius:4px;background:#fff;cursor:pointer;color:var(--navy);">Next \u2192</button>';
+    }
+    pagHtml += '</div>';
+  }
+
+  document.getElementById('cat-card-grid').innerHTML = filterHtml + cards + pagHtml;
+  document.getElementById('page-home').classList.add('hidden');
+  document.getElementById('page-cat').classList.add('active');
+  document.getElementById('page-search').classList.remove('active');
+  if (typeof ALL_STATIC_PAGES !== 'undefined') {
+    ALL_STATIC_PAGES.forEach(function(p) { var el = document.getElementById('page-'+p); if (el) el.classList.remove('active'); });
+  }
+  var payPage = document.getElementById('page-pay');
+  if (payPage) payPage.classList.remove('active');
+  document.querySelectorAll('.main-nav a').forEach(function(a) { a.classList.remove('active'); });
+  var latestNav = document.getElementById('nav-latest');
+  if (latestNav) latestNav.classList.add('active');
+  window.scrollTo(0,0);
+  history.pushState(null, '', '/all');
+}
+
 function selectTier(el) {
   el.closest('.newsletter-tiers').querySelectorAll('.newsletter-tier').forEach(t => t.classList.remove('selected'));
   el.classList.add('selected');
 }
-
 
 function toggleMobileNav() {
   const nav = document.getElementById('mobile-nav');
@@ -532,7 +801,7 @@ function openArticle(id){
   const shareBody = encodeURIComponent(a.headline + ' — ' + siteUrl);
   document.getElementById('modal-content').innerHTML=`
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bd);padding-right:48px;">
-      <span class="cat-badge cat-${a.cat}" style="font-size:11px;">${a.label}</span>
+      <span class="cat-badge cat-${a.cat}" style="font-size:11px;">${catDisplay(a.cat)}</span>
       <div style="display:flex;align-items:center;gap:6px;">
         <button onclick="adjustArticleSize(-1)" title="Decrease text size" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:4px 8px;font-size:13px;font-weight:700;color:var(--g1);cursor:pointer;line-height:1;">A−</button>
         <button onclick="adjustArticleSize(1)" title="Increase text size" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:4px 8px;font-size:16px;font-weight:700;color:var(--g1);cursor:pointer;line-height:1;">A+</button>
@@ -788,6 +1057,7 @@ function liveSearch(q, inputEl) {
     const searchable = [a.headline, a.dek, a.label].join(' ').toLowerCase();
     if (searchable.includes(lower)) results.push({ id, ...a });
   });
+  results.sort((a,b) => pubDate(b.id) - pubDate(a.id));
 
   positionDropdown(inputEl);
 
@@ -835,6 +1105,7 @@ function runSearch(q) {
       results.push({ id, ...a });
     }
   });
+  results.sort((a,b) => pubDate(b.id) - pubDate(a.id));
 
   // Show search page
   document.querySelectorAll('.home-page,.cat-page,.static-page,.search-page').forEach(el => {
@@ -860,7 +1131,7 @@ function runSearch(q) {
 
   list.innerHTML = results.map(a => `
     <div class="search-result-item" onclick="openArticle('${a.id}')">
-      <span class="cat-badge cat-${a.cat}" style="margin-bottom:8px;">${a.label}</span>
+      <span class="cat-badge cat-${a.cat}" style="margin-bottom:8px;">${catDisplay(a.cat)}</span>
       <div class="search-result-headline">${highlight(a.headline, q)}</div>
       <div class="search-result-dek">${highlight(a.dek, q)}</div>
       <div class="search-result-meta">
@@ -873,68 +1144,68 @@ function runSearch(q) {
 
 const CAL_EVENTS = [
   // ── APRIL 2026 ──────────────────────────────────────────────────
-  { id:'santana',        day:1,  month:3, year:2026, title:'Santana: Oneness Tour',               time:'8:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', key:'santana-bay-center' },
-  { id:'zztop',          day:2,  month:3, year:2026, title:'ZZ Top',                              time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', key:'zz-top-saenger' },
-  { id:'fantasia',       day:3,  month:3, year:2026, title:'Fantasia & Anthony Hamilton',         time:'8:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#8a6e3a', key:'fantasia' },
-  { id:'gary-owen',      day:3,  month:3, year:2026, title:'Gary Owen',                           time:'8:00 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a' , key:'zz-top-saenger' },
-  { id:'wahoos-open',    day:3,  month:3, year:2026, title:'Blue Wahoos Home Opener',             time:'6:05 PM',                    venue:'Blue Wahoos Stadium',            cat:'sports',        color:'#1a6a9a', key:'wahoos-opening-home' },
+  { id:'santana',        day:1,  month:3, year:2026, title:'Santana: Oneness Tour',               time:'8:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', url:'https://www.pensacolabaycenter.com/events/detail/santana-tour' },
+  { id:'zztop',          day:2,  month:3, year:2026, title:'ZZ Top',                              time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', url:'https://www.pensacolasaenger.com/events/zz-top-the-big-one' },
+  { id:'fantasia',       day:3,  month:3, year:2026, title:'Fantasia & Anthony Hamilton',         time:'8:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#8a6e3a', url:'https://www.ticketmaster.com/fantasia-anthony-hamilton-pensacola-florida-04-03-2026/event/1B0062FCCF9854B5' },
+  { id:'gary-owen',      day:3,  month:3, year:2026, title:'Gary Owen',                           time:'8:00 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a' , url:'https://www.pensacolasaenger.com/events/gary-owen' },
+  { id:'wahoos-open',    day:3,  month:3, year:2026, title:'Blue Wahoos Home Opener',             time:'6:05 PM',                    venue:'Blue Wahoos Stadium',            cat:'sports',        color:'#1a6a9a', url:'https://www.milb.com/pensacola/tickets' },
   { id:'egghunt',        day:4,  month:3, year:2026, title:'Egga-Wahooza Easter Egg Hunt',        time:'11:00 AM · Free',            venue:'Community Maritime Park',        cat:'family',        color:'#1a8a6e' , url:'https://pensacolachurch.org/eggawahooza/' },
-  { id:'bandsbeach',     day:7,  month:3, year:2026, title:'Bands on the Beach — Season Opener', time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a', key:'bands-beach-guide' },
+  { id:'bandsbeach',     day:7,  month:3, year:2026, title:'Bands on the Beach — Season Opener', time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a', url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
   { id:'escambia-apr8',  day:8,  month:3, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f' , url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
-  { id:'mrs-doubtfire1', day:7,  month:3, year:2026, title:'Mrs. Doubtfire the Musical',         time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#8a6e3a', key:'mrs-doubtfire-saenger' },
-  { id:'mrs-doubtfire2', day:8,  month:3, year:2026, title:'Mrs. Doubtfire the Musical',         time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#8a6e3a', key:'mrs-doubtfire-saenger' },
-  { id:'iglesias',       day:11, month:3, year:2026, title:'Gabriel Iglesias: The 1976 Tour',    time:'Doors 7PM · Show 8PM',       venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', key:'gabriel-iglesias' },
+  { id:'mrs-doubtfire1', day:7,  month:3, year:2026, title:'Mrs. Doubtfire the Musical',         time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#8a6e3a', url:'https://www.pensacolasaenger.com/events/mrs-doubtfire-the-musical' },
+  { id:'mrs-doubtfire2', day:8,  month:3, year:2026, title:'Mrs. Doubtfire the Musical',         time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#8a6e3a', url:'https://www.pensacolasaenger.com/events/mrs-doubtfire-the-musical' },
+  { id:'iglesias',       day:11, month:3, year:2026, title:'Gabriel Iglesias: The 1976 Tour',    time:'Doors 7PM · Show 8PM',       venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', url:'https://www.ticketmaster.com/gabriel-fluffy-iglesias-the-1976-tour-pensacola-florida-04-11-2026/event/1B006390CD61D0CB' },
   { id:'pso-candlelight',day:11, month:3, year:2026, title:'Candlelight Concert',                time:'TBD',                        venue:'First United Methodist Church',  cat:'entertainment', color:'#8a6e3a' , url:'https://www.eventbrite.com/e/candlelight-pensacola' },
   { id:'citycouncil',    day:14, month:3, year:2026, title:'Pensacola City Council Meeting',     time:'5:30 PM',                    venue:'City Hall, 222 W Main St',       cat:'government',    color:'#c2553f' , url:'https://www.cityofpensacola.com/193/City-Council' },
-  { id:'bandsbeach2',    day:14, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'gaffigan',       day:16, month:3, year:2026, title:'Jim Gaffigan',                       time:'7:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#1e2d4a', key:'gaffigan' },
-  { id:'gallery-apr',    day:17, month:3, year:2026, title:'Gallery Night — Navy Days Theme',    time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b', key:'gallery-night-april' },
-  { id:'panchiko',       day:20, month:3, year:2026, title:'Panchiko',                           time:'7:00 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#5a3d7a', key:'panchiko-vinyl' },
-  { id:'bandsbeach3',    day:21, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'bandsbeach2',    day:14, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  { id:'gaffigan',       day:16, month:3, year:2026, title:'Jim Gaffigan',                       time:'7:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#1e2d4a', url:'https://www.pensacolabaycenter.com/events/detail/jim-gaffigan' },
+  { id:'gallery-apr',    day:17, month:3, year:2026, title:'Gallery Night — Navy Days Theme',    time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b', url:'https://gallerynightpensacola.org' },
+  { id:'panchiko',       day:20, month:3, year:2026, title:'Panchiko',                           time:'7:00 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#5a3d7a', url:'https://www.vinylmusichall.com' },
+  { id:'bandsbeach3',    day:21, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
   { id:'sesame',         day:22, month:3, year:2026, title:'Sesame Street Live',                 time:'6:00 PM',                    venue:'Saenger Theatre',                cat:'family',        color:'#1a8a6e' , url:'https://www.ticketmaster.com/sesame-street-live-pensacola' },
   { id:'escambia-apr22', day:22, month:3, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f' , url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
-  { id:'crawfishfest',   day:24, month:3, year:2026, title:'Pensacola Crawfish Festival',        time:'All day',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', key:'crawfish' },
-  { id:'pso-gala',       day:25, month:3, year:2026, title:'PSO 100th Anniversary Gala',        time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', key:'pso-100th' },
-  { id:'mullettoss',     day:26, month:3, year:2026, title:'Flora-Bama Mullet Toss',             time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e', key:'mullet-toss' },
-  { id:'mullettoss2',    day:27, month:3, year:2026, title:'Flora-Bama Mullet Toss — Day 2',    time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e' , key:'mullet-toss' },
-  { id:'bandsbeach4',    day:28, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bavarian1',      day:30, month:3, year:2026, title:'Great Bavarian Circus — Opens',      time:'Multiple shows daily',       venue:'Pensacola Fairgrounds',          cat:'family',        color:'#1a8a6e', key:'bavarian-circus' },
+  { id:'crawfishfest',   day:24, month:3, year:2026, title:'Pensacola Crawfish Festival',        time:'All day',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', url:'https://pensacolabeachcrawfishfestival.com/' },
+  { id:'pso-gala',       day:25, month:3, year:2026, title:'PSO 100th Anniversary Gala',        time:'7:30 PM',                    venue:'Saenger Theatre',                cat:'entertainment', color:'#1e2d4a', url:'https://www.ticketmaster.com/pensacola-symphony-orchestra-100th-anniversary-gala-pensacola-florida-04-25-2026/event/1B0062AEE7FB7374' },
+  { id:'mullettoss',     day:26, month:3, year:2026, title:'Flora-Bama Mullet Toss',             time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e', url:'https://www.florabama.com/mullet-toss' },
+  { id:'mullettoss2',    day:27, month:3, year:2026, title:'Flora-Bama Mullet Toss — Day 2',    time:'All day',                    venue:'Flora-Bama, Perdido Key',        cat:'festival',      color:'#1a8a6e' , url:'https://www.florabama.com/mullet-toss' },
+  { id:'bandsbeach4',    day:28, month:3, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  { id:'bavarian1',      day:30, month:3, year:2026, title:'Great Bavarian Circus — Opens',      time:'Multiple shows daily',       venue:'Pensacola Fairgrounds',          cat:'family',        color:'#1a8a6e', url:'https://www.visitpensacola.com/events/' },
 
   // ── MAY 2026 ───────────────────────────────────────────────────
-  { id:'clutch',         day:1,  month:4, year:2026, title:'Clutch',                             time:'7:30 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#5a3d7a', key:'clutch-vinyl' },
-  { id:'krewe-sirens',   day:2,  month:4, year:2026, title:'Krewe of Sirens Beach Day',          time:'3:00–7:00 PM · Free',        venue:'Bounce Beach, Pensacola Beach',  cat:'festival',      color:'#1a8a6e', key:'krewe-sirens-beach' },
-  { id:'comedy-may',     day:2,  month:4, year:2026, title:'Pensacola Comedy Club',              time:'7:30 PM',                    venue:"Genie's Coffee Shop",            cat:'entertainment', color:'#8a6e3a', key:'pensacola-comedy-club' },
-  { id:'bavarian-may',   day:3,  month:4, year:2026, title:'Great Bavarian Circus',              time:'Multiple shows daily',       venue:'Pensacola Fairgrounds',          cat:'family',        color:'#1a8a6e', key:'bavarian-circus' },
-  { id:'bandsbeach-may1',day:5,  month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'alice-cooper',   day:8,  month:4, year:2026, title:'Alice Cooper',                       time:'7:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', key:'alice-cooper-bay-center' },
-  { id:'beach-art-wine', day:9,  month:4, year:2026, title:'Pensacola Beach Art & Wine Festival',time:'11:00 AM–4:00 PM · Free',    venue:'Pensacola Beach Boardwalk',      cat:'arts',          color:'#d4952b', key:'beach-art-wine' },
-  { id:'disney-ice1',    day:9,  month:4, year:2026, title:'Disney on Ice: Jump In! (Noon)',     time:'12:00 PM',                   venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', key:'disney-on-ice' },
-  { id:'disney-ice2',    day:9,  month:4, year:2026, title:'Disney on Ice: Jump In! (Evening)',  time:'6:00 PM',                    venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', key:'disney-on-ice' },
-  { id:'disney-ice3',    day:10, month:4, year:2026, title:'Disney on Ice: Jump In! (Noon)',     time:'12:00 PM',                   venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', key:'disney-on-ice' },
+  { id:'clutch',         day:1,  month:4, year:2026, title:'Clutch',                             time:'7:30 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#5a3d7a', url:'https://www.vinylmusichall.com' },
+  { id:'krewe-sirens',   day:2,  month:4, year:2026, title:'Krewe of Sirens Beach Day',          time:'3:00–7:00 PM · Free',        venue:'Bounce Beach, Pensacola Beach',  cat:'festival',      color:'#1a8a6e', url:'https://visitpensacolabeach.com/event-calendar/' },
+  { id:'comedy-may',     day:2,  month:4, year:2026, title:'Pensacola Comedy Club',              time:'7:30 PM',                    venue:"Genie's Coffee Shop",            cat:'entertainment', color:'#8a6e3a', url:'https://visitpensacolabeach.com/event-calendar/' },
+  { id:'bavarian-may',   day:3,  month:4, year:2026, title:'Great Bavarian Circus',              time:'Multiple shows daily',       venue:'Pensacola Fairgrounds',          cat:'family',        color:'#1a8a6e', url:'https://www.visitpensacola.com/events/' },
+  { id:'bandsbeach-may1',day:5,  month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  { id:'alice-cooper',   day:8,  month:4, year:2026, title:'Alice Cooper',                       time:'7:00 PM',                    venue:'Pensacola Bay Center',           cat:'entertainment', color:'#5a3d7a', url:'https://www.pensacolabaycenter.com/events/detail/alice-cooper' },
+  { id:'beach-art-wine', day:9,  month:4, year:2026, title:'Pensacola Beach Art & Wine Festival',time:'11:00 AM–4:00 PM · Free',    venue:'Pensacola Beach Boardwalk',      cat:'arts',          color:'#d4952b', url:'https://www.visitpensacola.com/events/2026-pensacola-beach-art-and-wine-festival/' },
+  { id:'disney-ice1',    day:9,  month:4, year:2026, title:'Disney on Ice: Jump In! (Noon)',     time:'12:00 PM',                   venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', url:'https://www.pensacolabaycenter.com/events/detail/disney-on-ice' },
+  { id:'disney-ice2',    day:9,  month:4, year:2026, title:'Disney on Ice: Jump In! (Evening)',  time:'6:00 PM',                    venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', url:'https://www.pensacolabaycenter.com/events/detail/disney-on-ice' },
+  { id:'disney-ice3',    day:10, month:4, year:2026, title:'Disney on Ice: Jump In! (Noon)',     time:'12:00 PM',                   venue:'Pensacola Bay Center',           cat:'family',        color:'#1a8a6e', url:'https://www.pensacolabaycenter.com/events/detail/disney-on-ice' },
   { id:'citycouncil-may',day:12, month:4, year:2026, title:'Pensacola City Council Meeting',     time:'5:30 PM',                    venue:'City Hall, 222 W Main St',       cat:'government',    color:'#c2553f' , url:'https://www.cityofpensacola.com/193/City-Council' },
   { id:'escambia-may',   day:13, month:4, year:2026, title:'Escambia County Commission Meeting', time:'9:00 AM',                    venue:'County Center',                  cat:'government',    color:'#c2553f' , url:'https://myescambia.com/our-services/boards-committees/board-of-county-commissioners' },
-  { id:'bandsbeach-may2',day:12, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'bandsbeach-may2',day:12, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
   { id:'gallery-may',    day:15, month:4, year:2026, title:'Gallery Night — Festa Italiana',     time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
-  { id:'pickles-wings',  day:16, month:4, year:2026, title:'Pickles & Wings Family Festival',    time:'10:00 AM–8:00 PM · Free',    venue:'Seville Square',                 cat:'festival',      color:'#8a6e3a', key:'pickles-wings-festival' },
-  { id:'iration',        day:19, month:4, year:2026, title:'Iration',                            time:'7:00 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#1a8a6e', key:'iration-vinyl' },
-  { id:'bandsbeach-may3',day:19, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bandsbeach-may4',day:26, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'fiesta-parade',  day:29, month:4, year:2026, title:'Grand Fiesta Parade',                time:'6:00 PM',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', key:'fiesta-parade' },
-  { id:'pride-may',      day:23, month:4, year:2026, title:'Pensacola Pride — Weekend',          time:'All day',                    venue:'Park East, Pensacola Beach',     cat:'festival',      color:'#d4952b', key:'pensacola-pride' },
-  { id:'pride-may2',     day:24, month:4, year:2026, title:'Pensacola Pride — Weekend',          time:'All day',                    venue:'Park East, Pensacola Beach',     cat:'festival',      color:'#d4952b', key:'pensacola-pride' },
+  { id:'pickles-wings',  day:16, month:4, year:2026, title:'Pickles & Wings Family Festival',    time:'10:00 AM–8:00 PM · Free',    venue:'Seville Square',                 cat:'festival',      color:'#8a6e3a', url:'https://visitpensacolabeach.com/event-calendar/' },
+  { id:'iration',        day:19, month:4, year:2026, title:'Iration',                            time:'7:00 PM',                    venue:'Vinyl Music Hall',               cat:'entertainment', color:'#1a8a6e', url:'https://www.vinylmusichall.com' },
+  { id:'bandsbeach-may3',day:19, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  { id:'bandsbeach-may4',day:26, month:4, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  { id:'fiesta-parade',  day:29, month:4, year:2026, title:'Grand Fiesta Parade',                time:'6:00 PM',                    venue:'Palafox St, Downtown',           cat:'festival',      color:'#8a6e3a', url:'https://www.fiestapensacola.org/' },
+  { id:'pride-may',      day:23, month:4, year:2026, title:'Pensacola Pride — Weekend',          time:'All day',                    venue:'Park East, Pensacola Beach',     cat:'festival',      color:'#d4952b', url:'https://pensapride.org/festival/' },
+  { id:'pride-may2',     day:24, month:4, year:2026, title:'Pensacola Pride — Weekend',          time:'All day',                    venue:'Park East, Pensacola Beach',     cat:'festival',      color:'#d4952b', url:'https://pensapride.org/festival/' },
 
   // ── JUNE 2026 ──────────────────────────────────────────────────
   { id:'gallery-jun',    day:19, month:5, year:2026, title:'Gallery Night — Journey to Juneteenth', time:'6:00–10:00 PM · Free',  venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
-  { id:'bandsbeach-jun1',day:2,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bandsbeach-jun2',day:9,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bandsbeach-jun3',day:16, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bandsbeach-jun4',day:23, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
-  { id:'bandsbeach-jun5',day:30, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , key:'bands-beach-guide' },
+  { id:'bandsbeach-jun1',day:2,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  { id:'bandsbeach-jun2',day:9,  month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  { id:'bandsbeach-jun3',day:16, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  { id:'bandsbeach-jun4',day:23, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
+  { id:'bandsbeach-jun5',day:30, month:5, year:2026, title:'Bands on the Beach',                 time:'Gates 6PM · Music 7PM · Free', venue:'Gulfside Pavilion, Pensacola Beach', cat:'music', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-bands-on-beach/' },
 
   // ── JULY 2026 ──────────────────────────────────────────────────
   { id:'4th-july',       day:4,  month:6, year:2026, title:'4th of July Fireworks',              time:'5:00 PM',                    venue:'Bayfront Pkwy, Downtown',        cat:'festival',      color:'#c2553f' , url:'https://www.visitpensacola.com/events/signature-events/' },
-  { id:'airshow1',       day:18, month:6, year:2026, title:'Pensacola Beach Air Show',           time:'All day',                    venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a' , key:'blue-angels-schedule' },
-  { id:'airshow2',       day:19, month:6, year:2026, title:'Pensacola Beach Air Show — Blue Angels', time:'All day',              venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a' , key:'blue-angels-schedule' },
+  { id:'airshow1',       day:18, month:6, year:2026, title:'Pensacola Beach Air Show',           time:'All day',                    venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-calendar/' },
+  { id:'airshow2',       day:19, month:6, year:2026, title:'Pensacola Beach Air Show — Blue Angels', time:'All day',              venue:'Pensacola Beach',                cat:'entertainment', color:'#1e2d4a' , url:'https://visitpensacolabeach.com/whats-happening-calendar/' },
   { id:'gallery-jul',    day:17, month:6, year:2026, title:'Gallery Night — Future Makers',      time:'6:00–10:00 PM · Free',       venue:'Govt St & Jefferson, Downtown',  cat:'arts',          color:'#d4952b' , url:'https://gallerynightpensacola.org' },
 ];
 
@@ -957,116 +1228,6 @@ const MONTH_NAMES = ['January','February','March','April','May','June','July','A
 const TODAY = new Date();
 
 // ── SIDEBAR CALENDAR ─────────────────────────────────────────────────────
-let sideCalYear = 2026, sideCalMonth = 3;
-let sideCalSelectedDay = null;
-
-function sideCalNav(dir) {
-  sideCalMonth += dir;
-  if (sideCalMonth > 11) { sideCalMonth = 0; sideCalYear++; }
-  if (sideCalMonth < 0)  { sideCalMonth = 11; sideCalYear--; }
-  sideCalSelectedDay = null;
-  renderSideCal();
-}
-
-function renderSideCal() {
-  const label = document.getElementById('side-cal-label');
-  const grid  = document.getElementById('side-cal-grid');
-  const list  = document.getElementById('side-cal-list');
-  const popup = document.getElementById('side-cal-popup');
-  if (!label || !grid || !list) return;
-
-  label.textContent = MONTH_NAMES[sideCalMonth] + ' ' + sideCalYear;
-
-  const firstDay    = new Date(sideCalYear, sideCalMonth, 1).getDay();
-  const daysInMonth = new Date(sideCalYear, sideCalMonth + 1, 0).getDate();
-  const daysInPrev  = new Date(sideCalYear, sideCalMonth, 0).getDate();
-
-  let cells = '<div class="cal-day-header">Su</div><div class="cal-day-header">Mo</div><div class="cal-day-header">Tu</div><div class="cal-day-header">We</div><div class="cal-day-header">Th</div><div class="cal-day-header">Fr</div><div class="cal-day-header">Sa</div>';
-
-  for (let i = firstDay - 1; i >= 0; i--)
-    cells += `<div class="cal-day other-month">${daysInPrev - i}</div>`;
-
-  for (let d = 1; d <= daysInMonth; d++) {
-    const evs = CAL_EVENTS.filter(e => e.day === d && e.month === sideCalMonth && e.year === sideCalYear);
-    const isToday = d === TODAY.getDate() && sideCalMonth === TODAY.getMonth() && sideCalYear === TODAY.getFullYear();
-    const isSel   = sideCalSelectedDay === d;
-    let cls = 'cal-day';
-    if (evs.length) cls += ' has-event';
-    if (isToday)    cls += ' today';
-    if (isSel)      cls += ' selected';
-    const dotBar = evs.length > 1
-      ? `<span style="display:block;width:${Math.min(evs.length,5)*5}px;height:3px;background:${evs[0].color};border-radius:2px;margin:1px auto 0;"></span>`
-      : '';
-    cells += `<div class="${cls}" onclick="sideCalSelectDay(${d})" title="${evs.map(e=>e.title).join(', ')}">${d}${dotBar}</div>`;
-  }
-
-  const total    = firstDay + daysInMonth;
-  const trailing = total % 7 === 0 ? 0 : 7 - (total % 7);
-  for (let d = 1; d <= trailing; d++)
-    cells += `<div class="cal-day other-month">${d}</div>`;
-
-  grid.innerHTML = cells;
-
-  // Day popup
-  if (sideCalSelectedDay !== null) {
-    const evs = CAL_EVENTS.filter(e => e.day === sideCalSelectedDay && e.month === sideCalMonth && e.year === sideCalYear);
-    if (evs.length > 0) {
-      popup.style.display = 'block';
-      popup.innerHTML = `
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--navy);">${MONTH_NAMES[sideCalMonth]} ${sideCalSelectedDay}</span>
-          <button onclick="sideCalSelectedDay=null;renderSideCal();" style="background:none;border:none;cursor:pointer;font-size:14px;color:var(--g2);line-height:1;padding:0;">&#10005;</button>
-        </div>
-        ${evs.map(e => `
-          <div onclick="${e.key ? "openArticle('"+e.key+"')" : e.url ? "window.open('"+e.url+"','_blank')" : e.id ? "openEvent('"+e.id+"')" : ''}" style="display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px solid var(--bd);cursor:${e.key?'pointer':'default'};">
-            <span style="display:block;width:3px;min-height:32px;background:${e.color};border-radius:2px;flex-shrink:0;margin-top:3px;"></span>
-            <div>
-              <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--navy);line-height:1.3;">${e.title}</div>
-              <div style="font-size:11px;color:var(--g1);margin-top:2px;">${e.time} · ${e.venue}</div>
-            </div>
-          </div>`).join('')}`;
-    } else {
-      popup.style.display = 'none';
-    }
-  } else {
-    popup.style.display = 'none';
-  }
-
-  // Upcoming events list — next 6 from today in this month
-  const upcoming = CAL_EVENTS
-    .filter(e => e.month === sideCalMonth && e.year === sideCalYear)
-    .filter(e => {
-      const eDate = new Date(e.year, e.month, e.day);
-      const tDate = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
-      return sideCalMonth !== TODAY.getMonth() || sideCalYear !== TODAY.getFullYear() || eDate >= tDate;
-    })
-    .sort((a,b) => a.day - b.day)
-    .slice(0, 5);
-
-  if (upcoming.length) {
-    list.innerHTML = upcoming.map(e => `
-      <div class="event-item" onclick="${e.key ? "openArticle('"+e.key+"')" : e.url ? "window.open('"+e.url+"','_blank')" : e.id ? "openEvent('"+e.id+"')" : ''}" style="cursor:${e.key||e.url||e.id?'pointer':'default'}">
-        <div class="event-date-box" style="border-left:3px solid ${e.color};">
-          <span class="event-date-month">${MONTH_NAMES[e.month].slice(0,3)}</span>
-          <span class="event-date-num">${e.day}</span>
-        </div>
-        <div>
-          <div class="event-title">${e.title}</div>
-          <div class="event-meta">${e.time} · ${e.venue}</div>
-        </div>
-      </div>`).join('');
-  } else {
-    list.innerHTML = '<div style="padding:12px 0;font-size:13px;color:var(--g2);text-align:center;">No upcoming events this month.</div>';
-  }
-}
-
-function sideCalSelectDay(d) {
-  sideCalSelectedDay = (sideCalSelectedDay === d) ? null : d;
-  renderSideCal();
-}
-
-// Init sidebar cal on page load
-document.addEventListener('DOMContentLoaded', renderSideCal);
 
 function calInit() {
   renderCalFilters();
@@ -2759,40 +2920,50 @@ document.addEventListener('DOMContentLoaded', function() {
 // ─────────────────────────────────────────────────────────────────────────────
 // NEIGHBORHOOD FILTER
 // ─────────────────────────────────────────────────────────────────────────────
-function filterNeighborhood(nbhd, btn) {
-  // Update button state
-  document.querySelectorAll('.nbhd-btn').forEach(b => b.classList.remove('active'));
+function filterTag(sectionId, tag, btn) {
+  // Update button state within this section's filter bar
+  var filterBar = btn.parentElement;
+  filterBar.querySelectorAll('.nbhd-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
 
-  // Filter cards
-  const cards = document.querySelectorAll('#news-article-list .article-card');
-  cards.forEach(card => {
-    if (nbhd === 'all') {
-      card.style.display = '';
-    } else {
-      const cardNbhd = card.dataset.nbhd || '';
-      card.style.display = cardNbhd === nbhd ? '' : 'none';
-    }
-  });
+  // Get the section element and find its cards
+  var section = document.getElementById(sectionId);
+  if (!section) return;
 
-  // Show empty state if needed
-  const list = document.getElementById('news-article-list');
-  if (!list) return;
-  const visible = [...cards].filter(c => c.style.display !== 'none');
-  let emptyEl = list.querySelector('.nbhd-empty');
-  if (visible.length === 0 && nbhd !== 'all') {
-    if (!emptyEl) {
-      emptyEl = document.createElement('div');
-      emptyEl.className = 'nbhd-empty';
-      emptyEl.style.cssText = 'padding:20px 0;font-size:13px;color:var(--g2);text-align:center;';
-      emptyEl.textContent = 'No stories tagged for this neighborhood yet.';
-      list.appendChild(emptyEl);
-    }
-    emptyEl.style.display = '';
-  } else if (emptyEl) {
-    emptyEl.style.display = 'none';
+  // Rebuild cards for this section with the selected tag filter
+  var cat = '';
+  for (var i = 0; i < HOME_SECTION_CATS.length; i++) {
+    if (HOME_SECTION_CATS[i].id === sectionId) { cat = HOME_SECTION_CATS[i].cat; break; }
   }
+  if (!cat) return;
+
+  var articles = Object.entries(A)
+    .filter(function(e) { return e[1].cat === cat; })
+    .filter(function(e) { return tag === 'all' || autoTag(e[0], e[1]) === tag; })
+    .sort(function(a, b) { return pubDate(b[0]) - pubDate(a[0]); })
+    .slice(0, 6);
+
+  var cards = '';
+  for (var j = 0; j < articles.length; j++) {
+    var id = articles[j][0];
+    var art = articles[j][1];
+    var artTag = autoTag(id, art);
+    var cls = 'story-card' + (j === 0 ? ' gold-top' : '');
+    cards += '<div class="' + cls + '" data-tag="' + artTag + '" onclick="openArticle(\'' + id + '\')">';
+    cards += '<div class="story-card-img">' + homeCardImg(id, art) + '</div>';
+    cards += '<span class="cat-badge cat-' + art.cat + '">' + catDisplay(art.cat) + '</span>';
+    cards += '<div class="headline-md">' + art.headline + '</div>';
+    cards += '<div class="dek-sm">' + (art.dek || '') + '</div>';
+    cards += '<div class="byline">' + art.date + '</div>';
+    cards += '</div>';
+  }
+
+  var threeCol = section.querySelector('.three-col');
+  if (threeCol) threeCol.innerHTML = cards;
 }
+
+// Keep old name as alias for any remaining references
+function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
 
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -2899,6 +3070,27 @@ function filterNeighborhood(nbhd, btn) {
 
 
 // ── URL ROUTING ─────────────────────────────────────────────────────────────
+
+// ─── DYNAMIC TICKER ──────────────────────────────────────────────────────────
+function buildTicker() {
+  var track = document.getElementById('ticker-track');
+  if (!track) return;
+  var sorted = Object.entries(A)
+    .filter(function(e) { return e[1].cat !== 'events' && e[1].cat !== 'opinion'; })
+    .sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); })
+    .slice(0, 5);
+  var html = '';
+  sorted.forEach(function(entry) {
+    var id = entry[0], a = entry[1];
+    var text = a.headline || '';
+    if (text.length > 80) text = text.substring(0, 77) + '...';
+    html += '<span class="ticker-item" onclick="openArticle(\'' + id + '\')">' + text + '</span><span class="ticker-sep">\u00b7</span>';
+  });
+  // Duplicate for seamless scroll
+  track.innerHTML = html + html;
+}
+buildTicker();
+
 window.addEventListener('popstate', function(e) {
   if (e.state && e.state.articleId) {
     onArticlesReady(function() { openArticle(e.state.articleId); });
@@ -2910,9 +3102,17 @@ window.addEventListener('popstate', function(e) {
 });
 // On load — check if URL is /story/slug and open that article
 (function() {
-  var match = location.pathname.match(/^\/story\/(.+)$/);
-  if (match) {
-    var slug = match[1];
-    onArticlesReady(function() { openArticle(slug); });
+  var storyMatch = location.pathname.match(/^\/story\/(.+)$/);
+  if (storyMatch) {
+    onArticlesReady(function() { openArticle(storyMatch[1]); });
+    return;
+  }
+  if (location.pathname === '/all') {
+    onArticlesReady(function() { goAllArticles(); });
+    return;
+  }
+  var catMatch = location.pathname.match(/^\/category\/(.+)$/);
+  if (catMatch) {
+    onArticlesReady(function() { goCategory(catMatch[1]); });
   }
 })();
