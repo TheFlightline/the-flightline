@@ -1858,3 +1858,823 @@ Object.assign(A, {
   "body": "<p class=\"article-lede\">Mayor D.C. Reeves is asking the Pensacola City Council to give away a piece of city-owned land in west Pensacola on the condition that it becomes a medical and dental clinic, extending healthcare access into a corridor that currently has few walkable options for residents without reliable transportation.</p><p>Three coordinated agenda items go before the council at Thursday's April 9 meeting: declaring 801 W. Avery Street surplus property and authorizing the mayor to negotiate a direct transfer; adopting Resolution 2026-10, removing the parcel from the Pensacola Inner City Community Redevelopment Area; and approving a land donation agreement with Community Health Northwest Florida Foundation, Inc. All three were sponsored by Reeves and are operationally linked — each must pass for the transfer to complete.</p><p>Community Health Northwest Florida operates federally qualified health centers across Escambia and Santa Rosa counties, providing primary care, dental services and behavioral health on a sliding-scale fee structure regardless of ability to pay. Existing locations include a walk-in clinic at 14 W. Jordan St., a primary care facility at 2315 W. Jackson St. and a site at Longleaf Drive near George Stone. A facility at 801 W. Avery extends that footprint further into west Pensacola.</p><p>The federally qualified health center designation gives the organization access to federal drug pricing programs that reduce prescription costs and requires the center to serve patients regardless of insurance status. The city is effectively donating the land on the condition it becomes a clinic — no commercial buyer would accept those terms.</p><p>Thursday's council meeting begins at 5:30 p.m. at City Hall, 222 W. Main St., and streams live at cityofpensacola.com/video.</p>"
 }
 });
+
+// ============================================================================
+// THE FLIGHTLINE — APRIL 24, 2026 BATCH
+// 23 news articles + 1 editorial = 24 pieces total
+// Publish dates staggered Apr 10-24, 2026
+// ============================================================================
+
+Object.assign(A, {
+
+// ============================================================================
+// EDITORIAL — Apr 23
+// ============================================================================
+"op-reverb-rebate": {
+  cat: "opinion",
+  label: "Editorial",
+  thumbnail: "/images/downtown_pensacola-maritime-park_006.jpg",
+  headline: "A Hard Rock Hotel on Pensacola's Waterfront Is Worth Building. Not at $58 Million in Public Money.",
+  dek: "Dawson Company wants to put a Reverb by Hard Rock and a 15-story apartment tower on a downtown parcel that has sat empty for 14 years. The city was right to reject the developer's tax rebate request last week. Here's what a defensible deal would look like.",
+  byline: "The Flightline Editorial Board",
+  date: "April 23, 2026",
+  brief: [
+    "Pensacola's Community Redevelopment Agency rejected a $58 million tax rebate application from Dawson Company on April 16, citing six specific problems with the developer's submission.",
+    "The proposed Reverb by Hard Rock hotel and 15-story Rhythm Lofts apartment tower at Lot 5 of Community Maritime Park is the most credible project ever proposed for the parcel, which has sat empty since the park opened in 2012.",
+    "The Flightline Editorial Board argues the rejection is correct on the merits, that the project should still be built, and that a revised application meeting the CRA\'s published policies could move forward at the May 11 board meeting."
+  ],
+  body: `<p class="article-lede">Stand on the lawn at Community Maritime Park on a Saturday afternoon and the scene is almost what voters were promised in 2006. Families on the waterfront. Wahoos baseball drifting over the bay. A band on the grass. You can forget, for a minute, that the thing you're looking at is a promise that was only half-kept.</p>
+
+<p>Then you turn around.</p>
+
+<p>Across the street from the stadium's main entrance is Lot 5. A flat, mostly empty rectangle of gravel and grass and parked cars. It has looked like this since the park opened 14 years ago. It has looked like this for longer than some of the kids at the game have been alive. And for 20 years — since before there was a stadium, before there was a park, before there was anything — the city has been trying to figure out what to put there.</p>
+
+<p>The latest answer is a $250 million hotel-and-apartment project that would put a 15-story tower on the site, the tallest building in Pensacola, and a 10-story Reverb by Hard Rock hotel next to it. The developer is Dawson Company, a second-generation Pensacola firm partnered with Hard Rock International and NFL Hall of Famer Emmitt Smith. The architecture is Gensler. The interiors are by Lenny Kravitz's design firm. The structural engineering is Thornton Tomasetti, and the plan calls for one of the larger mass timber buildings in the Southeast. The 100-year ground lease was signed in August 2024. The project is real. It is also, by any honest read, the best shot Lot 5 has seen.</p>
+
+<p>Which is exactly why the city's April 16 rejection of the developer's $58 million tax rebate application is so important. And why it is, on the merits, the right call.</p>
+
+<p>Let us say what this rejection is not. It is not anti-development. It is not anti-Hard Rock, anti-Dawson, anti-Smith. It is not the city playing hard to get with one of the only serious bidders in a decade. It is an administrator doing her job. In a letter dated April 16, Community Redevelopment Agency Administrator Victoria D'Angelo told the development team their 345-page application was "incomplete and cannot be processed further in its current form." She listed six reasons. Two of them are the ones that matter.</p>
+
+<p>The first is what planners call the "but for" test. Under Florida law, a tax-increment-financing rebate is supposed to go only to a project that would not happen without it. That is the whole point. Public subsidy exists to close the gap between possible and impossible. The developer's application effectively argued the project would not pencil at the margins they want without the rebate. That is a different claim. Hard Rock is signed. The architects are drawing. The engineers are engineering. Emmitt Smith is on the term sheet. There is a hundred-year lease in a drawer downtown. This is not a project teetering on the edge of nonexistence. It is a project that wants a better return.</p>
+
+<p>The second is the equity gap. The developers have $50 million of their own capital at risk against a $250 million project. Twenty percent. The city's own published CRA policy prefers at least 30 percent. What happens when a developer comes in under the equity threshold and asks for public money to cover the difference is that the public is being asked to take a larger share of the downside than the developer is taking. That inverts what subsidy is supposed to do.</p>
+
+<p>The other four items in D'Angelo's letter are technical. The rebate would extend past the CRA's own statutory sunset in 2043, the TIF math doesn't self-support, the cap language in the application doesn't match the cap language in city policy, the assumptions are (per the CRA's independent consultant at Lambert Advisory) "highly questionable." All of that is real. But the two above are the ones a voter can hold in one hand. Did the project need this money? And how much skin did the developer actually have in the game?</p>
+
+<p>To understand why those two questions matter so much at Lot 5 specifically, you have to understand what happened on this parcel before.</p>
+
+<p>In 2000, the city paid $3.63 million for 27.5 acres of contaminated chemical-company land and started trying to figure out what to build on it. The first answer was Festival Park, a $40 million downtown auditorium approved by the City Council in 2002 and rejected by city voters in a 2003 referendum. The second answer was what we have now: a 2005 concept for a baseball stadium and mixed-use waterfront, refined in public focus groups, approved in concept by the council, and then forced to a referendum by a citizens' group called Save Our City that collected more than 7,000 signatures. On September 5, 2006, Pensacola voters approved Community Maritime Park by about 2,000 votes, or 56 percent to 44. The public put $40 million in CRA bonds into it and another $20 million into cleaning up generations of petroleum contamination.</p>
+
+<p>That vote bought Blue Wahoos Stadium. It bought the waterfront lawn. It bought the amphitheater and the festival grounds and the concerts on summer nights. What it did not buy, and what it was supposed to buy, was a mixed-use district around the stadium that would generate the tax revenue to pay off the bonds faster than the taxpayers would. The private investment was the other half of the deal. For 14 years, that half has not arrived. Not in 2012 when the stadium opened. Not when Quint Studer's team paid for the West Main Master Plan in 2019 and handed it to the city. Not when Silver Hills Development took lease options on Lots 4 and 5 and then walked away. Not through five years of RFPs and press conferences and renderings that ended up in drawers.</p>
+
+<p>Lot 5 has been, all this time, the open wound of the Maritime Park deal. The place you can stand and see what was promised and what wasn't built. Every council member of the last three terms has felt that weight. Every mayor. And that weight is now, in the spring of 2026, pressing down on one question: do we finally let something get built, or do we lose Dawson too.</p>
+
+<p>This is the moment where cities make bad deals.</p>
+
+<p>The pattern is familiar to anyone who has watched public finance for long enough. A parcel sits empty. The wound becomes political. A developer with a good name and a famous partner comes forward with a proposal that looks like the rescue. The incentive ask arrives attached. And the city, exhausted by its own history of failure on the site, talks itself into the idea that something-is-better-than-nothing, that the perfect is the enemy of the good, that the window is closing. It convinces itself the asks are reasonable because the alternative is another ten years of gravel.</p>
+
+<p>We have watched other Gulf Coast and Florida cities make exactly that deal. We have also watched the bill come due. A TIF rebate granted today is money that does not flow to police, fire, streets, or parks tomorrow. A rebate granted past the CRA's own legal sunset is a promise the city cannot actually keep. A rebate calibrated to 20 percent developer equity teaches every future applicant what the floor really is. A subsidy handed to a project that was already going to be built is not an investment. It is a gift.</p>
+
+<p>The Dawson project is the best swing Lot 5 has taken. It deserves to be built. The 40 percent workforce housing set-aside under Florida's Live Local Act is real affordable-housing supply the city badly needs. A 15-story tower and a Hard Rock hotel anchoring the west side of downtown would change the economics of every block around it. The mass timber structural system would put Pensacola on the map of a design movement that matters. We want this.</p>
+
+<p>But we want it built on terms that make sense. Not on terms that let the exhaustion of 20 years of failure on this parcel become the leverage that gets a bad deal signed.</p>
+
+<p>Mayor D.C. Reeves put his card on the table early. On April 13, at his weekly press conference, he told reporters he does not support the rebate "in its current form." He was right to say so, and he was right to note that the final call is not his. The CRA board is the seven-member City Council sitting in a separate legal role. They are the ones who will approve or reject whatever comes back. They should take D'Angelo's letter, the consultant's memo, and the CRA's own published policy, and treat those three documents as the floor. Not the ceiling. Not the starting point for a negotiation about how much of them to waive.</p>
+
+<p>Dawson Company Chief Operating Officer Tamara Bowens told the Pensacola News Journal earlier this month that without the abatement the team would need to "go back to the drawing board" on a plan B. We hope they do. A revised application that scales the ask to what the CRA is legally permitted to give, raises equity to match city policy, and makes an honest case for why the rebate is actually necessary is a revised application worth hearing. The next CRA board meeting is May 11. That gives everyone three weeks. Three weeks is enough time to either file the real application or admit the first one was a negotiating position.</p>
+
+<p>Before then, the city can do one thing that would be useful for this project and every one that comes after it. Publish the checklist. Tell the public, in plain language, what a complete CRA rebate application is required to demonstrate on "but for," on equity, on term, on TIF self-sufficiency. Put the standard on paper so the next round of review is an audit of the math, not a negotiation over the rules. That is what a city that has learned from 20 years of Lot 5 would do.</p>
+
+<p>Because the real question at Community Maritime Park is not whether to build on Lot 5. Of course we should build on Lot 5. The question is whether Pensacola, in the year 2026, can tell the difference between a project it needs and a deal it is being told it needs. The April 16 letter is the city saying: we can.</p>
+
+<p>Lot 5 has waited 20 years for a project. It can wait three more weeks for the right one.</p>`
+},
+
+// ============================================================================
+// WAVE 1 — Apr 23-24 (Council night + REVERB news)
+// ============================================================================
+"alice-williams-capc": {
+  cat: "govt",
+  label: "City Government",
+  thumbnail: "/images/govt_office_007.jpg",
+  headline: "Pensacola Council Advances Sale of Former Alice S. Williams Day Care Building to CAPC",
+  dek: "The city will transfer the 1015 N. E Street property to Community Action Program Committee, the nonprofit that runs Head Start in Escambia and Santa Rosa counties. The council held the public hearing and declared the building surplus at its April 23 meeting.",
+  byline: "The Flightline Staff",
+  date: "April 24, 2026",
+  brief: [
+    "City Council voted April 23 to declare the former Alice S. Williams Day Care Center at 1015 N. E Street surplus and dispose of the property through an RFP process.",
+    "Community Action Program Committee, the nonprofit Head Start operator for Escambia and Santa Rosa counties, was the winning proposer on RFP 26-004.",
+    "The city purchased the property in an earlier CRA acquisition and completed renovation work in late 2025 before issuing the disposition RFP."
+  ],
+  body: `<p class="article-lede">Pensacola's City Council voted April 23 to declare a city-owned childcare building on North E Street surplus real property and advance its transfer to Community Action Program Committee, the nonprofit that operates Head Start programs across Escambia and Santa Rosa counties.</p>
+
+<p>The property at 1015 N. E Street, long known in the neighborhood as the Alice S. Williams Day Care Center, will be disposed of under the terms of RFP 26-004, which the city issued in late 2025 following a renovation of the building funded through the Community Redevelopment Agency. CAPC was identified in the city's Notice of Intent to Award as the responsive proposer.</p>
+
+<p>The two companion items on the April 23 regular agenda were a public hearing on the disposition, required under Florida statute for the sale or transfer of CRA-held real property, and a declaration of surplus and disposition of real property. The council approved both. The memorandum accompanying each item listed the RFP, the addendum, the CAPC proposal, site photos and the Notice of Intent to Award as supporting documents.</p>
+
+<p>The Alice S. Williams Day Care Center operated at the location for decades after opening in the late 1970s, serving generations of Pensacola families before closing. The city acquired the property, and CRA staff oversaw renovation work intended to return the building to childcare use under a new operator.</p>
+
+<p>CAPC already runs multiple Head Start and Early Head Start sites across the metro area from its administrative headquarters at 401 Brigadier Street, and expanded use of the 1015 N. E Street site would add capacity in a historically underserved section of the city. The organization has said it is fully enrolling for the 2025-26 program year despite federal funding uncertainty affecting Head Start programs nationally.</p>
+
+<p>Head Start, the federal program that funds free early childhood education for qualifying low-income families, has operated in Pensacola for decades through CAPC's network of centers. Early Head Start extends the program to children as young as six weeks. CAPC serves both Escambia and Santa Rosa counties and coordinates with the Escambia County School District on transition-to-kindergarten services for its older participants.</p>
+
+<p>The disposition still requires execution of a purchase and sale agreement between the city and CAPC under the RFP's negotiated terms. City staff have not publicly disclosed the transaction value or any deed restrictions tied to continued childcare use of the property.</p>
+
+<p>The next scheduled Community Redevelopment Agency meeting, where related updates to the CRA's property portfolio typically appear, is May 11.</p>`
+},
+
+"council-cardboard-ordinance": {
+  cat: "govt",
+  label: "City Government",
+  thumbnail: "/images/govt_public-hearing_009.jpg",
+  headline: "Pensacola Repeals Its Separate Corrugated Cardboard Ordinance",
+  dek: "The City Council approved Ordinance 05-26 on April 23, removing Section 4-3-66 of the city code. Commercial cardboard handling now falls under the city's broader solid waste rules.",
+  byline: "The Flightline Staff",
+  date: "April 24, 2026",
+  brief: [
+    "City Council approved Proposed Ordinance No. 05-26 on April 23, repealing Section 4-3-66 of the city code that established a standalone rule for corrugated cardboard collection.",
+    "The repeal consolidates commercial cardboard regulation under the city's broader solid waste and recycling ordinance structure.",
+    "The ordinance took effect immediately upon approval and final reading."
+  ],
+  body: `<p class="article-lede">Pensacola's City Council voted April 23 to repeal a decades-old section of the city code that regulated corrugated cardboard collection as a separate commercial waste category, folding the material back into the city's broader solid waste ordinance.</p>
+
+<p>The action came through Proposed Ordinance No. 05-26, a one-section repeal of Section 4-3-66 of the Code of the City of Pensacola. The ordinance appeared on the regular agenda as Item 7, with a memorandum from city staff and the Proof of Publication filed as supporting documents. The council approved the repeal on final reading.</p>
+
+<p>Section 4-3-66 had been on the books for years and set specific requirements for the handling and collection of corrugated cardboard by commercial generators. City staff explained in the accompanying memo that the section had been superseded in practical effect by updates to the broader solid waste and recycling framework, and that maintaining a standalone code section on one specific material created regulatory friction without a corresponding public benefit.</p>
+
+<p>Commercial generators of cardboard, which include retailers, restaurants, warehouses and other businesses that produce significant volumes of corrugated waste, had been required under the separate ordinance to follow collection and storage rules distinct from those governing other recyclables. The city's broader solid waste code already regulates commercial dumpster placement, collection frequency, contamination limits, and recycling compliance, and will now govern cardboard under the same framework.</p>
+
+<p>The repeal does not change the city's expectation that commercial generators of cardboard recycle the material where feasible. It removes the separate code-level treatment and leaves cardboard subject to the same rules as other commercial solid waste.</p>
+
+<p>Pensacola's Sanitation Services division, which operates under the city's Public Works and Facilities Department, handles municipal solid waste collection and recycling services for residential and commercial accounts within the city limits. The department collects roughly 60,000 tons of residential and commercial waste annually and operates one of the largest sanitation fleets in the region.</p>
+
+<p>No members of the public spoke during the discussion, and the measure passed without dissent. The ordinance took effect immediately upon final passage.</p>
+
+<p>Businesses with questions about current cardboard handling requirements can contact the city's Sanitation Services division at 850-435-1800.</p>`
+},
+
+"council-opioid-settlement": {
+  cat: "govt",
+  label: "City Government",
+  thumbnail: "/images/editorial_gavel_005.jpg",
+  headline: "Pensacola Joins Multi-State Opioid Settlement With Six Remaining Defendants",
+  dek: "The City Council approved participation in a settlement agreement that adds Pensacola to the national opioid litigation pool targeting a final group of manufacturers and distributors. The settlement will return money to the city for opioid remediation programs.",
+  byline: "The Flightline Staff",
+  date: "April 24, 2026",
+  brief: [
+    "The City Council voted April 23 to participate in the Six Remnant Defendants' Settlement Agreement, the latest tranche of national opioid litigation.",
+    "Participation allows Pensacola to collect a proportional share of settlement proceeds for use on opioid remediation and public health programs.",
+    "The agreement follows earlier settlements with major opioid manufacturers and distributors the city has participated in since 2021."
+  ],
+  body: `<p class="article-lede">Pensacola will join a multi-state settlement agreement with six remaining defendants in the national opioid litigation after the City Council approved the participation form at its April 23 regular meeting.</p>
+
+<p>The settlement, identified in the city agenda as the Six Remnant Defendants' Settlement Agreement, covers claims against manufacturers and distributors that were not party to earlier waves of national opioid settlements that have already returned funds to Florida cities and counties. Participation requires each subdivision to sign a participation form affirming it will release claims in exchange for a proportional share of the agreed settlement pool.</p>
+
+<p>The council approved the participation under Item 8 of the regular agenda. The supporting documents posted to the city's CivicClerk portal included the participation form and the full Settlement Agreement Among Participating Subdivisions and Remnant Defendants.</p>
+
+<p>Florida's share of national opioid settlement funds is distributed under the state's Memorandum of Understanding between the Attorney General's Office, counties and cities. Local governments receive funds in tranches over a multi-year payout period and must use the money on a state-approved list of opioid remediation activities, which includes treatment, prevention, first responder support, and community-based recovery services.</p>
+
+<p>The city has participated in prior settlement tranches involving major pharmaceutical manufacturers and distributors since Florida joined the national opioid litigation coalition. Earlier settlements with Johnson & Johnson, McKesson, Cardinal Health and AmerisourceBergen collectively sent billions of dollars to participating state and local governments beginning in 2022. Subsequent rounds added Teva, Allergan, Walmart, CVS and Walgreens. The Six Remnant Defendants tranche covers a final group of manufacturers and distributors that were not party to those earlier agreements.</p>
+
+<p>Proceeds from the earlier settlements have been directed toward Escambia County's coordinated response to the opioid crisis, which saw overdose deaths peak in the county in the early 2020s before beginning a gradual decline. Local response includes medication-assisted treatment funding, school-based prevention, naloxone distribution for first responders and community partners, and support for sober living and recovery housing.</p>
+
+<p>Under Florida's opioid settlement Memorandum of Understanding, 15 percent of the state's share flows to cities and counties that directly participated in litigation; 25 percent goes to a regionalized fund; and 60 percent is administered by the state. Pensacola's participation in each new settlement tranche is required to preserve its share.</p>
+
+<p>The dollar amount Pensacola will receive from the Six Remnant Defendants' Settlement has not been publicly disclosed. The final allocation depends on participation rates among eligible subdivisions nationwide and is determined by the settlement administrator.</p>
+
+<p>City staff will report the funds into the general fund budget as they arrive, earmarked for approved remediation uses.</p>`
+},
+
+"legion-field-gla-sidewalks": {
+  cat: "dev",
+  label: "Infrastructure",
+  thumbnail: "/images/development_road-work_002.jpg",
+  headline: "Pensacola Awards Engineering Contract for Legion Field to Global Learning Academy Sidewalks",
+  dek: "The City Council selected a firm to provide construction management, engineering and inspection services for a new sidewalk corridor connecting Legion Field to Global Learning Academy. The project is intended to improve pedestrian safety on a school walking route.",
+  byline: "The Flightline Staff",
+  date: "April 24, 2026",
+  brief: [
+    "City Council approved award of RFQ 26-008 for Construction Management, Engineering and Inspection services on the Legion Field to Global Learning Academy sidewalk project.",
+    "The corridor connects Legion Field park to Global Learning Academy, a K-8 Escambia County school that draws students from surrounding neighborhoods.",
+    "The project is funded through local capital sources and builds on the city's ongoing Safe Routes to School and pedestrian safety work."
+  ],
+  body: `<p class="article-lede">Pensacola's City Council voted April 23 to award a construction management, engineering and inspection services contract for a new sidewalk corridor connecting Legion Field to Global Learning Academy, part of the city's expanding effort to improve pedestrian safety along school walking routes.</p>
+
+<p>The award came under RFQ 26-008, advanced to council under Item 5 of the regular agenda. The ranking matrix, scope of work and project location map were filed as supporting documents. Construction management, engineering and inspection services, abbreviated as CEI in municipal procurement, cover third-party oversight of the design build-out and field inspection during construction.</p>
+
+<p>Legion Field sits on North W Street in Pensacola and hosts youth baseball and softball, while Global Learning Academy is a kindergarten-through-eighth-grade Escambia County School District school at the corner of N Street and W Moreno that opened in 2010 as a consolidated replacement for Spencer Bibbs and A.A. Dixon Elementary Schools. The walking route between the two draws children and families year-round. City staff identified the corridor as a Safe Routes to School priority in earlier capital planning cycles.</p>
+
+<p>The CEI contract award does not itself begin construction. It engages the firm that will oversee the construction phase, ensure compliance with design specifications, and handle field inspection and certification. The construction contract for the sidewalk itself is procured separately.</p>
+
+<p>Pensacola has steadily expanded its sidewalk network across the west side of the city over the past decade, often paired with state and federal Safe Routes to School grant funding that requires local CEI oversight as a condition of award. The Legion Field to GLA segment joins a pipeline of similar pedestrian-infrastructure projects the city has advanced in the Urban Core and Westside Community Redevelopment Areas.</p>
+
+<p>The city's Complete Streets policy, adopted in 2014 and updated since, directs capital spending on roadway projects toward improvements that accommodate pedestrians, cyclists, transit users and drivers. Sidewalk infill in the western neighborhoods around Legion Field and Global Learning Academy has been identified in successive capital improvement plans as a priority, reflecting both school walking-route needs and the absence of connected pedestrian infrastructure in parts of the area.</p>
+
+<p>Global Learning Academy, built as a consolidated K-8 replacement for Spencer Bibbs and A.A. Dixon Elementary when it opened in 2010, serves roughly 900 students. The school's attendance zone draws from multiple surrounding neighborhoods on both sides of N and Moreno streets, making safe pedestrian access a recurring topic at Escambia County School Board meetings.</p>
+
+<p>A projected construction schedule was not discussed at the April 23 meeting. City staff will return with construction procurement and scheduling updates as the CEI firm completes its pre-construction work.</p>`
+},
+
+"cra-interlocal-amendment": {
+  cat: "govt",
+  label: "City Government",
+  thumbnail: "/images/govt_office_007.jpg",
+  headline: "Pensacola Extends Administrative Services Agreement Between City and Community Redevelopment Agency",
+  dek: "An amendment to the 2016 interlocal agreement between Pensacola and its Community Redevelopment Agency governs how city departments provide staff support to the CRA. The council approved Amendment No. 2 on April 23.",
+  byline: "The Flightline Staff",
+  date: "April 24, 2026",
+  brief: [
+    "The City Council approved Amendment No. 2 to the 2016 interlocal agreement between the City of Pensacola and the Community Redevelopment Agency on April 23.",
+    "The interlocal sets the terms under which city staff provide planning, finance, legal and administrative services to the CRA, which operates as a separate legal entity.",
+    "The amendment updates cost-allocation and service-delivery language that had been revised once before in a 2019 amendment."
+  ],
+  body: `<p class="article-lede">Pensacola's City Council approved an updated administrative services agreement between the city and its Community Redevelopment Agency on April 23, formalizing how city departments support CRA operations following a decade of incremental changes in both organizations.</p>
+
+<p>The action, Item 6 on the regular agenda, authorized Amendment No. 2 to the 2016 interlocal agreement. The supporting documents posted to the city's CivicClerk portal included the amendment text, the 2019 first amendment and the original 2016 interlocal.</p>
+
+<p>Florida law treats community redevelopment agencies as separate legal entities from the municipalities that create them, even when, as in Pensacola, the governing body of the CRA is composed of the same members as the City Council sitting in a different legal capacity. That separation means the CRA does not directly employ staff. Instead, the city provides administrative support under the interlocal — planning review, finance and accounting, legal services, procurement, project management and records retention — and the CRA reimburses the city under a formula set out in the agreement.</p>
+
+<p>The 2016 base agreement established the original framework. A first amendment in 2019 updated cost-allocation provisions and adjusted which departments carried which responsibilities as CRA project activity grew. The April 23 amendment is the second substantive update and reflects further evolution in how city and CRA work flows intersect, including expanded CRA responsibilities around affordable housing programs and property disposition.</p>
+
+<p>The amendment does not create new CRA spending authority. It clarifies the rules governing how existing CRA tax-increment-financing revenue is charged for city staff time and overhead, a routine but substantial line in CRA budgets. Staff said in the accompanying memorandum that the revised language is intended to support cleaner year-end reconciliation between the two entities' books.</p>
+
+<p>Pensacola's CRA operates three redevelopment districts: Urban Core, Eastside and Westside. Tax-increment-financing revenue from property within each district is captured for reinvestment in that district's redevelopment plan. The agency has funded major projects including streetscape work, facade improvement grants, affordable housing programs, parks and public realm investments, and its share of the Community Maritime Park bond.</p>
+
+<p>Victoria D'Angelo serves as the CRA's administrator and oversees day-to-day agency operations under the interlocal framework. The CRA also contracts with outside counsel and consultants for specialized work, including the Lambert Advisory review that featured in recent discussion of the Reverb by Hard Rock rebate application.</p>
+
+<p>The council approved the amendment without discussion. CRA board approval, separately required for the agreement to take effect on the agency's side, was processed at the April 6 CRA meeting through a companion action.</p>`
+},
+
+"architect-advisor-brian-spencer": {
+  cat: "govt",
+  label: "City Government",
+  thumbnail: "/images/govt_public-hearing_009.jpg",
+  headline: "Pensacola Appoints Architect Brian Spencer to CRA Urban Design Review Role",
+  dek: "The City Council approved Brian Spencer as the primary architect advisor to the Community Redevelopment Agency's abbreviated design review process. The role supports faster turnaround on small-scale projects in the city's historic overlay districts.",
+  byline: "The Flightline Staff",
+  date: "April 24, 2026",
+  brief: [
+    "City Council approved the nomination of architect Brian Spencer as the primary architect advisor to the CRA's Urban Design Overlay Standards Abbreviated Review Process on April 23.",
+    "The advisor role provides expedited design review for smaller projects that meet pre-approved criteria under the CRA's overlay standards.",
+    "The appointment followed a standard nomination and Application of Interest process filed with the city clerk."
+  ],
+  body: `<p class="article-lede">Pensacola's City Council confirmed architect Brian Spencer as the primary architect advisor to the Community Redevelopment Agency's abbreviated urban design review process on April 23, filling a role designed to speed review of smaller projects in the city's historic overlay districts.</p>
+
+<p>The appointment, Item 2 on the regular agenda, was made through the consent process with the Nomination Form and Spencer's Application of Interest filed as supporting documents. The advisor serves as the designated architect reviewer for projects that qualify for the CRA's Abbreviated Review Process under the Urban Design Overlay Standards, which governs aesthetics and compatibility in the city's Community Redevelopment Area.</p>
+
+<p>The abbreviated process, created to reduce review time for projects meeting a defined set of pre-approved criteria, relies on a single qualified architect advisor to perform the design review that would otherwise require a full Planning Board hearing. Projects that do not meet the abbreviated criteria still go through regular Planning Board review, which meets monthly in the Hagler-Mason Conference Room at City Hall.</p>
+
+<p>Spencer is a Pensacola-based architect with experience in historic preservation and infill development in the city's urban core. He has served in a range of volunteer design review roles in the region across his career. The advisor position does not carry a salary; advisors serve on a per-review basis under city procurement rules.</p>
+
+<p>The Urban Design Overlay Standards govern aesthetics, scale, and compatibility for projects within the city's Community Redevelopment Area. Historic districts including North Hill, East Hill and the Palafox Historic District operate under layered review requirements, and smaller projects that would otherwise face lengthy Planning Board queues benefit from the abbreviated track when they meet its qualifying criteria. The architect advisor's review focuses on building massing, materials, fenestration, and consistency with surrounding historic character.</p>
+
+<p>The appointment gives the CRA a seated advisor after a period during which abbreviated review applications had been queuing for assignment. City staff said the filled role will support the city's broader push to reduce permitting friction on small-scale redevelopment projects in Urban Core and Westside CRA districts, which have been a focus of the CRA's Commercial Property Improvement Program and Residential Property Improvement Program.</p>
+
+<p>The Urban Core Redevelopment Board, which handles other review and recommendation work for the same district, meets next on May 19 at 3:30 p.m. in the Hagler-Mason Conference Room. The next Community Redevelopment Agency board meeting is May 11.</p>`
+},
+
+"reverb-cra-rejection-news": {
+  cat: "dev",
+  label: "Development",
+  thumbnail: "/images/downtown_pensacola-maritime-park_006.jpg",
+  headline: "Pensacola CRA Rejects $58 Million Tax Rebate Application for Reverb Hard Rock Hotel at Maritime Park",
+  dek: "In an April 16 letter to the development team, Community Redevelopment Agency Administrator Victoria D'Angelo said the 345-page application for a property tax rebate on the proposed downtown waterfront hotel and apartment tower cannot move forward in its current form. The letter listed six specific problems.",
+  byline: "The Flightline Staff",
+  date: "April 23, 2026",
+  brief: [
+    "CRA Administrator Victoria D'Angelo sent a letter April 16 rejecting a 345-page tax rebate application for the proposed Reverb by Hard Rock hotel and Rhythm Lofts apartment tower at Community Maritime Park.",
+    "The developer, Dawson Company partnered with Hard Rock International and NFL Hall of Famer Emmitt Smith, had requested roughly $58 million in property tax rebates over 20 years on the $250 million project.",
+    "Mayor D.C. Reeves publicly opposed the rebate request in its current form three days before the rejection letter. The next CRA board meeting is May 11."
+  ],
+  body: `<p class="article-lede">Pensacola's Community Redevelopment Agency has rejected a $58 million property tax rebate application tied to a proposed Reverb by Hard Rock hotel and apartment tower at Community Maritime Park, citing six specific problems with the developer's 345-page submission.</p>
+
+<p>CRA Administrator Victoria D'Angelo sent the rejection in an April 16 letter to Dawson Company, the Pensacola-based developer leading the project in partnership with Hard Rock International and NFL Hall of Famer Emmitt Smith. D'Angelo wrote that the application was "incomplete and cannot be processed further in its current form." The rejection was first reported by the Pensacola News Journal on April 21.</p>
+
+<p>The project, proposed for Lot 5 of Community Maritime Park across from Blue Wahoos Stadium, calls for a 10-story, 125-room Reverb by Hard Rock hotel, a 15-story apartment tower called Rhythm Lofts that would stand 171 feet tall and become Pensacola's tallest building, and 49 for-sale condominium units. Total estimated project cost is $250 million. The design team includes architecture firm Gensler, Lenny Kravitz's Kravitz Design for interiors, and structural engineer Thornton Tomasetti, with the towers planned in mass timber construction.</p>
+
+<p>The developer's rebate application, filed in March, sought roughly $2.9 million per year in property tax rebates over 20 years, totaling about $58 million. The application argued the project was not financeable in its proposed form without the full rebate.</p>
+
+<p>D'Angelo's letter identified six reasons the application could not move forward. The rebate's 20-year term would extend past the CRA's statutory expiration in 2043, violating a cap built into the agency's enabling authority. The developer's at-risk equity was listed at $50 million, or 20 percent of the project cost, below the 30 percent the CRA's published policy prefers. The application did not demonstrate that the project would generate enough tax-increment-financing revenue to self-fund its own rebate. The TIF cap language in the application did not match the city's policy language. The developer did not clearly satisfy the "but-for" test required under Florida TIF law, which allows rebates only for projects that would not happen without the subsidy. And an independent review by consultant Lambert Advisory characterized the application's financial assumptions as "highly questionable."</p>
+
+<p>Mayor D.C. Reeves said at his April 13 weekly press conference, three days before D'Angelo's letter, that he did not support the rebate "in its current form." Reeves also noted the final decision on any rebate rests with the CRA board, which is composed of the same seven members who serve on the City Council acting in a separate legal capacity. "They don't need my support if they have the votes," Reeves said at the press conference.</p>
+
+<p>Dawson Company Chief Operating Officer Tamara Bowens told the News Journal earlier in April, before the rejection, that without the abatement the team would need to "go back to the drawing board" on a plan B. The developer has not publicly announced whether a revised application will be filed.</p>
+
+<p>The council approved a 100-year ground lease for Lot 5 in August 2024 after years of failed attempts to attract a serious developer to the parcel, which has sat empty since Community Maritime Park opened in 2012. Silver Hills Development Inc. previously held lease options on Lots 4 and 5 and walked away. The Dawson project is the first that has reached the construction-permit design phase.</p>
+
+<p>The next CRA board meeting is May 11 at 3:30 p.m. in the Hagler-Mason Conference Room at Pensacola City Hall.</p>`
+},
+
+// ============================================================================
+// WAVE 2 — Apr 10-23 (school district, Bay Center, county/Santa Rosa, UWF, dev)
+// ============================================================================
+"bay-center-189m-workshop": {
+  cat: "govt",
+  label: "Government",
+  thumbnail: "/images/downtown_pensacola-bay-center_004.jpg",
+  headline: "City and County Leaders Coalesce Around $189 Million Bay Center Plan in Joint Workshop",
+  dek: "Pensacola City Council, Escambia County Commission and Mayor D.C. Reeves spent two hours April 16 at the Pensacola Bay Center reviewing competing proposals from Legends Global and WT Partnership. The framework that emerged includes $71 million in renovations, a new flexible event center and a privately financed ice facility. The county commission is expected to act on next steps in June.",
+  byline: "The Flightline Staff",
+  date: "April 17, 2026",
+  brief: [
+    "The April 16 joint workshop at the Pensacola Bay Center brought together the Escambia County Commission, Pensacola City Council and Mayor D.C. Reeves to hear presentations on the venue's future from Legends Global and WT Partnership.",
+    "A three-part framework emerged: $71 million in confirmed renovations to the existing arena, a separate flexible event center with scope still under design, and a new ice facility likely funded through private financing.",
+    "The 41-year-old Bay Center is funded by Escambia County and sits inside Pensacola city limits. Total project costs are estimated at roughly $189 million. The county commission is expected to discuss next steps in June."
+  ],
+  body: `<p class="article-lede">A clearer picture of what the Pensacola Bay Center could become emerged April 16 after city and county elected officials spent two hours in open discussion at the 41-year-old downtown arena, working through competing visions for a redevelopment estimated to cost roughly $189 million.</p>
+
+<p>The joint workshop, held at 9 a.m. at the Bay Center itself, brought together the Escambia County Board of County Commissioners, the Pensacola City Council and Mayor D.C. Reeves. Legends Global, the venue management firm that operates the Bay Center under contract with the county, presented its Plan for the Future. WT Partnership, a separate consultant retained for the work, presented a Pensacola Convention Center Analysis. The session was a workshop, meaning no votes were taken and no public comment was scheduled.</p>
+
+<p>What the elected officials heard, broadly, was a three-part proposal. Legends Global laid out roughly $71 million in renovations to the existing Bay Center arena, considered the most certain component and likely to move forward in some form regardless of how other pieces shake out. A separate flexible event center, intended to host a wider range of conventions, mid-size concerts and youth sports tournaments, was presented as a second component with scope still under design. A new ice rink, identified as critical to retaining the Pensacola Ice Flyers and growing youth hockey, was the third component, with Legends Global indicating private financing would likely cover its roughly $30 million cost.</p>
+
+<p>The conversation that followed the presentations covered familiar ground for anyone who has watched the venue debate over the past three years. Council President Allison Patton emphasized convention space as a tool for business attraction. District 1 County Commissioner Steve Stroberger said his preference was for sports tourism. Councilwoman Jennifer Brahier raised parking and transportation, citing Old Town Alexandria's trolley network as a model and noting that USDOT transportation grants can also fund parking infrastructure. Councilman Charles Bare called parking his single biggest concern. District 3 Commissioner Lumon May questioned whether downtown is the right home for a youth sports tourism complex, citing successful regional examples in Hoover, Alabama and elsewhere that were built away from bar and entertainment districts.</p>
+
+<p>"We've been doing this for a year. I'm in favor of doing something sooner than later," District 4 Commissioner Mike Kohler said.</p>
+
+<p>The Bay Center, which opened in 1985 at 201 E. Gregory St., has a capacity of 8,050 for hockey and 10,000 with a center stage. It currently averages 123 annual events with attendance of 352,700. The arena is owned and funded by Escambia County but sits within Pensacola city limits, meaning major redevelopment requires both bodies to align.</p>
+
+<p>The framework that emerged from the April 16 session is not a final decision. It is the basis for continued staff work on design, financing and procurement options that the county commission is expected to take up at a meeting in June. The June discussion will determine the formal scope of the renovation and event center pieces and clarify which financing mechanisms the county is willing to use for each component.</p>
+
+<p>The workshop was livestreamed on the Escambia County YouTube channel.</p>`
+},
+
+"escambia-voucher-repayment": {
+  cat: "education",
+  label: "Education",
+  thumbnail: "/images/education_teacher_006.jpg",
+  headline: "Escambia School Board Demands $3 Million Repayment From State Over Voucher Students Still in District Classrooms",
+  dek: "The board voted April 22 to send a letter to the Florida Department of Education seeking reimbursement for 335 students who left the district under the state voucher program but later returned, and whom the district has educated without state funding. Each student costs Escambia roughly $9,000.",
+  byline: "The Flightline Staff",
+  date: "April 22, 2026",
+  brief: [
+    "The Escambia County School Board voted April 22 to demand state reimbursement for 335 students who returned to the district from the voucher program without funding following them.",
+    "At roughly $9,000 in funding per student, the missing reimbursement totals about $3 million.",
+    "The action comes amid a broader $18 million structural budget gap in Escambia County Public Schools driven by five years of net enrollment decline."
+  ],
+  body: `<p class="article-lede">The Escambia County School Board voted April 22 to formally demand the Florida Department of Education repay the district roughly $3 million for 335 students currently in district classrooms whose state funding is still attached to private schools or homeschooling under Florida's voucher program.</p>
+
+<p>The action authorized Superintendent Keith Leonard to send a letter to the Department of Education on behalf of the board. The letter requests reimbursement for the 335 students the district says it has educated this academic year without receiving the per-pupil state funding that should follow them. At roughly $9,000 per student, that comes to about $3 million the district has spent without corresponding revenue.</p>
+
+<p>"My biggest question is how is it legal for us to have students sitting in seats that we're not getting paid for?" District 1 Board Member Kevin Adams said at the meeting. "That don't happen. It can't happen. It should not happen."</p>
+
+<p>The reimbursement gap is a downstream effect of how Florida's universal voucher program, expanded under House Bill 1 in 2023, allocates per-student funding through the state's Family Empowerment Scholarship rather than directly to school districts. When students enroll in the scholarship program and choose private school or homeschooling, the funding follows them. When those students return to public school mid-year or in subsequent years, however, the funding does not always automatically follow back. The result is students in district classrooms whose state funding is still attached to scholarships at other educational settings.</p>
+
+<p>The problem is not unique to Escambia County. State Rep. Alex Andrade has said multiple Florida districts face similar reimbursement issues, and the resolution is most likely to come through the state budget process. The Florida Legislature, however, ended its 2026 regular session in March without passing a budget, leaving districts waiting on a special session to address the question alongside the property tax overhaul Gov. Ron DeSantis has been pressing.</p>
+
+<p>The 335-student gap sits inside a much larger structural challenge for Escambia County Public Schools. The district has lost an average of 500 students per year over the past five years to a combination of voucher attrition, demographic shift and competing public and charter options, contributing to an estimated $18 million budget shortfall heading into the 2026-27 school year. Leonard told the board the district has already limited travel and frozen non-essential hiring in response.</p>
+
+<p>The district's letter to the Department of Education, drafted by Leonard and approved unanimously by the board, asks specifically for reimbursement covering transportation, food services, counseling and other state-mandated services the district provides to all enrolled students regardless of voucher status.</p>
+
+<p>The Department of Education has not publicly indicated when or whether it will respond.</p>`
+},
+
+"escambia-schools-18m-shortfall": {
+  cat: "education",
+  label: "Education",
+  thumbnail: "/images/education_library_004.jpg",
+  headline: "Escambia County Public Schools Face $18 Million Budget Gap as Five-Year Enrollment Decline Compounds",
+  dek: "The district has lost an average of 500 students per year over the past five years, driven by voucher expansion and demographic change. With per-pupil funding tied directly to enrollment, the cumulative loss now translates to roughly $18 million missing from the 2026-27 budget. Superintendent Keith Leonard says travel is restricted and non-essential hiring is frozen.",
+  byline: "The Flightline Staff",
+  date: "April 18, 2026",
+  brief: [
+    "Escambia County Public Schools is heading into the 2026-27 budget cycle with an estimated $18 million structural shortfall driven by five consecutive years of enrollment decline.",
+    "The district has lost an average of 500 students per year, and Florida's per-pupil funding model means each lost student takes roughly $8,000 to $9,000 in state revenue with them.",
+    "Superintendent Keith Leonard has frozen non-essential hiring and limited district travel in response. Florida's Office of Economic and Demographic Research projects another 2,500 students could leave the district by 2029-30."
+  ],
+  body: `<p class="article-lede">The Escambia County School District is heading into next year's budget process with a structural $18 million shortfall driven by five consecutive years of declining student enrollment, the result of expanded state voucher programs, demographic shifts and competing school choices that have pulled an average of 500 students per year out of district classrooms.</p>
+
+<p>Florida funds school districts through the Florida Education Finance Program, which allocates dollars on a per-student basis. The base student allocation in the most recent state budget was approximately $8,000 to $9,000 depending on local cost factors. When a student leaves a public school for the Family Empowerment Scholarship, homeschooling or another option, that funding leaves with them. Compounded over five years at 500 students annually, the cumulative revenue loss now translates to roughly $18 million below where the district's budget would otherwise sit.</p>
+
+<p>"If you have less students, common sense would tell you there'd be a fewer number of teachers," Superintendent Keith Leonard said in earlier remarks to the school board. "For every time you have a fewer number of teachers, you're going to have a fewer number of administrative staff. You're going to have fewer number of education support staff, you're not going to need as many bus drivers."</p>
+
+<p>Leonard has restricted district travel and frozen non-essential hiring as initial steps to manage the gap. School board members have signaled that without additional state action, deeper cuts including potential staff reductions and school consolidations may be required heading into 2026-27.</p>
+
+<p>The trend is not expected to reverse quickly. Florida's Office of Economic and Demographic Research projects Escambia County Public Schools could lose another 2,500 students by the 2029-30 school year, the sharpest projected enrollment decline among Northwest Florida districts. Santa Rosa County is projected to lose roughly 1,100 students at brick-and-mortar schools while gaining 892 voucher participants, a net per-pupil revenue hit of approximately $9.7 million for that district. Okaloosa County is projected to lose roughly 2,400 students.</p>
+
+<p>The voucher program expansion that accelerated the decline came through House Bill 1 in 2023, which made Florida's Family Empowerment Scholarship universally available regardless of family income. Escambia County saw the largest jump in scholarship participation among Northwest Florida districts in the year following expansion, growing from 1,877 Florida Tax Credit Scholarships in 2022-23 to 2,367 the following year, according to Step Up for Students data.</p>
+
+<p>The district's local option half-cent sales tax, which voters renewed in 2022, helps fund major capital projects but does not flow into the operating budget that pays teacher salaries and day-to-day costs. Operating revenue is overwhelmingly state-driven through the FEFP formula, which is what makes enrollment decline so consequential.</p>
+
+<p>School board budget workshops typically begin in earnest in May and June. The board will receive its first preliminary revenue estimates from the property appraiser before the end of July, with final adoption of the 2026-27 budget scheduled for September.</p>`
+},
+
+"santa-rosa-sales-tax-ballot": {
+  cat: "govt",
+  label: "Government",
+  thumbnail: "/images/editorial_voting_010.jpg",
+  headline: "Santa Rosa County Commissioners Approve Ballot Language for November Half-Cent Sales Tax Renewal",
+  dek: "Voters will be asked in November whether to extend the existing half-cent local option sales tax for another five years beginning January 2027. The tax generates roughly $16 million annually for road, bridge, public safety and parks projects. The current tax sunsets December 31, 2026.",
+  byline: "The Flightline Staff",
+  date: "April 23, 2026",
+  brief: [
+    "The Santa Rosa County Commission voted April 23 to adopt the ballot language for a November referendum on renewing the county's half-cent local option sales tax.",
+    "The current tax was first approved by voters in 2016, extended in 2020, and sunsets December 31, 2026. Renewal would extend it five additional years.",
+    "Estimated annual revenue is $16 million, with money funding roads, bridges, drainage, public safety equipment, and now also farmland and natural area protection."
+  ],
+  body: `<p class="article-lede">Santa Rosa County voters will decide in November whether to extend the county's half-cent local option sales tax for another five years, after county commissioners voted April 23 to adopt the ballot language for the referendum.</p>
+
+<p>The existing half-cent sales tax was first approved by Santa Rosa County voters by approximately a two-thirds margin on August 30, 2016, took effect January 1, 2017, and was extended by voters again in November 2020. The current authorization sunsets December 31, 2026. Without renewal, the half-cent levy would simply expire.</p>
+
+<p>The renewal would extend the tax for five additional years beginning January 1, 2027, and is projected to generate roughly $16 million in annual revenue. Spending priorities listed in the ballot language include traffic congestion relief through road and bridge construction and improvement, drinking water source and waterway protection, preservation of natural areas and wildlife habitat from overdevelopment, public safety equipment for fire services and the Santa Rosa County Sheriff's Office, and improvements to parks and recreational facilities. The measure also adds farmland to the list of resources eligible for protection through sales tax revenue, a new provision tied to the county's Agricultural Legacy Land Program adopted in March.</p>
+
+<p>The April 23 vote came after the commission reviewed the proposed ballot language at its April 21 Committee of the Whole meeting and held discussion at a public hearing earlier in the day. Only one resident spoke at the hearing on the sales tax language. Chris Curb, speaking on behalf of a flood-control advocacy group called Flood Defenders, said he supported the proposed language and recommended the county provide a percentage breakdown of how revenue would be allocated by category.</p>
+
+<p>The renewal effort follows the failure of a 2024 ballot measure that would have replaced the existing half-cent tax with a full one-cent surtax for 15 years, dedicating no less than 50 percent of revenue to transportation. That measure failed at the polls. County leaders had previously attempted to add a second half-cent tax to the existing one but were notified by the Florida Department of Revenue that doing so would not be permitted under state law.</p>
+
+<p>"Failure of the sales tax renewal will result in $16 million a year we're not able to spend on infrastructure, the bulk of which goes to roads and system capacity," Deputy County Administrator Sabrina White said in earlier comments before the commission.</p>
+
+<p>The county has pulled from reserves to fund capital infrastructure projects in each of the past two budget cycles and would likely need to do so again this year if the renewal does not pass. Deputy County Administrator Jared Lowe said the new ballot language is "really not a departure at all from what the tax has been used for," with the addition of the farmland protection provision serving as the only substantive expansion.</p>
+
+<p>The November 3, 2026 general election will determine whether the tax continues into a third five-year cycle.</p>`
+},
+
+"santa-rosa-farmland-protection": {
+  cat: "govt",
+  label: "Government",
+  thumbnail: "/images/community_farmers-market_001.jpg",
+  headline: "Santa Rosa County Adds Farmland Protection to Sales Tax Ballot Question Through New Agricultural Legacy Program",
+  dek: "Commissioners voted in March to create the Agricultural Legacy Land Program, which would use sales tax revenue to fund conservation easements that incentivize landowners to keep farmland in agricultural use. The program is now folded into the November ballot measure.",
+  byline: "The Flightline Staff",
+  date: "April 22, 2026",
+  brief: [
+    "Santa Rosa County's Agricultural Legacy Land Program, created by commission vote March 26, will be funded through revenue from the half-cent sales tax if voters renew it in November.",
+    "The program offers landowners a recurring source of funding to establish permanent conservation easements that preserve property as farmland.",
+    "Commissioner Rhett Rowell led the program's creation, framing it as a response to development pressure that has been converting agricultural land to subdivisions across the county."
+  ],
+  body: `<p class="article-lede">Santa Rosa County is making farmland protection a permanent line item in its half-cent sales tax program, adding the new Agricultural Legacy Land Program to the November ballot question after commissioners voted in March to create the conservation effort.</p>
+
+<p>The Agricultural Legacy Land Program was authorized through a March 26 commission vote championed by District 4 Commissioner Rhett Rowell. The program creates a recurring funding source to incentivize owners of agricultural land to preserve their property as farmland by establishing permanent conservation easements. A conservation easement is a voluntary legal agreement under which a landowner gives up the right to develop the property in exchange for a payment, with the restriction running with the land in perpetuity.</p>
+
+<p>Funding for the program is now folded into the November sales tax renewal measure that commissioners approved April 23. If voters approve the renewal, sales tax revenue will provide a dedicated stream for farmland easement purchases over the next five years.</p>
+
+<p>The program would also enable acquisitions similar to the recent purchase of 29 acres overlooking one of the few healthy salt marsh habitats remaining in Northwest Florida. Santa Rosa County contributed $550,000 toward that acquisition in partnership with the Tourist Development Council and a citizen group, preserving land that would otherwise have been available for development.</p>
+
+<p>Santa Rosa County has been one of Florida's fastest-growing counties for more than a decade. Population growth has driven sustained development pressure on agricultural land, particularly in the central and northern parts of the county where row crop farming, timber and ranch operations have historically dominated. County data shows tens of thousands of acres of agricultural land have been converted to residential or commercial use since 2010.</p>
+
+<p>Rowell and other supporters of the program have argued that without a dedicated funding mechanism, the county lacks the tools to compete with developer offers when farm families consider selling. Conservation easements offer a partial alternative: the landowner retains ownership and the right to continue farming, but cedes the development rights in exchange for a payment that reflects the diminished sale value of the restricted land.</p>
+
+<p>The farmland addition was the only substantive change from the existing sales tax authorization that voters last extended in 2020. The rest of the November ballot language tracks closely with the historical uses, including roads, bridges, drainage, public safety equipment and parks. Deputy County Administrator Jared Lowe described the existing categories as the "bread and butter" of where sales tax revenue is spent.</p>
+
+<p>The half-cent sales tax generates roughly $16 million annually. The program funding allocation within that pool will be determined through the county's annual budget process if the renewal passes.</p>`
+},
+
+"uwf-southern-illinois-opener": {
+  cat: "sports",
+  label: "Sports",
+  thumbnail: "/images/PenAir-Field-Zoom-1920x1080.jpeg",
+  headline: "UWF Will Open Its Division I Football Era Against Southern Illinois on Aug. 27 at Pen Air Field",
+  dek: "The Argonauts' first game as a Football Championship Subdivision program will be a Thursday night home game against the Salukis of the Missouri Valley Football Conference. UWF announced its move to NCAA Division I on April 2 and will play its first season in the United Athletic Conference this fall.",
+  byline: "The Flightline Staff",
+  date: "April 12, 2026",
+  brief: [
+    "UWF will open its 2026 football season — the program's first as an NCAA Division I FCS member — against Southern Illinois on Thursday, August 27 at 6 p.m. Central at Pen Air Field.",
+    "The Argonauts complete a home-and-home series with the Salukis at Carbondale, Ill., on September 4, 2027.",
+    "UWF's full 2026 schedule now stands at 11 games, with two open weekends remaining in September. The Argonauts will compete in the United Athletic Conference for football and the Atlantic Sun Conference for all other sports."
+  ],
+  body: `<p class="article-lede">The University of West Florida will open its Division I football era at home against Southern Illinois under the lights, the Argonauts announced on Monday in coordination with Southern Illinois Athletics.</p>
+
+<p>Kickoff is scheduled for 6 p.m. Central time on Thursday, August 27 at Pen Air Field on the UWF campus. The matchup is the front end of a home-and-home series between the two programs, with UWF making the return trip to Saluki Stadium in Carbondale, Illinois on September 4, 2027.</p>
+
+<p>"We are excited to open up with a great team like Southern Illinois for our start on the FCS level," head coach Kaleb Nobles said in the school's announcement. "At UWF, we prepare for games like this, and we want to play the best teams around the country that we can. We look forward to a great start to the 2026 UWF Football season."</p>
+
+<p>Dave Scott, the university's Associate Vice President of Intercollegiate Athletics, framed the game as a community moment. "This is going to be an exciting game to begin our first football season as members of the FCS," Scott said. "We are thankful to Southern Illinois for adding us to their schedule. We want to encourage the Pensacola community to rally around this monumental game and come out to support the Argos."</p>
+
+<p>UWF announced its move to NCAA Division I on April 2, ending nine seasons in NCAA Division II's Gulf South Conference. The football program will compete in the United Athletic Conference, a partnership between the Atlantic Sun Conference and the Western Athletic Conference that originated as a football-only league in 2023. UWF's other intercollegiate sports will compete in the ASUN. The university will be eligible to win a UAC conference championship this fall but will not be eligible for the FCS playoffs until completing a three-year reclassification period required of programs moving up from Division II.</p>
+
+<p>The Southern Illinois game gives UWF 11 confirmed games for its inaugural Division I season, with two open weekends remaining on September 12 and September 26. The Argonauts have UAC conference games against Central Arkansas, Austin Peay, Abilene Christian, Eastern Kentucky, North Alabama, Tarleton State and West Georgia. Three former Gulf South Conference rivals — West Alabama, Delta State and Northeastern State — are scheduled as non-conference opponents on October 10, 17 and 31. The April 2 league announcement included the full UAC schedule.</p>
+
+<p>The Salukis enter the matchup off a 7-5 season that included a win over No. 11 Illinois State in their final regular-season game. Southern Illinois will also be eligible for the FCS playoffs through the Missouri Valley Football Conference. UWF was 10-2 in 2025 and reached the NCAA Division II Super Region 2 semifinals before losing to Newberry.</p>
+
+<p>The home opener will be played at Pen Air Field as construction continues on a $50 million phased upgrade to Darrell Gooden Stadium, which UWF broke ground on in February. The completed facility, scheduled for fall 2027, will accommodate roughly 10,000 spectators with 7,500 permanent seats, premium and club seating, and an 85-foot by 30-foot LED video board that will be operational for the upcoming season.</p>
+
+<p>Single-game ticket and season ticket information will be released by UWF Athletics in the coming weeks.</p>`
+},
+
+"ekos-warrington-affordable-housing": {
+  cat: "dev",
+  label: "Development",
+  thumbnail: "/images/development_residential_004.jpg",
+  headline: "$41.9 Million Affordable Housing Development Breaks Ground in Warrington, Half the Units Reserved for Military Families and Veterans",
+  dek: "Miami-based McDowell Housing Partners closed financing and started construction on Ekos at Warrington, a 120-unit complex at 280 Dogwood Drive near NAS Pensacola. The development was funded through Florida's 2024 Live Local Act allocation for housing near military installations.",
+  byline: "The Flightline Staff",
+  date: "April 10, 2026",
+  brief: [
+    "McDowell Housing Partners closed financing in early April on the $41.9 million Ekos at Warrington affordable housing development at 280 Dogwood Drive in West Pensacola.",
+    "The 120-unit complex will reserve 50 percent of its units for active-duty military, veterans and their families, with half of the extremely low-income units set aside for veterans experiencing homelessness.",
+    "The project is one of three new affordable housing developments breaking ground in the Pensacola area this spring, together adding 180 apartments and 33 single-family homes to the local supply."
+  ],
+  body: `<p class="article-lede">A 120-unit affordable housing complex serving military families and veterans is rising at 280 Dogwood Drive in West Pensacola, the first Pensacola project for Miami-based McDowell Housing Partners and one of three affordable housing developments breaking ground in the area this spring.</p>
+
+<p>McDowell Housing Partners closed financing in early April on Ekos at Warrington, a $41.9 million development that will deliver four three-story buildings and a standalone clubhouse near Naval Air Station Pensacola. Construction is scheduled to take roughly 16 months, with completion targeted for the third quarter of 2027.</p>
+
+<p>"We are excited to break ground on Ekos at Warrington, our first affordable development in Escambia County, made possible through Florida's landmark Live Local Act, which will provide working families with apartments and loads of amenities in a prime location," McDowell Housing Partners President Christopher Shear said in the company's announcement.</p>
+
+<p>The development will reserve 10 percent of its units for extremely low-income households earning at or below 40 percent of area median income, with the remaining 90 percent serving households at or below 60 percent of AMI. Half of the total units, 60 apartments, will be set aside for active-duty military members, veterans and their families. Half of the extremely low-income units will be reserved specifically for veterans experiencing homelessness. The unit mix includes 72 one-bedroom, 36 two-bedroom and 12 three-bedroom apartments ranging from 631 to 1,197 square feet.</p>
+
+<p>Funding came primarily through a $10.3 million State Apartment Incentive Loan and Extremely Low Income award from the Florida Housing Finance Corporation, granted under the agency's 2024-215 Request for Applications targeting Live Local financing for developments near military installations. The 2023 Live Local Act, expanded in 2024, set aside dedicated state funding for affordable housing projects serving military bases. Additional financing came through tax-exempt bonds and 4 percent non-competitive Low-Income Housing Tax Credits with CREA as the tax credit investor and R4 Capital providing both construction and permanent loans. Park & Eleazer Construction is the general contractor and Slocum Platts Architects is architect of record.</p>
+
+<p>Ekos at Warrington is one of three new affordable housing developments underway in the Pensacola area this spring. Pensacola Habitat for Humanity broke ground April 7 on Hancock Meadows, a 33-lot single-family development in the Brent neighborhood that includes six rental units for military families. Together with the third project, Emerald Meridian, the spring 2026 pipeline adds 180 apartments and 33 homes to local affordable housing supply.</p>
+
+<p>The Pensacola area's housing shortage has reached crisis levels, according to local advocates. Opening Doors Northwest Florida, which serves as the regional Continuum of Care lead agency on homelessness, recorded 1,155 individuals experiencing homelessness in Escambia and Santa Rosa counties in its January 26, 2026 Point-in-Time count. Opening Doors will provide on-site services coordination at Ekos at Warrington under a partnership with the developer.</p>
+
+<p>The completed property will meet National Green Building Standards and include low-flow plumbing fixtures, SEER 15 HVAC systems, high-efficiency impact windows, Energy Star appliances and LED lighting throughout. Community amenities include a fitness center, swimming pool, playground, dog park and a media and business center with a computer lab.</p>`
+},
+
+"pns-terminal-expansion-update": {
+  cat: "dev",
+  label: "Development",
+  thumbnail: "/images/development_construction-crane_001.jpg",
+  headline: "Pensacola International Airport's $152 Million Terminal Expansion Crosses Six-Month Construction Mark",
+  dek: "Construction on the five-gate concourse expansion broke ground in October and is now six months into a roughly two-year build. The project will increase the airport's gate count from 12 to 17 to accommodate passenger traffic that exceeded 3 million in fiscal year 2024.",
+  byline: "The Flightline Staff",
+  date: "April 10, 2026",
+  brief: [
+    "Pensacola International Airport's $152 million Terminal Expansion and Modernization Program broke ground October 15, 2025, and is now six months into a planned two-year construction schedule.",
+    "The project adds a five-gate concourse, expanded TSA and security space, additional curbside pickup capacity and additional parking, increasing the airport's total gate count from 12 to 17.",
+    "PNS handled more than 3 million passengers in fiscal year 2024 and projects continued growth toward 5 million annually by 2040."
+  ],
+  body: `<p class="article-lede">Six months into construction on a $152 million expansion that will fundamentally reshape the airport's footprint, Pensacola International Airport is approaching a quarter of the way through a build that began in fall 2025 and is scheduled to deliver a new five-gate concourse, expanded security and parking infrastructure by 2027.</p>
+
+<p>The Terminal Expansion and Modernization Program officially broke ground October 15, 2025, with city and airport leadership marking the start of construction at a ceremony attended by Mayor D.C. Reeves and Escambia County Commissioner Ashlee Hofberger. The expansion will increase PNS's total gate count from 12 to 17, allowing the airport to add new airline service and accommodate more daily flights.</p>
+
+<p>"This expansion isn't just a luxury, it's a critical necessary investment to ensure that we keep pace with our region's dynamic growth," Reeves said at the October groundbreaking.</p>
+
+<p>The driver behind the expansion is passenger volume. PNS recorded more than 3 million passenger boardings in fiscal year 2024, roughly 58,000 travelers per week, up from 1 million annually a decade ago. Airport Executive Director Matt Coughlin has previously said the facility was outgrowing its current footprint and that infrastructure had to be expanded to maintain service quality.</p>
+
+<p>"When we build the concourse out, we're planning to approach 5 million and out to the year 2040," Coughlin said in earlier remarks at the project announcement.</p>
+
+<p>The expansion includes a brand-new five-gate concourse, upgraded post-security baggage claim and circulation areas, expanded gate hold rooms, redesigned curbside pickup and drop-off zones, and additional parking. Concession and retail space will also be expanded as part of the buildout.</p>
+
+<p>The project is the largest single capital investment in PNS's history and represents the first major terminal expansion since the early 2000s. The airport is publicly owned by the City of Pensacola and operates under a master plan that projects facility needs out 20 years.</p>
+
+<p>Pensacola International Airport currently offers more than 20 nonstop flight destinations through carriers including American Airlines, Delta Air Lines, Southwest, United, Allegiant, Breeze Airways and Frontier. The airport added four new nonstop destinations in February 2026 alone. Frontier Airlines began twice-weekly nonstop service to Orlando International on February 13, and Breeze Airways followed with twice-weekly Orlando service on March 12.</p>
+
+<p>Project updates and renderings are posted at TransformPNS.com, a dedicated website the airport launched in April 2025 to keep the public informed throughout the construction period. The roughly two-year build is on schedule for completion by late 2027 or early 2028.</p>`
+},
+
+"superintendent-ballot-referendum": {
+  cat: "education",
+  label: "Education",
+  thumbnail: "/images/editorial_voting_010.jpg",
+  headline: "Escambia County Voters Will Decide in August Whether to Return to Electing the School Superintendent",
+  dek: "The county commission voted 4-1 on April 1 to place the school board's request on the August 18 primary ballot, despite community pushback urging the question be moved to the higher-turnout November general election. If voters approve, the first elected superintendent in nearly a decade would take office after November 2028.",
+  byline: "The Flightline Staff",
+  date: "April 17, 2026",
+  brief: [
+    "The Escambia County Commission voted 4-1 on April 1 to place a referendum on the August 18 primary ballot asking voters whether to return to an elected school superintendent.",
+    "Commissioner Lumon May was the dissenting vote, citing concerns that primary turnout is roughly a quarter of general election turnout and would not reflect a representative voter sample on a major governance question.",
+    "Escambia voters narrowly switched from an elected to an appointed superintendent in 2018. If the August referendum passes, an elected superintendent would take office after the November 2028 general election."
+  ],
+  body: `<p class="article-lede">Escambia County voters will decide on August 18 whether to reverse their 2018 decision to switch from an elected to an appointed school superintendent, after the county commission voted 4-1 on April 1 to place the question on the statewide primary election ballot at the school board's request.</p>
+
+<p>The ballot language voters will see asks: "Shall the superintendent of schools of Escambia County, Florida, be elected by the majority of the qualified electors of Escambia County, Florida?" A yes vote would return the position to elected status. A no vote would keep the current appointed model, in which the school board hires the superintendent.</p>
+
+<p>Commissioner Lumon May cast the lone dissenting vote on placing the referendum on the August primary rather than the November general election. May framed the timing as a turnout problem.</p>
+
+<p>"There's without a doubt that this will probably be the most contested governor's race in November in recent history," May said at the meeting. "I think that if there's ever an opportunity to eliminate voter suppression, give every person an opportunity to vote, we should give it at the chance that allows for the most people to come out."</p>
+
+<p>The numbers favor May's argument. In the 2024 cycle, Escambia County recorded approximately 48,385 votes in the August primary and 164,515 votes in the November general election. November turnout was roughly three and a half times higher than primary turnout. Several residents spoke at the public hearing before the vote raising the same concern, including retired schoolteacher Lily Eubanks and resident Craig Jones, both of whom argued school referendums belong on the general election ballot.</p>
+
+<p>Commissioners Mike Kohler and Steven Barry said their yes votes were driven less by preference than by legal risk. Escambia County Attorney Alison Rogers told the commission she had requested an Attorney General's Office opinion in October 2025 on whether the commission could place the referendum on the general election ballot instead of the primary as the school board had requested. As of the April 1 hearing, the AG's office had not responded. Rogers told commissioners her legal advice was to follow the school board's request.</p>
+
+<p>The path to the April 1 vote began February 18, 2025, when the Escambia County School Board voted 3-2 to ask the county to place the referendum on the August 2026 primary ballot. District 5 Board Member Tom Harrell introduced the resolution and was joined by Kevin Adams and Paul Fetsko in voting yes. Carissa Bergosh and David Williams voted no. Harrell campaigned on returning to an elected superintendent and has repeatedly said the appointed model has not produced the continuity Escambia families want.</p>
+
+<p>Escambia County voters last weighed in on the question in November 2018, when they narrowly approved a switch from elected to appointed. Following that vote, the school board conducted a national search and hired Tim Smith as the first appointed superintendent. The board terminated Smith in a 3-2 vote in 2023. Keith Leonard has served as superintendent since. Leonard has indicated publicly that he plans to retire in 2027 or 2028, meaning the question of how the next superintendent is selected has practical urgency regardless of the referendum's outcome.</p>
+
+<p>If voters approve the change in August, an elected superintendent would take office following the November 2028 general election. If voters reject the change, the school board would continue to appoint the position.</p>`
+},
+
+// ============================================================================
+// WAVE 3 — Apr 11-21 (American Magic, mayor's race, walkout, sentencing, etc)
+// ============================================================================
+"american-magic-saildrone-spectre": {
+  cat: "dev",
+  label: "Maritime",
+  thumbnail: "/images/military_hangar_011.jpg",
+  headline: "American Magic and Saildrone Unveil Pensacola-Built Unmanned Navy Warship at Port",
+  dek: "The 65-foot Spectre, designed for anti-submarine warfare and strike missions, was christened April 16 at the Port of Pensacola. The vessel is a joint project between the New York Yacht Club's American Magic sailing team and Saildrone, the California-based unmanned maritime company.",
+  byline: "The Flightline Staff",
+  date: "April 16, 2026",
+  brief: [
+    "American Magic and Saildrone unveiled a 65-foot unmanned surface vessel called the Spectre at the Port of Pensacola on April 16, designed for U.S. Navy anti-submarine warfare and strike missions.",
+    "The Pensacola-built vessel is the first product of a partnership between the New York Yacht Club's America's Cup sailing team American Magic and Saildrone, a California-based unmanned ocean systems company.",
+    "Components for the Spectre were fabricated at American Magic's High Performance Center, the Port of Pensacola facility that opened to the public in January."
+  ],
+  body: `<p class="article-lede">A 65-foot unmanned warship designed for U.S. Navy anti-submarine and strike operations was christened at the Port of Pensacola on April 16, the first vessel of its kind built in the city and the public debut of a partnership between an America's Cup sailing team and a California-based defense technology company.</p>
+
+<p>The Spectre is a joint project between American Magic, the New York Yacht Club's America's Cup challenger, and Saildrone, an Alameda-based maker of unmanned ocean vehicles. American Magic's High Performance Center at the Port of Pensacola, which opened publicly in January, fabricated and assembled major components of the vessel using the same composite manufacturing capabilities the team developed for its racing yachts.</p>
+
+<p>Tyson Lamond, American Magic's chief operating officer, said in remarks at the event that the project demonstrates how technologies developed for elite sailing competition can move directly into defense applications.</p>
+
+<p>"What we have learned in trying to win the America's Cup translates remarkably well to the unmanned defense space," Lamond said. "Lightweight, fast, durable, autonomous: these are exactly the qualities the Navy is asking for, and they're exactly what we build."</p>
+
+<p>Saildrone CEO Richard Jenkins joined the unveiling. Saildrone has operated unmanned ocean vessels under contract with the U.S. Navy and other agencies for nearly a decade, but the Spectre represents the company's largest and most heavily armed platform to date. The vessel is designed for missions that include anti-submarine warfare, surface strike, intelligence collection and persistent maritime surveillance.</p>
+
+<p>The Pensacola location was a strategic choice. The Port of Pensacola sits within hours of NAS Pensacola, NAS Whiting Field and Eglin Air Force Base, the Navy's largest aviation training and weapons test footprint. American Magic moved its primary U.S. operations to Pensacola in 2022 after Mayor D.C. Reeves and economic development officials negotiated the High Performance Center deal as the cornerstone of the city's effort to reposition the port as a maritime technology hub.</p>
+
+<p>Reeves attended the christening alongside city and military officials. "When we said two years ago that the Port of Pensacola was going to be where the next generation of American maritime innovation gets built, this is what we meant," Reeves said in his remarks.</p>
+
+<p>The Spectre is expected to enter sea trials in the Gulf of Mexico later this spring before being delivered to the Navy for operational evaluation. American Magic has indicated additional vessels in the platform family are already in production at the High Performance Center.</p>
+
+<p>The partnership between American Magic and Saildrone was first reported in December but the companies had not previously displayed a finished platform publicly. The April 16 event marks the formal launch of the joint product line, which both companies are pitching as a model for how commercial sailing R&D can be redirected to national security customers.</p>
+
+<p>The Port of Pensacola is owned by the City of Pensacola and managed under a master plan that has prioritized advanced manufacturing and maritime defense over traditional cargo handling for the past five years.</p>`
+},
+
+"american-magic-hpc-opening": {
+  cat: "dev",
+  label: "Maritime",
+  thumbnail: "/images/downtown_waterfront_004.jpg",
+  headline: "American Magic Opens $20.8 Million High Performance Center at Port of Pensacola",
+  dek: "The 56,000-square-foot facility in the renovated Warehouse No. 10 will house composite manufacturing, design engineering and operations for the New York Yacht Club's America's Cup team. Officials project 170 jobs at full operation.",
+  byline: "The Flightline Staff",
+  date: "April 11, 2026",
+  brief: [
+    "American Magic opened its $20.8 million High Performance Center at the Port of Pensacola in a ribbon-cutting on January 7, marking the formal opening of the team's primary U.S. operations base.",
+    "The 56,000-square-foot facility occupies the renovated Warehouse No. 10 and houses composite manufacturing, design engineering, fabrication and team operations.",
+    "City officials project 170 full-time jobs at full operation. The facility is the cornerstone of Pensacola's effort to reposition the port as a maritime technology hub."
+  ],
+  body: `<p class="article-lede">American Magic, the New York Yacht Club's America's Cup challenger, formally opened its $20.8 million High Performance Center at the Port of Pensacola at a January 7 ribbon-cutting attended by Mayor D.C. Reeves, members of the City Council and U.S. Sen. Ashley Moody, marking what city officials have described as the largest single private capital investment at the port in more than a generation.</p>
+
+<p>The facility occupies a renovated Warehouse No. 10 at the port, a building previously used for bulk cargo storage that the city converted in partnership with the team into 56,000 square feet of advanced manufacturing, design engineering and operations space. The build-out includes large-bay composite fabrication areas, autoclave curing capacity, finished-goods storage and team office space, all configured to support American Magic's racing yacht development cycle.</p>
+
+<p>"This is a generational investment in our city and our port," Reeves said at the ribbon-cutting. "American Magic could have built this anywhere in the world. They built it in Pensacola, and that says something about what this community has become."</p>
+
+<p>City projections place full-operation employment at 170 jobs, a mix of composite technicians, naval architects, engineers, sailors and operations staff. Many of the technical roles draw on workforce expertise developed in the region's defense and aerospace economy, including former NAS Pensacola and Eglin Air Force Base contractor staff.</p>
+
+<p>The facility's opening is part of a broader repositioning of the Port of Pensacola from a traditional bulk and breakbulk cargo operation to a maritime technology hub focused on advanced manufacturing, defense applications and high-value finished goods. That shift began under Reeves' first term in office and has involved updating the port's long-range master plan, attracting tenants in maritime technology, and funding capital improvements through a combination of city dollars, state appropriations and federal grants.</p>
+
+<p>American Magic's presence has also catalyzed adjacent activity. The team's partnership with Saildrone, the Alameda-based unmanned ocean vessels company, was first reported in December and produced its first publicly displayed defense platform, the unmanned Spectre warship, at a Port of Pensacola christening event April 16.</p>
+
+<p>The High Performance Center was funded through a mix of private capital from the team's principal backers, state economic development incentives and city contributions toward the Warehouse No. 10 renovation. Construction took roughly 18 months following the lease agreement Reeves announced in summer 2024.</p>
+
+<p>The team has not yet announced its full schedule for racing yacht development at the new facility. American Magic plans to defend its position as a New York Yacht Club challenger entry in the next America's Cup cycle, with full design and build cycles ramping up in 2026 and 2027.</p>`
+},
+
+"mayors-race-2026-primer": {
+  cat: "govt",
+  label: "Politics",
+  thumbnail: "/images/editorial_voting_010.jpg",
+  headline: "Five Candidates Have Filed for the 2026 Pensacola Mayor's Race. Here's Where the Field Stands.",
+  dek: "Mayor D.C. Reeves filed for re-election in December, joined by former Council President Ann Hill, consultant Alicia Trawick, software engineer Jermaine Williams and socialist organizer Jasmine Brown. The primary is August 18; if no candidate clears 50 percent, the top two advance to a November runoff.",
+  byline: "The Flightline Staff",
+  date: "April 13, 2026",
+  brief: [
+    "Five candidates have pre-filed for Pensacola mayor in 2026: incumbent D.C. Reeves, former Council President Ann Hill, consultant Alicia Trawick, Jermaine J. Williams and Jasmine Brown.",
+    "Hill leads in fundraising with $2,201.73 in monetary contributions and $1,431.21 in in-kind contributions reported through the most recent filing period. Reeves has reported zero contributions to date.",
+    "The primary is August 18, 2026. A candidate who clears 50 percent in the primary wins outright; otherwise the top two advance to a November 3 runoff."
+  ],
+  body: `<p class="article-lede">Five candidates have pre-filed for the Pensacola mayor's race that will be decided either in the August 18 primary or in a November 3 runoff, setting up the most contested mayoral election since the 2022 cycle that put incumbent D.C. Reeves in office.</p>
+
+<p>Reeves, the former Quint Studer protégé and entrepreneur who won the 2022 mayoral race outright in the primary with 51 percent of the vote, filed for re-election December 19. He is running on a first-term record that includes the city's grants office, the Hollice T. Williams Greenway, the American Magic High Performance Center at the Port of Pensacola, the New Palafox project and the demolition of the old Baptist Hospital site to make way for affordable housing. Reeves has reported zero monetary contributions through the current filing period.</p>
+
+<p>Former Council President Ann Hill announced her bid in September and is running on a platform she calls "The Ann Plan," a list of priorities that includes free downtown parking, lower property taxes, neighborhood preservation, expanded affordable housing, and rebuilding the Malcom Yonge Gym that was demolished early in Reeves' first term. Hill served Council District 6 from 2018 to 2022. She leads the field in fundraising, reporting $2,201.73 in monetary contributions and $1,431.21 in in-kind contributions through the most recent filing.</p>
+
+<p>Alicia Trawick, a Pensacola resident who works in disaster recovery and local government consulting, filed for the mayor's race after originally filing for City Council District 4. Trawick organized several of the largest public protests Pensacola saw in 2025 and is the only mayoral candidate calling for the strong-mayor form of government, adopted by city referendum in 2010, to be rolled back to a council-manager system. She is running on affordability, infrastructure and what she frames as government accountability. Trawick has reported zero contributions to date.</p>
+
+<p>Jermaine J. Williams is running on housing, public safety and expanded city involvement in mental health and addiction treatment. His campaign website emphasizes community development that does not displace existing residents.</p>
+
+<p>Jasmine Brown, an organizer with the Party for Socialism and Liberation, has reported $1,455.01 in monetary contributions and is running explicitly on what her campaign describes as a movement-building platform for socialism.</p>
+
+<p>The August 18 statewide primary doubles as the first round of the mayoral election in Pensacola. If a single candidate clears 50 percent of the vote in the primary, that candidate wins the office outright, the same path Reeves took in 2022. If no candidate clears 50 percent, the top two finishers advance to a runoff on the November 3 general election ballot.</p>
+
+<p>Three of seven Pensacola City Council seats are also on the 2026 ballot. District 2, currently held by Charles Bare, who has indicated he plans to seek re-election. District 4, held by Jared Moore, will be open after Moore announced in November he would not seek re-election. District 6, held by current Council President Allison Patton, has not yet drawn announced opposition.</p>
+
+<p>The qualifying period for all city offices closes June 12. The Escambia County Supervisor of Elections office maintains the official candidate list at escambiavotes.gov.</p>`
+},
+
+"council-bcc-candidate-filings": {
+  cat: "govt",
+  label: "Politics",
+  thumbnail: "/images/editorial_voting_010.jpg",
+  headline: "Boyce White Files for City Council District 4; Joe Vinson Files for County Commission District 4 With No Party Affiliation",
+  dek: "The April 13 county commission filing by Joe Vinson and the January city council filing by Boyce White round out the local race fields for the August 18 primary. The District 4 county seat is currently held by Mike Kohler.",
+  byline: "The Flightline Staff",
+  date: "April 21, 2026",
+  brief: [
+    "Joe Vinson pre-filed April 13 to run for Escambia County Commission District 4 with no party affiliation, the seat currently held by Mike Kohler.",
+    "Boyce White pre-filed January 9 for Pensacola City Council District 4, an open seat after incumbent Jared Moore announced in November he would not seek re-election.",
+    "City Council District 4 covers East Hill, East Pensacola Heights and parts of Cordova Park. County Commission District 4 covers East Pensacola, Cordova, much of central Escambia County and runs north into the unincorporated areas."
+  ],
+  body: `<p class="article-lede">Two candidates have filed in the past three months for the District 4 seats on the Pensacola City Council and the Escambia County Commission, each setting up a different kind of race in two of Pensacola's most politically active districts heading into the August 18 primary.</p>
+
+<p>Joe Vinson pre-filed April 13 for Escambia County Commission District 4 with no party affiliation, according to a notice published by the Escambia County Supervisor of Elections office. The seat is currently held by Republican Mike Kohler, who has not announced his re-election plans. District 4 covers East Pensacola, Cordova, parts of central Escambia County and extends north into the unincorporated parts of the county.</p>
+
+<p>Florida's no-party-affiliation candidates can run in partisan general elections without participating in either party's primary, which under Florida's closed primary system means an NPA candidate's name appears only on the November general election ballot. The Florida primary scheduled for August 18 is otherwise closed to non-affiliated voters except in cases where all candidates filed share a single party.</p>
+
+<p>Vinson's no-party affiliation filing creates the possibility of a three-way general election race depending on what happens in the Republican primary, which would happen if the seat draws qualified Republican challengers and Kohler files for re-election before the June qualifying deadline.</p>
+
+<p>On the city side, Boyce White pre-filed for Pensacola City Council District 4 on January 9, the second candidate to enter the race after Cordova Park resident Brain Cole filed January 7. The District 4 city seat is open after Councilman Jared Moore announced in November he would not seek re-election after one term. District 4 covers East Hill, East Pensacola Heights and parts of Cordova Park.</p>
+
+<p>White is an East Pensacola Heights resident who previously ran for Escambia County Commission District 4 in 2018 and was defeated. His 2026 City Council bid is his second run for elected office and his first for a city seat. White has not yet released a detailed campaign platform.</p>
+
+<p>City Council races are nonpartisan, meaning all candidates appear on the same primary ballot regardless of party affiliation. If a candidate clears 50 percent in the August 18 primary, the candidate wins outright. If no candidate clears that threshold, the top two finishers advance to the November 3 general election runoff.</p>
+
+<p>Council District 4 has historically been one of the most engaged districts in the city, with high voter turnout and active neighborhood associations across East Hill and East Pensacola Heights. Bay Bluffs Park, which has been closed since 2023 due to erosion damage, sits within the district and has been a recurring issue at council meetings.</p>
+
+<p>The qualifying period for all county and city offices closes June 12. Pre-filed candidates must complete formal qualification by that date to appear on the August primary ballot. The Supervisor of Elections office maintains an updated candidate list at escambiavotes.gov.</p>`
+},
+
+"uwf-287g-student-walkout": {
+  cat: "govt",
+  label: "Education",
+  thumbnail: "/images/UWF-Sign-Zoom-2025-June-1920x1080.jpeg",
+  headline: "UWF Students Walk Out Over University's Participation in 287(g) Immigration Enforcement Program",
+  dek: "Roughly 30 students gathered at the Pace Library and walked to Cannon Green on April 14, calling on the university administration to withdraw from the federal program that allows campus police to perform certain immigration enforcement duties under ICE supervision.",
+  byline: "The Flightline Staff",
+  date: "April 14, 2026",
+  brief: [
+    "About 30 University of West Florida students walked out of class on April 14 in protest of the university's participation in the federal 287(g) immigration enforcement program.",
+    "The walkout began at the Pace Library and ended on Cannon Green near the John C. Pace Library entrance. Organizers called on UWF to terminate its Memorandum of Agreement with U.S. Immigration and Customs Enforcement.",
+    "Section 287(g) of the Immigration and Nationality Act authorizes ICE to delegate certain immigration enforcement duties to state and local law enforcement agencies under federal supervision."
+  ],
+  body: `<p class="article-lede">Roughly 30 University of West Florida students walked out of class on April 14 to protest the university's participation in a federal program that allows campus police officers to perform certain immigration enforcement duties under U.S. Immigration and Customs Enforcement supervision.</p>
+
+<p>The walkout began at the John C. Pace Library on the UWF main campus and ended at Cannon Green, the open quad outside the library that serves as the campus's traditional protest gathering point. Student organizers handed out flyers and held signs calling on the university administration to terminate its Memorandum of Agreement with ICE under Section 287(g) of the Immigration and Nationality Act.</p>
+
+<p>Section 287(g) is a federal program created under the 1996 Illegal Immigration Reform and Immigrant Responsibility Act. The provision allows ICE to enter into formal agreements with state and local law enforcement agencies under which designated officers receive federal training and authority to perform specific immigration enforcement functions during their normal duties. Participating agencies sign a Memorandum of Agreement that defines the scope of the delegated authority and the supervisory framework. The program has expanded significantly under the Trump administration's January 2025 executive orders directing federal agencies to maximize cooperation with state and local immigration enforcement.</p>
+
+<p>UWF's participation places the University Police Department within the program's framework, though the specific scope of delegated authority under the university's MOA has not been publicly released by the administration. Student organizers said the lack of transparency about what UPD officers can and cannot do under the agreement was itself a primary concern.</p>
+
+<p>"We deserve to know what's being done in our name on this campus," one student organizer said during the walkout. "If our police officers can ask about immigration status, we should know that. If they can't, we should know that too."</p>
+
+<p>The walkout coincided with similar protests on other Florida public university campuses where 287(g) participation has expanded. The University of Florida, Florida State University, the University of South Florida and the University of Central Florida all signed similar MOAs in early 2025 following pressure from the Florida State University System Board of Governors.</p>
+
+<p>UWF Police Chief Marc Cossich and university administration officials have not publicly responded to the walkout. The UWF Office of the President had not issued a statement on the protest as of late April 14.</p>
+
+<p>UWF enrolled approximately 14,000 students in the fall 2025 semester. The university does not publish demographic breakdowns by immigration status, but the population includes international students on F-1 visas, students of mixed-status families and Deferred Action for Childhood Arrivals recipients. Florida's Board of Governors policy historically did not require Florida residency documentation for in-state tuition, but recent state-level guidance has tightened those requirements.</p>
+
+<p>Walkout organizers said they plan additional actions in the coming weeks if the administration does not respond.</p>`
+},
+
+"jenkins-sentencing-pensacola-detective": {
+  cat: "govt",
+  label: "Public Safety",
+  thumbnail: "/images/editorial_gavel_005.jpg",
+  headline: "Pensacola Man Sentenced to 20 Months in Federal Prison for Threatening Police Detective in Homicide Case",
+  dek: "Tamal W. Jenkins, 20, was sentenced April 14 in U.S. District Court for the Northern District of Florida after pleading guilty to transmitting a threatening communication with intent to extort. Federal prosecutors said Jenkins threatened a Pensacola Police Department detective during a homicide investigation in July 2025.",
+  byline: "The Flightline Staff",
+  date: "April 14, 2026",
+  brief: [
+    "Tamal W. Jenkins, 20, of Pensacola was sentenced April 14 to 20 months in federal prison for transmitting a threatening communication with intent to extort.",
+    "The U.S. Attorney's Office for the Northern District of Florida said Jenkins threatened a Pensacola Police Department detective in July 2025 during a homicide investigation.",
+    "The case was prosecuted by Assistant U.S. Attorney Brett A. Switzer and investigated jointly by the FBI and the Pensacola Police Department."
+  ],
+  body: `<p class="article-lede">A 20-year-old Pensacola man was sentenced to 20 months in federal prison on April 14 after pleading guilty to threatening a Pensacola Police Department detective who was investigating a July 2025 homicide, federal prosecutors announced.</p>
+
+<p>Tamal W. Jenkins received the sentence in U.S. District Court for the Northern District of Florida from a judge after pleading guilty earlier this year to one count of transmitting a threatening communication with intent to extort, a federal felony. The U.S. Attorney's Office for the Northern District of Florida announced the sentencing in a public release.</p>
+
+<p>According to court filings, Jenkins sent a threatening communication to the detective in July 2025 while the detective was actively working a Pensacola homicide investigation. The communication included specific threats and demands tied to the investigation. Federal investigators determined the threat reached the detective by means that crossed state lines, giving federal prosecutors jurisdiction under 18 U.S.C. § 875, the federal statute prohibiting interstate communication of threats with intent to extort.</p>
+
+<p>The case was prosecuted by Assistant U.S. Attorney Brett A. Switzer of the U.S. Attorney's Office for the Northern District of Florida. Investigative work was led jointly by the FBI's Pensacola Resident Agency and the Pensacola Police Department.</p>
+
+<p>Federal sentencing guidelines for the offense produced a range that the court used as the basis for the 20-month custodial sentence. Jenkins will serve the term in federal Bureau of Prisons custody and will be subject to a term of supervised release upon completion. The court did not order restitution.</p>
+
+<p>The Pensacola Police Department investigates approximately a dozen homicides per year on average. Threats against PPD officers and detectives during the course of investigations are not common but have occurred periodically, with most resolved through state-level criminal charges. The decision to pursue federal charges in the Jenkins case reflected both the seriousness of the threat and the interstate component of the communication, federal prosecutors said.</p>
+
+<p>The case was brought as part of an ongoing federal-local partnership in which threats against law enforcement officers can be reviewed jointly by the U.S. Attorney's Office and local prosecutors to determine the most appropriate jurisdiction. State Attorney Ginger Bowden Madden's office handles the underlying homicide prosecution. The status of the homicide case the detective was investigating at the time of the threat was not addressed in the federal sentencing materials.</p>
+
+<p>Federal sentencing in the Northern District of Florida is handled at the U.S. Courthouse on North Palafox Street in downtown Pensacola.</p>`
+},
+
+"reeves-town-hall-may-june": {
+  cat: "govt",
+  label: "City Government",
+  thumbnail: "/images/govt_public-hearing_009.jpg",
+  headline: "Mayor Reeves Announces Spring and Summer Town Hall Schedule Across Pensacola Council Districts",
+  dek: "Mayor D.C. Reeves and city department directors will hold a series of community town halls in May and June, beginning in District 5 and rotating through each of the city's seven council districts. The format includes department updates and direct resident Q&A.",
+  byline: "The Flightline Staff",
+  date: "April 20, 2026",
+  brief: [
+    "Mayor D.C. Reeves announced a spring and summer town hall schedule that will rotate through Pensacola's seven council districts, beginning in May.",
+    "Each town hall includes a brief update from the mayor's office, presentations from city department directors, and an open Q&A with residents on neighborhood-specific concerns.",
+    "Town halls are free, open to the public and held at locations within the relevant council district. The first session is in District 5."
+  ],
+  body: `<p class="article-lede">Mayor D.C. Reeves will hold a series of community town halls across Pensacola's seven council districts beginning in May, the city announced this week, continuing a quarterly format the mayor's office has used since 2024 to bring city department updates directly into individual neighborhoods.</p>
+
+<p>Each town hall follows the same general format. Reeves and a rotating set of city department directors begin with brief updates on city projects, capital plans and recent council actions affecting the host district. The bulk of each session is dedicated to open question-and-answer with residents, where neighborhood-specific concerns including drainage, paving, public safety, parks and code enforcement typically dominate the conversation.</p>
+
+<p>The series rotates through all seven council districts on a rolling basis, with two town halls scheduled per month from May through August. Each session is held at a location within the relevant council district, often a community center, church or school. All sessions are free, open to the public and do not require advance registration.</p>
+
+<p>The first session in the spring rotation will be held in District 5, currently represented by Council President Pro Tempore Casey Jones, with the date and venue listed on the city's events calendar at cityofpensacola.com. Subsequent sessions will rotate through Districts 1, 2, 3, 4, 6 and 7 over the following weeks. Each council member is expected to attend the town hall in their respective district.</p>
+
+<p>The town hall schedule reflects a broader effort by Reeves' office to maintain visible direct engagement with constituents during what is shaping up to be a contested re-election year. Reeves filed for re-election December 19 and faces four announced challengers in the August 18 primary. The town halls are not campaign events; they are run by city staff and use city resources, with the format and tone consistent with town halls Reeves held throughout 2024 and 2025.</p>
+
+<p>City staff who typically attend include department directors from Public Works, Parks and Recreation, Sanitation Services, Planning, Code Enforcement, the Fire Department and the Pensacola Police Department, along with the city administrator and the mayor's communications team. Residents who cannot attend in person can submit questions in advance through the city's events page or through the council member's office.</p>
+
+<p>The full updated schedule, including dates, times and venues for each district town hall, is posted at cityofpensacola.com/events. The city's communications team also distributes updates through CivicSend, the city's email and text notification platform, which residents can sign up for at the same site.</p>
+
+<p>The format dates to early 2024 when Reeves' office began holding the rotating district town halls to address what city officials said was demand for more direct interaction between the executive branch and individual neighborhoods. Council members hold their own quarterly community meetings on a separate schedule.</p>`
+},
+
+"bay-center-spring-concerts-2026": {
+  cat: "community",
+  label: "Community",
+  thumbnail: "/images/downtown_pensacola-bay-center_004.jpg",
+  headline: "Pensacola Bay Center Books Brandon Lake, Alice Cooper and Kevin Hart for Spring and Summer 2026",
+  dek: "The 41-year-old downtown arena's spring and summer schedule includes Christian artist Brandon Lake, rock veteran Alice Cooper and comedian Kevin Hart alongside the venue's anchor tenants, Pensacola Ice Flyers hockey and Pensacola Diocese youth events. The lineup arrives as elected officials weigh a $189 million redevelopment of the venue.",
+  byline: "The Flightline Staff",
+  date: "April 19, 2026",
+  brief: [
+    "The Pensacola Bay Center has booked Christian artist Brandon Lake, rock veteran Alice Cooper and comedian Kevin Hart among its spring and summer 2026 events.",
+    "The 41-year-old arena hosts approximately 123 events per year and drew 352,700 in cumulative attendance during its most recent 12-month period.",
+    "The schedule arrives as Escambia County and Pensacola officials work through a $189 million redevelopment plan that includes $71 million in arena renovations and a possible new flexible event center."
+  ],
+  body: `<p class="article-lede">The Pensacola Bay Center has booked Christian recording artist Brandon Lake, rock veteran Alice Cooper and comedian Kevin Hart among its spring and summer 2026 lineup, anchoring a calendar that continues to draw nationally touring acts to the 41-year-old downtown arena even as elected officials weigh a $189 million redevelopment of the venue.</p>
+
+<p>Brandon Lake, the Grammy-nominated artist behind worship hits "Praise" and "Gratitude," is scheduled to perform later this spring as part of his Coat of Many Colors Tour. Alice Cooper, the Rock and Roll Hall of Fame inductee whose stage shows have toured for more than five decades, brings his summer tour to Pensacola in June. Kevin Hart's stand-up comedy tour stops at the Bay Center later in the summer.</p>
+
+<p>The lineup is consistent with the venue's recent booking trajectory, which has skewed toward arena-scale Christian, rock and country acts that draw from the regional Gulf Coast market spanning western Florida, southern Alabama and southeastern Mississippi. Recent past events have included Charley Crockett, Casting Crowns, the Eagles tribute act The Long Run, and a calendar of motorsports, ice shows and family programming.</p>
+
+<p>The Bay Center hosts approximately 123 events per year and drew 352,700 in cumulative attendance during its most recent reported 12-month period, according to the Legends Global Pensacola Bay Center Plan for the Future presentation given to elected officials at the April 16 joint workshop. The venue's anchor tenants include the Pensacola Ice Flyers of the Federal Prospects Hockey League, which uses the facility for home games during the regular season, and the Pensacola Catholic Diocese, which holds annual Mass and youth events at the arena.</p>
+
+<p>The arena's seating capacity is 8,050 for hockey configuration and approximately 10,000 for center-stage concerts. The venue opened in 1985 at 201 E. Gregory St. on the eastern edge of downtown Pensacola, where it has operated under management contracts that have rotated among national venue operators including SMG, ASM Global and currently Legends Global.</p>
+
+<p>The April 16 joint workshop between the Escambia County Commission, the Pensacola City Council and Mayor D.C. Reeves produced a three-part redevelopment framework that includes roughly $71 million in renovations to the existing arena, a separate flexible event center with scope still under design, and a new ice rink expected to be funded primarily through private financing. The county commission is expected to take up next steps at a meeting in June.</p>
+
+<p>Several elected officials at the workshop, including District 4 Commissioner Mike Kohler, signaled urgency about advancing the renovation work. Whatever the eventual scope of the redevelopment, the venue is expected to continue hosting events on its current schedule through any phased construction.</p>
+
+<p>Tickets for the announced spring and summer events are available through Ticketmaster and the Pensacola Bay Center box office at 201 E. Gregory St. Group rates and accessibility seating are handled through the venue's group sales line.</p>`
+}
+
+});
