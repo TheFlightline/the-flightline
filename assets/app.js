@@ -1711,50 +1711,35 @@ function renderCalList() {
     uwf:      { label:'UWF Main Entrance',       coords:[-87.2186647, 30.5418837] }
   };
 
-  // Route destinations: [lng, lat] for ORS — destination is the Welcome to Pensacola Beach sign
-  const DESTINATIONS = {
-    'pcb':     { coords:[-87.1421, 30.3340], label:'Pensacola Beach (Casino Beach)',  via:'Via Bob Sikes Bridge',  miles:'8.0' },
-    'navarre': { coords:[-86.8602, 30.3796], label:'Navarre Beach',                   via:'Via US-98 E',           miles:'25' },
-    'perdido': { coords:[-87.4538, 30.3007], label:'Perdido Key',                     via:'Via Sorrento Rd',       miles:'18' }
-  };
+  // Single destination: Pensacola Beach (Casino Beach)
+  const DESTINATION = { coords:[-87.1421, 30.3340], label:'Pensacola Beach' };
 
-  // Baseline drive times in seconds per origin (used for traffic ratio coloring)
+  // Baseline drive times to Pensacola Beach in seconds (verified from Google Maps,
+  // typical traffic, weekday midday). Used for traffic-vs-baseline ratio coloring.
   const BASELINES = {
-    downtown: { pcb: 720,  navarre: 1800, perdido: 1500 },
-    nas:      { pcb: 1080, navarre: 2160, perdido: 900  },
-    airport:  { pcb: 960,  navarre: 1800, perdido: 1620 },
-    uwf:      { pcb: 1380, navarre: 2280, perdido: 2100 }
+    downtown: 780,   // ~13 min  via US-98 + Bob Sikes Bridge
+    nas:      1320,  // ~22 min  via Navy Blvd + US-98 + Bob Sikes Bridge
+    airport:  1080,  // ~18 min  via I-110 + US-98 + Bob Sikes Bridge
+    uwf:      1440   // ~24 min  via I-110 + US-98 + Bob Sikes Bridge
   };
 
-  // Route label/via overrides per origin
+  // Per-origin route description + miles to Pensacola Beach.
   const ROUTE_LABELS = {
-    downtown: {
-      'pcb':     { name:'Pensacola Beach',     via:'Via US-98 E + Bob Sikes Bridge',     miles:'8' },
-      'navarre': { name:'Navarre Beach',       via:'Via US-98 E + FL-87 S',              miles:'25' },
-      'perdido': { name:'Perdido Key',         via:'Via Barrancas + Sorrento Rd',        miles:'17' }
-    },
-    nas: {
-      'pcb':     { name:'Pensacola Beach',     via:'Via Navy Blvd + Bob Sikes Bridge',   miles:'13' },
-      'navarre': { name:'Navarre Beach',       via:'Via US-98 E + FL-87 S',              miles:'30' },
-      'perdido': { name:'Perdido Key',         via:'Via Blue Angel Pkwy + Sorrento Rd',  miles:'12' }
-    },
-    airport: {
-      'pcb':     { name:'Pensacola Beach',     via:'Via I-110 + Bob Sikes Bridge',       miles:'12' },
-      'navarre': { name:'Navarre Beach',       via:'Via I-10 E + FL-87 S',               miles:'28' },
-      'perdido': { name:'Perdido Key',         via:'Via I-110 + Sorrento Rd',            miles:'21' }
-    },
-    uwf: {
-      'pcb':     { name:'Pensacola Beach',     via:'Via I-110 + Bob Sikes Bridge',       miles:'17' },
-      'navarre': { name:'Navarre Beach',       via:'Via I-10 E + FL-87 S',               miles:'30' },
-      'perdido': { name:'Perdido Key',         via:'Via I-110 + Sorrento Rd',            miles:'27' }
-    }
+    downtown: { via:'Via US-98 E + Bob Sikes Bridge',           miles:'8' },
+    nas:      { via:'Via Navy Blvd + US-98 + Bob Sikes Bridge', miles:'13' },
+    airport:  { via:'Via I-110 + US-98 + Bob Sikes Bridge',     miles:'12' },
+    uwf:      { via:'Via I-110 + US-98 + Bob Sikes Bridge',     miles:'17' }
   };
 
-  // Google Maps destination coords for click-through (Welcome to Pensacola Beach sign)
-  const GMAPS_DEST = {
-    'pcb':     '30.3340,-87.1421',
-    'navarre': '30.3796,-86.8602',
-    'perdido': '30.3007,-87.4538'
+  // Google Maps click-through destination — Casino Beach Boardwalk
+  const GMAPS_DEST = '30.3340,-87.1421';
+
+  // Bridge status — manually maintained config. To flag a closure or backup, set:
+  //   status: 'open' | 'warn' | 'alert'
+  //   text:   short description shown under the bridge name
+  const BRIDGES = {
+    '3mb':   { name:'Three Mile Bridge', status:'open', text:'Open · Normal flow' },
+    'sikes': { name:'Bob Sikes Bridge',  status:'open', text:'Open · Normal flow' }
   };
 
   const HOURLY_PATTERN = [
@@ -1768,36 +1753,39 @@ function renderCalList() {
                         '12p','1p','2p','3p','4p','5p','6p','7p','8p','9p','10p','11p'];
 
   let currentOrigin = 'downtown';
-  let lastResults   = null;
+  let lastDuration  = null;
   let lastIncidents = [];
-  window._trafficState = { currentOrigin, lastResults, lastIncidents };
+  window._trafficState = { currentOrigin, lastDuration, lastIncidents };
 
-  // ── Label updater ──────────────────────────────────────────────────
-  function updateRouteLabels() {
-    const labels = ROUTE_LABELS[currentOrigin];
-    const keys = ['pcb','navarre','perdido'];
-    keys.forEach(k => {
-      const nameEl = document.getElementById('traffic-name-' + k);
-      const viaEl  = document.getElementById('traffic-via-'  + k);
-      if (nameEl) nameEl.textContent = labels[k].name;
-      if (viaEl)  viaEl.textContent  = labels[k].via + ' · ' + labels[k].miles + ' mi';
+  // ── Bridge status renderer ──────────────────────────────────────────
+  function renderBridges() {
+    Object.entries(BRIDGES).forEach(([key, b]) => {
+      const dot    = document.getElementById('traffic-bridge-dot-' + key);
+      const status = document.getElementById('traffic-bridge-status-' + key);
+      if (dot) {
+        dot.classList.remove('warn', 'alert');
+        if (b.status === 'warn')  dot.classList.add('warn');
+        if (b.status === 'alert') dot.classList.add('alert');
+      }
+      if (status) status.textContent = b.text;
     });
   }
 
-  // ── ORS Matrix — one call gets all 3 route durations ──────────────
-  async function fetchAllRoutes() {
-    const orig = ORIGINS[currentOrigin].coords; // [lng, lat]
-    const dests = [
-      DESTINATIONS['pcb'].coords,
-      DESTINATIONS['navarre'].coords,
-      DESTINATIONS['perdido'].coords
-    ];
+  // ── Label updater ──────────────────────────────────────────────────
+  function updateRouteLabel() {
+    const labels = ROUTE_LABELS[currentOrigin];
+    const viaEl  = document.getElementById('traffic-via-beach');
+    if (viaEl) viaEl.textContent = labels.via + ' · ' + labels.miles + ' mi';
+  }
 
+  // ── ORS Matrix — single source → single destination ───────────────
+  async function fetchRouteDuration() {
+    const orig = ORIGINS[currentOrigin].coords;
     const body = {
-      locations: [orig, ...dests],
+      locations: [orig, DESTINATION.coords],
       metrics: ['duration'],
       sources: [0],
-      destinations: [1, 2, 3]
+      destinations: [1]
     };
 
     const res = await fetch(
@@ -1814,71 +1802,54 @@ function renderCalList() {
 
     if (!res.ok) throw new Error('ORS ' + res.status);
     const data = await res.json();
-    // durations[0] is the source row → [dur_to_dest0, dur_to_dest1, dur_to_dest2]
-    return data.durations?.[0] ?? [null, null, null];
+    return data.durations?.[0]?.[0] ?? null;
   }
 
   // ── Main update ───────────────────────────────────────────────────
   async function updateTraffic() {
-    const keys     = ['pcb','navarre','perdido'];
-    const baselines = BASELINES[currentOrigin];
+    const baseline = BASELINES[currentOrigin];
+    const pill     = document.getElementById('traffic-beach');
+    const status   = document.getElementById('traffic-status');
+    const tu       = document.getElementById('traffic-time-updated');
 
     try {
-      const durations = await fetchAllRoutes();
-
-      lastResults = durations;
-      window._trafficState.lastResults = durations;
+      const dur = await fetchRouteDuration();
+      lastDuration = dur;
+      window._trafficState.lastDuration = dur;
       if (window.updateRightNow) window.updateRightNow({});
 
-      let totalRatio = 0, validCount = 0;
+      if (dur == null || dur === 0) {
+        if (pill) pill.textContent = '—';
+        return;
+      }
 
-      keys.forEach((k, i) => {
-        const pill = document.getElementById('traffic-' + k);
-        if (!pill) return;
-        const dur = durations[i];
-        if (dur == null || dur === 0) {
-          pill.textContent = '—';
-          return;
-        }
-        const mins  = Math.round(dur / 60);
-        const ratio = dur / baselines[k];
-        const cls   = ratio < 1.15 ? 'traffic-normal' : ratio < 1.4 ? 'traffic-moderate' : 'traffic-heavy';
+      const mins  = Math.round(dur / 60);
+      const ratio = dur / baseline;
+      const cls   = ratio < 1.15 ? 'traffic-normal' : ratio < 1.4 ? 'traffic-moderate' : 'traffic-heavy';
+      if (pill) {
         pill.textContent = mins + ' min';
         pill.className   = 'traffic-time-pill ' + cls;
-        totalRatio += ratio;
-        validCount++;
-      });
-
-      // Status bar
-      if (validCount) {
-        const avg = totalRatio / validCount;
-        window._trafficState.avgRatio = avg;
-        const st  = document.getElementById('traffic-status');
-        if (st) st.textContent = avg < 1.15 ? '🟢 Clear — moving well' :
-                                  avg < 1.4  ? '🟡 Moderate — some delays' :
-                                               '🔴 Heavy — significant delays';
       }
-      const tu = document.getElementById('traffic-time-updated');
+
+      window._trafficState.avgRatio = ratio;
+      if (status) status.textContent = ratio < 1.15 ? '🟢 Clear — moving well' :
+                                       ratio < 1.4  ? '🟡 Moderate — some delays' :
+                                                      '🔴 Heavy — significant delays';
       if (tu) tu.textContent = 'Updated ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
 
     } catch(e) {
       console.warn('Traffic fetch failed:', e.message);
-      // Graceful fallback: show estimated times based on time-of-day pattern
-      const now   = new Date();
-      const mult  = HOURLY_PATTERN[now.getHours()] * DAY_MULTIPLIER[now.getDay()];
-      const baselines = BASELINES[currentOrigin];
-      keys.forEach(k => {
-        const pill = document.getElementById('traffic-' + k);
-        if (!pill) return;
-        const est  = Math.round((baselines[k] * mult) / 60);
-        const cls  = mult < 1.15 ? 'traffic-normal' : mult < 1.4 ? 'traffic-moderate' : 'traffic-heavy';
+      // Graceful fallback: estimated time based on time-of-day pattern
+      const now  = new Date();
+      const mult = HOURLY_PATTERN[now.getHours()] * DAY_MULTIPLIER[now.getDay()];
+      const est  = Math.round((baseline * mult) / 60);
+      const cls  = mult < 1.15 ? 'traffic-normal' : mult < 1.4 ? 'traffic-moderate' : 'traffic-heavy';
+      if (pill) {
         pill.textContent = '~' + est + ' min';
         pill.className   = 'traffic-time-pill ' + cls;
-      });
-      const tu = document.getElementById('traffic-time-updated');
+      }
       if (tu) tu.textContent = 'Est. · ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-      const st = document.getElementById('traffic-status');
-      if (st) st.textContent = '⏱ Estimated — live data unavailable';
+      if (status) status.textContent = '⏱ Estimated — live data unavailable';
       window._trafficState.avgRatio = mult;
     }
   }
@@ -1890,24 +1861,20 @@ function renderCalList() {
     document.querySelectorAll('.traffic-origin-tab').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
 
-    ['pcb','navarre','perdido'].forEach(id => {
-      const pill = document.getElementById('traffic-' + id);
-      if (pill) { pill.textContent = '…'; pill.className = 'traffic-time-pill traffic-normal'; }
-    });
+    const pill = document.getElementById('traffic-beach');
+    if (pill) { pill.textContent = '…'; pill.className = 'traffic-time-pill traffic-normal'; }
     const tu = document.getElementById('traffic-time-updated');
     if (tu) tu.textContent = 'Updating…';
 
-    updateRouteLabels();
+    updateRouteLabel();
     await updateTraffic();
   };
 
   // ── Google Maps route opener ─────────────────────────────────────
-  window.openGoogleMapsRoute = function(idx) {
+  window.openGoogleMapsRoute = function() {
     const orig    = ORIGINS[currentOrigin].coords;
-    const keys    = ['pcb','navarre','perdido'];
-    const destStr = GMAPS_DEST[keys[idx]];
     const origStr = orig[1] + ',' + orig[0];
-    window.open(`https://www.google.com/maps/dir/${origStr}/${destStr}`, '_blank');
+    window.open(`https://www.google.com/maps/dir/${origStr}/${GMAPS_DEST}`, '_blank');
   };
 
   // ── Traffic detail modal ──────────────────────────────────────────
@@ -1916,31 +1883,42 @@ function renderCalList() {
     const body    = document.getElementById('traffic-modal-body');
     if (!overlay || !body) return;
 
-    const keys     = ['pcb','navarre','perdido'];
     const labels   = ROUTE_LABELS[currentOrigin];
-    const baselines = BASELINES[currentOrigin];
-    const results  = window._trafficState.lastResults || [null, null, null];
+    const baseline = BASELINES[currentOrigin];
+    const dur      = window._trafficState.lastDuration;
     const incs     = window._trafficState.lastIncidents || [];
     const icons_inc = { ACCIDENT:'🚨', CONSTRUCTION:'🚧', CONGESTION:'🚗', ROAD_CLOSED:'🚫', default:'⚠️' };
 
-    const routeRows = keys.map((k, i) => {
-      const dur   = results[i];
-      const mins  = dur ? Math.round(dur / 60) : '—';
-      const ratio = dur ? dur / baselines[k] : 1;
-      const color = ratio < 1.15 ? '#2a8a4e' : ratio < 1.4 ? '#d4952b' : '#c2553f';
-      const pill  = `<span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:20px;color:${color};">${mins}${dur?' min':''}</span>`;
-      const orig  = ORIGINS[currentOrigin].coords;
-      const gmaps = `https://www.google.com/maps/dir/${orig[1]},${orig[0]}/${GMAPS_DEST[k]}`;
-      return `
-        <div class="traffic-modal-route-row">
-          <div class="traffic-modal-route-info">
-            <div class="traffic-modal-route-name">${labels[k].name}</div>
-            <div class="traffic-modal-route-via">${labels[k].via} · ${labels[k].miles} mi</div>
-          </div>
-          ${pill}
-          <button class="traffic-modal-map-btn" onclick="window.open('${gmaps}','_blank')">Maps →</button>
-        </div>`;
-    }).join('');
+    const mins  = dur ? Math.round(dur / 60) : '—';
+    const ratio = dur ? dur / baseline : 1;
+    const color = ratio < 1.15 ? '#2a8a4e' : ratio < 1.4 ? '#d4952b' : '#c2553f';
+    const orig  = ORIGINS[currentOrigin].coords;
+    const gmaps = `https://www.google.com/maps/dir/${orig[1]},${orig[0]}/${GMAPS_DEST}`;
+
+    const routeRow = `
+      <div class="traffic-modal-route-row">
+        <div class="traffic-modal-route-info">
+          <div class="traffic-modal-route-name">Pensacola Beach</div>
+          <div class="traffic-modal-route-via">${labels.via} · ${labels.miles} mi</div>
+        </div>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:20px;color:${color};">${mins}${dur?' min':''}</span>
+        <button class="traffic-modal-map-btn" onclick="window.open('${gmaps}','_blank')">Maps →</button>
+      </div>`;
+
+    // Bridge status section
+    const bridgeColor = (s) => s === 'alert' ? '#c2553f' : s === 'warn' ? '#d4952b' : '#22a06b';
+    const bridgesHtml = `
+      <div class="traffic-modal-section">
+        <div class="traffic-modal-section-label">Bridge Status</div>
+        ${Object.values(BRIDGES).map(b => `
+          <div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--bd);">
+            <span style="width:10px;height:10px;border-radius:50%;background:${bridgeColor(b.status)};flex-shrink:0;"></span>
+            <div style="flex:1;">
+              <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;color:var(--navy);">${b.name}</div>
+              <div style="font-size:11px;color:var(--g2);margin-top:2px;">${b.text}</div>
+            </div>
+          </div>`).join('')}
+      </div>`;
 
     const incHtml = incs.length ? `
       <div class="traffic-modal-section">
@@ -1979,7 +1957,7 @@ function renderCalList() {
         </div>
       </div>`;
 
-    body.innerHTML = originTabsHtml + routeRows + incHtml + `
+    body.innerHTML = bridgesHtml + originTabsHtml + routeRow + incHtml + `
       <div class="traffic-modal-section">
         <div class="traffic-modal-section-label">Typical ${dayNames[dayIdx]} Traffic Pattern · Beach Corridor</div>
         <div class="traffic-pattern-grid">${patternCells}</div>
@@ -1989,7 +1967,7 @@ function renderCalList() {
       </div>
       <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--bd);font-size:10px;color:var(--g2);">
         Data: Open Route Service · Updated ${new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
-        &nbsp;·&nbsp; Click any route to open in Google Maps
+        &nbsp;·&nbsp; Click route to open in Google Maps
       </div>`;
 
     overlay.classList.add('open');
@@ -2002,11 +1980,9 @@ function renderCalList() {
     document.querySelectorAll('.traffic-origin-tab').forEach(b => {
       b.classList.toggle('active', b.dataset.originKey === key);
     });
-    ['pcb','navarre','perdido'].forEach(id => {
-      const pill = document.getElementById('traffic-' + id);
-      if (pill) { pill.textContent = '…'; pill.className = 'traffic-time-pill traffic-normal'; }
-    });
-    updateRouteLabels();
+    const pill = document.getElementById('traffic-beach');
+    if (pill) { pill.textContent = '…'; pill.className = 'traffic-time-pill traffic-normal'; }
+    updateRouteLabel();
     await updateTraffic();
     openTrafficModal();
   };
@@ -2018,7 +1994,8 @@ function renderCalList() {
   };
 
   // Init
-  updateRouteLabels();
+  renderBridges();
+  updateRouteLabel();
   updateTraffic();
   setInterval(updateTraffic, 120000);
 

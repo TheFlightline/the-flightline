@@ -362,6 +362,16 @@
   .hurricane-read { font-family:'DM Sans',sans-serif; font-weight:700; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,255,255,0.5); display:block; text-align:center; padding-top:8px; border-top:1px solid rgba(255,255,255,0.07); transition:color 0.15s; }
 
   /* TRAFFIC WIDGET */
+  /* Bridge status block — shown above origin tabs in the traffic widget */
+  .traffic-bridges { display:flex; flex-direction:column; gap:6px; padding:10px 8px; margin:0 -6px 12px; background:var(--surface); border-radius:4px; border-left:3px solid var(--navy); }
+  .traffic-bridge-row { display:flex; align-items:center; gap:8px; }
+  .traffic-bridge-dot { width:8px; height:8px; border-radius:50%; background:#22a06b; flex-shrink:0; box-shadow:0 0 0 2px rgba(34,160,107,0.18); }
+  .traffic-bridge-dot.warn { background:#d4871a; box-shadow:0 0 0 2px rgba(212,135,26,0.18); }
+  .traffic-bridge-dot.alert { background:#c53030; box-shadow:0 0 0 2px rgba(197,48,48,0.18); }
+  .traffic-bridge-label { flex:1; }
+  .traffic-bridge-name { font-family:'DM Sans',sans-serif; font-weight:700; font-size:11px; color:var(--navy); }
+  .traffic-bridge-status { font-size:10px; color:var(--g2); margin-top:1px; }
+
   .traffic-origin-tabs { display:flex; gap:4px; margin-bottom:10px; flex-wrap:wrap; }
   .traffic-origin-tab { font-family:'DM Sans',sans-serif; font-weight:700; font-size:10px; letter-spacing:0.04em; text-transform:uppercase; padding:4px 8px; border-radius:3px; border:1.5px solid var(--bd); color:var(--g1); cursor:pointer; background:var(--surface); transition:all 0.12s; white-space:nowrap; }
   .traffic-origin-tab:hover { border-color:var(--navy); color:var(--navy); }

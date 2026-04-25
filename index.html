@@ -571,6 +571,24 @@
       <div class="sidebar-widget">
         <div class="sidebar-widget-header" style="cursor:pointer;" onclick="openTrafficModal()" style="display:flex;justify-content:space-between;align-items:center;"><span>Traffic · To Pensacola Beach</span><span style="font-weight:400;font-size:10px;opacity:0.6;margin-left:8px;flex-shrink:0;">Expand ↗</span></div>
         <div class="sidebar-widget-body" style="padding-bottom:8px;">
+          <!-- Bridge status row -->
+          <div class="traffic-bridges" id="traffic-bridges">
+            <div class="traffic-bridge-row" id="traffic-bridge-3mb">
+              <span class="traffic-bridge-dot" id="traffic-bridge-dot-3mb"></span>
+              <div class="traffic-bridge-label">
+                <div class="traffic-bridge-name">Three Mile Bridge</div>
+                <div class="traffic-bridge-status" id="traffic-bridge-status-3mb">Open · Normal flow</div>
+              </div>
+            </div>
+            <div class="traffic-bridge-row" id="traffic-bridge-sikes">
+              <span class="traffic-bridge-dot" id="traffic-bridge-dot-sikes"></span>
+              <div class="traffic-bridge-label">
+                <div class="traffic-bridge-name">Bob Sikes Bridge</div>
+                <div class="traffic-bridge-status" id="traffic-bridge-status-sikes">Open · Normal flow</div>
+              </div>
+            </div>
+          </div>
+
           <!-- Origin switcher -->
           <div class="traffic-origin-tabs" id="traffic-origin-tabs">
             <button class="traffic-origin-tab active" data-origin-key="downtown" onclick="setTrafficOrigin('downtown',this)">Downtown</button>
@@ -579,30 +597,14 @@
             <button class="traffic-origin-tab" data-origin-key="uwf" onclick="setTrafficOrigin('uwf',this)">UWF</button>
           </div>
 
-          <!-- Route rows — clickable → Google Maps -->
-          <div class="traffic-route" id="traffic-row-pcb" onclick="openGoogleMapsRoute(0)">
+          <!-- Single drive-time row to Pensacola Beach -->
+          <div class="traffic-route" id="traffic-row-beach" onclick="openGoogleMapsRoute(0)">
             <div class="traffic-route-label">
-              <div class="traffic-route-name" id="traffic-name-pcb">Pensacola Beach</div>
-              <div class="traffic-route-via" id="traffic-via-pcb">Via Bob Sikes Bridge</div>
+              <div class="traffic-route-name" id="traffic-name-beach">Pensacola Beach</div>
+              <div class="traffic-route-via" id="traffic-via-beach">Via US-98 + Bob Sikes Bridge</div>
               <div class="traffic-route-map-hint">Open in Google Maps →</div>
             </div>
-            <div class="traffic-time-pill traffic-normal" id="traffic-pcb">…</div>
-          </div>
-          <div class="traffic-route" id="traffic-row-navarre" onclick="openGoogleMapsRoute(1)">
-            <div class="traffic-route-label">
-              <div class="traffic-route-name" id="traffic-name-navarre">Navarre Beach</div>
-              <div class="traffic-route-via" id="traffic-via-navarre">Via US-98 E</div>
-              <div class="traffic-route-map-hint">Open in Google Maps →</div>
-            </div>
-            <div class="traffic-time-pill traffic-normal" id="traffic-navarre">…</div>
-          </div>
-          <div class="traffic-route" id="traffic-row-perdido" onclick="openGoogleMapsRoute(2)">
-            <div class="traffic-route-label">
-              <div class="traffic-route-name" id="traffic-name-perdido">Perdido Key</div>
-              <div class="traffic-route-via" id="traffic-via-perdido">Via Sorrento Rd</div>
-              <div class="traffic-route-map-hint">Open in Google Maps →</div>
-            </div>
-            <div class="traffic-time-pill traffic-normal" id="traffic-perdido">…</div>
+            <div class="traffic-time-pill traffic-normal" id="traffic-beach">…</div>
           </div>
 
           <!-- Incidents (shown when any exist) -->
