@@ -1734,12 +1734,13 @@ function renderCalList() {
   // Google Maps click-through destination — Casino Beach Boardwalk
   const GMAPS_DEST = '30.3340,-87.1421';
 
-  // Bridge status — manually maintained config. To flag a closure or backup, set:
-  //   status: 'open' | 'warn' | 'alert'
-  //   text:   short description shown under the bridge name
+  // Bridge status — live data from FL511 via /.netlify/functions/bridge-status.
+  // The proxy aggregates incidents/closures on each bridge and computes a
+  // status of 'open' | 'warn' | 'alert'. We keep names client-side so the
+  // widget renders something sensible if the proxy is slow on first load.
   const BRIDGES = {
-    '3mb':   { name:'Three Mile Bridge', status:'open', text:'Open · Normal flow' },
-    'sikes': { name:'Bob Sikes Bridge',  status:'open', text:'Open · Normal flow' }
+    '3mb':   { name:'Three Mile Bridge', status:'open', text:'Checking status…', incidents: [] },
+    'sikes': { name:'Bob Sikes Bridge',  status:'open', text:'Checking status…', incidents: [] }
   };
 
   const HOURLY_PATTERN = [
@@ -1769,6 +1770,28 @@ function renderCalList() {
       }
       if (status) status.textContent = b.text;
     });
+  }
+
+  // ── Bridge status fetcher (live data from FL511 via Netlify proxy) ──
+  async function fetchBridgeStatus() {
+    try {
+      const res = await fetch('/.netlify/functions/bridge-status', { cache: 'no-store' });
+      if (!res.ok) throw new Error('bridge-status ' + res.status);
+      const data = await res.json();
+      if (data && data.bridges) {
+        ['3mb', 'sikes'].forEach(key => {
+          const live = data.bridges[key];
+          if (!live) return;
+          BRIDGES[key].status = live.status || 'open';
+          BRIDGES[key].text   = live.text   || 'Open · Normal flow';
+          BRIDGES[key].incidents = Array.isArray(live.incidents) ? live.incidents : [];
+        });
+        renderBridges();
+      }
+    } catch (e) {
+      // Fail-open: leave whatever the last good state was; just log.
+      console.warn('Bridge status fetch failed:', e.message);
+    }
   }
 
   // ── Label updater ──────────────────────────────────────────────────
@@ -1994,7 +2017,9 @@ function renderCalList() {
   };
 
   // Init
-  renderBridges();
+  renderBridges();           // Render the placeholder state immediately
+  fetchBridgeStatus();       // Then go fetch the live status
+  setInterval(fetchBridgeStatus, 60000);  // Refresh every 60s
   updateRouteLabel();
   updateTraffic();
   setInterval(updateTraffic, 120000);
