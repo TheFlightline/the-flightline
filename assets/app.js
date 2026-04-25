@@ -1580,9 +1580,13 @@ function renderCalGrid() {
     const extraClass = (isToday ? ' today-cell' : '') + (isSelected ? ' selected-cell' : '');
     const todayBadge = isToday ? `<span class="comm-cal-cell-today-badge">Today</span>` : '';
     const maxShow = 3;
-    const pips = evs.slice(0, maxShow).map(e => `
+    const pips = evs.slice(0, maxShow).map(e => {
+      const hasModal = typeof EVENTS !== 'undefined' && EVENTS[e.id];
+      const pipAction = hasModal ? `openEvent('${e.id}')` : e.key ? `openArticle('${e.key}')` : e.url ? `window.open('${e.url}','_blank','noopener,noreferrer')` : `calSelectDay(${d})`;
+      return `
       <div class="comm-cal-event-pip" style="background:${e.color};" 
-           onclick="event.stopPropagation();calSelectDay(${d})" title="${e.title}">${e.title}</div>`).join('');
+           onclick="event.stopPropagation();${pipAction}" title="${e.title}">${e.title}</div>`;
+    }).join('');
     const more = evs.length > maxShow ? `<div class="comm-cal-more">+${evs.length - maxShow} more</div>` : '';
     cells += `
       <div class="comm-cal-cell${extraClass}" onclick="calSelectDay(${d})">
@@ -1709,48 +1713,48 @@ function renderCalList() {
 
   // Route destinations: [lng, lat] for ORS — destination is the Welcome to Pensacola Beach sign
   const DESTINATIONS = {
-    '98':    { coords:[-87.1470959, 30.3396491], label:'Via US-98 · Pensacola Beach Sign',   via:'Main route',           miles:'11.2' },
-    'alt':   { coords:[-87.1240, 30.3571],       label:'Via Gulf Breeze Pkwy',                via:'Alt route',             miles:'13.8' },
-    'sikes': { coords:[-86.9830, 30.3267],       label:'Bob Sikes Bridge',                    via:'Via Navarre / Hwy 98',  miles:'18.4' }
+    'pcb':     { coords:[-87.1421, 30.3340], label:'Pensacola Beach (Casino Beach)',  via:'Via Bob Sikes Bridge',  miles:'8.0' },
+    'navarre': { coords:[-86.8602, 30.3796], label:'Navarre Beach',                   via:'Via US-98 E',           miles:'25' },
+    'perdido': { coords:[-87.4538, 30.3007], label:'Perdido Key',                     via:'Via Sorrento Rd',       miles:'18' }
   };
 
   // Baseline drive times in seconds per origin (used for traffic ratio coloring)
   const BASELINES = {
-    downtown: { '98': 900,  alt: 1080, sikes: 1320 },
-    nas:      { '98': 960,  alt: 1140, sikes: 1560 },
-    airport:  { '98': 960,  alt: 1080, sikes: 1500 },
-    uwf:      { '98': 1320, alt: 1380, sikes: 1800 }
+    downtown: { pcb: 720,  navarre: 1800, perdido: 1500 },
+    nas:      { pcb: 1080, navarre: 2160, perdido: 900  },
+    airport:  { pcb: 960,  navarre: 1800, perdido: 1620 },
+    uwf:      { pcb: 1380, navarre: 2280, perdido: 2100 }
   };
 
   // Route label/via overrides per origin
   const ROUTE_LABELS = {
     downtown: {
-      '98':    { name:'Via US-98 · Beach Blvd',     via:'Main route',              miles:'11.4' },
-      'alt':   { name:'Via Gulf Breeze Pkwy',        via:'Alt route',               miles:'13.9' },
-      'sikes': { name:'Bob Sikes Bridge',            via:'Via Navarre · Hwy 98',    miles:'18.5' }
+      'pcb':     { name:'Pensacola Beach',     via:'Via US-98 E + Bob Sikes Bridge',     miles:'8' },
+      'navarre': { name:'Navarre Beach',       via:'Via US-98 E + FL-87 S',              miles:'25' },
+      'perdido': { name:'Perdido Key',         via:'Via Barrancas + Sorrento Rd',        miles:'17' }
     },
     nas: {
-      '98':    { name:'Via Blue Angel Pkwy → US-98', via:'Main route',              miles:'14.1' },
-      'alt':   { name:'Via Navy Blvd → Hwy 98',      via:'Navy Blvd alt',           miles:'16.2' },
-      'sikes': { name:'Bob Sikes Bridge',             via:'Via US-98 East',          miles:'24.1' }
+      'pcb':     { name:'Pensacola Beach',     via:'Via Navy Blvd + Bob Sikes Bridge',   miles:'13' },
+      'navarre': { name:'Navarre Beach',       via:'Via US-98 E + FL-87 S',              miles:'30' },
+      'perdido': { name:'Perdido Key',         via:'Via Blue Angel Pkwy + Sorrento Rd',  miles:'12' }
     },
     airport: {
-      '98':    { name:'Via Airport Blvd → US-98',    via:'Main route',              miles:'12.8' },
-      'alt':   { name:'Via Cervantes → Hwy 98',      via:'Surface route',           miles:'14.3' },
-      'sikes': { name:'Bob Sikes Bridge',             via:'Via US-98 E to Navarre',  miles:'22.6' }
+      'pcb':     { name:'Pensacola Beach',     via:'Via I-110 + Bob Sikes Bridge',       miles:'12' },
+      'navarre': { name:'Navarre Beach',       via:'Via I-10 E + FL-87 S',               miles:'28' },
+      'perdido': { name:'Perdido Key',         via:'Via I-110 + Sorrento Rd',            miles:'21' }
     },
     uwf: {
-      '98':    { name:'Via Davis Hwy → US-98',        via:'Main route',             miles:'17.8' },
-      'alt':   { name:'Via I-110 → Gulf Breeze Pkwy', via:'Freeway alt',            miles:'19.4' },
-      'sikes': { name:'Bob Sikes Bridge',              via:'I-10 E → Navarre',       miles:'25.2' }
+      'pcb':     { name:'Pensacola Beach',     via:'Via I-110 + Bob Sikes Bridge',       miles:'17' },
+      'navarre': { name:'Navarre Beach',       via:'Via I-10 E + FL-87 S',               miles:'30' },
+      'perdido': { name:'Perdido Key',         via:'Via I-110 + Sorrento Rd',            miles:'27' }
     }
   };
 
   // Google Maps destination coords for click-through (Welcome to Pensacola Beach sign)
   const GMAPS_DEST = {
-    '98':    '30.3396491,-87.1470959',
-    'alt':   '30.3571,-87.1240',
-    'sikes': '30.3267,-86.9830'
+    'pcb':     '30.3340,-87.1421',
+    'navarre': '30.3796,-86.8602',
+    'perdido': '30.3007,-87.4538'
   };
 
   const HOURLY_PATTERN = [
@@ -1771,7 +1775,7 @@ function renderCalList() {
   // ── Label updater ──────────────────────────────────────────────────
   function updateRouteLabels() {
     const labels = ROUTE_LABELS[currentOrigin];
-    const keys = ['98','alt','sikes'];
+    const keys = ['pcb','navarre','perdido'];
     keys.forEach(k => {
       const nameEl = document.getElementById('traffic-name-' + k);
       const viaEl  = document.getElementById('traffic-via-'  + k);
@@ -1784,9 +1788,9 @@ function renderCalList() {
   async function fetchAllRoutes() {
     const orig = ORIGINS[currentOrigin].coords; // [lng, lat]
     const dests = [
-      DESTINATIONS['98'].coords,
-      DESTINATIONS['alt'].coords,
-      DESTINATIONS['sikes'].coords
+      DESTINATIONS['pcb'].coords,
+      DESTINATIONS['navarre'].coords,
+      DESTINATIONS['perdido'].coords
     ];
 
     const body = {
@@ -1816,7 +1820,7 @@ function renderCalList() {
 
   // ── Main update ───────────────────────────────────────────────────
   async function updateTraffic() {
-    const keys     = ['98','alt','sikes'];
+    const keys     = ['pcb','navarre','perdido'];
     const baselines = BASELINES[currentOrigin];
 
     try {
@@ -1886,7 +1890,7 @@ function renderCalList() {
     document.querySelectorAll('.traffic-origin-tab').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
 
-    ['98','alt','sikes'].forEach(id => {
+    ['pcb','navarre','perdido'].forEach(id => {
       const pill = document.getElementById('traffic-' + id);
       if (pill) { pill.textContent = '…'; pill.className = 'traffic-time-pill traffic-normal'; }
     });
@@ -1900,7 +1904,7 @@ function renderCalList() {
   // ── Google Maps route opener ─────────────────────────────────────
   window.openGoogleMapsRoute = function(idx) {
     const orig    = ORIGINS[currentOrigin].coords;
-    const keys    = ['98','alt','sikes'];
+    const keys    = ['pcb','navarre','perdido'];
     const destStr = GMAPS_DEST[keys[idx]];
     const origStr = orig[1] + ',' + orig[0];
     window.open(`https://www.google.com/maps/dir/${origStr}/${destStr}`, '_blank');
@@ -1912,7 +1916,7 @@ function renderCalList() {
     const body    = document.getElementById('traffic-modal-body');
     if (!overlay || !body) return;
 
-    const keys     = ['98','alt','sikes'];
+    const keys     = ['pcb','navarre','perdido'];
     const labels   = ROUTE_LABELS[currentOrigin];
     const baselines = BASELINES[currentOrigin];
     const results  = window._trafficState.lastResults || [null, null, null];
@@ -1998,7 +2002,7 @@ function renderCalList() {
     document.querySelectorAll('.traffic-origin-tab').forEach(b => {
       b.classList.toggle('active', b.dataset.originKey === key);
     });
-    ['98','alt','sikes'].forEach(id => {
+    ['pcb','navarre','perdido'].forEach(id => {
       const pill = document.getElementById('traffic-' + id);
       if (pill) { pill.textContent = '…'; pill.className = 'traffic-time-pill traffic-normal'; }
     });
