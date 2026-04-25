@@ -270,3 +270,17 @@ function renderSideCalList() {
     }
   };
 }
+
+function sideCalNav(dir) {
+  sideCalMonth += dir;
+  if (sideCalMonth > 11) { sideCalMonth = 0; sideCalYear++; }
+  if (sideCalMonth < 0)  { sideCalMonth = 11; sideCalYear--; }
+  sideCalSelDay = null;
+  var panel = document.getElementById('side-cal-day-events');
+  if (panel) { panel.style.display = 'none'; panel.innerHTML = ''; }
+  renderSideCal();
+}
+
+document.addEventListener('DOMContentLoaded', renderSideCal);
+
+// ─── END SIDEBAR CALENDAR ─────────────────────────────────────────────────
