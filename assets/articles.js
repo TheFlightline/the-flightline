@@ -800,6 +800,7 @@ Object.assign(A, {
   },
   "alice-cooper-bay-center": {
     "cat": "events",
+    "event": { "label": "Concert", "title": "Alice Cooper", "date": "May 8, 2026", "time": "7:00 PM", "venue": "Pensacola Bay Center, 201 E. Gregory St", "desc": "Alice Cooper plays Pensacola Bay Center on Friday, May 8. Doors open 7 p.m.", "url": "https://www.pensacolabaycenter.com" },
     "label": "Concert",
     "thumbnail": "/images/community_concert_008.jpg",
     "headline": "Alice Cooper at Pensacola Bay Center May 8",

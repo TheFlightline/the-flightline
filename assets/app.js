@@ -3792,7 +3792,9 @@ function processArticleLinks() {
   // 1. Linkify bare URLs in text nodes. Walk only text nodes; skip nodes inside
   //    existing <a>, <code>, <pre>, <script>, <style>.
   var SKIP = {A:1, CODE:1, PRE:1, SCRIPT:1, STYLE:1};
-  var URL_RE = /(\bhttps?:\/\/[^\s<>"')]+[^\s<>"'.,;:!?)\]])/g;
+  // Match http(s):// AND bare domains like www.example.com or example.com
+  // for common web TLDs. \b prevents matching mid-word.
+  var URL_RE = /(\bhttps?:\/\/[^\s<>"')]+[^\s<>"'.,;:!?)\]]|\b(?:www\.)?[a-zA-Z0-9][a-zA-Z0-9-]*(?:\.[a-zA-Z0-9][a-zA-Z0-9-]*)*\.(?:com|org|net|gov|edu|io|co|us|info|biz|app|dev|news|tv|ly|me|fm|mil)(?:\/[^\s<>"')]*[^\s<>"'.,;:!?)\]])?)/g;
   var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
     acceptNode: function(node) {
       var p = node.parentNode;
@@ -3816,7 +3818,8 @@ function processArticleLinks() {
     while ((m = URL_RE.exec(text)) !== null) {
       if (m.index > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, m.index)));
       var a = document.createElement('a');
-      a.href = m[1];
+      // Bare-domain matches need https:// prefix for href to work
+      a.href = /^https?:\/\//i.test(m[1]) ? m[1] : ('https://' + m[1]);
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
       a.textContent = m[1];
