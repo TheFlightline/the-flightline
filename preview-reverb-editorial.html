@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>REVERB Editorial Preview — The Flightline</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1e2d4a;
+    --gold: #d4952b;
+    --g1: #4b5563;
+    --g2: #9ca3af;
+    --bd: #e5e7eb;
+    --surface: #f9fafb;
+    --cat-opinion: #5a3d7a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f3f4f6;
+    color: var(--navy);
+    line-height: 1.55;
+  }
+  .page-wrap {
+    max-width: 760px;
+    margin: 32px auto;
+    background: #fff;
+    padding: 48px 56px;
+    border-radius: 6px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+  }
+  .preview-banner {
+    background: var(--navy);
+    color: #fff;
+    padding: 14px 20px;
+    margin-bottom: 32px;
+    border-radius: 4px;
+    border-left: 4px solid var(--gold);
+    font-size: 13px;
+  }
+  .preview-banner strong { color: var(--gold); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; font-size: 11px; }
+  .article-header {
+    border-bottom: 1px solid var(--bd);
+    margin-bottom: 26px;
+    padding-bottom: 18px;
+  }
+  .cat-badge {
+    display: inline-block;
+    padding: 5px 11px;
+    background: var(--cat-opinion);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .article-headline {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1.12;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .article-dek {
+    font-size: 16px;
+    color: var(--g1);
+    margin-bottom: 12px;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+  .article-byline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--g2);
+    margin-bottom: 0;
+  }
+  .article-byline span { color: var(--gold); }
+  .article-body p {
+    font-size: 16.5px;
+    line-height: 1.68;
+    color: var(--navy);
+    margin-bottom: 18px;
+  }
+  .article-body p.article-lede {
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.55;
+    color: var(--navy);
+    margin-bottom: 22px;
+  }
+  @media (max-width: 720px) {
+    .page-wrap { padding: 28px 22px; margin: 0; border-radius: 0; }
+    .article-headline { font-size: 24px; }
+    .article-body p { font-size: 15.5px; }
+    .article-body p.article-lede { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+<div class="preview-banner">
+  <strong>▸ Preview Mode</strong><br>
+  This is a local preview of the enhanced REVERB editorial. Visual elements include 3 pull quotes, a "By the Numbers" stat strip, an interactive timeline, and 2 render placeholder slots.
+</div>
+
+<div class="article-header">
+  <span class="cat-badge">Editorial</span>
+  <h1 class="article-headline">A Hard Rock Hotel on Pensacola's Waterfront Is Worth Building. Not at $58 Million in Public Money.</h1>
+  <p class="article-dek">Dawson Company wants to put a Reverb by Hard Rock and a 15-story apartment tower on a downtown parcel that has sat empty for 14 years. The city was right to reject the developer's tax rebate request last week. Here's what a defensible deal would look like.</p>
+  <p class="article-byline">By <span>The Flightline Editorial Board</span> · April 23, 2026</p>
+</div>
+
+<div class="article-body">
+<!--
+  THE FLIGHTLINE — REVERB EDITORIAL ENHANCED BODY
+  Visual elements: pull quotes (3), stat strip, interactive timeline, render placeholders
+  All inline. No <script> tags (innerHTML strips those).
+  Uses brand CSS vars: --navy, --gold, --g1, --g2, --bd, --surface, --cat-opinion
+-->
+
+<!-- Inline scoped styles for editorial enhancements -->
+<style>
+  /* === PULL QUOTE === */
+  .fl-pullquote {
+    margin: 32px 0;
+    padding: 24px 28px 24px 32px;
+    border-left: 4px solid var(--gold);
+    background: linear-gradient(to right, rgba(30, 45, 74, 0.03), transparent 70%);
+    position: relative;
+  }
+  .fl-pullquote::before {
+    content: "\201C";
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    font-family: 'Bebas Neue', serif;
+    font-size: 64px;
+    color: var(--gold);
+    opacity: 0.35;
+    line-height: 1;
+  }
+  .fl-pullquote-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    line-height: 1.32;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .fl-pullquote-attr {
+    margin-top: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--g2);
+  }
+  @media (max-width: 600px) {
+    .fl-pullquote-text { font-size: 18px; }
+    .fl-pullquote { padding: 20px 18px 20px 24px; margin: 24px 0; }
+  }
+
+  /* === STAT STRIP === */
+  .fl-stat-strip {
+    margin: 36px 0;
+    background: var(--navy);
+    border-radius: 4px;
+    padding: 24px 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .fl-stat-strip::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+  .fl-stat-header {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .fl-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+  }
+  .fl-stat-cell {
+    padding: 10px 14px;
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .fl-stat-cell:last-child { border-right: none; }
+  .fl-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+  .fl-stat-num .fl-stat-unit {
+    font-size: 22px;
+    color: var(--gold);
+    margin-left: 2px;
+  }
+  .fl-stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.72);
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 720px) {
+    .fl-stat-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 4px;
+    }
+    .fl-stat-cell {
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 14px;
+    }
+    .fl-stat-cell:nth-last-child(-n+2) { border-bottom: none; padding-bottom: 0; }
+    .fl-stat-num { font-size: 32px; }
+  }
+
+  /* === TIMELINE === */
+  .fl-timeline {
+    margin: 36px 0;
+    background: var(--surface);
+    border: 1px solid var(--bd);
+    border-radius: 4px;
+    padding: 24px;
+  }
+  .fl-timeline-header {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--g1);
+    margin-bottom: 4px;
+  }
+  .fl-timeline-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .fl-timeline-sub {
+    font-size: 12px;
+    color: var(--g1);
+    margin-bottom: 20px;
+  }
+  .fl-timeline-track {
+    position: relative;
+    padding-left: 24px;
+    border-left: 2px solid var(--bd);
+  }
+  .fl-timeline-item {
+    position: relative;
+    padding: 0 0 16px 0;
+  }
+  .fl-timeline-item:last-child { padding-bottom: 0; }
+  .fl-timeline-dot {
+    position: absolute;
+    left: -33px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--g2);
+    transition: all 0.2s ease;
+  }
+  .fl-timeline-item.fl-active .fl-timeline-dot {
+    background: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(212, 149, 43, 0.18);
+  }
+  .fl-timeline-summary {
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 4px 0;
+    transition: color 0.15s;
+  }
+  .fl-timeline-summary::-webkit-details-marker { display: none; }
+  .fl-timeline-summary:hover { color: var(--gold); }
+  .fl-timeline-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--navy);
+    flex-shrink: 0;
+    min-width: 56px;
+    letter-spacing: 0.02em;
+  }
+  details[open] .fl-timeline-year { color: var(--gold); }
+  .fl-timeline-headline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.35;
+  }
+  details[open] .fl-timeline-headline { color: var(--gold); }
+  .fl-timeline-toggle {
+    margin-left: auto;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--g2);
+    transition: transform 0.2s;
+  }
+  details[open] .fl-timeline-toggle { transform: rotate(45deg); color: var(--gold); }
+  .fl-timeline-detail {
+    margin-top: 8px;
+    margin-left: 68px;
+    padding: 12px 16px;
+    background: #fff;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 3px 3px 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--g1);
+  }
+  .fl-timeline-tag {
+    display: inline-block;
+    margin-bottom: 6px;
+    padding: 2px 8px;
+    background: var(--cat-opinion);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-radius: 999px;
+  }
+  .fl-timeline-tag.fl-tag-vote { background: var(--gold); color: var(--navy); }
+  .fl-timeline-tag.fl-tag-fail { background: #c0392b; }
+  .fl-timeline-tag.fl-tag-build { background: #27634c; }
+  .fl-timeline-tag.fl-tag-now { background: var(--navy); }
+  @media (max-width: 600px) {
+    .fl-timeline { padding: 18px 14px; }
+    .fl-timeline-track { padding-left: 18px; }
+    .fl-timeline-year { min-width: 48px; font-size: 18px; }
+    .fl-timeline-headline { font-size: 13px; }
+    .fl-timeline-detail { margin-left: 0; font-size: 12.5px; }
+  }
+
+  /* === RENDER PLACEHOLDER === */
+  .fl-render-figure {
+    margin: 32px 0;
+  }
+  .fl-render-img {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--bd);
+  }
+  .fl-render-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 2px dashed var(--bd);
+    background: var(--surface);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--g2);
+    font-family: 'DM Sans', sans-serif;
+    text-align: center;
+    padding: 24px;
+  }
+  .fl-render-placeholder-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .fl-render-placeholder-text {
+    font-size: 13px;
+    color: var(--g1);
+    max-width: 340px;
+    line-height: 1.45;
+  }
+  .fl-render-caption {
+    margin-top: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--g1);
+    font-style: italic;
+  }
+  .fl-render-credit {
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--g2);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* === KICKER PULL QUOTE (LARGER) === */
+  .fl-pullquote-kicker {
+    margin: 36px 0;
+    padding: 32px 28px;
+    background: var(--navy);
+    border-radius: 4px;
+    text-align: center;
+    position: relative;
+  }
+  .fl-pullquote-kicker::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 3px;
+    background: var(--gold);
+  }
+  .fl-pullquote-kicker .fl-pullquote-text {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+  }
+  .fl-pullquote-kicker .fl-pullquote-attr {
+    color: var(--gold);
+    margin-top: 14px;
+  }
+  @media (max-width: 600px) {
+    .fl-pullquote-kicker .fl-pullquote-text { font-size: 20px; }
+  }
+</style>
+
+<p class="article-lede">Stand on the lawn at Community Maritime Park on a Saturday afternoon and the scene is almost what voters were promised in 2006. Families on the waterfront. Wahoos baseball drifting over the bay. A band on the grass. You can forget, for a minute, that the thing you're looking at is a promise that was only half-kept.</p>
+
+<p>Then you turn around.</p>
+
+<p>Across the street from the stadium's main entrance is Lot 5. A flat, mostly empty rectangle of gravel and grass and parked cars. It has looked like this since the park opened 14 years ago. It has looked like this for longer than some of the kids at the game have been alive. And for 20 years, since before there was a stadium, before there was a park, before there was anything, the city has been trying to figure out what to put there.</p>
+
+<p>The latest answer is a $250 million hotel-and-apartment project that would put a 15-story tower on the site, the tallest building in Pensacola, and a 10-story Reverb by Hard Rock hotel next to it. The developer is Dawson Company, a second-generation Pensacola firm partnered with Hard Rock International and NFL Hall of Famer Emmitt Smith. The architecture is Gensler. The interiors are by Lenny Kravitz's design firm. The structural engineering is Thornton Tomasetti, and the plan calls for one of the larger mass timber buildings in the Southeast. The 100-year ground lease was signed in August 2024. The project is real. It is also, by any honest read, the best shot Lot 5 has seen.</p>
+
+<!-- PULL QUOTE 1 — sets the stakes -->
+<div class="fl-pullquote">
+  <p class="fl-pullquote-text">It is also, by any honest read, the best shot Lot 5 has seen.</p>
+  <div class="fl-pullquote-attr">On the project itself</div>
+</div>
+
+<!-- RENDER PLACEHOLDER 1 — Project massing/exterior -->
+<figure class="fl-render-figure">
+  <div class="fl-render-placeholder" data-render-slot="exterior-massing">
+    <div class="fl-render-placeholder-label">▸ Render Slot 1</div>
+    <div class="fl-render-placeholder-text">Project exterior massing or street-level rendering. Reverb hotel (10 stories) at left, Rhythm Lofts tower (15 stories) at right, Blue Wahoos Stadium across Main Street.</div>
+  </div>
+  <figcaption class="fl-render-caption">
+    The Reverb by Hard Rock Pensacola and Rhythm Lofts as proposed for Lot 5 of Community Maritime Park.
+    <span class="fl-render-credit">Rendering: Gensler / Dawson Company</span>
+  </figcaption>
+</figure>
+
+<p>Which is exactly why the city's April 16 rejection of the developer's $58 million tax rebate application is so important. And why it is, on the merits, the right call.</p>
+
+<p>Let us say what this rejection is not. It is not anti-development. It is not anti-Hard Rock, anti-Dawson, anti-Smith. It is not the city playing hard to get with one of the only serious bidders in a decade. It is an administrator doing her job. In a letter dated April 16, Community Redevelopment Agency Administrator Victoria D'Angelo told the development team their 345-page application was "incomplete and cannot be processed further in its current form." She listed six reasons. Two of them are the ones that matter.</p>
+
+<p>The first is what planners call the "but for" test. Under Florida law, a tax-increment-financing rebate is supposed to go only to a project that would not happen without it. That is the whole point. Public subsidy exists to close the gap between possible and impossible. The developer's application effectively argued the project would not pencil at the margins they want without the rebate. That is a different claim. Hard Rock is signed. The architects are drawing. The engineers are engineering. Emmitt Smith is on the term sheet. There is a hundred-year lease in a drawer downtown. This is not a project teetering on the edge of nonexistence. It is a project that wants a better return.</p>
+
+<p>The second is the equity gap. The developers have $50 million of their own capital at risk against a $250 million project. Twenty percent. The city's own published CRA policy prefers at least 30 percent. What happens when a developer comes in under the equity threshold and asks for public money to cover the difference is that the public is being asked to take a larger share of the downside than the developer is taking. That inverts what subsidy is supposed to do.</p>
+
+<!-- STAT STRIP — by the numbers -->
+<div class="fl-stat-strip">
+  <div class="fl-stat-header">By the Numbers</div>
+  <div class="fl-stat-grid">
+    <div class="fl-stat-cell">
+      <div class="fl-stat-num"><span class="fl-stat-unit">$</span>58<span class="fl-stat-unit">M</span></div>
+      <div class="fl-stat-label">Rebate requested<br>over 20 years</div>
+    </div>
+    <div class="fl-stat-cell">
+      <div class="fl-stat-num"><span class="fl-stat-unit">$</span>250<span class="fl-stat-unit">M</span></div>
+      <div class="fl-stat-label">Total project<br>cost</div>
+    </div>
+    <div class="fl-stat-cell">
+      <div class="fl-stat-num">20<span class="fl-stat-unit">%</span></div>
+      <div class="fl-stat-label">Developer equity<br>(policy floor: 30%)</div>
+    </div>
+    <div class="fl-stat-cell">
+      <div class="fl-stat-num">2043</div>
+      <div class="fl-stat-label">CRA statutory<br>sunset year</div>
+    </div>
+    <div class="fl-stat-cell">
+      <div class="fl-stat-num">14<span class="fl-stat-unit">YR</span></div>
+      <div class="fl-stat-label">Lot 5 has sat<br>empty since CMP opened</div>
+    </div>
+  </div>
+</div>
+
+<!-- PULL QUOTE 2 — the spine of the argument -->
+<div class="fl-pullquote">
+  <p class="fl-pullquote-text">The public is being asked to take a larger share of the downside than the developer is taking. That inverts what subsidy is supposed to do.</p>
+  <div class="fl-pullquote-attr">On the equity gap</div>
+</div>
+
+<p>The other four items in D'Angelo's letter are technical. The rebate would extend past the CRA's own statutory sunset in 2043, the TIF math doesn't self-support, the cap language in the application doesn't match the cap language in city policy, the assumptions are (per the CRA's independent consultant at Lambert Advisory) "highly questionable." All of that is real. But the two above are the ones a voter can hold in one hand. Did the project need this money? And how much skin did the developer actually have in the game?</p>
+
+<p>To understand why those two questions matter so much at Lot 5 specifically, you have to understand what happened on this parcel before.</p>
+
+<!-- INTERACTIVE TIMELINE — Lot 5 / CMP history -->
+<div class="fl-timeline">
+  <div class="fl-timeline-header">▸ Interactive Timeline</div>
+  <div class="fl-timeline-title">Lot 5 and Community Maritime Park</div>
+  <div class="fl-timeline-sub">Click any milestone to expand. The story of this parcel is the story of 26 years of Pensacola trying to figure out what to put on the waterfront.</div>
+
+  <div class="fl-timeline-track">
+
+    <div class="fl-timeline-item">
+      <div class="fl-timeline-dot"></div>
+      <details>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">2000</span>
+          <span class="fl-timeline-headline">City buys 27.5 acres of contaminated chemical-company land</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag">Acquisition</span>
+          The City of Pensacola purchased the former Trillium Group property at the western edge of downtown for $3.63 million. The site had been used for petroleum and chemical storage for decades and required environmental remediation. From the start, the city's position was that the land's highest value was as a public-facing waterfront, not as private commercial development.
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item">
+      <div class="fl-timeline-dot"></div>
+      <details>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">2002</span>
+          <span class="fl-timeline-headline">City Council approves Festival Park, a $40 million downtown auditorium</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag">Vote</span>
+          The first answer to "what to put on the parcel" was Festival Park, an outdoor amphitheater complex anchored to a $40 million bond. The Council approved the concept, but a citizens' group pushed it to a referendum.
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item">
+      <div class="fl-timeline-dot"></div>
+      <details>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">2003</span>
+          <span class="fl-timeline-headline">Voters reject Festival Park at the ballot box</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag fl-tag-fail">Defeat</span>
+          The Festival Park referendum failed. The first attempt at putting something on the parcel had ended with voters telling the city to start over.
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item">
+      <div class="fl-timeline-dot"></div>
+      <details>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">2005</span>
+          <span class="fl-timeline-headline">A new mixed-use vision emerges: stadium, plaza, condos, retail</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag">Concept</span>
+          City planners and a coalition of business interests developed a second-generation concept for the site: a baseball stadium as anchor, a public lawn and amphitheater, and surrounding mixed-use parcels for private development. The Community Maritime Park Associates Inc. nonprofit was created to manage the parcel.
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item fl-active">
+      <div class="fl-timeline-dot"></div>
+      <details open>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">2006</span>
+          <span class="fl-timeline-headline">Voters approve Community Maritime Park, 56% to 44%</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag fl-tag-vote">Decisive Vote</span>
+          On September 5, 2006, after the citizens' group Save Our City forced the question to referendum with more than 7,000 signatures, Pensacola voters approved Community Maritime Park by about 2,000 votes. The public committed $40 million in CRA bonds and another $20 million for environmental cleanup. The other half of the deal — private investment to repay the bonds through TIF — has never been delivered.
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item">
+      <div class="fl-timeline-dot"></div>
+      <details>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">2012</span>
+          <span class="fl-timeline-headline">Blue Wahoos Stadium opens on the cleaned-up land</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag fl-tag-build">Built</span>
+          Admiral Fetterman Field at Blue Wahoos Stadium opened, anchoring the public side of the park. The amphitheater lawn, festival grounds, and waterfront walkway were built. The private development parcels around the stadium remained empty.
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item">
+      <div class="fl-timeline-dot"></div>
+      <details>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">2019</span>
+          <span class="fl-timeline-headline">West Main Master Plan delivered to the city</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag">Plan</span>
+          A privately funded urban design study, led by Quint Studer, was given to the city as a roadmap for what could be built around the stadium and on the empty parcels. The plan emphasized walkability, mid-rise residential, and active ground-floor uses. Lot 5 was identified as the marquee redevelopment site.
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item">
+      <div class="fl-timeline-dot"></div>
+      <details>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">2021</span>
+          <span class="fl-timeline-headline">Silver Hills Development walks away from Lots 4 and 5</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag fl-tag-fail">Defeat</span>
+          Silver Hills Development Inc., which had held lease options on the two key Lot 5/Lot 4 parcels and was the closest the city had come to a serious developer in a decade, walked away. Five years of RFPs and press conferences had ended with empty parcels.
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item">
+      <div class="fl-timeline-dot"></div>
+      <details>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">2024</span>
+          <span class="fl-timeline-headline">Council approves 100-year ground lease with Dawson Company</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag fl-tag-vote">Vote</span>
+          On August 8, 2024, the City Council approved a 100-year ground lease with Inspired Communities of Florida (Dawson Company's affiliate) for Lot 5. The same day, Hard Rock International announced REVERB Pensacola publicly. The plan: a 10-story Reverb hotel and a 15-story Rhythm Lofts apartment tower, both in mass timber construction. A second lease option for Lot 4 was attached.
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item">
+      <div class="fl-timeline-dot"></div>
+      <details>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">2025</span>
+          <span class="fl-timeline-headline">Planning Board grants initial design approval</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag">Plan</span>
+          In March 2025, the Pensacola Planning Board unanimously approved the initial design concept presented by Lester Yuen of Gensler. Open questions remained around windows on the north wall, parking-deck water table issues, and connection to a future Lot 4 build-out.
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item">
+      <div class="fl-timeline-dot"></div>
+      <details>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">Mar 2026</span>
+          <span class="fl-timeline-headline">Dawson files 345-page application for $58M tax rebate</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag">Action</span>
+          The development team submitted a property tax rebate application to the CRA seeking roughly $2.9 million per year for 20 years, totaling about $58 million. Dawson COO Tamara Bowens told reporters the project would not pencil without the abatement and the team would otherwise need to "go back to the drawing board."
+        </div>
+      </details>
+    </div>
+
+    <div class="fl-timeline-item fl-active">
+      <div class="fl-timeline-dot"></div>
+      <details open>
+        <summary class="fl-timeline-summary">
+          <span class="fl-timeline-year">Apr 2026</span>
+          <span class="fl-timeline-headline">CRA Administrator Victoria D'Angelo rejects the application</span>
+          <span class="fl-timeline-toggle">+</span>
+        </summary>
+        <div class="fl-timeline-detail">
+          <span class="fl-timeline-tag fl-tag-now">This Week</span>
+          On April 16, D'Angelo sent a letter to Dawson stating the application was "incomplete and cannot be processed further in its current form." She listed six issues, including the rebate extending past the CRA's 2043 statutory sunset, the developer's 20% equity falling below the CRA's 30% floor, and an independent review by Lambert Advisory calling the financial assumptions "highly questionable." The next CRA board meeting is May 11.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+
+<!-- RENDER PLACEHOLDER 2 — Site plan / Lot 5 location -->
+<figure class="fl-render-figure">
+  <div class="fl-render-placeholder" data-render-slot="site-plan">
+    <div class="fl-render-placeholder-label">▸ Render Slot 2</div>
+    <div class="fl-render-placeholder-text">Site plan or aerial view of Community Maritime Park showing Lot 5's position relative to Blue Wahoos Stadium, Main Street, and the waterfront. Annotated with project footprint.</div>
+  </div>
+  <figcaption class="fl-render-caption">
+    Lot 5 sits across Main Street from the Blue Wahoos Stadium entrance, fronting the waterfront promenade. The 14-acre Maritime Park parcel was approved by Pensacola voters in 2006.
+    <span class="fl-render-credit">Source: City of Pensacola / Gensler site plan</span>
+  </figcaption>
+</figure>
+
+<p>That vote bought Blue Wahoos Stadium. It bought the waterfront lawn. It bought the amphitheater and the festival grounds and the concerts on summer nights. What it did not buy, and what it was supposed to buy, was a mixed-use district around the stadium that would generate the tax revenue to pay off the bonds faster than the taxpayers would. The private investment was the other half of the deal. For 14 years, that half has not arrived. Not in 2012 when the stadium opened. Not when Quint Studer's team paid for the West Main Master Plan in 2019 and handed it to the city. Not when Silver Hills Development took lease options on Lots 4 and 5 and then walked away. Not through five years of RFPs and press conferences and renderings that ended up in drawers.</p>
+
+<p>Lot 5 has been, all this time, the open wound of the Maritime Park deal. The place you can stand and see what was promised and what wasn't built. Every council member of the last three terms has felt that weight. Every mayor. And that weight is now, in the spring of 2026, pressing down on one question: do we finally let something get built, or do we lose Dawson too.</p>
+
+<p>This is the moment where cities make bad deals.</p>
+
+<p>The pattern is familiar to anyone who has watched public finance for long enough. A parcel sits empty. The wound becomes political. A developer with a good name and a famous partner comes forward with a proposal that looks like the rescue. The incentive ask arrives attached. And the city, exhausted by its own history of failure on the site, talks itself into the idea that something-is-better-than-nothing, that the perfect is the enemy of the good, that the window is closing. It convinces itself the asks are reasonable because the alternative is another ten years of gravel.</p>
+
+<p>We have watched other Gulf Coast and Florida cities make exactly that deal. We have also watched the bill come due. A TIF rebate granted today is money that does not flow to police, fire, streets, or parks tomorrow. A rebate granted past the CRA's own legal sunset is a promise the city cannot actually keep. A rebate calibrated to 20 percent developer equity teaches every future applicant what the floor really is. A subsidy handed to a project that was already going to be built is not an investment. It is a gift.</p>
+
+<p>The Dawson project is the best swing Lot 5 has taken. It deserves to be built. The 40 percent workforce housing set-aside under Florida's Live Local Act is real affordable-housing supply the city badly needs. A 15-story tower and a Hard Rock hotel anchoring the west side of downtown would change the economics of every block around it. The mass timber structural system would put Pensacola on the map of a design movement that matters. We want this.</p>
+
+<p>But we want it built on terms that make sense. Not on terms that let the exhaustion of 20 years of failure on this parcel become the leverage that gets a bad deal signed.</p>
+
+<p>Mayor D.C. Reeves put his card on the table early. On April 13, at his weekly press conference, he told reporters he does not support the rebate "in its current form." He was right to say so, and he was right to note that the final call is not his. The CRA board is the seven-member City Council sitting in a separate legal role. They are the ones who will approve or reject whatever comes back. They should take D'Angelo's letter, the consultant's memo, and the CRA's own published policy, and treat those three documents as the floor. Not the ceiling. Not the starting point for a negotiation about how much of them to waive.</p>
+
+<p>Dawson Company Chief Operating Officer Tamara Bowens told the Pensacola News Journal earlier this month that without the abatement the team would need to "go back to the drawing board" on a plan B. We hope they do. A revised application that scales the ask to what the CRA is legally permitted to give, raises equity to match city policy, and makes an honest case for why the rebate is actually necessary is a revised application worth hearing. The next CRA board meeting is May 11. That gives everyone three weeks. Three weeks is enough time to either file the real application or admit the first one was a negotiating position.</p>
+
+<p>Before then, the city can do one thing that would be useful for this project and every one that comes after it. Publish the checklist. Tell the public, in plain language, what a complete CRA rebate application is required to demonstrate on "but for," on equity, on term, on TIF self-sufficiency. Put the standard on paper so the next round of review is an audit of the math, not a negotiation over the rules. That is what a city that has learned from 20 years of Lot 5 would do.</p>
+
+<p>Because the real question at Community Maritime Park is not whether to build on Lot 5. Of course we should build on Lot 5. The question is whether Pensacola, in the year 2026, can tell the difference between a project it needs and a deal it is being told it needs. The April 16 letter is the city saying: we can.</p>
+
+<!-- KICKER PULL QUOTE — final beat -->
+<div class="fl-pullquote-kicker">
+  <p class="fl-pullquote-text">Lot 5 has waited 20 years for a project. It can wait three more weeks for the right one.</p>
+  <div class="fl-pullquote-attr">— The Flightline Editorial Board</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
