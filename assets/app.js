@@ -3589,3 +3589,44 @@ window.addEventListener('popstate', function(e) {
     onArticlesReady(function() { goCategory(catMatch[1]); });
   }
 })();
+
+
+// ============================================================================
+// Pensacola Notebook — On This Day in Pensacola history
+// Data source: assets/pensapedia-today.json (366 entries keyed by MM-DD)
+// ============================================================================
+async function renderPensacolaNotebook() {
+  const body = document.getElementById('on-this-day-body');
+  if (!body) return;
+  
+  try {
+    const res = await fetch('/assets/pensapedia-today.json', {cache: 'force-cache'});
+    if (!res.ok) throw new Error('fetch failed');
+    const data = await res.json();
+    
+    const now = new Date();
+    const key = String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+    const entry = data[key];
+    
+    if (!entry || !entry.text) {
+      body.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,0.55);font-style:italic;">No notable events recorded for today.</div>';
+      return;
+    }
+    
+    const dateLabel = now.toLocaleDateString('en-US', {month: 'long', day: 'numeric'}).toUpperCase();
+    const yearsAgo = now.getFullYear() - entry.year;
+    
+    body.innerHTML = 
+      '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:11px;letter-spacing:.08em;color:#D4871A;margin-bottom:4px;">ON THIS DAY · ' + dateLabel + '</div>'
+      + '<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px;">'
+      + '<span style="font-family:\'Bebas Neue\',sans-serif;font-size:32px;line-height:1;color:#fff;">' + entry.year + '</span>'
+      + '<span style="font-size:10px;color:rgba(255,255,255,0.5);">' + yearsAgo + ' years ago</span>'
+      + '</div>'
+      + '<div style="font-size:13px;line-height:1.45;color:rgba(255,255,255,0.92);">' + entry.text + '</div>'
+      + '<div style="margin-top:10px;font-size:10px;color:rgba(255,255,255,0.4);">Source: Pensapedia</div>';
+  } catch (err) {
+    body.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,0.45);">Notebook unavailable.</div>';
+  }
+}
+document.addEventListener('DOMContentLoaded', renderPensacolaNotebook);
+
