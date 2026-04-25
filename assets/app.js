@@ -870,6 +870,76 @@ function openEvent(id) {
   document.getElementById('event-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+
+function openEventInline(title, dateStr, timeStr, venue, url, color, label) {
+  const modal = document.getElementById('event-modal');
+  if (!modal) return;
+  
+  // Build minimal event meta: 📅 date, 🕐 time, 📍 venue
+  const metaParts = [];
+  if (dateStr) metaParts.push('<div class="event-modal-meta-item"><span>📅</span> ' + dateStr + '</div>');
+  if (timeStr) metaParts.push('<div class="event-modal-meta-item"><span>🕐</span> ' + timeStr + '</div>');
+  if (venue) metaParts.push('<div class="event-modal-meta-item"><span>📍</span> ' + venue + '</div>');
+  
+  // Description fallback: show that more info is at the linked source
+  const descHtml = url ? 'Full details, ticket info, and showtimes available at the venue page below.' : '';
+  
+  // CTA: external URL → "Get Tickets / More Info"
+  const ctaHtml = url
+    ? '<a class="event-modal-btn" href="' + url + '" target="_blank" rel="noopener noreferrer">Get Tickets / More Info →</a>'
+    : '';
+  
+  // Add to Calendar buttons — use inline data to build .ics + Google/Outlook URLs at click time
+  const safeTitle = (title || '').replace(/'/g, "\\'");
+  const safeVenue = (venue || '').replace(/'/g, "\\'");
+  const safeDesc = (descHtml || '').replace(/'/g, "\\'").replace(/<[^>]+>/g, '');
+  
+  // Try to parse a startISO/endISO from dateStr + timeStr if possible
+  let startISO = '', endISO = '';
+  try {
+    if (dateStr && timeStr) {
+      // dateStr like "Friday, April 3, 2026"; timeStr like "8:00 PM"
+      const d = new Date(dateStr + ' ' + timeStr);
+      if (!isNaN(d.getTime())) {
+        startISO = d.toISOString();
+        endISO = new Date(d.getTime() + 2*60*60*1000).toISOString(); // assume 2h duration
+      }
+    } else if (dateStr) {
+      const d = new Date(dateStr);
+      if (!isNaN(d.getTime())) {
+        startISO = d.toISOString();
+        endISO = new Date(d.getTime() + 24*60*60*1000).toISOString();
+      }
+    }
+  } catch(e) {}
+  
+  const calBtns = (startISO && endISO)
+    ? '<div class="cal-row-label">Add to Calendar</div>'
+    + '<div class="cal-btn-row">'
+    + '<a class="cal-btn" href="' + (typeof googleCalUrl === 'function' ? googleCalUrl(safeTitle, startISO, endISO, safeVenue, safeDesc) : '#') + '" target="_blank" rel="noopener noreferrer"><span class="cal-btn-icon">G</span>Google</a>'
+    + '<a class="cal-btn" href="' + (typeof outlookCalUrl === 'function' ? outlookCalUrl(safeTitle, startISO, endISO, safeVenue, safeDesc) : '#') + '" target="_blank" rel="noopener noreferrer"><span class="cal-btn-icon">O</span>Outlook</a>'
+    + '</div>'
+    : '';
+  
+  modal.innerHTML = '<div class="event-modal-card">'
+    + '<div class="event-modal-header">'
+    + '<button class="event-modal-close" onclick="closeEvent()">✕</button>'
+    + '<div class="event-modal-label" style="color:' + (color || '#1E2D4A') + '">' + (label || 'Event') + '</div>'
+    + '<div class="event-modal-title">' + (title || 'Event Details') + '</div>'
+    + '</div>'
+    + '<div class="event-modal-body">'
+    + (metaParts.length ? '<div class="event-modal-meta">' + metaParts.join('') + '</div>' : '')
+    + (descHtml ? '<div class="event-modal-desc">' + descHtml + '</div>' : '')
+    + ctaHtml
+    + calBtns
+    + '</div>'
+    + '</div>';
+  
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+window.openEventInline = openEventInline;
+
 function closeEvent() {
   document.getElementById('event-modal').classList.remove('open');
   document.body.style.overflow = '';
@@ -1582,7 +1652,23 @@ function renderCalGrid() {
     const maxShow = 3;
     const pips = evs.slice(0, maxShow).map(e => {
       const hasModal = typeof EVENTS !== 'undefined' && EVENTS[e.id];
-      const pipAction = hasModal ? `openEvent('${e.id}')` : e.key ? `openArticle('${e.key}')` : e.url ? `window.open('${e.url}','_blank','noopener,noreferrer')` : `calSelectDay(${d})`;
+      let pipAction;
+      if (hasModal) {
+        pipAction = `openEvent('${e.id}')`;
+      } else if (e.key) {
+        pipAction = `openArticle('${e.key}')`;
+      } else {
+        // Always open the inline modal — even if there's only a URL.
+        // Escape single quotes for inline string args.
+        const t  = (e.title  || '').replace(/'/g, "\\'");
+        const dt = (e.date   || '').replace(/'/g, "\\'");
+        const tm = (e.time   || '').replace(/'/g, "\\'");
+        const vn = (e.venue  || '').replace(/'/g, "\\'");
+        const ur = (e.url    || '').replace(/'/g, "\\'");
+        const co = (e.color  || '').replace(/'/g, "\\'");
+        const lb = (e.label  || 'Event').replace(/'/g, "\\'");
+        pipAction = `openEventInline('${t}','${dt}','${tm}','${vn}','${ur}','${co}','${lb}')`;
+      }
       return `
       <div class="comm-cal-event-pip" style="background:${e.color};" 
            onclick="event.stopPropagation();${pipAction}" title="${e.title}">${e.title}</div>`;
