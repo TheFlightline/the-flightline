@@ -791,20 +791,17 @@ function generateICS(e) {
     'END:VCALENDAR'
   ].join('\r\n');
   // Use data URI for iOS Safari compatibility
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+
   if (isIOS) {
-    // iOS Calendar recognizes .ics files opened as data URIs via a link tap
-    const dataUri = 'data:text/calendar;charset=utf8;filename=' + e.title.replace(/\s+/g,'-').toLowerCase() + '.ics,' + encodeURIComponent(ics);
-    const a = document.createElement('a');
-    a.href = dataUri;
-    a.setAttribute('download', e.title.replace(/\s+/g,'-').toLowerCase() + '.ics');
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => document.body.removeChild(a), 500);
+    // iOS: Open in a new tab so Safari sees the text/calendar MIME and routes
+    // to the Calendar app's "Add Event" sheet rather than the Files Save sheet.
+    // No `download` attribute — that's what triggers the Save in Files/Drive prompt.
+    window.location.href = url;
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
   } else {
-    const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
-    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = e.title.replace(/\s+/g,'-').toLowerCase() + '.ics';
