@@ -298,7 +298,7 @@ async function populateWeatherModal() {
 const ALL_STATIC_PAGES = ['subscribe','newsletter','about','our-mission','letters','community-calendar','tips','advertise','privacy','terms','contact'];
 
 // ── PAY PAGE NAVIGATION ──────────────────────────────────────
-function goPage(page) {
+function goPage(page, fromPopstate) {
   document.getElementById('page-home').classList.add('hidden');
   document.getElementById('page-cat').classList.remove('active');
   document.getElementById('page-search').classList.remove('active');
@@ -313,6 +313,12 @@ function goPage(page) {
   window.scrollTo(0,0);
   if (page === 'community-calendar') setTimeout(calInit, 0);
   if (page === 'pay') setTimeout(initPayCharts, 0);
+  // Push the slug to the URL so the page is bookmarkable / shareable.
+  // Skip when this call came from a popstate (back/forward) to avoid pushing
+  // a duplicate history entry.
+  if (!fromPopstate && location.pathname !== '/' + page) {
+    history.pushState({page: page}, '', '/' + page);
+  }
 }
 
 function goCategory(cat, page) {
@@ -708,6 +714,11 @@ function goHome() {
   document.querySelectorAll('.main-nav a').forEach(a => a.classList.remove('active'));
   document.getElementById('nav-home').classList.add('active');
   window.scrollTo(0,0);
+  if (!arguments[0] || arguments[0] !== true) {
+    if (location.pathname !== '/') {
+      history.pushState({}, '', '/');
+    }
+  }
 }
 
 
@@ -3650,30 +3661,64 @@ function buildTicker() {
 }
 buildTicker();
 
-window.addEventListener('popstate', function(e) {
-  if (e.state && e.state.articleId) {
-    onArticlesReady(function() { openArticle(e.state.articleId); });
-  } else {
-    var modal = document.getElementById('modal');
-    if (modal) modal.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-});
-// On load — check if URL is /story/slug and open that article
-(function() {
-  var storyMatch = location.pathname.match(/^\/story\/(.+)$/);
+// Routes the current URL to the right view. Used on initial load and
+// on history navigation (back/forward).
+function routeFromUrl() {
+  var path = location.pathname;
+
+  // Article: /story/<slug>
+  var storyMatch = path.match(/^\/story\/(.+)$/);
   if (storyMatch) {
     onArticlesReady(function() { openArticle(storyMatch[1]); });
     return;
   }
-  if (location.pathname === '/all') {
+
+  // Category: /category/<cat>
+  var catMatch = path.match(/^\/category\/(.+)$/);
+  if (catMatch) {
+    onArticlesReady(function() { goCategory(catMatch[1]); });
+    return;
+  }
+
+  // All articles index
+  if (path === '/all') {
     onArticlesReady(function() { goAllArticles(); });
     return;
   }
-  var catMatch = location.pathname.match(/^\/category\/(.+)$/);
-  if (catMatch) {
-    onArticlesReady(function() { goCategory(catMatch[1]); });
+
+  // Static pages (community-calendar, about, newsletter, etc.) plus /pay
+  var staticSlug = path.replace(/^\//, '').replace(/\/$/, '');
+  if (staticSlug && (ALL_STATIC_PAGES.indexOf(staticSlug) !== -1 || staticSlug === 'pay')) {
+    // Pass true as second arg so goPage doesn't pushState a duplicate entry.
+    goPage(staticSlug, true);
+    return;
   }
+
+  // Default: home
+  if (path !== '/' && path !== '') return; // unknown path — let SPA fallback render home
+  // Already on home — ensure home view is active
+  goHome(true);
+}
+
+window.addEventListener('popstate', function(e) {
+  // Article modal close / open from history
+  if (e.state && e.state.articleId) {
+    onArticlesReady(function() { openArticle(e.state.articleId); });
+    return;
+  }
+  // Close article modal if it was open
+  var modal = document.getElementById('modal');
+  if (modal && modal.classList.contains('open')) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  // Route to whatever URL we landed on
+  routeFromUrl();
+});
+
+// On initial load — route from the current URL
+(function() {
+  routeFromUrl();
 })();
 
 
