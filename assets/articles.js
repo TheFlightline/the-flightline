@@ -2019,6 +2019,15 @@ Object.assign(A, {
   ],
   body: `<p class="article-lede">Pensacola will join a multi-state settlement agreement with six remaining defendants in the national opioid litigation after the City Council approved the participation form at its April 23 regular meeting.</p>
 
+<div class="source-docs">
+  <div class="source-docs-label">Source documents</div>
+  <ul>
+    <li><a href="https://pensacolafl.portal.civicclerk.com/" target="_blank" rel="noopener noreferrer">Pensacola City Council agenda portal</a> — April 23, 2026 meeting (CivicClerk), Item 8</li>
+    <li><a href="https://nationalopioidsettlement.com/" target="_blank" rel="noopener noreferrer">National Opioid Settlement</a> — official information site for the Six Remnant Defendants' Settlement and prior tranches</li>
+    <li><a href="https://myfloridalegal.com/opioid-settlements" target="_blank" rel="noopener noreferrer">Florida Attorney General — Opioid Settlements</a> page (state Memorandum of Understanding and distribution framework)</li>
+  </ul>
+</div>
+
 <p>The settlement, identified in the city agenda as the Six Remnant Defendants' Settlement Agreement, covers claims against manufacturers and distributors that were not party to earlier waves of national opioid settlements that have already returned funds to Florida cities and counties. Participation requires each subdivision to sign a participation form affirming it will release claims in exchange for a proportional share of the agreed settlement pool.</p>
 
 <p>The council approved the participation under Item 8 of the regular agenda. Supporting documents posted to the city's CivicClerk portal included the participation form and the full Settlement Agreement Among Participating Subdivisions and Remnant Defendants.</p>
@@ -2028,6 +2037,13 @@ Object.assign(A, {
 <p>The city has participated in prior settlement tranches involving major pharmaceutical manufacturers and distributors since Florida joined the national opioid litigation coalition. Earlier settlements with Johnson & Johnson, McKesson, Cardinal Health and AmerisourceBergen collectively sent billions of dollars to participating state and local governments beginning in 2022. Subsequent rounds added Teva, Allergan, Walmart, CVS and Walgreens. The Six Remnant Defendants tranche covers a final group of manufacturers and distributors that were not party to those earlier agreements.</p>
 
 <p>Proceeds from the earlier settlements have been directed toward Escambia County's coordinated response to the opioid crisis, which saw overdose deaths peak in the early 2020s before beginning a gradual decline. Local response includes medication-assisted treatment funding, school-based prevention, naloxone distribution for first responders and community partners, and support for sober living and recovery housing.</p>
+
+<div class="fl-statstrip" role="group" aria-label="Florida opioid settlement distribution">
+  <div class="fl-stat"><div class="fl-stat-num">15%</div><div class="fl-stat-label">Direct to participating cities &amp; counties</div></div>
+  <div class="fl-stat"><div class="fl-stat-num">25%</div><div class="fl-stat-label">Regionalized fund</div></div>
+  <div class="fl-stat"><div class="fl-stat-num">60%</div><div class="fl-stat-label">State-administered</div></div>
+</div>
+<div class="fl-statstrip-caption">Florida opioid settlement Memorandum of Understanding distribution framework. Pensacola must participate in each tranche to preserve its share.</div>
 
 <p>Under Florida's opioid settlement Memorandum of Understanding, 15 percent of the state's share flows to cities and counties that directly participated in litigation; 25 percent goes to a regionalized fund; and 60 percent is administered by the state. Pensacola's participation in each new settlement tranche is required to preserve its share.</p>
 
