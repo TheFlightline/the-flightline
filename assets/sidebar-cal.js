@@ -193,52 +193,72 @@ function sideCalSelectDay(key, evts) {
 }
 
 function renderSideCalList() {
-  var list = document.getElementById('side-cal-list');
-  if (!list) { return; }
-  var upcoming = sideCalUpcoming(5);
-
+  const list = document.getElementById('side-cal-list');
+  if (!list) return;
+  const upcoming = sideCalUpcoming();
   if (!upcoming.length) {
-    list.innerHTML = '<p style="font-size:11px;color:var(--g2);margin:0 0 8px;">No upcoming events.</p>';
+    list.innerHTML = '<div class="side-cal-empty">No events listed for the next two weeks.</div>';
+    list.onclick = null;
     return;
   }
-
-  var html = '';
-  for (var i = 0; i < upcoming.length; i++) {
-    var ev      = upcoming[i];
-    var fd      = sideCalFormatDate(ev);
-    var color   = sideCalCatColor(ev.cat);
-    var isLink  = ev.key || ev.url;
-    var dataAttr = ev.key ? ('data-ekey="' + ev.key + '"') : (ev.url ? ('data-url="' + ev.url + '"') : '');
-
-    html += '<div ' + dataAttr + ' class="event-item" style="display:flex;gap:8px;padding:5px 0;border-top:1px solid var(--bd);cursor:' + (isLink ? 'pointer' : 'default') + ';">';
-    html += '<div class="event-date-box" style="flex-shrink:0;width:30px;text-align:center;border-top:2px solid ' + color + ';">';
-    html += '<div class="event-date-month" style="font-size:8px;font-weight:700;color:' + color + ';text-transform:uppercase;letter-spacing:.04em;">' + fd.month + '</div>';
-    html += '<div class="event-date-num" style="font-family:\'Bebas Neue\',sans-serif;font-size:18px;color:var(--navy);line-height:1;">' + fd.day + '</div>';
-    html += '</div>';
-    html += '<div style="flex:1;min-width:0;">';
-    html += '<div class="event-title" style="font-size:11px;font-weight:600;color:var(--navy);line-height:1.3;">' + ev.title + '</div>';
-    var meta = [];
-    if (ev.time)  { meta.push(ev.time); }
-    if (ev.venue) { meta.push(ev.venue); }
-    if (meta.length) {
-      html += '<div class="event-meta" style="font-size:10px;color:var(--g2);line-height:1.3;margin-top:2px;">' + meta.join(' \u00b7 ') + '</div>';
-    }
-    html += '</div></div>';
-  }
-
-  list.innerHTML = html;
-
-  list.onclick = function(e) {
-    var node = e.target;
-    while (node && node !== list) {
-      if (node.dataset && (node.dataset.ekey || node.dataset.url)) { break; }
-      node = node.parentNode;
-    }
-    if (!node || node === list) { return; }
-    if (node.dataset.ekey) {
+  list.innerHTML = upcoming.slice(0, 5).map(e => {
+    const monthAbbr = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][e.month] || '';
+    const hasModal = typeof EVENTS !== 'undefined' && EVENTS[e.id];
+    const dataAttrs = hasModal
+      ? 'data-eid="' + (e.id || '').replace(/"/g, '&quot;') + '"'
+      : (e.key ? 'data-ekey="' + e.key.replace(/"/g, '&quot;') + '"' : '')
+        + (e.url ? ' data-url="' + e.url.replace(/"/g, '&quot;') + '"' : '')
+        + ' data-title="' + (e.title || '').replace(/"/g, '&quot;') + '"'
+        + ' data-time="' + (e.time || '').replace(/"/g, '&quot;') + '"'
+        + ' data-venue="' + (e.venue || '').replace(/"/g, '&quot;') + '"'
+        + ' data-color="' + (e.color || '').replace(/"/g, '&quot;') + '"'
+        + ' data-cat="' + (e.cat || 'Event').replace(/"/g, '&quot;') + '"'
+        + ' data-day="' + e.day + '"'
+        + ' data-month="' + e.month + '"'
+        + ' data-year="' + e.year + '"';
+    return '<div class="side-cal-list-item" ' + dataAttrs + ' style="cursor:pointer;">'
+      + '<div class="side-cal-list-date" style="background:' + (e.color || '#1E2D4A') + '">'
+      + '<div class="side-cal-list-month">' + monthAbbr + '</div>'
+      + '<div class="side-cal-list-day">' + e.day + '</div>'
+      + '</div>'
+      + '<div class="side-cal-list-info">'
+      + '<div class="side-cal-list-title">' + (e.title || '') + '</div>'
+      + '<div class="side-cal-list-meta">' + (e.time || '') + (e.venue ? ' · ' + e.venue : '') + '</div>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+  list.onclick = function(ev) {
+    const node = ev.target.closest('.side-cal-list-item');
+    if (!node) return;
+    if (node.dataset.eid && typeof openEvent === 'function') {
+      openEvent(node.dataset.eid);
+    } else if (node.dataset.ekey && typeof openArticle === 'function') {
       openArticle(node.dataset.ekey);
+    } else if (typeof openEventInline === 'function') {
+      // Build a date string like "Friday, April 24, 2026" from day/month/year
+      const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const d = parseInt(node.dataset.day, 10);
+      const m = parseInt(node.dataset.month, 10);
+      const y = parseInt(node.dataset.year, 10);
+      let dateStr = '';
+      if (!isNaN(d) && !isNaN(m) && !isNaN(y)) {
+        const obj = new Date(y, m, d);
+        dateStr = dayNames[obj.getDay()] + ', ' + monthNames[m] + ' ' + d + ', ' + y;
+      }
+      const labelTitle = (node.dataset.cat || 'Event').charAt(0).toUpperCase() + (node.dataset.cat || 'Event').slice(1);
+      openEventInline(
+        node.dataset.title || '',
+        dateStr,
+        node.dataset.time || '',
+        node.dataset.venue || '',
+        node.dataset.url || '',
+        node.dataset.color || '',
+        labelTitle
+      );
     } else if (node.dataset.url) {
-      window.open(node.dataset.url, '_blank');
+      // Last-resort fallback (shouldn't happen if openEventInline is loaded)
+      window.open(node.dataset.url, '_blank', 'noopener,noreferrer');
     }
   };
 }
