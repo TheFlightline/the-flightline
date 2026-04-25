@@ -28,12 +28,12 @@ function sideCalUpcoming(n) {
   var now = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
   return CAL_EVENTS
     .filter(function(e) {
-      var evDate = new Date(e.year, e.month - 1, e.day);
+      var evDate = new Date(e.year, e.month, e.day);
       return evDate >= now;
     })
     .sort(function(a, b) {
-      var da = new Date(a.year, a.month - 1, a.day);
-      var db = new Date(b.year, b.month - 1, b.day);
+      var da = new Date(a.year, a.month, a.day);
+      var db = new Date(b.year, b.month, b.day);
       return da - db;
     })
     .slice(0, n || 5);
@@ -45,7 +45,7 @@ function sideCalCatColor(cat) {
 
 function sideCalFormatDate(e) {
   var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-  return { month: months[e.month - 1], day: String(e.day) };
+  return { month: months[e.month], day: String(e.day) };
 }
 
 // ── render ────────────────────────────────────────────────────────────────────
