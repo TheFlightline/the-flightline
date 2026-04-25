@@ -942,9 +942,9 @@ function openEventInline(titleOrEvent, dateStr, timeStr, venue, url, color, labe
     : '';
 
   modal.innerHTML = '<div class="event-modal-card">'
-    + '<div class="event-modal-header">'
+    + '<div class="event-modal-header" style="background:' + (color || '#1E2D4A') + ';">'
     + '<button class="event-modal-close" onclick="closeEvent()">✕</button>'
-    + '<div class="event-modal-label" style="color:' + (color || '#1E2D4A') + '">' + (label || 'Event') + '</div>'
+    + '<div class="event-modal-label">' + (label || 'Event') + '</div>'
     + '<div class="event-modal-title">' + (title || 'Event Details') + '</div>'
     + '</div>'
     + '<div class="event-modal-body">'
