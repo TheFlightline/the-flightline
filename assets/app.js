@@ -3248,7 +3248,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (elFlag && _rnData.flag) {
       const f = _rnData.flag;
       const dot = `<span class="rn-pill-dot" style="background:${f.color};"></span>`;
-      elFlag.innerHTML = dot + ' ' + f.label + ' Flag';
+      elFlag.innerHTML = dot + ' ' + f.label;
     }
 
     // Next tide

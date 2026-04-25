@@ -987,3 +987,17 @@
 
 /* Restore correct last-child no-border behavior with mixed children */
 .mobile-nav a:last-child { border-bottom: none; }
+
+/* MOBILE FIXES: search overflow + right-now wrap */
+@media (max-width: 720px) {
+  .header-search { flex: 1 1 auto; min-width: 0; max-width: calc(100vw - 130px); margin-right: 8px; }
+  .header-search input { width: 100% !important; min-width: 0; padding: 6px 8px; font-size: 12px; }
+  .header-search > button { padding: 6px 9px; font-size: 14px; }
+
+  /* Right Now: keep pills compact and on one line where possible */
+  #right-now-strip > div { gap: 6px !important; padding: 0 14px !important; }
+  .rn-pill { font-size: 9px; padding: 3px 7px; }
+
+  /* Latest ticker: smooth fade at right edge so headlines don't get visibly chopped */
+  .ticker-scroll { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent); }
+}
