@@ -2678,3 +2678,192 @@ Object.assign(A, {
 }
 
 });
+
+// ============================================================================
+// WAVE 4 — Military + Sports backfill (pushed Apr 24, 2026)
+// Publish dates: Apr 8-24, 2026 — 3 military + 3 sports
+// ============================================================================
+
+Object.assign(A, {
+"nas-pensacola-200th-birthday": {
+  cat: "military",
+  label: "Military",
+  thumbnail: "/images/military_aviation-museum_004.jpg",
+  headline: "NAS Pensacola's 200th Birthday Honored on U.S. House Floor by Rep. Jimmy Patronis",
+  dek: "Florida's 1st District congressman marked the installation's bicentennial in a speech to the House of Representatives on April 23, tracing the base's history from President John Quincy Adams' 1826 establishment to its current role training 60 percent of the Navy and Marine Corps fleet.",
+  byline: "The Flightline Staff",
+  date: "April 23, 2026",
+  brief: [
+    "Rep. Jimmy Patronis recognized Naval Air Station Pensacola's 200th birthday in a speech on the U.S. House floor on April 23, placing the milestone in the Congressional Record.",
+    "NAS Pensacola was established by order of President John Quincy Adams in 1826 as the first permanent naval installation on the Gulf Coast. It was designated the first U.S. Naval Air Station in 1914.",
+    "The base trains roughly 60 percent of the U.S. Navy and Marine Corps fleet, hosts the Blue Angels, and serves as headquarters for the Naval Education and Training Command."
+  ],
+  body: `<p class="article-lede">Rep. Jimmy Patronis marked the 200th birthday of Naval Air Station Pensacola with a speech on the U.S. House floor on April 23, placing remarks in the Congressional Record that traced the installation from its 1826 founding under President John Quincy Adams to its present role as one of the Navy's most critical training bases.</p>
+
+<p>Patronis, a Republican representing Florida's 1st Congressional District, used floor time during the legislative session to honor the bicentennial. The Navy officially established a presence at the deep-water harbor on the western end of Pensacola Bay in 1826, creating what would become the Pensacola Navy Yard, the first permanent U.S. naval installation on the Gulf Coast. Nearly 90 years later, in 1914, the installation was designated the first U.S. Naval Air Station. That designation cemented Pensacola's identity as the Cradle of Naval Aviation, a nickname earned because every Navy, Marine Corps and Coast Guard aviator still begins flight training at the base.</p>
+
+<p>"We honor every service member who has trained here, every family member who has stood beside them, and every sacrifice made in defense of our freedoms," Patronis said in his floor remarks. "To the men and women of our United States Armed Forces, past and present, we thank you. Your service is not just respected, it is remembered. Happy 200th birthday to Naval Air Station Pensacola. Here's to the next century of excellence, innovation, and unwavering service."</p>
+
+<p>NAS Pensacola is home to approximately 16,000 military personnel and 7,400 civilian personnel and supports more than 120 tenant commands across its four geographic areas: NAS Pensacola Mainside, Corry Station, Saufley Field and the Blue Angel Recreation Area. Annually, more than 60,000 military members pass through the installation's gates for training. The base serves as headquarters for the Naval Education and Training Command, and hosts the Naval Aviation Technical Training Center, the Naval Aviation Schools Command, the Center for Information Warfare Training and Marine Aviation Training Support Groups 21 and 23. Roughly 60 percent of the entire U.S. Navy and Marine Corps fleet trains there.</p>
+
+<p>The 200th anniversary comes as the base prepares for a year of public commemorations and as NAS Pensacola Commanding Officer Capt. Chandra "Mamasan" Newman, who assumed command in November 2024 as the first woman to lead the installation in its history, has publicly framed the bicentennial as a priority of her command tour. Newman said last year that the bicentennial was one of the reasons she chose NAS Pensacola as her top pick when she screened for major command.</p>
+
+<p>The National Naval Aviation Museum, which sits on the installation, remains open seven days a week to the public. The museum is the largest naval aviation museum in the world and anchors much of the installation's public-facing activity during the bicentennial year.</p>
+
+<p>Patronis' full floor speech is available on his official YouTube channel. The remarks are also entered in the Congressional Record for April 23, 2026.</p>`
+},
+
+"citadel-shield-solid-curtain-2026": {
+  cat: "military",
+  label: "Military",
+  thumbnail: "/images/military_blue-angels-pitchup-break_007.jpg",
+  headline: "NAS Pensacola Completes Two-Week Force Protection Exercise Testing Base Response to Simulated Threats",
+  dek: "Exercise Citadel Shield-Solid Curtain 2026, a scheduled two-part Navy-wide drill, tested NAS Pensacola's security forces, fire department and emergency operations center through a series of realistic scenarios in early April. Commander Navy Installations Command runs the field training exercise; Fleet Forces Command runs the command post exercise.",
+  byline: "The Flightline Staff",
+  date: "April 8, 2026",
+  brief: [
+    "NAS Pensacola participated in Exercise Citadel Shield-Solid Curtain 2026 in early April, a two-part annual force protection exercise conducted at every Navy installation in the continental United States.",
+    "Citadel Shield is the field training portion led by Commander, Navy Installations Command. Solid Curtain is the command post exercise led by Commander, U.S. Fleet Forces Command.",
+    "The exercise tests security forces, fire and emergency services and emergency operations center staff through scenarios designed to simulate realistic threats to base infrastructure and personnel."
+  ],
+  body: `<p class="article-lede">Naval Air Station Pensacola completed a two-week force protection exercise in early April that tested the installation's security forces, fire and emergency services, and emergency operations center staff through a series of scripted scenarios, officials with the base said in a release from Commander, Navy Region Southeast.</p>
+
+<p>Exercise Citadel Shield-Solid Curtain 2026, identified in Navy shorthand as CS-SC26, is an annual force protection exercise conducted at every Navy installation in the continental United States. The two-week format combines a field training exercise in the first week, led by Commander, Navy Installations Command, with a command post exercise in the second week, led by Commander, U.S. Fleet Forces Command.</p>
+
+<p>"Comprehensive exercises test our Naval Security Forces and first responders. It keeps our personnel sharp and ensures the safety of those who live, work and visit NAS Pensacola," NAS Pensacola Commanding Officer Capt. Chandra Newman said in the official release. "These exercises reinforce procedures across the installation so personnel rapidly respond and effectively employ the full scale of our capabilities."</p>
+
+<p>The field training exercise tests how security forces and first responders physically react to scripted incidents on base. The command post exercise tests how installation leadership, regional leadership and supporting commands coordinate decision-making and communication during a larger, extended scenario. Together, the two phases are designed to stress-test the full chain from the initial response at a gate or on a flight line through to the decisions made at the Emergency Operations Center and above.</p>
+
+<p>"These exercises are used to provide realistic, dynamic scenarios for our first responders to react to so they can better protect the populace of the installation," NAS Pensacola Installation Training Officer Erich Brinkmeier said. "Consistently testing our security department, fire department and emergency operations centers with these types of drills makes sure that our personnel are ready to respond to any threat."</p>
+
+<p>NAS Pensacola hosted CS-SC26 across its four geographic areas: Mainside, Corry Station, Saufley Field and the Blue Angel Recreation Area. Navy officials emphasized in the release that the exercise was not conducted in response to any specific threat. Notifications and temporary access restrictions tied to individual scripted events were coordinated with the surrounding community when scenarios involved activity visible from off base.</p>
+
+<p>The exercise's timing drew additional attention this year because of the 2019 attack at NAS Pensacola, in which a Royal Saudi Air Force trainee killed three U.S. Navy sailors and wounded eight others before being killed by responding law enforcement. The response protocols reviewed and refined after that attack remain core elements of the installation's force protection posture, and exercises like CS-SC26 test how those protocols hold up against new scenarios each year.</p>
+
+<p>NAS Pensacola is home to more than 120 tenant commands and hosts roughly 16,000 military and 7,400 civilian personnel across its footprint. The installation returns to normal operations following completion of the exercise.</p>`
+},
+
+"blue-angels-2026-practice-season": {
+  cat: "military",
+  label: "Military",
+  thumbnail: "/images/military_blue-angels-over-pensacola_008.jpg",
+  headline: "Blue Angels' 2026 Practice Season Is in Full Swing Above NAS Pensacola",
+  dek: "The U.S. Navy flight demonstration squadron is holding regular practice flights over the base through the spring and summer, with free public viewing available at the National Naval Aviation Museum on select dates. Base access rules continue under the 2025 restrictions that limit weekday visitor entry.",
+  byline: "The Flightline Staff",
+  date: "April 15, 2026",
+  brief: [
+    "The Blue Angels' 2026 practice season over Naval Air Station Pensacola is now in full swing, with practice dates scheduled regularly from March through October.",
+    "Upcoming April practice dates include April 14, 15, 21, 22, 28 and 29. May practices run nearly every Tuesday and Wednesday.",
+    "Access to the flight line viewing area at the National Naval Aviation Museum is free, but non-DoD visitors over 18 must first be screened at the Visitor Control Center at the south end of Navy Boulevard."
+  ],
+  body: `<p class="article-lede">The U.S. Navy Blue Angels' 2026 practice season over Naval Air Station Pensacola is in full swing, with regular training flights scheduled nearly every week from March through October and free public viewing available at the National Naval Aviation Museum on the majority of practice days.</p>
+
+<p>Upcoming April practice dates include April 14, 15, 21, 22, 28 and 29. May practices run nearly every Tuesday and Wednesday through the first three weeks of the month, followed by practices on May 27, and continue through the summer on regular schedules. The full 2026 practice schedule published by the museum lists dates stretching into late October.</p>
+
+<p>Practice flights typically begin at approximately 10:30 a.m. Central. The NAS Pensacola West Gate on Blue Angel Parkway opens to the public at 9 a.m. on practice days. Flight line gates behind the museum open around 9:30 a.m. Practice sessions generally last between 45 minutes and an hour, weather-dependent. The Naval Aviation Museum Foundation operates concessions and flight line chair service for an additional fee during practices.</p>
+
+<p>Base access for non-DoD visitors operates under the 2025 restrictions that remain in place. Non-DoD personnel ages 18 and older are required to present a REAL ID or valid U.S. passport and be screened and vetted through the NAS Pensacola Visitor Control Center at the south end of Navy Boulevard before being granted access. After approval at the VCC, visitors must proceed to the West Gate at the south end of Blue Angel Parkway to enter the installation. DoD personnel continue to access the base seven days a week under normal procedures.</p>
+
+<p>The Blue Angels are in their 79th year as the Navy's flight demonstration squadron. The team is based at NAS Pensacola and winters at NAF El Centro, California, where the 2026 team completed its winter training cycle before returning to Pensacola in March. The squadron's annual training and demonstration calendar includes roughly 60 scheduled air shows across the United States each year, with a flight envelope that takes the team from the Pacific to the Atlantic coast and nearly every major metropolitan area in between.</p>
+
+<p>Individuals with felony convictions are not permitted base access, per DoD policy. Coolers are not allowed on base. Parking is available at the National Naval Aviation Museum and at the Pensacola Lighthouse. Once those lots fill, access is halted until spaces open.</p>
+
+<p>The 2026 Pensacola Beach Air Show, which is a separate event operated by Escambia County and the Pensacola Beach business district, is scheduled for July 11. The Blue Angels' Homecoming Air Show at NAS Pensacola, the traditional season-closer, is scheduled for November.</p>
+
+<p>Practice schedule updates, date changes and weather cancellations are posted at navalaviationmuseum.org and on the Blue Angels' official social media channels. Time frames are subject to change on any given day, especially for weather reasons, so visitors are encouraged to verify the current day's schedule before making the trip.</p>`
+},
+
+"ice-flyers-playoff-run-ends": {
+  cat: "sports",
+  label: "Sports",
+  thumbnail: "/images/downtown_pensacola-bay-center_004.jpg",
+  headline: "Ice Flyers' First Playoff Run in Four Years Ends in Overtime Game 3 Loss at Evansville",
+  dek: "Pensacola fell 4-3 in overtime to the defending champion Evansville Thunderbolts on April 12, closing out the team's deepest postseason run since winning the President's Cup in 2021. The Ice Flyers drew 4,772 fans to Game 2 at the Pensacola Bay Center, the largest SPHL quarterfinal crowd of the night.",
+  byline: "The Flightline Staff",
+  date: "April 13, 2026",
+  brief: [
+    "The Pensacola Ice Flyers were eliminated from the SPHL President's Cup Playoffs on April 12, losing Game 3 of a best-of-three quarterfinal series to the Evansville Thunderbolts 4-3 in overtime.",
+    "The series marked the Ice Flyers' first playoff appearance since 2021 and their first playoff game victory since 2022, with Pensacola winning Game 2 at home 3-1 after dropping Game 1 in Evansville.",
+    "The team finished a record-setting regular season on attendance, drawing more than 168,000 fans to home games across the year, nearly 16,000 more than the previous season."
+  ],
+  body: `<p class="article-lede">The Pensacola Ice Flyers' first playoff run in four years ended in overtime at Ford Center in Evansville on April 12, with the defending Southern Professional Hockey League champion Evansville Thunderbolts taking Game 3 of the quarterfinal series 4-3 to advance to the semifinals.</p>
+
+<p>The loss closed out a best-of-three series that had swung from an Ice Flyers blowout loss to a defiant home win to a final-minute decision. Evansville took Game 1 at Ford Center 4-1 on April 8, putting Pensacola on the brink of elimination. Facing the end of their season, the Ice Flyers returned to the Pensacola Bay Center on April 10 and, in front of what the team described as a Whiteout crowd, won 3-1 to force a deciding Game 3.</p>
+
+<p>"Satisfying to win, that's for sure," Ice Flyers head coach Jeremy Gates said after the Game 2 victory. "(Ice Flyers players) played hard and in the right way. It was good. To have our team play the way they did shows we can do it."</p>
+
+<p>The Game 2 win was the Ice Flyers' first playoff game victory in four years. Defenseman Laudon Poellinger posted what Gates called "a Gordie Howe hat trick" with a goal, an assist and a fight. Tyler Burnie opened the scoring and Matt Allen added a third-period insurance goal. Crowd attendance was 4,772, the largest crowd across all four SPHL quarterfinal Game 2s that night.</p>
+
+<p>Game 3 returned to Evansville on the afternoon of April 12. The Thunderbolts held home ice advantage as the fourth seed, with Pensacola entering the postseason as the fifth seed after losing all four regular-season games against Evansville. The deciding game went to overtime with the Ice Flyers fighting back from an early deficit before eventually losing 4-3.</p>
+
+<p>The playoff appearance was the team's first since 2021, when the Ice Flyers won their fourth SPHL President's Cup championship. The franchise has won titles in 2013, 2014, 2016 and 2021. Eliminated in Round 1, the 2026 team finishes its season with its breakthrough home playoff win as the signature moment of a year that also set a franchise record for regular-season attendance.</p>
+
+<p>The Ice Flyers drew more than 168,000 fans to home games during the 2025-26 regular season, according to figures the team provided to local media during the playoff series. That total exceeded the previous season by nearly 16,000 fans and is the highest in franchise history. Longtime season ticket holder Robert Creevon, who has attended Ice Flyers games since the team's 2009-10 inaugural season, predicted continued growth ahead of the 2026-27 season, citing the planned addition of the Mobile Mysticks to the SPHL for 2026-27 as a development that would draw regional interest.</p>
+
+<p>The Ice Flyers play their home games at the Pensacola Bay Center, which is under early planning discussion by Escambia County and the City of Pensacola for the $189 million redevelopment proposal reviewed by elected officials at an April 16 joint workshop. Any new ice facility that comes out of that process is expected to be privately financed.</p>
+
+<p>Season ticket and single-game ticket information for the 2026-27 Ice Flyers season will be released later this summer at iceflyers.com.</p>`
+},
+
+"sam-rhodes-sphl-rookie-year": {
+  cat: "sports",
+  label: "Sports",
+  thumbnail: "/images/downtown_pensacola-bay-center_004.jpg",
+  headline: "Ice Flyers' Sam Rhodes Named SPHL Co-Rookie of the Year",
+  dek: "The Pensacola forward led all SPHL rookies in points and power play goals during the 2025-26 regular season. The league announced the honor on April 24, with Rhodes sharing Co-Rookie of the Year with Macon Mayhem forward Khaden Henry.",
+  byline: "The Flightline Staff",
+  date: "April 24, 2026",
+  brief: [
+    "Pensacola Ice Flyers forward Sam Rhodes was named SPHL Co-Rookie of the Year on April 24, sharing the honor with Macon Mayhem forward Khaden Henry.",
+    "Rhodes led all SPHL rookies in points, finishing the regular season with 38. He also led all rookies in power play goals with six.",
+    "The award is voted on by team coaches and staff around the league. It is the first league-wide individual honor for an Ice Flyers rookie in recent seasons."
+  ],
+  body: `<p class="article-lede">Pensacola Ice Flyers forward Sam Rhodes was named the Southern Professional Hockey League Co-Rookie of the Year on April 24, sharing the honor with Macon Mayhem forward Khaden Henry after a season in which Rhodes led all league rookies in both points and power play goals.</p>
+
+<p>The league announced the award in a release from SPHL headquarters in Huntersville, North Carolina. The Rookie of the Year award is voted on by head coaches and staff from each of the league's teams, and the 2025-26 vote produced a tie that resulted in the shared honor. Rhodes finished the regular season with 38 points, leading all SPHL rookies, and added six power play goals to lead the league's first-year players in that category as well.</p>
+
+<p>The recognition caps a breakthrough individual season for Rhodes and arrives days after the Ice Flyers' first-round playoff loss to the Evansville Thunderbolts in a three-game quarterfinal series that ended April 12 in overtime. Rhodes was a significant contributor to the regular-season push that returned the Ice Flyers to the postseason for the first time since 2021.</p>
+
+<p>Rhodes is the first Ice Flyers rookie to win a league-wide individual award in recent seasons. The Ice Flyers have produced several SPHL all-stars and veteran award winners over the franchise's 16 seasons, but the Rookie of the Year nod is a specific recognition of first-year performance that typically tracks future professional development.</p>
+
+<p>The SPHL is a Tier II professional league operating in the southern United States and Midwest, and serves as a common development pathway for players moving toward the ECHL and higher-level professional hockey. Rookies who perform at the level Rhodes produced this season frequently get called up to ECHL teams during the following season or sign ECHL contracts before training camp.</p>
+
+<p>The shared award is the second time in the past five seasons that the Rookie of the Year has been split between two players, league records show. Henry, the Macon co-recipient, played a similarly productive role for the Mayhem during the regular season, finishing among the top scoring rookies and earning coaches' recognition for his two-way game.</p>
+
+<p>The SPHL also announced its All-Rookie Team on April 24 as part of the end-of-season recognition cycle, along with league transaction notices and the Athletic Trainer of the Year, which went to Quad City Storm athletic trainer Chloe Hinojosa. The All-Rookie Team selections included players from across the league's first-year class.</p>
+
+<p>The Ice Flyers' 2026-27 season is expected to begin in October. The team's front office has not yet announced whether Rhodes will return, but league sources indicate the forward's strong rookie season makes him a candidate for an ECHL contract ahead of next year. If he returns to Pensacola, he would anchor the offensive core of a roster that is entering a second year under head coach Jeremy Gates.</p>
+
+<p>Season ticket information for the 2026-27 season is posted at iceflyers.com.</p>`
+},
+
+"blue-wahoos-sky-jockeys-debut": {
+  cat: "sports",
+  label: "Sports",
+  thumbnail: "/images/PenAir-Field-Zoom-1920x1080.jpeg",
+  headline: "Blue Wahoos Debut 'Pensacola Sky Jockeys' Alternate Identity at Mid-April Homestand",
+  dek: "The Miami Marlins' Double-A affiliate wore its new Blue Angels-inspired alternate uniforms for the first time during a home series against the Biloxi Shuckers that began April 15. The blue-and-yellow Sky Jockeys identity, unveiled in January at Pensacola International Airport, is the team's tribute to the region's naval aviation heritage.",
+  byline: "The Flightline Staff",
+  date: "April 16, 2026",
+  brief: [
+    "The Pensacola Blue Wahoos wore the new 'Pensacola Sky Jockeys' alternate uniforms for the first time during a home series that began April 15 against the Biloxi Shuckers.",
+    "The Sky Jockeys identity was unveiled in January at Pensacola International Airport and features a blue-and-yellow color scheme drawn from the U.S. Navy Blue Angels.",
+    "The Blue Wahoos will wear the Sky Jockeys uniforms on Wednesdays throughout the 2026 season as part of a weekly 'Winging Wednesday' promotion with wing specials at the stadium."
+  ],
+  body: `<p class="article-lede">The Pensacola Blue Wahoos wore their new "Pensacola Sky Jockeys" alternate identity for the first time on April 15, opening a homestand against the Biloxi Shuckers in blue-and-yellow uniforms designed as a tribute to the region's deep ties to Naval aviation and the Blue Angels flight demonstration squadron based at NAS Pensacola.</p>
+
+<p>The Sky Jockeys alternate identity was unveiled in January at a ceremony at Pensacola International Airport, a venue selected specifically to reinforce the aviation connection. The color scheme mirrors the Blue Angels' flight suits and aircraft paint schemes, and the branding has already been one of the best-selling items in team merchandise since its launch.</p>
+
+<p>The alternate identity joins the Blue Wahoos' primary branding as part of a weekly promotional rotation. Each Wednesday home game during the 2026 season is a "Winging Wednesday," during which the team wears the Sky Jockeys uniforms and the stadium concessions offer chicken wing specials. The Blue Wahoos have maintained a weekly promotion schedule for multiple seasons, with Tuesdays designated as "Doggone Tuesday" for dog-friendly entry, Thursdays designated as "Pensacola Mullets" night, Fridays as giveaway nights and Saturdays as fireworks nights.</p>
+
+<p>The Sky Jockeys name draws directly on Pensacola's naval aviation identity. NAS Pensacola has been called the Cradle of Naval Aviation since the early 20th century because every Navy, Marine Corps and Coast Guard aviator completes flight training at the installation. The Blue Angels have called NAS Pensacola home since 1955. The Blue Wahoos have consistently built promotional programming around military appreciation across prior seasons, including recurring military discount nights, camouflage hat giveaways and on-field color guard ceremonies. The full-season Sky Jockeys alternate identity is the most comprehensive branding treatment the team has given the aviation theme to date.</p>
+
+<p>The Blue Wahoos enter the 2026 season as the Miami Marlins' Double-A affiliate for a sixth straight year. The team has finished its opening stretch of the 138-game Southern League schedule with a slow offensive start. Through the first 12 games, the Blue Wahoos scored a league-low 37 runs before breaking out with a 13-4 win over the Knoxville Smokies at home. Opening Day starter Karson Milbrandt, the Marlins' No. 10 overall prospect, took the ball on the April 3 opener against the Montgomery Biscuits. Five of the Marlins' top 30 prospects have appeared for Pensacola this year, including Milbrandt, outfielder Dillon Lewis, infielder Cristian Hernández and outfielders Brendan Jones and Fenwick Trimble.</p>
+
+<p>Off the field, the team opened the 2026 season with several stadium upgrades visible to returning fans. A new indoor batting facility sits near the main stadium entrance and includes three batting and pitching stalls, a locker room, additional restrooms and wireless video capability. The facility is intended to serve as event space when the team is on the road. The Blue Wahoos also added a new, larger front office lobby, a new party deck behind the right field wall, new signs and decorative murals around the stadium. Chef Travis Wilson has introduced a new slate of menu items through the Blue Wahoos culinary team.</p>
+
+<p>"From day one, we knew it wasn't about having a good first year, but having a good decade," Blue Wahoos principal owner Quint Studer said in reflecting on recent stadium upgrades. The ballpark, now in its 15th year, opened in 2012 as Blue Wahoos Stadium and is part of Community Maritime Park.</p>
+
+<p>Sky Jockeys merchandise is available at the stadium team store and online at bluewahoos.com. The Blue Wahoos' next homestand begins April 28 against the Biloxi Shuckers.</p>`
+}
+});
