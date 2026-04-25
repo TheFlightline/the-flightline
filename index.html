@@ -1013,6 +1013,12 @@
         </div>
       </div>
 
+      <!-- Search -->
+      <div class="comm-cal-search-wrap">
+        <input type="text" class="comm-cal-search" id="comm-cal-search" placeholder="Search events by name, venue, or category..." autocomplete="off" oninput="calSetSearch(this.value)">
+        <button class="comm-cal-search-clear" id="comm-cal-search-clear" onclick="calClearSearch()" aria-label="Clear search" style="display:none;">✕</button>
+      </div>
+
       <!-- Category Filters -->
       <div class="comm-cal-filters" id="comm-cal-filters"></div>
 

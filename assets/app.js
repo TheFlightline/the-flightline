@@ -1555,6 +1555,7 @@ let calYear = 2026, calMonth = 3; // 0-indexed month (3 = April)
 let calView = 'grid';
 let calActiveFilters = new Set(Object.keys(CAL_CATS));
 let calSelectedDay = null;
+let calSearchQuery = '';
 
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const TODAY = new Date();
@@ -1588,6 +1589,21 @@ function calToggleFilter(cat) {
   renderCalMonth();
 }
 
+function calSetSearch(query) {
+  calSearchQuery = query || '';
+  const clearBtn = document.getElementById('comm-cal-search-clear');
+  if (clearBtn) clearBtn.style.display = calSearchQuery ? 'flex' : 'none';
+  // Reset selected day so it doesn't stick on a day that no longer matches
+  calSelectedDay = null;
+  renderCalMonth();
+}
+
+function calClearSearch() {
+  const input = document.getElementById('comm-cal-search');
+  if (input) input.value = '';
+  calSetSearch('');
+}
+
 function calNav(dir) {
   calMonth += dir;
   if (calMonth > 11) { calMonth = 0; calYear++; }
@@ -1606,7 +1622,18 @@ function calSetView(v) {
 }
 
 function eventsForDay(d, m, y) {
-  return CAL_EVENTS.filter(e => e.day === d && e.month === m && e.year === y && calActiveFilters.has(e.cat));
+  const q = calSearchQuery.trim().toLowerCase();
+  return CAL_EVENTS.filter(e => {
+    if (e.day !== d || e.month !== m || e.year !== y) return false;
+    if (!calActiveFilters.has(e.cat)) return false;
+    if (!q) return true;
+    // Search across title, venue, label, description, time
+    const haystack = [
+      e.title, e.venue, e.label, e.desc, e.time,
+      (CAL_CATS[e.cat] && CAL_CATS[e.cat].label) || ''
+    ].filter(Boolean).join(' ').toLowerCase();
+    return haystack.includes(q);
+  });
 }
 
 function renderCalMonth() {

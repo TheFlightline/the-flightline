@@ -1032,3 +1032,77 @@
   }
   .comm-cal-filter-dot { width: 5px; height: 5px; }
 }
+
+/* Calendar search + mobile dot view */
+.comm-cal-search-wrap {
+  position: relative;
+  margin-bottom: 12px;
+}
+.comm-cal-search {
+  width: 100%;
+  padding: 11px 38px 11px 14px;
+  border: 1.5px solid var(--bd);
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  background: white;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+}
+.comm-cal-search::placeholder { color: var(--g2); }
+.comm-cal-search:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212,135,26,0.12);
+}
+.comm-cal-search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--g2);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+  padding: 0;
+  transition: background 0.15s;
+}
+.comm-cal-search-clear:hover { background: var(--navy); }
+
+/* Mobile: replace event-pip bars with sidebar-style colored dots so day cells stay scannable */
+@media (max-width: 600px) {
+  .comm-cal-event-pip {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    padding: 0;
+    margin: 1px 1px 0 0;
+    font-size: 0;
+    color: transparent;
+    line-height: 0;
+    vertical-align: middle;
+    overflow: hidden;
+  }
+  .comm-cal-cell { padding: 3px 2px 4px; }
+  .comm-cal-cell-num { margin-bottom: 2px; }
+  .comm-cal-more {
+    font-size: 8px;
+    line-height: 1;
+    padding: 1px 0 0;
+    color: var(--g2);
+    font-weight: 700;
+  }
+  .comm-cal-search { font-size: 13px; padding: 10px 36px 10px 12px; }
+}
