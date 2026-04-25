@@ -859,38 +859,57 @@ function openEvent(id) {
   document.body.style.overflow = 'hidden';
 }
 
-function openEventInline(title, dateStr, timeStr, venue, url, color, label) {
+function openEventInline(titleOrEvent, dateStr, timeStr, venue, url, color, label, key, desc) {
+  // Accepts either a full event object as the first arg or the legacy positional args.
+  // Legacy positional form (kept for back-compat with existing inline onclick handlers
+  // generated before openEventFromCalendar): title, dateStr, timeStr, venue, url, color, label, key, desc.
+  let title;
+  if (titleOrEvent && typeof titleOrEvent === 'object') {
+    const e = titleOrEvent;
+    title    = e.title;
+    dateStr  = e.date  || e.dateStr  || '';
+    timeStr  = e.time  || e.timeStr  || '';
+    venue    = e.venue || '';
+    url      = e.url   || '';
+    color    = e.color || '';
+    label    = e.label || (CAL_CATS[e.cat] && CAL_CATS[e.cat].label) || 'Event';
+    key      = e.key   || '';
+    desc     = e.desc  || '';
+  } else {
+    title = titleOrEvent;
+  }
+
   const modal = document.getElementById('event-modal');
   if (!modal) return;
-  
-  // Build minimal event meta: 📅 date, 🕐 time, 📍 venue
+
+  // Meta: date / time / venue
   const metaParts = [];
   if (dateStr) metaParts.push('<div class="event-modal-meta-item"><span>📅</span> ' + dateStr + '</div>');
   if (timeStr) metaParts.push('<div class="event-modal-meta-item"><span>🕐</span> ' + timeStr + '</div>');
-  if (venue) metaParts.push('<div class="event-modal-meta-item"><span>📍</span> ' + venue + '</div>');
-  
-  // Description fallback: show that more info is at the linked source
-  const descHtml = url ? 'Full details, ticket info, and showtimes available at the venue page below.' : '';
-  
-  // CTA: external URL → "Get Tickets / More Info"
-  const ctaHtml = url
-    ? '<a class="event-modal-btn" href="' + url + '" target="_blank" rel="noopener noreferrer">Get Tickets / More Info →</a>'
-    : '';
-  
-  // Add to Calendar buttons — use inline data to build .ics + Google/Outlook URLs at click time
-  const safeTitle = (title || '').replace(/'/g, "\\'");
-  const safeVenue = (venue || '').replace(/'/g, "\\'");
-  const safeDesc = (descHtml || '').replace(/'/g, "\\'").replace(/<[^>]+>/g, '');
-  
-  // Try to parse a startISO/endISO from dateStr + timeStr if possible
+  if (venue)   metaParts.push('<div class="event-modal-meta-item"><span>📍</span> ' + venue + '</div>');
+
+  // Description: prefer the event's own desc; fall back to a soft pointer at the external link.
+  const descHtml = desc ? desc : (url ? 'Full details, ticket info, and showtimes available at the venue page below.' : '');
+
+  // CTA buttons: Read Article (if linked) and/or Get Tickets / More Info (external URL).
+  const ctaParts = [];
+  if (key) {
+    ctaParts.push('<a class="event-modal-btn" href="javascript:void(0)" onclick="closeEvent();openArticle(\'' + key.replace(/'/g, "\\'") + '\');return false;">Read Flightline Article →</a>');
+  }
+  if (url) {
+    const ctaLabel = key ? 'Get Tickets / Visit Site →' : 'Get Tickets / More Info →';
+    ctaParts.push('<a class="event-modal-btn" href="' + url + '" target="_blank" rel="noopener noreferrer">' + ctaLabel + '</a>');
+  }
+  const ctaHtml = ctaParts.join('');
+
+  // Parse a startISO/endISO from dateStr + timeStr for calendar links.
   let startISO = '', endISO = '';
   try {
     if (dateStr && timeStr) {
-      // dateStr like "Friday, April 3, 2026"; timeStr like "8:00 PM"
       const d = new Date(dateStr + ' ' + timeStr);
       if (!isNaN(d.getTime())) {
         startISO = d.toISOString();
-        endISO = new Date(d.getTime() + 2*60*60*1000).toISOString(); // assume 2h duration
+        endISO = new Date(d.getTime() + 2*60*60*1000).toISOString();
       }
     } else if (dateStr) {
       const d = new Date(dateStr);
@@ -900,15 +919,28 @@ function openEventInline(title, dateStr, timeStr, venue, url, color, label) {
       }
     }
   } catch(e) {}
-  
-  const calBtns = (startISO && endISO)
+
+  // Build a normalized event object the calendar helpers expect.
+  const calEvent = {
+    title:    title || 'Event',
+    desc:     (descHtml || '').replace(/<[^>]+>/g, ''),
+    address:  venue || '',
+    startISO: startISO ? startISO.replace(/[-:.]/g,'').slice(0,15) + 'Z' : '',
+    endISO:   endISO   ? endISO.replace(/[-:.]/g,'').slice(0,15) + 'Z'   : ''
+  };
+
+  // Stash the event so the Apple button can call generateICS without re-parsing.
+  window.__pendingCalEvent = calEvent;
+
+  const calBtns = (calEvent.startISO && calEvent.endISO)
     ? '<div class="cal-row-label">Add to Calendar</div>'
     + '<div class="cal-btn-row">'
-    + '<a class="cal-btn" href="' + (typeof googleCalUrl === 'function' ? googleCalUrl(safeTitle, startISO, endISO, safeVenue, safeDesc) : '#') + '" target="_blank" rel="noopener noreferrer"><span class="cal-btn-icon">G</span>Google</a>'
-    + '<a class="cal-btn" href="' + (typeof outlookCalUrl === 'function' ? outlookCalUrl(safeTitle, startISO, endISO, safeVenue, safeDesc) : '#') + '" target="_blank" rel="noopener noreferrer"><span class="cal-btn-icon">O</span>Outlook</a>'
+    + '<button class="cal-btn" onclick="generateICS(window.__pendingCalEvent)"><span class="cal-btn-icon">🍎</span> Apple</button>'
+    + '<a class="cal-btn" href="' + googleCalUrl(calEvent) + '" target="_blank" rel="noopener noreferrer"><span class="cal-btn-icon">G</span> Google</a>'
+    + '<a class="cal-btn" href="' + outlookCalUrl(calEvent) + '" target="_blank" rel="noopener noreferrer"><span class="cal-btn-icon">O</span> Outlook</a>'
     + '</div>'
     : '';
-  
+
   modal.innerHTML = '<div class="event-modal-card">'
     + '<div class="event-modal-header">'
     + '<button class="event-modal-close" onclick="closeEvent()">✕</button>'
@@ -922,9 +954,25 @@ function openEventInline(title, dateStr, timeStr, venue, url, color, label) {
     + calBtns
     + '</div>'
     + '</div>';
-  
+
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+// Single click router for any calendar event in any view (grid pip, list item,
+// day-panel item). All paths first open the inline lightbox, which surfaces
+// "Add to Calendar" buttons and a "Read Article" / "Get Tickets" CTA. From
+// there the user can opt into the article or the external URL — never auto-
+// redirected to either one.
+function openEventFromCalendar(e) {
+  if (!e) return;
+  // Hardcoded EVENTS modals (when present) get their own dedicated rendering
+  // via openEvent — those already include calendar buttons and rich content.
+  if (e.id && typeof EVENTS !== 'undefined' && EVENTS[e.id]) {
+    openEvent(e.id);
+    return;
+  }
+  openEventInline(e);
 }
 window.openEventInline = openEventInline;
 
@@ -1663,25 +1711,12 @@ function renderCalGrid() {
     const extraClass = (isToday ? ' today-cell' : '') + (isSelected ? ' selected-cell' : '');
     const todayBadge = isToday ? `<span class="comm-cal-cell-today-badge">Today</span>` : '';
     const maxShow = 3;
-    const pips = evs.slice(0, maxShow).map(e => {
-      const hasModal = typeof EVENTS !== 'undefined' && EVENTS[e.id];
-      let pipAction;
-      if (hasModal) {
-        pipAction = `openEvent('${e.id}')`;
-      } else if (e.key) {
-        pipAction = `openArticle('${e.key}')`;
-      } else {
-        // Always open the inline modal — even if there's only a URL.
-        // Escape single quotes for inline string args.
-        const t  = (e.title  || '').replace(/'/g, "\\'");
-        const dt = (e.date   || '').replace(/'/g, "\\'");
-        const tm = (e.time   || '').replace(/'/g, "\\'");
-        const vn = (e.venue  || '').replace(/'/g, "\\'");
-        const ur = (e.url    || '').replace(/'/g, "\\'");
-        const co = (e.color  || '').replace(/'/g, "\\'");
-        const lb = (e.label  || 'Event').replace(/'/g, "\\'");
-        pipAction = `openEventInline('${t}','${dt}','${tm}','${vn}','${ur}','${co}','${lb}')`;
-      }
+    const pips = evs.slice(0, maxShow).map((e, idx) => {
+      // Stash the event reference so click handler can pass full object to the router.
+      // Index-keyed by day to avoid collisions when the grid re-renders.
+      const stashKey = '__cal_evt_' + calYear + '_' + calMonth + '_' + d + '_' + idx;
+      window[stashKey] = e;
+      const pipAction = "openEventFromCalendar(window['" + stashKey + "'])";
       return `
       <div class="comm-cal-event-pip" style="background:${e.color};" 
            onclick="event.stopPropagation();${pipAction}" title="${e.title}">${e.title}</div>`;
@@ -1725,12 +1760,13 @@ function renderDayPanel(d) {
   const todayTag = isToday ? ' <span style="font-family:\'DM Sans\';font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:var(--navy);color:white;padding:2px 7px;border-radius:2px;">Today</span>' : '';
 
   const items = evs.length
-    ? evs.map(e => {
-        const hasModal = typeof EVENTS !== 'undefined' && EVENTS[e.id];
-        const action = hasModal ? `openEvent('${e.id}')` : e.key ? `openArticle('${e.key}')` : e.url ? `window.open('${e.url}','_blank')` : '';
-        const clickable = action ? `onclick="${action}"` : '';
+    ? evs.map((e, idx) => {
+        const stashKey = '__cal_panel_evt_' + calYear + '_' + calMonth + '_' + d + '_' + idx;
+        window[stashKey] = e;
+        const action = "openEventFromCalendar(window['" + stashKey + "'])";
+        const clickable = `onclick="${action}"`;
         return `
-        <div class="comm-cal-day-event" ${clickable} style="cursor:${action?'pointer':'default'}">
+        <div class="comm-cal-day-event" ${clickable} style="cursor:pointer">
           <div class="comm-cal-list-bar" style="background:${e.color};"></div>
           <div>
             <div class="comm-cal-list-tag" style="background:${e.color};">${CAL_CATS[e.cat]?.label || e.cat}</div>
@@ -1771,12 +1807,13 @@ function renderCalList() {
     const date = new Date(calYear, calMonth, parseInt(d));
     const dayName = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()];
     const isToday = parseInt(d) === TODAY.getDate() && calMonth === TODAY.getMonth() && calYear === TODAY.getFullYear();
-    const items = evs.map(e => {
-      const hasModal = typeof EVENTS !== 'undefined' && EVENTS[e.id];
-      const action = hasModal ? `openEvent('${e.id}')` : e.key ? `openArticle('${e.key}')` : e.url ? `window.open('${e.url}','_blank')` : '';
-      const clickable = action ? `onclick="${action}"` : '';
+    const items = evs.map((e, idx) => {
+      const stashKey = '__cal_list_evt_' + calYear + '_' + calMonth + '_' + d + '_' + idx;
+      window[stashKey] = e;
+      const action = "openEventFromCalendar(window['" + stashKey + "'])";
+      const clickable = `onclick="${action}"`;
       return `
-        <div class="comm-cal-list-item" ${clickable} style="cursor:${action?'pointer':'default'}">
+        <div class="comm-cal-list-item" ${clickable} style="cursor:pointer">
           <div class="comm-cal-list-bar" style="background:${e.color};"></div>
           <div>
             <div class="comm-cal-list-tag" style="background:${e.color};">${CAL_CATS[e.cat]?.label || e.cat}</div>
