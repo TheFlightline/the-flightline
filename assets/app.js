@@ -3139,13 +3139,72 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
 (function() {
   // Keyed by MM-DD, entries: { text, articleId (optional) }
   const ON_THIS_DAY = {
-    '01-01': { text: 'Pensacola, founded 1559, is the oldest European settlement site in the continental U.S. — older than St. Augustine by six years.', articleId: 'history-galvez' },
-    '01-08': { text: 'NAS Pensacola commissioned in 1914 — the first naval air station in the United States.', articleId: 'history-naval-aviation' },
-    '03-18': { text: 'In 1781, Bernardo de Gálvez sailed alone into Pensacola Bay under British cannon fire — forcing the rest of his fleet to follow.', articleId: 'history-galvez' },
-    '05-10': { text: 'On May 10, 1781, Pensacola surrendered to Spain after a 61-day siege — ending British West Florida for good.', articleId: 'history-galvez' },
-    '09-16': { text: 'Hurricane Sally made landfall near Gulf Shores in 2020 at 2 mph — dropping 30 inches of rain on Pensacola in 24 hours and damaging both bay bridges.', articleId: null },
-    '04-04': { text: 'The Blue Wahoos open their 2026 season at Blue Wahoos Stadium this week — one of the best minor league ballparks in the country.', articleId: 'wahoos' },
-    '04-07': { text: 'Bands on the Beach returns tonight at Gulfside Pavilion on Pensacola Beach — free admission, gates at 6 PM.', articleId: null },
+    // ─── JANUARY ───
+    '01-01': { text: 'Pensacola, founded 1559, was the first multi-year European settlement in what is now the continental United States — predating St. Augustine by six years.', articleId: 'history-galvez' },
+    '01-08': { text: 'NAS Pensacola was commissioned in 1914 — the first naval air station in the United States. Today the base trains every Navy, Marine, and Coast Guard aviator.', articleId: null },
+    '01-10': { text: 'In 1861, Florida became the third state to secede from the Union. Fort Pickens, on Santa Rosa Island, remained in Union hands throughout the Civil War.', articleId: null },
+
+    // ─── FEBRUARY ───
+    '02-14': { text: 'Pensacola hosts Pensacon each February — a four-day comic and pop-culture convention drawing nearly 25,000 attendees from around the world.', articleId: null },
+    '02-22': { text: 'In 1819, Spain and the United States signed the Adams-Onís Treaty, transferring Florida — and Pensacola — to American control.', articleId: null },
+    '02-27': { text: 'In 1880, the Louisville & Nashville Railroad bought the Pensacola Railroad, accelerating the city\'s late-19th-century lumber boom.', articleId: null },
+
+    // ─── MARCH ───
+    '03-09': { text: 'In 1822, Pensacola was officially incorporated as a city under U.S. territorial rule — making it one of Florida\'s oldest municipal governments.', articleId: null },
+    '03-16': { text: 'In 1561, Spanish explorer Villafane arrived at Pensacola Bay leading a relief expedition for Tristán de Luna\'s storm-shattered settlement — too late to save it.', articleId: null },
+    '03-18': { text: 'In 1781, Bernardo de Gálvez sailed alone into Pensacola Bay under British cannon fire — forcing the rest of his fleet to follow. Pensacola surrendered to Spain 61 days later.', articleId: 'history-galvez' },
+    '03-21': { text: 'In 1898, the Pensacola Electric Railway Company began operations — bringing streetcar service to a city of about 18,000 residents.', articleId: null },
+    '03-24': { text: 'In 1824, contractor Winslow Lewis bid $4,927 to build the Pensacola Lighthouse — the structure that would mark the harbor entrance for the next two centuries.', articleId: null },
+
+    // ─── APRIL ───
+    '04-04': { text: 'The Blue Wahoos play their home opener around this time each spring at Blue Wahoos Stadium — consistently ranked one of the best minor-league ballparks in the country.', articleId: 'wahoos' },
+    '04-07': { text: 'Bands on the Beach returns to Gulfside Pavilion on Pensacola Beach each spring — a free Tuesday-night concert series that runs through October.', articleId: null },
+    '04-09': { text: 'In 1561, Villafane was named governor of Spanish Florida after the disaster of Luna\'s Pensacola colony.', articleId: null },
+    '04-20': { text: 'In 2010, the Deepwater Horizon oil rig exploded in the Gulf of Mexico, leaking millions of barrels of crude. Pensacola Beach was among the shores most heavily impacted by tar and sheen.', articleId: null },
+
+    // ─── MAY ───
+    '05-09': { text: 'In 1862, Confederate forces evacuated the Pensacola Lighthouse during the Civil War, and the tower returned to Union control. Six artillery rounds had struck the structure but none penetrated the wall.', articleId: null },
+    '05-10': { text: 'In 1781, Pensacola surrendered to Spain after a 61-day siege — ending British West Florida for good and returning the colony to Spanish control until 1821.', articleId: 'history-galvez' },
+    '05-14': { text: 'In 1719, French forces under Bienville captured Pensacola from Spain. France held the city only until a 1722 hurricane forced them out.', articleId: null },
+    '05-25': { text: 'In 1868, Florida was readmitted to the Union three years after the end of the Civil War. Pensacola began rebuilding around the lumber and railroad economy.', articleId: null },
+
+    // ─── JUNE ───
+    '06-01': { text: 'Atlantic hurricane season opens June 1 — the start of a six-month window that historically brings most of the Gulf Coast\'s named storms.', articleId: 'hurricane-prep' },
+    '06-11': { text: 'In 1559, members of Tristán de Luna\'s expedition embarked from Vera Cruz, Mexico, bound for Pensacola Bay — beginning what would become the first multi-year European colony in the continental U.S.', articleId: null },
+    '06-17': { text: 'In 1891, Pensacola dedicated Lee Square — formerly Florida Park — in memory of Confederate dead. The square still anchors the city\'s North Hill historic district.', articleId: null },
+    '06-20': { text: 'In 1899, gunpowder stored at Fort Pickens exploded, destroying an entire bastion of the historic Civil War-era fort on Santa Rosa Island.', articleId: null },
+    '06-30': { text: 'Each summer the city ramps up Pensacola Beach lifeguard staffing as visitor counts climb. The beach attracts more than 4 million visitors annually.', articleId: null },
+
+    // ─── JULY ───
+    '07-04': { text: 'Pensacola\'s Independence Day fireworks light up Pensacola Bay each July 4 — a tradition that draws crowds to Plaza de Luna and the downtown waterfront.', articleId: null },
+    '07-14': { text: 'In 1756, the Spanish viceroy issued the decree that formally established Presidio San Miguel de Panzacola — the foundation of the modern city of Pensacola.', articleId: null },
+    '07-22': { text: 'The Blue Angels perform their annual Pensacola Beach Air Show in July, attracting tens of thousands to the Casino Beach pier.', articleId: 'blue-angels-2026-practice-season' },
+
+    // ─── AUGUST ───
+    '08-10': { text: 'In 1876, the first burial took place at St. Johns Cemetery — one of Pensacola\'s oldest active cemeteries, still located off East Romana Street downtown.', articleId: null },
+    '08-14': { text: 'In 1559, Tristán de Luna\'s expedition entered Pensacola Bay on this day — beginning the first attempt at a permanent European settlement in what is now the U.S.', articleId: null },
+    '08-15': { text: 'In 1559, Don Tristán de Luna y Arellano formally established the Pensacola colony with 1,500 people on 11 ships from Vera Cruz, Mexico.', articleId: null },
+    '08-22': { text: 'In 1881, construction began on railroad bridges spanning Pensacola Bay and the Choctawhatchee and Apalachicola Rivers — the infrastructure that connected Pensacola to the broader Florida economy.', articleId: null },
+
+    // ─── SEPTEMBER ───
+    '09-05': { text: 'In 2006, Pensacola voters approved Community Maritime Park by a margin of about 2,000 votes — 56 to 44 percent. The vote authorized the bond financing that built Blue Wahoos Stadium.', articleId: 'op-reverb-rebate' },
+    '09-16': { text: 'In 2020, Hurricane Sally made landfall near Gulf Shores at 2 mph — dropping 30 inches of rain on Pensacola in 24 hours and damaging both Pensacola Bay bridges.', articleId: null },
+    '09-19': { text: 'In 1559, a hurricane struck Tristán de Luna\'s Pensacola colony, sinking five ships and ruining supplies. Survivors abandoned the settlement two years later.', articleId: null },
+
+    // ─── OCTOBER ───
+    '10-05': { text: 'In 1995, Hurricane Opal made landfall near Pensacola Beach as a strong Category 3 storm — destroying piers, dunes and beachfront property along Santa Rosa Island.', articleId: null },
+    '10-12': { text: 'The Pensacola Interstate Fair runs each October at the fairgrounds off Mobile Highway — a regional tradition since 1935.', articleId: null },
+    '10-25': { text: 'The Great Gulfcoast Arts Festival takes place in early November in Seville Square, drawing more than 200 regional and international artists to historic downtown.', articleId: null },
+
+    // ─── NOVEMBER ───
+    '11-07': { text: 'In 1814, Andrew Jackson attacked Spanish-held Pensacola during the War of 1812 — dislodging British forces who had been allowed to occupy the city.', articleId: null },
+    '11-09': { text: 'In 1873, U.S. Senator Stephen R. Mallory — Confederate Secretary of the Navy and longtime Pensacola statesman — died in the city.', articleId: null },
+    '11-22': { text: 'In 1861, a two-day Civil War artillery battle erupted across Pensacola Bay between Union-held Fort Pickens and the Confederate-held mainland forts.', articleId: null },
+
+    // ─── DECEMBER ───
+    '12-07': { text: 'In 1941, the attack on Pearl Harbor brought the U.S. into World War II — and transformed NAS Pensacola from a regional training base into the central pilot pipeline for the entire war effort.', articleId: null },
+    '12-15': { text: 'The Winterfest carriage tours run through downtown Pensacola each December — a holiday tradition pairing actors and music in front of historic North Hill homes.', articleId: null },
+    '12-31': { text: 'The Pelican Drop ran each New Year\'s Eve from 2008 to 2018 in downtown Pensacola — an aluminum pelican lowered in place of the traditional ball, drawing crowds of up to 50,000.', articleId: null },
   };
 
   const body = document.getElementById('on-this-day-body');
