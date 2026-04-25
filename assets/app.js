@@ -3761,3 +3761,20 @@ async function renderPensacolaNotebook() {
 }
 document.addEventListener('DOMContentLoaded', renderPensacolaNotebook);
 
+// Live topbar date — replaces the static fallback in index.html with the
+// reader's current local date. Format: "Saturday, April 25, 2026"
+function refreshTopbarDate() {
+  var el = document.getElementById('topbar-date');
+  if (!el) return;
+  var DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var d = new Date();
+  el.textContent = DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', refreshTopbarDate);
+} else {
+  refreshTopbarDate();
+}
+// Refresh hourly so a long-open tab updates at midnight rollover
+setInterval(refreshTopbarDate, 60 * 60 * 1000);

@@ -2966,6 +2966,8 @@ Object.assign(A, {
   <p class="fl-pullquote-text">The project is real. It is also, by any honest read, the best shot Lot 5 has seen.</p>
 </aside>
 
+<div class="editor-note" style="border-left:3px solid var(--gold); background:#faf6ee; padding:14px 18px; margin:24px 0; font-size:14px; line-height:1.55; color:var(--g1);"><strong style="color:var(--navy); text-transform:uppercase; font-size:11px; letter-spacing:0.06em; display:block; margin-bottom:6px;">For Background</strong>The Flightline's news coverage of the rejection — what the CRA administrator's letter said, what the developer requested, and what comes next — is here: <a href="javascript:void(0)" onclick="openArticle('reverb-cra-rejection-news');return false;" style="color:var(--navy); font-weight:700; text-decoration:underline;">Pensacola CRA Rejects $58 Million Tax Rebate Application for Reverb Hard Rock Hotel at Maritime Park →</a></div>
+
 <p>Which is exactly why the city's April 16 rejection of the developer's $58 million tax rebate application is so important — and why, on the merits, it was the right call.</p>
 
 <p>What this rejection is not: it is not anti-development, not anti-Hard Rock, not anti-Dawson, and not the city playing hard to get with one of the only serious bidders in a decade. It is an administrator doing her job. In a letter dated April 16, Community Redevelopment Agency Administrator Victoria D'Angelo informed the development team that their 345-page application was "incomplete and cannot be processed further in its current form," and laid out six reasons. Two of them are the ones that matter.</p>

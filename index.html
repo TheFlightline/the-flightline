@@ -21,7 +21,7 @@
 <div class="topbar">
   <div class="topbar-inner">
     <div class="topbar-left">
-      <span>Friday, April 3, 2026 · Good Friday</span>
+      <span id="topbar-date">Saturday, April 25, 2026</span>
       <a href="#" class="tmp" onclick="openWeather();return false;" id="topbar-weather">72°F · Partly Cloudy</a>
     </div>
     <div class="topbar-right">
@@ -43,11 +43,11 @@
     <nav class="main-nav">
       <a href="#" onclick="goHome();return false;" id="nav-home" class="active">Home</a>
       <a href="/all" onclick="goAllArticles();return false;" id="nav-latest">Latest</a>
-      <a href="#" onclick="goCategory('govt')" id="nav-govt">Government</a>
-      <a href="#" onclick="goCategory('dev')" id="nav-dev">Business</a>
-      <a href="#" onclick="goCategory('military')" id="nav-military">Military</a>
-      <a href="#" onclick="goCategory('sports')" id="nav-sports">Sports</a>
-      <a href="#" onclick="goCategory('opinion')" id="nav-opinion">Opinion</a>
+      <a href="javascript:void(0)" onclick="goCategory('govt');return false;" id="nav-govt">Government</a>
+      <a href="javascript:void(0)" onclick="goCategory('dev');return false;" id="nav-dev">Business</a>
+      <a href="javascript:void(0)" onclick="goCategory('military');return false;" id="nav-military">Military</a>
+      <a href="javascript:void(0)" onclick="goCategory('sports');return false;" id="nav-sports">Sports</a>
+      <a href="javascript:void(0)" onclick="goCategory('opinion');return false;" id="nav-opinion">Opinion</a>
     </nav>
 
     <button class="hamburger" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
