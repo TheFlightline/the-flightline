@@ -1001,3 +1001,34 @@
   /* Latest ticker: smooth fade at right edge so headlines don't get visibly chopped */
   .ticker-scroll { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent); }
 }
+
+/* MOBILE FIXES: community calendar */
+@media (max-width: 600px) {
+  /* Today badge: text overflows narrow cells. Replace with a navy dot in the corner. */
+  .comm-cal-cell-today-badge { font-size: 0; padding: 0; background: transparent; }
+  .comm-cal-cell-today-badge::after {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--navy);
+    border-radius: 50%;
+  }
+
+  /* Filter pills: equal-width grid for clean wrap, tighter text */
+  .comm-cal-filters {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+  }
+  .comm-cal-filter {
+    font-size: 8px !important;
+    padding: 5px 4px !important;
+    letter-spacing: 0.04em;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .comm-cal-filter-dot { width: 5px; height: 5px; }
+}
