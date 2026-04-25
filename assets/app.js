@@ -771,42 +771,33 @@ const EVENTS = {
 };
 
 function generateICS(e) {
-  const uid = 'flightline-' + e.title.replace(/\s+/g,'-').toLowerCase() + '@theflightline.com';
-  const now = new Date().toISOString().replace(/[-:.]/g,'').slice(0,15) + 'Z';
-  const ics = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//The Flightline//Pensacola Events//EN',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
-    'BEGIN:VEVENT',
-    'UID:' + uid,
-    'DTSTAMP:' + now,
-    'DTSTART:' + e.startISO,
-    'DTEND:' + e.endISO,
-    'SUMMARY:' + e.title,
-    'DESCRIPTION:' + e.desc.replace(/,/g,'\\,').replace(/\n/g,'\\n'),
-    'LOCATION:' + e.address,
-    'END:VEVENT',
-    'END:VCALENDAR'
-  ].join('\r\n');
-  // Use data URI for iOS Safari compatibility
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
+  // Server-rendered .ics via /.netlify/functions/event-ics. Required for iOS:
+  // a real HTTP response with `Content-Type: text/calendar` (no attachment
+  // disposition) is the only path that reliably opens the iOS Calendar
+  // "Add Event" sheet rather than the system "Save in Files" sheet. Client-
+  // generated Blob URLs and data URIs both fail this on modern iOS.
+  const params = new URLSearchParams({
+    title: e.title || 'Event',
+    start: e.startISO || '',
+    end:   e.endISO   || '',
+    loc:   e.address  || '',
+    desc:  (e.desc || '').replace(/<[^>]+>/g, '')
+  });
+  // Stable UID so re-adds update the same event rather than create a new one.
+  const uid = 'flightline-' + (e.title || 'event').toLowerCase().replace(/\s+/g, '-') + '@theflightline.com';
+  params.set('uid', uid);
+  const href = '/.netlify/functions/event-ics?' + params.toString();
 
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   if (isIOS) {
-    // iOS: Open in a new tab so Safari sees the text/calendar MIME and routes
-    // to the Calendar app's "Add Event" sheet rather than the Files Save sheet.
-    // No `download` attribute — that's what triggers the Save in Files/Drive prompt.
-    window.location.href = url;
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    // Direct navigation lets Safari recognize the calendar response and
+    // hand it to the Calendar app's add-event sheet.
+    window.location.href = href;
   } else {
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = e.title.replace(/\s+/g,'-').toLowerCase() + '.ics';
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    // Desktop / Android: open in a new tab. The server filename header
+    // gives the file a sensible name; the browser will route to the
+    // user's default calendar handler.
+    window.open(href, '_blank', 'noopener');
   }
 }
 
