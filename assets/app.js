@@ -772,13 +772,15 @@ function closeEvent() {
 function openArticle(id){
   const a=A[id]; if(!a) return;
   const bullets = a.brief || a.bluf || [];
+  const briefCollapsed = localStorage.getItem('fl_brief_collapsed') === '1';
   const briefHTML = bullets.length ? `
-    <div class="flightline-brief">
-      <div class="brief-header">
+    <div class="flightline-brief${briefCollapsed ? ' brief-collapsed' : ''}" id="flightline-brief">
+      <div class="brief-header" onclick="toggleBrief()" role="button" tabindex="0" aria-expanded="${briefCollapsed ? 'false' : 'true'}" aria-controls="brief-items-list" title="Click to collapse or expand">
         <span class="brief-plane">✈</span>
         <span class="brief-label">Flightline Brief</span>
+        <span class="brief-chevron" aria-hidden="true">▾</span>
       </div>
-      <ul class="brief-items">
+      <ul class="brief-items" id="brief-items-list">
         ${bullets.map(b=>`<li class="brief-item"><span class="brief-bullet"></span><span class="brief-text">${b}</span></li>`).join('')}
       </ul>
     </div>` : '';
@@ -788,7 +790,7 @@ function openArticle(id){
   const shareBody = encodeURIComponent(a.headline + ' — ' + siteUrl);
   document.getElementById('modal-content').innerHTML=`
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bd);padding-right:48px;">
-      <span class="cat-badge cat-${a.cat}" style="font-size:11px;">${catDisplay(a.cat)}</span>
+      <span class="cat-badge cat-${a.cat}" style="font-size:11px;cursor:pointer;" onclick="closeArticle();goCategory('${a.cat}');" title="See more in ${catDisplay(a.cat)}">${catDisplay(a.cat)}</span>
       <div style="display:flex;align-items:center;gap:6px;">
         <button onclick="adjustArticleSize(-1)" title="Decrease text size" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:4px 8px;font-size:13px;font-weight:700;color:var(--g1);cursor:pointer;line-height:1;">A−</button>
         <button onclick="adjustArticleSize(1)" title="Increase text size" style="background:var(--surface);border:1.5px solid var(--bd);border-radius:3px;padding:4px 8px;font-size:16px;font-weight:700;color:var(--g1);cursor:pointer;line-height:1;">A+</button>
@@ -829,6 +831,8 @@ function openArticle(id){
   }
   // Wire hover count-up on callouts after render
   setTimeout(() => initCalloutHovers(), 120);
+  // Wire clickable images for lightbox enlargement
+  setTimeout(() => initArticleImageLightbox(), 120);
 }
 function closeArticle(){
   document.getElementById('modal').classList.remove('open');
@@ -894,6 +898,89 @@ function initCalloutHovers() {
     callout.addEventListener('mouseenter', runCountUp);
     callout.addEventListener('mouseleave', resetStatic);
   });
+}
+
+// ── Flightline Brief: collapse/expand with localStorage memory ─────────
+function toggleBrief() {
+  const brief = document.getElementById('flightline-brief');
+  if (!brief) return;
+  const nowCollapsed = !brief.classList.contains('brief-collapsed');
+  brief.classList.toggle('brief-collapsed');
+  const header = brief.querySelector('.brief-header');
+  if (header) header.setAttribute('aria-expanded', nowCollapsed ? 'false' : 'true');
+  try { localStorage.setItem('fl_brief_collapsed', nowCollapsed ? '1' : '0'); } catch(e){}
+}
+
+// ── Article image lightbox: click any article-body image to enlarge ────
+function initArticleImageLightbox() {
+  const imgs = document.querySelectorAll('#article-body-text img');
+  imgs.forEach(img => {
+    if (img.dataset.lightboxWired) return;
+    img.dataset.lightboxWired = '1';
+    img.style.cursor = 'zoom-in';
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', 'Click to enlarge image');
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Find associated caption: prefer parent figure's figcaption
+      let caption = '';
+      const figure = img.closest('figure');
+      if (figure) {
+        const fc = figure.querySelector('figcaption');
+        if (fc) caption = fc.innerHTML;
+      }
+      // Fallback to alt text
+      if (!caption && img.alt) caption = '<span style="font-style:italic;">' + img.alt + '</span>';
+      openImageLightbox(img.src, caption, img.alt || '');
+    });
+    img.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        img.click();
+      }
+    });
+  });
+}
+
+function openImageLightbox(src, captionHTML, altText) {
+  // Lazy-create lightbox container the first time it's needed
+  let lb = document.getElementById('fl-image-lightbox');
+  if (!lb) {
+    lb = document.createElement('div');
+    lb.id = 'fl-image-lightbox';
+    lb.className = 'fl-image-lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Image enlargement');
+    lb.innerHTML = `
+      <button class="fl-lightbox-close" onclick="closeImageLightbox()" aria-label="Close enlarged image">×</button>
+      <div class="fl-lightbox-inner" onclick="closeImageLightbox()">
+        <img class="fl-lightbox-img" alt="" onclick="event.stopPropagation()">
+        <div class="fl-lightbox-caption" onclick="event.stopPropagation()"></div>
+      </div>
+    `;
+    document.body.appendChild(lb);
+  }
+  lb.querySelector('.fl-lightbox-img').src = src;
+  lb.querySelector('.fl-lightbox-img').alt = altText || '';
+  lb.querySelector('.fl-lightbox-caption').innerHTML = captionHTML || '';
+  // Hide caption block if empty
+  lb.querySelector('.fl-lightbox-caption').style.display = captionHTML ? 'block' : 'none';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeImageLightbox() {
+  const lb = document.getElementById('fl-image-lightbox');
+  if (!lb) return;
+  lb.classList.remove('open');
+  // Re-lock scroll if article modal is still open
+  if (document.getElementById('modal').classList.contains('open')) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
 }
 
 function renderArticleMap(a) {
@@ -2381,6 +2468,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
+    // If lightbox is open, close that first (don't dismiss the underlying article)
+    const lb = document.getElementById('fl-image-lightbox');
+    if (lb && lb.classList.contains('open')) {
+      closeImageLightbox();
+      return;
+    }
     closeArticle();
     closeEvent();
     closeWeather();
