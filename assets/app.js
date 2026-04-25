@@ -3183,7 +3183,7 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
 
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ON THIS DAY IN PENSACOLA
+// PENSACOLA NOTEBOOK (formerly On This Day in Pensacola)
 // ─────────────────────────────────────────────────────────────────────────────
 (function() {
   // Keyed by MM-DD, entries: { text, articleId (optional) }
@@ -3192,13 +3192,16 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
     '01-01': { text: 'Pensacola, founded 1559, was the first multi-year European settlement in what is now the continental United States — predating St. Augustine by six years.', articleId: 'history-galvez' },
     '01-08': { text: 'NAS Pensacola was commissioned in 1914 — the first naval air station in the United States. Today the base trains every Navy, Marine, and Coast Guard aviator.', articleId: null },
     '01-10': { text: 'In 1861, Florida became the third state to secede from the Union. Fort Pickens, on Santa Rosa Island, remained in Union hands throughout the Civil War.', articleId: null },
+    '01-21': { text: 'In 1985, Pensacola recorded its all-time low temperature of 5°F — one of only three occasions in city history when single-digit temperatures have been observed.', articleId: null },
 
     // ─── FEBRUARY ───
     '02-14': { text: 'Pensacola hosts Pensacon each February — a four-day comic and pop-culture convention drawing nearly 25,000 attendees from around the world.', articleId: null },
+    '02-19': { text: 'In 2009, King Juan Carlos I and Queen Sofia of Spain visited Pensacola to celebrate the city\'s 450th anniversary, praising the shared history between Spain and the United States.', articleId: null },
     '02-22': { text: 'In 1819, Spain and the United States signed the Adams-Onís Treaty, transferring Florida — and Pensacola — to American control.', articleId: null },
     '02-27': { text: 'In 1880, the Louisville & Nashville Railroad bought the Pensacola Railroad, accelerating the city\'s late-19th-century lumber boom.', articleId: null },
 
     // ─── MARCH ───
+    '03-05': { text: 'In 1822, the Florida Territorial Legislative Council convened in Pensacola — making the city the temporary capital of Florida Territory before the seat of government was relocated to Tallahassee in 1824.', articleId: null },
     '03-09': { text: 'In 1822, Pensacola was officially incorporated as a city under U.S. territorial rule — making it one of Florida\'s oldest municipal governments.', articleId: null },
     '03-16': { text: 'In 1561, Spanish explorer Villafane arrived at Pensacola Bay leading a relief expedition for Tristán de Luna\'s storm-shattered settlement — too late to save it.', articleId: null },
     '03-18': { text: 'In 1781, Bernardo de Gálvez sailed alone into Pensacola Bay under British cannon fire — forcing the rest of his fleet to follow. Pensacola surrendered to Spain 61 days later.', articleId: 'history-galvez' },
@@ -3209,17 +3212,21 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
     '04-04': { text: 'The Blue Wahoos play their home opener around this time each spring at Blue Wahoos Stadium — consistently ranked one of the best minor-league ballparks in the country.', articleId: 'wahoos' },
     '04-07': { text: 'Bands on the Beach returns to Gulfside Pavilion on Pensacola Beach each spring — a free Tuesday-night concert series that runs through October.', articleId: null },
     '04-09': { text: 'In 1561, Villafane was named governor of Spanish Florida after the disaster of Luna\'s Pensacola colony.', articleId: null },
+    '04-15': { text: 'In 1781, Spanish forces under Bernardo de Gálvez began the formal Siege of Pensacola — a 61-day campaign that would end British rule of West Florida and return the colony to Spain.', articleId: 'history-galvez' },
     '04-20': { text: 'In 2010, the Deepwater Horizon oil rig exploded in the Gulf of Mexico, leaking millions of barrels of crude. Pensacola Beach was among the shores most heavily impacted by tar and sheen.', articleId: null },
+    '04-26': { text: 'The Flora-Bama Mullet Toss takes place each spring at the Florida-Alabama state line — contestants compete to throw a dead mullet from one state into the other for distance.', articleId: null },
 
     // ─── MAY ───
     '05-09': { text: 'In 1862, Confederate forces evacuated the Pensacola Lighthouse during the Civil War, and the tower returned to Union control. Six artillery rounds had struck the structure but none penetrated the wall.', articleId: null },
     '05-10': { text: 'In 1781, Pensacola surrendered to Spain after a 61-day siege — ending British West Florida for good and returning the colony to Spanish control until 1821.', articleId: 'history-galvez' },
+    '05-12': { text: 'In 1862, Confederate General Braxton Bragg evacuated Pensacola, abandoning the city to Union forces. Most of Pensacola was burned in the days that followed; residents had already fled inland to Greenville, Alabama.', articleId: null },
     '05-14': { text: 'In 1719, French forces under Bienville captured Pensacola from Spain. France held the city only until a 1722 hurricane forced them out.', articleId: null },
     '05-25': { text: 'In 1868, Florida was readmitted to the Union three years after the end of the Civil War. Pensacola began rebuilding around the lumber and railroad economy.', articleId: null },
 
     // ─── JUNE ───
     '06-01': { text: 'Atlantic hurricane season opens June 1 — the start of a six-month window that historically brings most of the Gulf Coast\'s named storms.', articleId: 'hurricane-prep' },
     '06-11': { text: 'In 1559, members of Tristán de Luna\'s expedition embarked from Vera Cruz, Mexico, bound for Pensacola Bay — beginning what would become the first multi-year European colony in the continental U.S.', articleId: null },
+    '06-13': { text: 'In 1694, the Spanish Crown formally endorsed the establishment of a permanent settlement at Pensacola Bay — though King William\'s War in Europe would delay actual settlement until 1698.', articleId: null },
     '06-17': { text: 'In 1891, Pensacola dedicated Lee Square — formerly Florida Park — in memory of Confederate dead. The square still anchors the city\'s North Hill historic district.', articleId: null },
     '06-20': { text: 'In 1899, gunpowder stored at Fort Pickens exploded, destroying an entire bastion of the historic Civil War-era fort on Santa Rosa Island.', articleId: null },
     '06-30': { text: 'Each summer the city ramps up Pensacola Beach lifeguard staffing as visitor counts climb. The beach attracts more than 4 million visitors annually.', articleId: null },
@@ -3243,16 +3250,21 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
     // ─── OCTOBER ───
     '10-05': { text: 'In 1995, Hurricane Opal made landfall near Pensacola Beach as a strong Category 3 storm — destroying piers, dunes and beachfront property along Santa Rosa Island.', articleId: null },
     '10-12': { text: 'The Pensacola Interstate Fair runs each October at the fairgrounds off Mobile Highway — a regional tradition since 1935.', articleId: null },
+    '10-22': { text: 'In 1774, the British colony of West Florida received a letter from the Continental Congress in Philadelphia inviting representatives to join the cause for independence — but Loyalist Governor Peter Chester suppressed the letter, keeping Pensacola in British hands during the Revolutionary War.', articleId: null },
     '10-25': { text: 'The Great Gulfcoast Arts Festival takes place in early November in Seville Square, drawing more than 200 regional and international artists to historic downtown.', articleId: null },
+    '10-31': { text: 'In 1905, the Great Halloween Night Fire destroyed multiple downtown Pensacola buildings — leading to the construction of the larger Blount Building and Brent Building that still anchor Palafox Place today.', articleId: null },
 
     // ─── NOVEMBER ───
+    '11-05': { text: 'In 1915, a military aircraft was test-launched by catapult from the deck of the USS North Carolina in Pensacola Bay — an early test of what would become standard naval aviation practice. NAS Pensacola has been called the Cradle of Naval Aviation ever since.', articleId: null },
     '11-07': { text: 'In 1814, Andrew Jackson attacked Spanish-held Pensacola during the War of 1812 — dislodging British forces who had been allowed to occupy the city.', articleId: null },
     '11-09': { text: 'In 1873, U.S. Senator Stephen R. Mallory — Confederate Secretary of the Navy and longtime Pensacola statesman — died in the city.', articleId: null },
     '11-22': { text: 'In 1861, a two-day Civil War artillery battle erupted across Pensacola Bay between Union-held Fort Pickens and the Confederate-held mainland forts.', articleId: null },
 
     // ─── DECEMBER ───
+    '12-06': { text: 'In 2019, a Saudi military trainee opened fire at NAS Pensacola, killing three U.S. sailors and wounding eight others. The FBI later classified the attack as an act of terrorism, prompting a national review of foreign military training programs.', articleId: null },
     '12-07': { text: 'In 1941, the attack on Pearl Harbor brought the U.S. into World War II — and transformed NAS Pensacola from a regional training base into the central pilot pipeline for the entire war effort.', articleId: null },
     '12-15': { text: 'The Winterfest carriage tours run through downtown Pensacola each December — a holiday tradition pairing actors and music in front of historic North Hill homes.', articleId: null },
+    '12-20': { text: 'In 1698, the Spanish established Presidio Santa Maria de Galve at Pensacola Bay near present-day Fort Barrancas — beginning the permanent European-dominated settlement of modern Pensacola, after a 137-year gap since Luna\'s 1559 colony was abandoned.', articleId: null },
     '12-31': { text: 'The Pelican Drop ran each New Year\'s Eve from 2008 to 2018 in downtown Pensacola — an aluminum pelican lowered in place of the traditional ball, drawing crowds of up to 50,000.', articleId: null },
   };
 
@@ -3261,17 +3273,26 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
 
   const now = new Date();
   const key = String(now.getMonth() + 1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
-  const entry = ON_THIS_DAY[key];
 
-  if (entry) {
-    const linkHtml = entry.articleId
-      ? `<a href="javascript:void(0)" onclick="openArticle('${entry.articleId}')" style="font-family:'DM Sans';font-size:9px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:block;margin-top:7px;">Read the story →</a>`
-      : '';
-    body.innerHTML = `<div style="font-size:11px;line-height:1.55;color:rgba(255,255,255,0.75);">${entry.text}</div>${linkHtml}`;
-  } else {
-    // Fallback — always show something
-    body.innerHTML = `<div style="font-size:11px;line-height:1.55;color:rgba(255,255,255,0.75);">Pensacola was first settled by Spanish colonists in 1559 — making it the oldest European settlement site in the continental United States.</div><a href="javascript:void(0)" onclick="openArticle('history-galvez')" style="font-family:'DM Sans';font-size:9px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:block;margin-top:7px;">Read the story →</a>`;
+  // Hybrid mode: dated entry today if available, otherwise random fact from archive
+  let entry = ON_THIS_DAY[key];
+  let isFromArchive = false;
+  if (!entry) {
+    const allKeys = Object.keys(ON_THIS_DAY);
+    // Daily-stable random: same fact appears all day, rotates by date
+    const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+    const randomKey = allKeys[dayOfYear % allKeys.length];
+    entry = ON_THIS_DAY[randomKey];
+    isFromArchive = true;
   }
+
+  const eyebrow = isFromArchive
+    ? `<div style="font-family:'DM Sans';font-size:8px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;opacity:0.85;">From the archive</div>`
+    : '';
+  const linkHtml = entry.articleId
+    ? `<a href="javascript:void(0)" onclick="openArticle('${entry.articleId}')" style="font-family:'DM Sans';font-size:9px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:block;margin-top:7px;">Read the story →</a>`
+    : '';
+  body.innerHTML = `${eyebrow}<div style="font-size:11px;line-height:1.55;color:rgba(255,255,255,0.75);">${entry.text}</div>${linkHtml}`;
 })();
 
 // ─────────────────────────────────────────────────────────────────────────────
