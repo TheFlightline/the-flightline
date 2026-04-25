@@ -2166,13 +2166,49 @@ Object.assign(A, {
   ],
   body: `<p class="article-lede">A clearer picture of what the Pensacola Bay Center could become emerged April 16 after city and county elected officials spent two hours in open discussion at the 41-year-old downtown arena, working through competing visions for a redevelopment estimated to cost roughly $189 million.</p>
 
+<div class="source-docs" style="background:#f4f1ea;border:1px solid #e1d9c5;border-left:3px solid var(--gold);border-radius:6px;padding:14px 18px;margin:20px 0;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.55;color:var(--g1);">
+  <div style="font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);margin-bottom:8px;">Source documents</div>
+  <ul style="margin:0;padding-left:18px;">
+    <li style="margin-bottom:5px;"><a href="https://www.cityofpensacola.com/CivicAlerts.aspx?AID=5026" target="_blank" rel="noopener noreferrer" style="color:var(--navy);font-weight:600;">City of Pensacola press release announcing the April 16 joint meeting</a></li>
+    <li style="margin-bottom:5px;"><a href="https://escambiacofl.portal.civicclerk.com" target="_blank" rel="noopener noreferrer" style="color:var(--navy);font-weight:600;">Escambia County Board of County Commissioners agenda portal</a> (CivicClerk)</li>
+    <li><a href="https://www.youtube.com/@EscambiaCountyFL" target="_blank" rel="noopener noreferrer" style="color:var(--navy);font-weight:600;">Escambia County YouTube channel</a> — workshop livestream archive</li>
+  </ul>
+</div>
+
 <p>The joint workshop, held at 9 a.m. inside the Bay Center itself, brought together the Escambia County Board of County Commissioners, the Pensacola City Council and Mayor D.C. Reeves. Legends Global, the venue management firm that operates the Bay Center under contract with the county, presented its Plan for the Future. WT Partnership, a separate consultant retained for the work, presented a Pensacola Convention Center Analysis. The session was a workshop, meaning no votes were taken and no public comment was scheduled.</p>
 
 <p>What the elected officials heard, broadly, was a three-part proposal. Legends Global laid out roughly $71 million in renovations to the existing Bay Center arena — the most certain component, likely to move forward in some form regardless of how the rest shakes out. A separate flexible event center, intended to host a wider range of conventions, mid-size concerts and youth sports tournaments, was presented as a second component with scope still under design. A new ice rink, identified as critical to retaining the Pensacola Ice Flyers and growing youth hockey, was the third component, with Legends indicating private financing would likely cover its roughly $30 million cost.</p>
 
+<div class="fl-statstrip" role="group" aria-label="Bay Center redevelopment by the numbers" style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#e5e7eb;margin:32px -2px;border-radius:6px;overflow:hidden;">
+  <div class="fl-stat" style="background:#0f1e35;padding:22px 16px 18px;text-align:left;">
+    <div class="fl-stat-num" style="font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:#ffffff;letter-spacing:0.01em;">$189M</div>
+    <div class="fl-stat-label" style="margin-top:8px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.05em;line-height:1.4;color:rgba(255,255,255,0.65);text-transform:uppercase;">Estimated total project cost</div>
+  </div>
+  <div class="fl-stat" style="background:#0f1e35;padding:22px 16px 18px;text-align:left;">
+    <div class="fl-stat-num" style="font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:#ffffff;letter-spacing:0.01em;">$71M</div>
+    <div class="fl-stat-label" style="margin-top:8px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.05em;line-height:1.4;color:rgba(255,255,255,0.65);text-transform:uppercase;">Arena renovations (most certain component)</div>
+  </div>
+  <div class="fl-stat" style="background:#0f1e35;padding:22px 16px 18px;text-align:left;">
+    <div class="fl-stat-num" style="font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:#ffffff;letter-spacing:0.01em;">$30M</div>
+    <div class="fl-stat-label" style="margin-top:8px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.05em;line-height:1.4;color:rgba(255,255,255,0.65);text-transform:uppercase;">Ice rink (private financing expected)</div>
+  </div>
+  <div class="fl-stat" style="background:#0f1e35;padding:22px 16px 18px;text-align:left;">
+    <div class="fl-stat-num" style="font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:#ffffff;letter-spacing:0.01em;">123</div>
+    <div class="fl-stat-label" style="margin-top:8px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.05em;line-height:1.4;color:rgba(255,255,255,0.65);text-transform:uppercase;">Annual events at the venue</div>
+  </div>
+  <div class="fl-stat" style="background:#0f1e35;padding:22px 16px 18px;text-align:left;">
+    <div class="fl-stat-num" style="font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:#ffffff;letter-spacing:0.01em;">352K</div>
+    <div class="fl-stat-label" style="margin-top:8px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.05em;line-height:1.4;color:rgba(255,255,255,0.65);text-transform:uppercase;">Annual attendance (12-month period)</div>
+  </div>
+</div>
+<div class="fl-statstrip-caption" style="margin:-22px 0 32px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#9ca3af;">Source: Legends Global Pensacola Bay Center Plan for the Future, presented April 16, 2026</div>
+
 <p>The conversation that followed covered familiar ground for anyone who has watched the venue debate over the past three years. Council President Allison Patton emphasized convention space as a tool for business attraction. District 1 County Commissioner Steve Stroberger said his preference was for sports tourism. Councilwoman Jennifer Brahier raised parking and transportation, citing Old Town Alexandria's trolley network as a model and noting that USDOT transportation grants can fund parking infrastructure. Councilman Charles Bare called parking his single biggest concern. District 3 Commissioner Lumon May questioned whether downtown is the right home for a youth sports tourism complex, citing successful regional examples in Hoover, Alabama and elsewhere built away from bar and entertainment districts.</p>
 
-<p>"We've been doing this for a year. I'm in favor of doing something sooner than later," District 4 Commissioner Mike Kohler said.</p>
+<aside class="fl-pullquote" style="margin:36px 0;padding:24px 26px 26px;background:#fefcf6;border-left:4px solid var(--gold);border-radius:0 8px 8px 0;">
+  <p class="fl-pullquote-text" style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:24px;line-height:1.35;color:#1e2d4a;letter-spacing:-0.005em;margin:0;">"We've been doing this for a year. I'm in favor of doing something sooner than later."</p>
+  <span class="fl-pullquote-attr" style="display:block;margin-top:14px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#9ca3af;">— Mike Kohler, District 4 Commissioner</span>
+</aside>
 
 <p>The Bay Center, which opened in 1985 at 201 E. Gregory St., has a capacity of 8,050 for hockey and 10,000 with a center stage. It currently averages 123 annual events and 352,700 in attendance. The arena is owned and funded by Escambia County but sits within Pensacola city limits, meaning major redevelopment requires both bodies to align.</p>
 
