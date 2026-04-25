@@ -2302,6 +2302,7 @@ Object.assign(A, {
 
 "uwf-southern-illinois-opener": {
   cat: "sports",
+  event: { label: "Football", title: "UWF vs. Southern Illinois — D-I Home Opener", date: "August 27, 2026", time: "6:00 PM", venue: "Pen Air Field, UWF campus", desc: "UWF's first home game as an NCAA Division I FCS program. Kickoff against Southern Illinois opens a home-and-home series with the Salukis.", color: "#0e3050" },
   label: "Sports",
   thumbnail: "/images/PenAir-Field-Zoom-1920x1080.jpeg",
   headline: "UWF Will Open Its Division I Football Era Against Southern Illinois on Aug. 27 at Pen Air Field",
@@ -2621,10 +2622,6 @@ Object.assign(A, {
 
 "reeves-town-hall-may-june": {
   cat: "govt",
-  event: [
-    { label: "Town Hall", title: "Mayor's Town Hall — District 5", date: "May 14, 2026", time: "6:00 PM", endTime: "7:30 PM", venue: "Cobb Resource Center, 601 E Mallory St", desc: "Mayor D.C. Reeves and city department directors host a community town hall in District 5. Format: department updates and resident Q&A.", url: "https://www.cityofpensacola.com/events" },
-    { label: "Town Hall", title: "Mayor's Town Hall — District 7", date: "June 11, 2026", time: "6:00 PM", endTime: "7:30 PM", venue: "Bayview Community Center, 2001 E Lloyd St", desc: "Mayor D.C. Reeves and city department directors host a community town hall in District 7.", url: "https://www.cityofpensacola.com/events" }
-  ],
   label: "City Government",
   thumbnail: "/images/govt_public-hearing_009.jpg",
   headline: "Mayor Reeves Announces Spring and Summer Town Hall Schedule Across Pensacola Council Districts",
