@@ -834,6 +834,20 @@
   @media(max-width:960px){.hero-section{grid-template-columns:1fr}.hero-side{display:none}.content-grid{grid-template-columns:1fr}.three-col{grid-template-columns:1fr 1fr}.events-cards{grid-template-columns:1fr 1fr}.opinion-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.main-nav{display:none}.hamburger{display:flex}.logo-name{font-size:40px}.topbar{display:none}.content-grid{display:flex;flex-direction:column}.content-grid>div:first-child{order:2}.content-grid>aside{order:1}}
   @media(max-width:600px){.three-col{grid-template-columns:1fr}.events-cards{grid-template-columns:1fr}.article-card{flex-direction:column}.article-card-image{width:100%;height:150px}.footer-grid{grid-template-columns:1fr 1fr;gap:16px}.footer-logo-row{flex-direction:column;align-items:flex-start;gap:8px}.hero-body{padding:14px 14px 18px}.header-inner{padding:0 14px;gap:12px}.logo-name{font-size:32px}.logo-the,.logo-geo{display:none}.newsletter-tiers{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr}.about-team{grid-template-columns:1fr 1fr}.static-form-row{grid-template-columns:1fr}.comm-cal-wrap{padding:20px 12px 40px}.comm-cal-nav{gap:8px}.comm-cal-month-label{font-size:16px}.comm-cal-cell{min-height:52px;padding:4px}.comm-cal-event-pip{font-size:9px;padding:1px 3px}.comm-cal-filters{gap:6px}.comm-cal-filter{font-size:9px;padding:4px 8px}.comm-cal-nav-btn{padding:6px 10px;font-size:12px}.comm-cal-view-toggle{display:none}}
   @media(max-width:400px){.logo-name{font-size:26px}.logo-bars{display:none}}
+
+  /* MOBILE OVERFLOW SAFETY — lock x-axis, contain stray bleed at all narrow widths */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+  @media(max-width:600px) {
+    .container { padding-left: 14px; padding-right: 14px; }
+    /* Mobile hero strip: stack vertically below ~430px to avoid 2-col cramping */
+    .mobile-hero-hed { font-size: 12px; }
+    .mobile-hero-body { padding: 7px 8px 9px; }
+    .mobile-hero-body .cat-badge { font-size: 8px; padding: 2px 4px; }
+  }
+  @media(max-width:430px) {
+    .mobile-hero-strip { grid-template-columns: 1fr !important; }
+    .mobile-hero-img { aspect-ratio: 16/9; }
+  }
   /* Mobile article modal fixes */
   @media(max-width:640px){
     .modal-close { top:12px; right:12px; width:40px; height:40px; font-size:17px; }

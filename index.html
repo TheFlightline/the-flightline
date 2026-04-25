@@ -94,7 +94,7 @@
   <div class="hero-section">
     <div class="hero-main" onclick="openArticle('op-reverb-rebate')">
       <div class="hero-image-wrap">
-        <img src="/images/downtown_pensacola-maritime-park_006.jpg" alt="Community Maritime Park">
+        <img src="/images/reverb-aerial-dusk.jpg" alt="Aerial dusk rendering of the proposed Hard Rock hotel and Rhythm Lofts tower at Community Maritime Park, Pensacola">
       </div>
       <div class="hero-body">
         <span class="cat-badge cat-opinion">Editorial</span>
@@ -177,7 +177,7 @@
 
           <div class="article-card" data-nbhd="downtown" onclick="openArticle('20260404-sunshine-escambia-county-pensacolas')">
             <div class="article-card-text">
-              <span class="cat-badge cat-govt" style="background:var(--gold);color:#fff;">✦ Government in the Sunshine</span>
+              <span class="cat-badge cat-govt" style="background:var(--gold);color:#fff;">✦ Let the Sunshine In</span>
               <div class="headline-lg">In the Sunshine: What Escambia's Elected Officials Actually Earn</div>
               <div class="dek">All 41 elected and appointed officials — confirmed salaries, sources, and analysis. Florida's transparency law was championed by a Pensacola native. We're using it.</div>
               <div class="byline">By <span>The Flightline Staff</span> · April 4, 2026 · 8 min read</div>
@@ -267,7 +267,7 @@
       <!-- PUBLIC PAY SPOTLIGHT -->
       <div class="pay-spotlight" onclick="goPage('pay')">
         <div class="pay-spotlight-header">
-          <span class="pay-spotlight-eyebrow">✦ Government in the Sunshine</span>
+          <span class="pay-spotlight-eyebrow">✦ Let the Sunshine In</span>
           <span class="pay-spotlight-cta">Full dashboard &amp; search →</span>
         </div>
         <div class="pay-spotlight-body">
@@ -493,9 +493,9 @@
 <!-- SIDEBAR -->
     <aside>
       <!-- HURRICANE SEASON SIDEBAR WIDGET -->
-      <div style="position:relative;padding-top:13px;margin-bottom:20px;cursor:pointer;" onclick="openArticle('20260403-hurricane-season-58-days')">
-        <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-family:'DM Sans',sans-serif;font-size:8px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;padding:4px 14px;border-radius:999px;white-space:nowrap;z-index:1;">🌀 Hurricane Season</div>
-        <div style="background:#1e2d4a;border-radius:16px;padding:16px 14px 12px;overflow:hidden;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.92'" onmouseout="this.style.opacity='1'">
+      <div style="position:relative;padding-top:13px;margin-bottom:20px;cursor:pointer;-webkit-tap-highlight-color:rgba(212,149,43,0.15);" onclick="openArticle('20260403-hurricane-season-58-days')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openArticle('20260403-hurricane-season-58-days');}">
+        <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-family:'DM Sans',sans-serif;font-size:8px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;padding:4px 14px;border-radius:999px;white-space:nowrap;z-index:1;pointer-events:none;">🌀 Hurricane Season</div>
+        <div style="background:#1e2d4a;border-radius:16px;padding:16px 14px 12px;overflow:hidden;transition:opacity 0.15s;cursor:pointer;" onmouseover="this.style.opacity='0.92'" onmouseout="this.style.opacity='1'">
           <div style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px;">Atlantic Season Opens</div>
           <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:white;line-height:1;margin-bottom:12px;">June 1, 2026</div>
           <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:10px;">
@@ -576,7 +576,7 @@
             <button class="traffic-origin-tab active" data-origin-key="downtown" onclick="setTrafficOrigin('downtown',this)">Downtown</button>
             <button class="traffic-origin-tab" data-origin-key="nas" onclick="setTrafficOrigin('nas',this)">NAS Gate</button>
             <button class="traffic-origin-tab" data-origin-key="airport" onclick="setTrafficOrigin('airport',this)">Airport</button>
-            <button class="traffic-origin-tab" data-origin-key="beulah" onclick="setTrafficOrigin('beulah',this)">Beulah</button>
+            <button class="traffic-origin-tab" data-origin-key="uwf" onclick="setTrafficOrigin('uwf',this)">UWF</button>
           </div>
 
           <!-- Route rows — clickable → Google Maps -->
@@ -727,6 +727,13 @@
   <div class="container">
     <div class="static-page-wrap">
       <button class="static-page-back" onclick="goHome()">← Back to Home</button>
+      <div style="background:linear-gradient(135deg,rgba(212,149,43,0.12) 0%,rgba(212,149,43,0.05) 100%);border:1px solid rgba(212,149,43,0.35);border-left:4px solid var(--gold);border-radius:6px;padding:14px 18px 12px;margin:0 0 22px;display:flex;align-items:center;gap:14px;">
+        <div style="font-size:24px;line-height:1;">🚧</div>
+        <div>
+          <div style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:13px;letter-spacing:0.04em;color:var(--navy);text-transform:uppercase;margin-bottom:3px;">Subscriptions Coming Soon</div>
+          <div style="font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5;color:var(--g1);">We're building it. Sign-ups aren't live and no payments are being collected. The tiers below are previews of what's coming.</div>
+        </div>
+      </div>
       <div class="static-page-label">Support Local Journalism</div>
       <div class="static-page-title">Subscribe to The Flightline</div>
       <div class="static-page-intro">The Flightline is Pensacola's independent hyperlocal news source. No corporate ownership. No out-of-town editorial board. Just straight coverage of the city — government, development, culture, and the things that actually affect your daily life here. Your subscription keeps it running.</div>
@@ -783,7 +790,7 @@
         <p>Pensacola deserves a news source that covers city hall like it matters — because it does. Every commission vote, zoning decision, school board fight, and budget battle affects people's lives. The Flightline shows up so you don't have to.</p>
         <p>We cover Escambia County, Santa Rosa County, Pensacola Beach, and the surrounding communities. We write about development, military, culture, and the Gulf Coast economy. And we write editorials when the situation calls for it.</p>
         <h3>Questions?</h3>
-        <p>Email us at <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e38b868f8f8ca3978b86858f8a848b978f8a8d86cd808c8e">[email&#160;protected]</a></strong> or find us on social media. We read everything.</p>
+        <p>Email us at <strong><a href="mailto:hello@theflightline.com" style="color:var(--navy);text-decoration:underline;">hello@theflightline.com</a></strong> or find us on social media. We read everything.</p>
       </div>
     </div>
   </div>
@@ -843,7 +850,7 @@
       <div class="static-page-intro">The Flightline is an independent hyperlocal news publication covering Pensacola and the surrounding Gulf Coast communities. We launched because Pensacola deserves journalism that takes the city seriously — not wire copy, not aggregated content, not a skeletal bureau filing three stories a week. Real coverage, by people who live here.</div>
 
       <div class="about-grid">
-        <div class="about-stat"><div class="about-stat-num">18</div><div class="about-stat-label">Stories published this week</div></div>
+        <div class="about-stat"><div class="about-stat-num" id="about-stat-stories-2026">—</div><div class="about-stat-label">Stories published since Jan 1, 2026</div></div>
         <div class="about-stat"><div class="about-stat-num">100%</div><div class="about-stat-label">Locally owned &amp; operated</div></div>
       </div>
 
@@ -870,8 +877,8 @@
         <p>We have an editorial board that writes opinion pieces under The Flightline's name. When we editorialize, we label it clearly. News coverage and opinion are kept separate.</p>
 
         <h3>Get in touch</h3>
-        <p>Tips, story ideas, corrections, and letters to the editor: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bbd3ded7d7d4fbcfd3deddd7d2dcd3cfd7d2d5de95d8d4d6">[email&#160;protected]</a></strong></p>
-        <p>Advertising inquiries: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0c6d687a697e78657f65626b4c7864696a60656b647860656269226f6361">[email&#160;protected]</a></strong></p>
+        <p>Tips, story ideas, corrections, and letters to the editor: <strong><a href="mailto:hello@theflightline.com" style="color:var(--navy);text-decoration:underline;">hello@theflightline.com</a></strong></p>
+        <p>Advertising inquiries: <strong><a href="mailto:advertising@theflightline.com" style="color:var(--navy);text-decoration:underline;">advertising@theflightline.com</a></strong></p>
       </div>
 
       <div class="static-form" style="margin-top:32px;">
@@ -1073,7 +1080,7 @@
         <p>If you have documents — public records, contracts, correspondence, budgets, permits — include them. We handle all materials with discretion.</p>
         <h3>Source protection</h3>
         <p>We take source protection seriously. We will not identify you without your explicit consent. If you have concerns about security or traceability, contact us via Signal or ProtonMail at the address below before submitting sensitive materials.</p>
-        <p>For highly sensitive matters: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="26524f565566524e43404a4f414e524a4f48430845494b">[email&#160;protected]</a></strong> (ProtonMail compatible)</p>
+        <p>For highly sensitive matters: <strong><a href="mailto:tips@theflightline.com" style="color:var(--navy);text-decoration:underline;">tips@theflightline.com</a></strong> (ProtonMail compatible)</p>
       </div>
       <div class="static-form" style="margin-top:8px;">
         <div class="static-form-title">Send a Tip</div>
@@ -1111,7 +1118,7 @@
         <h3>Our editorial wall</h3>
         <p>Advertising revenue supports The Flightline's reporting. It does not influence our editorial decisions. Advertisers cannot request coverage, request that stories be withheld, or influence the direction of our news operation. If any advertiser attempted this, we would report it.</p>
         <h3>Get in touch</h3>
-        <p>Send advertising inquiries to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86e7e2f0e3f4f2eff5efe8e1c6f2eee3e0eaefe1eef2eaefe8e3a8e5e9eb">[email&#160;protected]</a></strong>. We'll respond within two business days with a current rate card and availability.</p>
+        <p>Send advertising inquiries to <strong><a href="mailto:advertising@theflightline.com" style="color:var(--navy);text-decoration:underline;">advertising@theflightline.com</a></strong>. We'll respond within two business days with a current rate card and availability.</p>
       </div>
       <div class="static-form" style="margin-top:8px;">
         <div class="static-form-title">Advertising Inquiry</div>
@@ -1159,9 +1166,9 @@
         <h3>What we do not do</h3>
         <p>We do not sell personal information. We do not share subscriber data with advertisers. We do not use tracking pixels or behavioral advertising. We do not retain data longer than necessary for the stated purpose.</p>
         <h3>Your rights</h3>
-        <p>You may request deletion of your personal information at any time by emailing <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cfbfbda6b9aeacb68fbba7aaa9a3a6a8a7bba3a6a1aae1aca0a2">[email&#160;protected]</a></strong>. Newsletter subscribers can unsubscribe via the link in any email. Paid subscribers can cancel via their account settings.</p>
+        <p>You may request deletion of your personal information at any time by emailing <strong><a href="mailto:privacy@theflightline.com" style="color:var(--navy);text-decoration:underline;">privacy@theflightline.com</a></strong>. Newsletter subscribers can unsubscribe via the link in any email. Paid subscribers can cancel via their account settings.</p>
         <h3>Contact</h3>
-        <p>Privacy questions: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6616140f1007051f26120e03000a0f010e120a0f08034805090b">[email&#160;protected]</a></strong>. We respond to all requests within five business days.</p>
+        <p>Privacy questions: <strong><a href="mailto:privacy@theflightline.com" style="color:var(--navy);text-decoration:underline;">privacy@theflightline.com</a></strong>. We respond to all requests within five business days.</p>
         <p><em>Last updated: April 2026</em></p>
       </div>
     </div>
@@ -1182,7 +1189,7 @@
         <h3>User conduct</h3>
         <p>You agree not to use the site for unlawful purposes. Comments, letter submissions, and tip submissions must not contain defamatory content, threats, or material that violates the rights of others. We reserve the right to remove content that violates these standards and to ban users who do so repeatedly.</p>
         <h3>Subscriptions and payments</h3>
-        <p>Paid subscriptions are billed monthly or annually as selected. You may cancel at any time. Cancellation takes effect at the end of the current billing period — we do not provide partial refunds. If you believe a billing error has occurred, contact us at <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a0d3d5d0d0cfd2d4e0d4c8c5c6ccc9c7c8d4ccc9cec58ec3cfcd">[email&#160;protected]</a></strong> within 30 days.</p>
+        <p>Paid subscriptions are billed monthly or annually as selected. You may cancel at any time. Cancellation takes effect at the end of the current billing period — we do not provide partial refunds. If you believe a billing error has occurred, contact us at <strong><a href="mailto:support@theflightline.com" style="color:var(--navy);text-decoration:underline;">support@theflightline.com</a></strong> within 30 days.</p>
         <h3>Disclaimers</h3>
         <p>The Flightline reports factual information to the best of our ability. We correct errors promptly when identified. Content published as opinion is labeled as such and does not represent factual claims. We are not liable for actions taken based on information published on this site.</p>
         <h3>Changes to terms</h3>
@@ -1203,12 +1210,12 @@
       <div class="static-page-intro">We're a small operation and we read everything. Whether you have a tip, a correction, a question, or a complaint — reach out. We respond to most messages within one business day.</div>
       <div class="static-page-body">
         <h3>By topic</h3>
-        <p><strong>News tips and story ideas:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f4809d8487b4809c9192989d939c80989d9a91da979b99">[email&#160;protected]</a></p>
-        <p><strong>Letters to the editor:</strong> Use the letters form or email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f131a0b0b1a0d0c3f0b171a19131618170b1316111a511c1012">[email&#160;protected]</a></p>
-        <p><strong>Corrections:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcbfb3aeaeb9bfa8b5b3b2af9ca8b4b9bab0b5bbb4a8b0b5b2b9f2bfb3b1">[email&#160;protected]</a> — corrections are our highest editorial priority</p>
-        <p><strong>Advertising:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="056461736077716c766c6b6245716d6063696c626d71696c6b602b666a68">[email&#160;protected]</a></p>
-        <p><strong>Subscription support:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="45363035352a373105312d2023292c222d31292c2b206b262a28">[email&#160;protected]</a></p>
-        <p><strong>Everything else:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3aba6afafac83b7aba6a5afaaa4abb7afaaada6eda0acae">[email&#160;protected]</a></p>
+        <p><strong>News tips and story ideas:</strong> <a href="mailto:tips@theflightline.com" style="color:var(--navy);text-decoration:underline;">tips@theflightline.com</a></p>
+        <p><strong>Letters to the editor:</strong> Use the letters form or email <a href="mailto:letters@theflightline.com" style="color:var(--navy);text-decoration:underline;">letters@theflightline.com</a></p>
+        <p><strong>Corrections:</strong> <a href="mailto:corrections@theflightline.com" style="color:var(--navy);text-decoration:underline;">corrections@theflightline.com</a> — corrections are our highest editorial priority</p>
+        <p><strong>Advertising:</strong> <a href="mailto:advertising@theflightline.com" style="color:var(--navy);text-decoration:underline;">advertising@theflightline.com</a></p>
+        <p><strong>Subscription support:</strong> <a href="mailto:support@theflightline.com" style="color:var(--navy);text-decoration:underline;">support@theflightline.com</a></p>
+        <p><strong>Everything else:</strong> <a href="mailto:hello@theflightline.com" style="color:var(--navy);text-decoration:underline;">hello@theflightline.com</a></p>
         <h3>Find us</h3>
         <p>The Flightline is based in Pensacola, Florida. We do not have a public walk-in office at this time. All correspondence is handled by email.</p>
       </div>
@@ -1246,10 +1253,10 @@
 
     <!-- Article header -->
     <div style="max-width:820px;">
-      <span class="cat-badge cat-govt" style="font-size:11px;">✦ Government in the Sunshine</span>
+      <span class="cat-badge cat-govt" style="font-size:11px;">✦ Let the Sunshine In</span>
       <h1 style="font-family:'DM Sans',sans-serif;font-weight:900;font-size:32px;line-height:1.1;color:var(--navy);margin:10px 0 10px;">In the Sunshine: What Escambia County and Pensacola's Elected Officials Actually Earn</h1>
       <p style="font-size:17px;color:var(--g1);line-height:1.6;margin-bottom:10px;">Florida law says every government salary is public record. This database covers elected and appointed officials only — the 41 people chosen or named to govern Escambia County and the City of Pensacola, from city council members to the sheriff. For the full employee roster, use the database links below.</p>
-      <p style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--g2);margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--bd);">By <span style="color:var(--gold);">The Flightline Staff</span> · April 2026 · Part of the Government in the Sunshine</p>
+      <p style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--g2);margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--bd);">By <span style="color:var(--gold);">The Flightline Staff</span> · April 2026 · Part of the Let the Sunshine In</p>
     </div>
 
     <!-- Stat callouts -->

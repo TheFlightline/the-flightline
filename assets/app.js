@@ -458,7 +458,7 @@ function goCategory(cat, page) {
     spotlightHtml = `
     <div onclick="openArticle('${sid}')" style="cursor:pointer;background:var(--navy);border-radius:4px;padding:28px 32px;margin-bottom:28px;display:flex;flex-direction:column;gap:12px;">
       <div style="display:flex;align-items:center;gap:10px;">
-        <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);">☀ Government in the Sunshine</span>
+        <span style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);">☀ Let the Sunshine In</span>
       </div>
       <div style="font-family:'DM Sans',sans-serif;font-weight:900;font-size:26px;line-height:1.1;color:#fff;">${sa.headline}</div>
       <div style="font-size:15px;color:rgba(255,255,255,0.75);line-height:1.55;max-width:680px;">${sa.dek}</div>
@@ -539,8 +539,17 @@ function goAllArticles(filterTag, page) {
   var currentPage = page || 1;
   var perPage = 25;
 
+  // Tag can be a geo (pensacola, downtown, etc) OR a category (cat:govt, cat:military, etc)
+  function matchesTag(id, a, tag) {
+    if (tag === 'all') return true;
+    if (tag.indexOf('cat:') === 0) {
+      return a.cat === tag.slice(4);
+    }
+    return autoTag(id, a) === tag;
+  }
+
   var allFiltered = Object.entries(A)
-    .filter(function(e) { return tag === 'all' || autoTag(e[0], e[1]) === tag; })
+    .filter(function(e) { return matchesTag(e[0], e[1], tag); })
     .sort(function(a,b) { return pubDate(b[0]) - pubDate(a[0]); });
 
   var totalArticles = allFiltered.length;
@@ -551,18 +560,67 @@ function goAllArticles(filterTag, page) {
   var startIdx = (currentPage - 1) * perPage;
   var pageArticles = allFiltered.slice(startIdx, startIdx + perPage);
 
-  var tagNames = { pensacola:'Pensacola', downtown:'Downtown Pensacola', escambia:'Escambia County', beach:'Pensacola Beach', gulfbreeze:'Gulf Breeze' };
+  var tagNames = {
+    pensacola:'Pensacola', downtown:'Downtown Pensacola', escambia:'Escambia County',
+    beach:'Pensacola Beach', gulfbreeze:'Gulf Breeze',
+    'cat:news':'News', 'cat:govt':'Government', 'cat:dev':'Development',
+    'cat:military':'Military', 'cat:sports':'Sports', 'cat:business':'Business',
+    'cat:education':'Education', 'cat:opinion':'Opinion', 'cat:events':'Events'
+  };
   document.getElementById('cat-page-title').textContent = tag === 'all' ? 'Latest' : (tagNames[tag] || tag);
   document.getElementById('cat-page-sub').textContent = totalArticles + (tag === 'all' ? '' : ' of ' + Object.keys(A).length) + ' ' + (totalArticles === 1 ? 'story' : 'stories');
 
-  // Tag filter bar
-  var tags = [['all','All'],['pensacola','Pensacola'],['downtown','Downtown'],['escambia','Escambia County'],['beach','Pensacola Beach'],['gulfbreeze','Gulf Breeze']];
-  var filterHtml = '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;align-items:center;grid-column:1/-1;">';
-  for (var t = 0; t < tags.length; t++) {
-    var isActive = tags[t][0] === tag;
-    filterHtml += '<button onclick="goAllArticles(\'' + tags[t][0] + '\')" style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:' + (isActive ? '700' : '500') + ';padding:8px 16px;border:1px solid ' + (isActive ? 'var(--navy)' : 'var(--bd)') + ';border-radius:4px;background:' + (isActive ? 'var(--navy)' : '#fff') + ';color:' + (isActive ? '#fff' : 'var(--navy)') + ';cursor:pointer;">' + tags[t][1] + '</button>';
+  // Two-row tag filter bar: categories first (always visible), then geographic
+  var catTags = [
+    ['all','All'],
+    ['cat:news','News'],
+    ['cat:govt','Government'],
+    ['cat:dev','Development'],
+    ['cat:military','Military'],
+    ['cat:sports','Sports'],
+    ['cat:business','Business'],
+    ['cat:education','Education'],
+    ['cat:opinion','Opinion'],
+    ['cat:events','Events']
+  ];
+  var geoTags = [
+    ['pensacola','Pensacola'],
+    ['downtown','Downtown'],
+    ['escambia','Escambia County'],
+    ['beach','Pensacola Beach'],
+    ['gulfbreeze','Gulf Breeze']
+  ];
+
+  // Hide categories that have zero articles
+  catTags = catTags.filter(function(t) {
+    if (t[0] === 'all') return true;
+    return Object.entries(A).some(function(e) { return matchesTag(e[0], e[1], t[0]); });
+  });
+  geoTags = geoTags.filter(function(t) {
+    return Object.entries(A).some(function(e) { return matchesTag(e[0], e[1], t[0]); });
+  });
+
+  function buildFilterRow(tags, label) {
+    var row = '<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px;">';
+    if (label) {
+      row += '<span style="font-family:DM Sans,sans-serif;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--g2);margin-right:4px;">' + label + '</span>';
+    }
+    for (var t = 0; t < tags.length; t++) {
+      var isActive = tags[t][0] === tag;
+      var bg = isActive ? 'var(--navy)' : '#fff';
+      var color = isActive ? '#fff' : 'var(--navy)';
+      var border = isActive ? 'var(--navy)' : 'var(--bd)';
+      var weight = isActive ? '700' : '500';
+      row += '<button onclick="goAllArticles(\'' + tags[t][0] + '\')" style="font-family:DM Sans,sans-serif;font-size:12px;font-weight:' + weight + ';padding:6px 13px;border:1px solid ' + border + ';border-radius:4px;background:' + bg + ';color:' + color + ';cursor:pointer;">' + tags[t][1] + '</button>';
+    }
+    row += '</div>';
+    return row;
   }
-  filterHtml += '</div>';
+
+  var filterHtml = '<div style="grid-column:1/-1;margin-bottom:24px;">'
+    + buildFilterRow(catTags, 'Topic')
+    + buildFilterRow(geoTags, 'Area')
+    + '</div>';
 
   // Article cards
   var cards = pageArticles.map(function(entry) {
@@ -804,6 +862,35 @@ function openArticle(id){
     <p style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--g2);margin-bottom:26px;padding-bottom:18px;border-bottom:1px solid var(--bd);">By <span style="color:var(--gold);">${a.byline}</span> · ${a.date}</p>
     ${briefHTML}
     <div class="article-body" id="article-body-text">${a.body}</div>
+    ${(function(){
+      // Auto-populate related coverage: same category, sorted by recency, max 3, exclude self
+      var related = Object.entries(A)
+        .filter(function(e){ return e[0] !== id && e[1].cat === a.cat; })
+        .sort(function(x,y){ return pubDate(y[0]) - pubDate(x[0]); })
+        .slice(0, 3);
+      if (!related.length) return '';
+      return `
+      <div style="margin-top:32px;padding-top:24px;border-top:2px solid var(--navy);">
+        <div style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--gold);">✦</span> More ${catDisplay(a.cat)} Coverage
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:4px;overflow:hidden;">
+          ${related.map(function(e){
+            var rid = e[0], r = e[1];
+            var thumb = r.thumbnail
+              ? '<img src="' + r.thumbnail + '" alt="" style="width:80px;height:60px;object-fit:cover;border-radius:3px;flex-shrink:0;">'
+              : '<div style="width:80px;height:60px;background:var(--surface);border-radius:3px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--g2);font-size:18px;">📰</div>';
+            return '<div onclick="closeArticle();setTimeout(function(){openArticle(\'' + rid + '\');},120);" style="display:flex;gap:14px;padding:14px 16px;background:#fff;cursor:pointer;align-items:flex-start;transition:background 0.12s;" onmouseover="this.style.background=\'var(--surface)\'" onmouseout="this.style.background=\'#fff\'">'
+              + thumb
+              + '<div style="flex:1;min-width:0;">'
+              +   '<div style="font-family:\'DM Sans\',sans-serif;font-weight:700;font-size:14px;line-height:1.35;color:var(--navy);margin-bottom:4px;">' + r.headline + '</div>'
+              +   '<div style="font-family:\'DM Sans\',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--g2);">' + r.date + '</div>'
+              + '</div>'
+              + '</div>';
+          }).join('')}
+        </div>
+      </div>`;
+    })()}
     <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--bd);">
       <div style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--g2);margin-bottom:10px;">React to this story</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;" id="reaction-row-${id}">
@@ -1497,33 +1584,33 @@ function renderCalList() {
   const ORS_KEY = '5b3ce3597851110001cf62484aef3f0d40a04c0fbbaf1fcc29ef36d6';
 
   const ORIGINS = {
-    downtown: { label:'Downtown Pensacola', coords:[-87.2169, 30.4101] },
-    nas:      { label:'NAS Main Gate',      coords:[-87.3014, 30.3527] },
-    airport:  { label:'PNS Airport',        coords:[-87.1865, 30.4735] },
-    beulah:   { label:'Beulah / Nine Mile', coords:[-87.3445, 30.4713] }
+    downtown: { label:'Veterans Memorial Park',  coords:[-87.2037076, 30.4124489] },
+    nas:      { label:'NAS Visitor Center',      coords:[-87.2774303, 30.3685849] },
+    airport:  { label:'PNS Terminal',            coords:[-87.1861041, 30.4737579] },
+    uwf:      { label:'UWF Main Entrance',       coords:[-87.2186647, 30.5418837] }
   };
 
-  // Route destinations: [lng, lat] for ORS
+  // Route destinations: [lng, lat] for ORS — destination is the Welcome to Pensacola Beach sign
   const DESTINATIONS = {
-    '98':    { coords:[-87.1605, 30.3353], label:'Via US-98 · Beach Blvd',      via:'Main route',           miles:'11.2' },
-    'alt':   { coords:[-87.1240, 30.3571], label:'Via Gulf Breeze Pkwy',         via:'Alt route',             miles:'13.8' },
-    'sikes': { coords:[-86.9830, 30.3267], label:'Bob Sikes Bridge',             via:'Via Navarre / Hwy 98',  miles:'18.4' }
+    '98':    { coords:[-87.1470959, 30.3396491], label:'Via US-98 · Pensacola Beach Sign',   via:'Main route',           miles:'11.2' },
+    'alt':   { coords:[-87.1240, 30.3571],       label:'Via Gulf Breeze Pkwy',                via:'Alt route',             miles:'13.8' },
+    'sikes': { coords:[-86.9830, 30.3267],       label:'Bob Sikes Bridge',                    via:'Via Navarre / Hwy 98',  miles:'18.4' }
   };
 
   // Baseline drive times in seconds per origin (used for traffic ratio coloring)
   const BASELINES = {
-    downtown: { '98': 840,  alt: 1080, sikes: 1320 },
+    downtown: { '98': 900,  alt: 1080, sikes: 1320 },
     nas:      { '98': 960,  alt: 1140, sikes: 1560 },
-    airport:  { '98': 900,  alt: 1020, sikes: 1500 },
-    beulah:   { '98': 1140, alt: 1200, sikes: 1680 }
+    airport:  { '98': 960,  alt: 1080, sikes: 1500 },
+    uwf:      { '98': 1320, alt: 1380, sikes: 1800 }
   };
 
   // Route label/via overrides per origin
   const ROUTE_LABELS = {
     downtown: {
-      '98':    { name:'Via US-98 · Beach Blvd',     via:'Main route',              miles:'11.2' },
-      'alt':   { name:'Via Gulf Breeze Pkwy',        via:'Alt route',               miles:'13.8' },
-      'sikes': { name:'Bob Sikes Bridge',            via:'Via Navarre · Hwy 98',    miles:'18.4' }
+      '98':    { name:'Via US-98 · Beach Blvd',     via:'Main route',              miles:'11.4' },
+      'alt':   { name:'Via Gulf Breeze Pkwy',        via:'Alt route',               miles:'13.9' },
+      'sikes': { name:'Bob Sikes Bridge',            via:'Via Navarre · Hwy 98',    miles:'18.5' }
     },
     nas: {
       '98':    { name:'Via Blue Angel Pkwy → US-98', via:'Main route',              miles:'14.1' },
@@ -1535,16 +1622,16 @@ function renderCalList() {
       'alt':   { name:'Via Cervantes → Hwy 98',      via:'Surface route',           miles:'14.3' },
       'sikes': { name:'Bob Sikes Bridge',             via:'Via US-98 E to Navarre',  miles:'22.6' }
     },
-    beulah: {
-      '98':    { name:'Via Nine Mile → US-98',        via:'Main route',             miles:'19.4' },
-      'alt':   { name:'Via I-10 → Gulf Breeze Pkwy',  via:'Freeway alt',            miles:'21.2' },
-      'sikes': { name:'Bob Sikes Bridge',              via:'I-10 E → Navarre',       miles:'28.8' }
+    uwf: {
+      '98':    { name:'Via Davis Hwy → US-98',        via:'Main route',             miles:'17.8' },
+      'alt':   { name:'Via I-110 → Gulf Breeze Pkwy', via:'Freeway alt',            miles:'19.4' },
+      'sikes': { name:'Bob Sikes Bridge',              via:'I-10 E → Navarre',       miles:'25.2' }
     }
   };
 
-  // Google Maps destination coords for click-through
+  // Google Maps destination coords for click-through (Welcome to Pensacola Beach sign)
   const GMAPS_DEST = {
-    '98':    '30.3353,-87.1605',
+    '98':    '30.3396491,-87.1470959',
     'alt':   '30.3571,-87.1240',
     'sikes': '30.3267,-86.9830'
   };
@@ -3077,6 +3164,25 @@ function filterNeighborhood(nbhd, btn) { filterTag('news', nbhd, btn); }
     // Fallback — always show something
     body.innerHTML = `<div style="font-size:11px;line-height:1.55;color:rgba(255,255,255,0.75);">Pensacola was first settled by Spanish colonists in 1559 — making it the oldest European settlement site in the continental United States.</div><a href="javascript:void(0)" onclick="openArticle('history-galvez')" style="font-family:'DM Sans';font-size:9px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:block;margin-top:7px;">Read the story →</a>`;
   }
+})();
+
+// ─────────────────────────────────────────────────────────────────────────────
+// STORIES PUBLISHED COUNTER — live count of articles since Jan 1, 2026
+// ─────────────────────────────────────────────────────────────────────────────
+(function() {
+  function update() {
+    const el = document.getElementById('about-stat-stories-2026');
+    if (!el) return;
+    const cutoff = new Date('2026-01-01');
+    const today = new Date();
+    let n = 0;
+    for (const id of Object.keys(A)) {
+      const d = pubDate(id);
+      if (d >= cutoff && d <= today) n++;
+    }
+    el.textContent = n;
+  }
+  onArticlesReady(update);
 })();
 
 // ─────────────────────────────────────────────────────────────────────────────
