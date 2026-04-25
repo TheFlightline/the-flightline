@@ -2869,8 +2869,9 @@ Object.assign(A, {
 });
 
 // ============================================================================
-// REVERB EDITORIAL v2 — Rich body with renderings, pull quotes, stat strip,
-// interactive Lot 5 / CMP timeline. Overrides the prior op-reverb-rebate body.
+// REVERB EDITORIAL v2.1 — Tightened open: collapsed orphan "then you turn
+// around" line into the lede so the rendering sits at the natural visual
+// pivot, not in the middle of two short paragraphs.
 // ============================================================================
 
 Object.assign(A, {
@@ -2946,9 +2947,7 @@ Object.assign(A, {
 .article-body .fl-timeline-help { padding:6px 12px 0; font-family:'DM Sans',sans-serif; font-size:11px; color:#9ca3af; font-style:italic; }
 </style>
 
-<p class="article-lede">Stand on the lawn at Community Maritime Park on a Saturday afternoon and the scene is almost what voters were promised in 2006. Families on the waterfront. Wahoos baseball drifting over the bay. A band on the grass. You can forget, for a minute, that the thing you're looking at is a promise that was only half-kept.</p>
-
-<p>Then you turn around.</p>
+<p class="article-lede">Stand on the lawn at Community Maritime Park on a Saturday afternoon and the scene is almost what voters were promised in 2006. Families on the waterfront. Wahoos baseball drifting over the bay. A band on the grass. You can forget, for a minute, that the thing you're looking at is a promise that was only half-kept. Then you turn around.</p>
 
 <figure class="fl-render">
   <img src="/images/reverb-aerial-dusk.jpg" alt="Aerial dusk rendering of the proposed REVERB by Hard Rock hotel and Rhythm Lofts tower at Community Maritime Park, with Blue Wahoos Stadium and the Pensacola Bay marina in the foreground.">
