@@ -866,15 +866,23 @@ function openEventInline(titleOrEvent, dateStr, timeStr, venue, url, color, labe
   let title;
   if (titleOrEvent && typeof titleOrEvent === 'object') {
     const e = titleOrEvent;
-    title    = e.title;
-    dateStr  = e.date  || e.dateStr  || '';
-    timeStr  = e.time  || e.timeStr  || '';
-    venue    = e.venue || '';
-    url      = e.url   || '';
-    color    = e.color || '';
-    label    = e.label || (CAL_CATS[e.cat] && CAL_CATS[e.cat].label) || 'Event';
-    key      = e.key   || '';
-    desc     = e.desc  || '';
+    title   = e.title;
+    // CAL_EVENTS stores day/month/year separately. Build a human-readable
+    // date string and a parseable ISO date for the calendar buttons.
+    if (e.date || e.dateStr) {
+      dateStr = e.date || e.dateStr;
+    } else if (typeof e.day === 'number' && typeof e.month === 'number' && typeof e.year === 'number') {
+      dateStr = MONTH_NAMES[e.month] + ' ' + e.day + ', ' + e.year;
+    } else {
+      dateStr = '';
+    }
+    timeStr = e.time  || e.timeStr  || '';
+    venue   = e.venue || '';
+    url     = e.url   || '';
+    color   = e.color || '';
+    label   = e.label || (CAL_CATS[e.cat] && CAL_CATS[e.cat].label) || 'Event';
+    key     = e.key   || '';
+    desc    = e.desc  || '';
   } else {
     title = titleOrEvent;
   }
