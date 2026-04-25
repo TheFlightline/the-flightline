@@ -1107,6 +1107,7 @@ function openArticle(id){
         <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'))" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--surface);border:1.5px solid var(--bd);color:var(--navy);border-radius:3px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;cursor:pointer;">🔗 Copy Link</button>
       </div>
     </div>`
+  processArticleLinks();
   document.getElementById('modal').classList.add('open');
   history.pushState({articleId: id}, '', '/story/' + id);
   document.getElementById('modal').scrollTop = 0;
@@ -3778,3 +3779,73 @@ if (document.readyState === 'loading') {
 }
 // Refresh hourly so a long-open tab updates at midnight rollover
 setInterval(refreshTopbarDate, 60 * 60 * 1000);
+
+// Auto-process all links inside the rendered article body:
+//   - Bare URLs in text get wrapped in <a> tags
+//   - All <a> tags pointing to external sites open in a new tab with rel safety
+//   - Internal SPA links (openArticle, goCategory, javascript:, hash anchors) untouched
+function processArticleLinks() {
+  var root = document.getElementById('article-body-text');
+  if (!root) return;
+
+  // 1. Linkify bare URLs in text nodes. Walk only text nodes; skip nodes inside
+  //    existing <a>, <code>, <pre>, <script>, <style>.
+  var SKIP = {A:1, CODE:1, PRE:1, SCRIPT:1, STYLE:1};
+  var URL_RE = /(\bhttps?:\/\/[^\s<>"')]+[^\s<>"'.,;:!?)\]])/g;
+  var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(node) {
+      var p = node.parentNode;
+      while (p && p !== root) {
+        if (SKIP[p.nodeName]) return NodeFilter.FILTER_REJECT;
+        p = p.parentNode;
+      }
+      return URL_RE.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  var pending = [];
+  var n;
+  while ((n = walker.nextNode())) pending.push(n);
+
+  pending.forEach(function(node) {
+    URL_RE.lastIndex = 0;
+    var text = node.nodeValue;
+    var frag = document.createDocumentFragment();
+    var lastIdx = 0;
+    var m;
+    while ((m = URL_RE.exec(text)) !== null) {
+      if (m.index > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, m.index)));
+      var a = document.createElement('a');
+      a.href = m[1];
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = m[1];
+      frag.appendChild(a);
+      lastIdx = m.index + m[1].length;
+    }
+    if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+    node.parentNode.replaceChild(frag, node);
+  });
+
+  // 2. Force target=_blank + rel=noopener on every external <a> in the body.
+  //    Internal/SPA links — javascript:, hash anchors, anything starting with /
+  //    that doesn't go to /story or /category, and any same-origin URLs whose
+  //    host matches location.host — keep their existing behavior.
+  var anchors = root.querySelectorAll('a[href]');
+  for (var i = 0; i < anchors.length; i++) {
+    var el = anchors[i];
+    var href = el.getAttribute('href') || '';
+    if (!href) continue;
+    if (/^javascript:/i.test(href)) continue;
+    if (href === '#' || href.charAt(0) === '#') continue;
+    // Same-origin? Decide based on parsed URL
+    try {
+      var u = new URL(href, window.location.origin);
+      if (u.origin === window.location.origin) continue;
+    } catch (e) { /* malformed URL, skip */ continue; }
+    el.target = '_blank';
+    var existingRel = el.getAttribute('rel') || '';
+    if (existingRel.indexOf('noopener') === -1) {
+      el.setAttribute('rel', (existingRel + ' noopener noreferrer').trim());
+    }
+  }
+}
