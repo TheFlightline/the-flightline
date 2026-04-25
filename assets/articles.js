@@ -1981,6 +1981,14 @@ Object.assign(A, {
   ],
   body: `<p class="article-lede">Pensacola's City Council voted April 23 to repeal a decades-old section of the city code that regulated corrugated cardboard collection as a separate commercial waste category, folding the material back into the city's broader solid waste ordinance.</p>
 
+<div class="source-docs">
+  <div class="source-docs-label">Source documents</div>
+  <ul>
+    <li><a href="https://pensacolafl.portal.civicclerk.com/" target="_blank" rel="noopener noreferrer">Pensacola City Council agenda portal</a> — April 23, 2026 regular meeting (CivicClerk)</li>
+    <li><a href="https://library.municode.com/fl/pensacola/codes/code_of_ordinances" target="_blank" rel="noopener noreferrer">Pensacola Code of Ordinances</a> (Municode) — Chapter 4 Article III, Section 4-3-66</li>
+  </ul>
+</div>
+
 <p>The action came through Proposed Ordinance No. 05-26, a one-section repeal of Section 4-3-66 of the Code of the City of Pensacola. The ordinance appeared on the regular agenda as Item 7, with a memorandum from city staff and the Proof of Publication filed as supporting documents. The council approved the repeal on final reading.</p>
 
 <p>Section 4-3-66 had been on the books for years and set specific requirements for the handling and collection of corrugated cardboard by commercial generators. City staff explained in the accompanying memo that the section had been superseded in practical effect by updates to the broader solid waste and recycling framework, and that maintaining a standalone code section on one specific material created regulatory friction without a corresponding public benefit.</p>
