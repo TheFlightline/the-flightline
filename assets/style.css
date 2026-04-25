@@ -116,7 +116,7 @@
   .hero-side-image { width:100%; height:100px; background:var(--surface); margin-bottom:10px; border-radius:3px; overflow:hidden; display:flex; align-items:center; justify-content:center; font-size:28px; color:var(--bd); }
   .hero-side-image img { width:100%; height:100%; object-fit:cover; }
 
-  /* BADGES Ã¢ÂÂ text color only, no pill */
+  /* BADGES — text color only, no pill */
   .cat-badge { display:inline-block; font-family:'DM Sans',sans-serif; font-weight:800; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px; background:none; padding:0; cursor:pointer; }
   .cat-badge:hover { text-decoration:underline; }
   .cat-news { color:var(--cat-news); }
@@ -128,7 +128,7 @@
   .cat-education { color:var(--cat-education); }
   .cat-sports { color:var(--cat-sports); }
 
-  /* TYPOGRAPHY Ã¢ÂÂ DM Sans heavy throughout */
+  /* TYPOGRAPHY — DM Sans heavy throughout */
   .headline-xl { font-family:'DM Sans',sans-serif; font-weight:900; font-size:26px; line-height:1.15; color:var(--navy); margin-bottom:8px; }
   .headline-xl:hover { color:var(--g1); }
   .headline-lg { font-family:'DM Sans',sans-serif; font-weight:800; font-size:20px; line-height:1.2; color:var(--navy); margin-bottom:6px; }
@@ -155,7 +155,7 @@
   .leaflet-popup-content-wrapper { border-radius:6px !important; box-shadow:0 4px 16px rgba(0,0,0,0.15) !important; }
   .leaflet-popup-content { font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; color:var(--navy); margin:10px 14px !important; }
 
-  /* SECTION LABELS Ã¢ÂÂ reference's shd style */
+  /* SECTION LABELS — reference's shd style */
   .nbhd-btn { font-family:'DM Sans',sans-serif; font-size:9px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; padding:3px 9px; border-radius:999px; border:1px solid var(--bd); background:white; color:var(--g1); cursor:pointer; transition:all 0.12s; }
   .nbhd-btn:hover { border-color:var(--navy); color:var(--navy); }
   .nbhd-btn.active { background:var(--navy); color:white; border-color:var(--navy); }
@@ -217,7 +217,7 @@
   .event-title { font-size:12px; font-weight:600; color:var(--navy); line-height:1.3; }
   .event-meta { font-size:11px; color:var(--g2); margin-top:2px; }
 
-  /* OPINION SECTION Ã¢ÂÂ dark navy, reference .ed card style */
+  /* OPINION SECTION — dark navy, reference .ed card style */
   .opinion-section { background:var(--navy); padding:28px 0; margin:8px 0 0; }
   .opinion-section .section-label { color:white; border-bottom-color:var(--gold); max-width:1200px; margin-left:auto; margin-right:auto; padding-left:20px; padding-right:20px; }
   .opinion-section .section-label a { color:rgba(255,255,255,0.5); }
@@ -527,7 +527,7 @@
   .tier-price span { font-size:13px; font-weight:500; color:var(--g2); }
   .tier-feature { font-size:13px; color:var(--g1); padding:4px 0; border-bottom:1px solid var(--bd); display:flex; align-items:center; gap:6px; }
   .tier-feature:last-child { border-bottom:none; }
-  .tier-feature::before { content:'Ã¢ÂÂ'; color:var(--gold); font-weight:900; font-size:12px; flex-shrink:0; }
+  .tier-feature::before { content:'✓'; color:var(--gold); font-weight:900; font-size:12px; flex-shrink:0; }
   .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin:24px 0; }
   .about-stat { background:var(--navy); color:white; border-radius:10px; padding:22px; text-align:center; }
   .about-stat-num { font-family:'Bebas Neue',sans-serif; font-size:42px; color:var(--gold); line-height:1; }
@@ -539,7 +539,7 @@
   .team-role { font-size:12px; color:var(--g2); font-weight:500; }
   @media(max-width:600px){ .newsletter-tiers{grid-template-columns:1fr} .about-grid{grid-template-columns:1fr} .about-team{grid-template-columns:1fr 1fr} .static-form-row{grid-template-columns:1fr} }
 
-  /* Ã¢ÂÂÃ¢ÂÂ PUBLIC PAY SECTION Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */
+  /* ── PUBLIC PAY SECTION ─────────────────────────────────── */
   @keyframes payTickerScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
   /* Homepage spotlight card */
@@ -678,7 +678,7 @@
 
   /* WEATHER LIGHTBOX */
   .weather-widget-trigger { cursor:pointer; position:relative; }
-  .weather-widget-trigger::after { content:'Ã¢ÂÂ'; position:absolute; top:8px; right:8px; font-size:10px; color:var(--g2); opacity:0; transition:opacity 0.15s; font-weight:700; }
+  .weather-widget-trigger::after { content:'↗'; position:absolute; top:8px; right:8px; font-size:10px; color:var(--g2); opacity:0; transition:opacity 0.15s; font-weight:700; }
   .weather-widget-trigger:hover::after { opacity:1; }
   .weather-widget-trigger:hover .sidebar-widget-header { background:var(--gold); }
   .weather-modal { display:none; position:fixed; inset:0; z-index:1100; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; padding:20px; }
@@ -712,7 +712,7 @@
   .weather-modal-footer a { color:var(--navy); font-weight:700; text-decoration:underline; }
 
   /* FULL COMMUNITY CALENDAR */
-  /* Ã¢ÂÂÃ¢ÂÂ Community Calendar Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ */
+  /* ── Community Calendar ─────────────────────────────────── */
   .comm-cal-wrap { max-width:1020px; margin:0 auto; padding:32px 16px 80px; }
   .comm-cal-nav { display:flex; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
   .comm-cal-nav-btn { background:none; border:2px solid var(--bd); border-radius:6px; color:var(--navy); font-family:'DM Sans',sans-serif; font-weight:800; font-size:13px; padding:7px 16px; cursor:pointer; transition:all 0.15s; flex-shrink:0; }
