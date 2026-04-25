@@ -1108,6 +1108,7 @@ function openArticle(id){
       </div>
     </div>`
   processArticleLinks();
+  renderArticleEventWidget(Object.assign({id: id}, a));
   document.getElementById('modal').classList.add('open');
   history.pushState({articleId: id}, '', '/story/' + id);
   document.getElementById('modal').scrollTop = 0;
@@ -3848,4 +3849,134 @@ function processArticleLinks() {
       el.setAttribute('rel', (existingRel + ' noopener noreferrer').trim());
     }
   }
+}
+
+// Event widget for articles. Articles can declare an `event` field (object
+// or array of objects) describing one or more scheduled events the article
+// covers. We render an inline "Add to Calendar" panel at the top of the
+// article body so readers can save the event(s) without leaving the piece.
+//
+// Per-event shape:
+//   {
+//     title:    string  (optional — defaults to article headline)
+//     date:     string  ("April 14, 2026" — required if no startISO)
+//     time:     string  ("5:30 PM" — optional)
+//     endTime:  string  ("7:30 PM" — optional, defaults to start + 2h)
+//     venue:    string  (optional)
+//     desc:     string  (optional)
+//     url:      string  (optional external link)
+//     allDay:   boolean (optional — overrides times)
+//     label:    string  (optional badge text — defaults to "EVENT")
+//     color:    string  (optional accent color hex)
+//   }
+function renderArticleEventWidget(article) {
+  if (!article || !article.event) return;
+  var bodyEl = document.getElementById('article-body-text');
+  if (!bodyEl) return;
+
+  var events = Array.isArray(article.event) ? article.event : [article.event];
+  events = events.filter(Boolean);
+  if (events.length === 0) return;
+
+  var heading = events.length === 1 ? 'Add this event to your calendar' : 'Add these events to your calendar';
+
+  var cards = events.map(function(e, idx) {
+    var title = e.title || article.headline || 'Event';
+    var label = e.label || 'EVENT';
+    var color = e.color || 'var(--gold)';
+
+    // Build human-readable date/time row
+    var dateBits = [];
+    if (e.date) dateBits.push('<span class="art-evt-meta-item">📅 ' + e.date + '</span>');
+    if (e.allDay) {
+      dateBits.push('<span class="art-evt-meta-item">🕐 All day</span>');
+    } else if (e.time) {
+      var timeStr = e.endTime ? (e.time + ' – ' + e.endTime) : e.time;
+      dateBits.push('<span class="art-evt-meta-item">🕐 ' + timeStr + '</span>');
+    }
+    if (e.venue) dateBits.push('<span class="art-evt-meta-item">📍 ' + e.venue + '</span>');
+
+    // Compute startISO/endISO for calendar URLs
+    var startISO = '', endISO = '';
+    try {
+      if (e.startISO && e.endISO) {
+        startISO = e.startISO;
+        endISO = e.endISO;
+      } else if (e.date) {
+        var startD;
+        if (e.allDay) {
+          startD = new Date(e.date);
+        } else if (e.time) {
+          startD = new Date(e.date + ' ' + e.time);
+        } else {
+          startD = new Date(e.date);
+        }
+        if (!isNaN(startD.getTime())) {
+          var endD;
+          if (e.allDay) {
+            endD = new Date(startD.getTime() + 24*60*60*1000);
+          } else if (e.endTime) {
+            endD = new Date(e.date + ' ' + e.endTime);
+            if (isNaN(endD.getTime())) endD = new Date(startD.getTime() + 2*60*60*1000);
+          } else {
+            endD = new Date(startD.getTime() + 2*60*60*1000);
+          }
+          // ICS format: YYYYMMDDTHHMMSSZ
+          startISO = startD.toISOString().replace(/[-:.]/g, '').slice(0, 15) + 'Z';
+          endISO   = endD.toISOString().replace(/[-:.]/g, '').slice(0, 15) + 'Z';
+        }
+      }
+    } catch (err) {}
+
+    var calEvent = {
+      title:    title,
+      desc:     (e.desc || article.dek || '').replace(/<[^>]+>/g, ''),
+      address:  e.venue || '',
+      startISO: startISO,
+      endISO:   endISO
+    };
+    var stashKey = '__art_evt_' + (article.id || 'a') + '_' + idx;
+    window[stashKey] = calEvent;
+
+    var calBtns = (startISO && endISO) ? (
+      '<div class="art-evt-cal-row">' +
+        '<button class="art-evt-cal-btn" onclick="generateICS(window[\'' + stashKey + '\'])">' +
+          '<span class="art-evt-cal-icon">🍎</span> Apple' +
+        '</button>' +
+        '<a class="art-evt-cal-btn" href="' + googleCalUrl(calEvent) + '" target="_blank" rel="noopener noreferrer">' +
+          '<span class="art-evt-cal-icon">G</span> Google' +
+        '</a>' +
+        '<a class="art-evt-cal-btn" href="' + outlookCalUrl(calEvent) + '" target="_blank" rel="noopener noreferrer">' +
+          '<span class="art-evt-cal-icon">O</span> Outlook' +
+        '</a>' +
+      '</div>'
+    ) : '';
+
+    var moreInfoBtn = e.url ? (
+      '<a class="art-evt-link" href="' + e.url + '" target="_blank" rel="noopener noreferrer">More info →</a>'
+    ) : '';
+
+    return (
+      '<div class="art-evt-card" style="border-left-color:' + color + ';">' +
+        '<div class="art-evt-label" style="color:' + color + ';">' + label + '</div>' +
+        (events.length > 1 ? '<div class="art-evt-title">' + title + '</div>' : '') +
+        (dateBits.length ? '<div class="art-evt-meta">' + dateBits.join(' · ') + '</div>' : '') +
+        moreInfoBtn +
+        calBtns +
+      '</div>'
+    );
+  });
+
+  var widgetHTML =
+    '<div class="article-event-widget">' +
+      '<div class="art-evt-header">' +
+        '<span class="art-evt-icon">📅</span>' +
+        '<span class="art-evt-heading">' + heading + '</span>' +
+      '</div>' +
+      cards.join('') +
+    '</div>';
+
+  // Insert as the FIRST child of the article body so readers see it before
+  // the lede. If a Brief sits above, it stays above (it's outside .article-body).
+  bodyEl.insertAdjacentHTML('afterbegin', widgetHTML);
 }

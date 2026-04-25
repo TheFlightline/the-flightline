@@ -2621,6 +2621,10 @@ Object.assign(A, {
 
 "reeves-town-hall-may-june": {
   cat: "govt",
+  event: [
+    { label: "Town Hall", title: "Mayor's Town Hall — District 5", date: "May 14, 2026", time: "6:00 PM", endTime: "7:30 PM", venue: "Cobb Resource Center, 601 E Mallory St", desc: "Mayor D.C. Reeves and city department directors host a community town hall in District 5. Format: department updates and resident Q&A.", url: "https://www.cityofpensacola.com/events" },
+    { label: "Town Hall", title: "Mayor's Town Hall — District 7", date: "June 11, 2026", time: "6:00 PM", endTime: "7:30 PM", venue: "Bayview Community Center, 2001 E Lloyd St", desc: "Mayor D.C. Reeves and city department directors host a community town hall in District 7.", url: "https://www.cityofpensacola.com/events" }
+  ],
   label: "City Government",
   thumbnail: "/images/govt_public-hearing_009.jpg",
   headline: "Mayor Reeves Announces Spring and Summer Town Hall Schedule Across Pensacola Council Districts",
