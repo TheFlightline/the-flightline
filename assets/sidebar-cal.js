@@ -197,45 +197,53 @@ function renderSideCalList() {
   if (!list) return;
   const upcoming = sideCalUpcoming();
   if (!upcoming.length) {
-    list.innerHTML = '<div class="side-cal-empty">No events listed for the next two weeks.</div>';
+    list.innerHTML = '<div style="font-size:11px;color:var(--g2);margin:0 0 8px;">No events listed for the next two weeks.</div>';
     list.onclick = null;
     return;
   }
   list.innerHTML = upcoming.slice(0, 5).map(e => {
     const monthAbbr = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][e.month] || '';
+    const color = e.color || '#1E2D4A';
     const hasModal = typeof EVENTS !== 'undefined' && EVENTS[e.id];
-    const dataAttrs = hasModal
-      ? 'data-eid="' + (e.id || '').replace(/"/g, '&quot;') + '"'
-      : (e.key ? 'data-ekey="' + e.key.replace(/"/g, '&quot;') + '"' : '')
-        + (e.url ? ' data-url="' + e.url.replace(/"/g, '&quot;') + '"' : '')
+    const isLink = hasModal || e.key || e.url;
+    
+    let dataAttrs = '';
+    if (hasModal) {
+      dataAttrs = ' data-eid="' + (e.id || '').replace(/"/g, '&quot;') + '"';
+    } else if (e.key) {
+      dataAttrs = ' data-ekey="' + e.key.replace(/"/g, '&quot;') + '"';
+    } else if (e.url) {
+      dataAttrs = ' data-url="' + e.url.replace(/"/g, '&quot;') + '"'
         + ' data-title="' + (e.title || '').replace(/"/g, '&quot;') + '"'
         + ' data-time="' + (e.time || '').replace(/"/g, '&quot;') + '"'
         + ' data-venue="' + (e.venue || '').replace(/"/g, '&quot;') + '"'
-        + ' data-color="' + (e.color || '').replace(/"/g, '&quot;') + '"'
+        + ' data-color="' + color.replace(/"/g, '&quot;') + '"'
         + ' data-cat="' + (e.cat || 'Event').replace(/"/g, '&quot;') + '"'
         + ' data-day="' + e.day + '"'
         + ' data-month="' + e.month + '"'
         + ' data-year="' + e.year + '"';
-    return '<div class="side-cal-list-item" ' + dataAttrs + ' style="cursor:pointer;">'
-      + '<div class="side-cal-list-date" style="background:' + (e.color || '#1E2D4A') + '">'
-      + '<div class="side-cal-list-month">' + monthAbbr + '</div>'
-      + '<div class="side-cal-list-day">' + e.day + '</div>'
+    }
+    
+    return '<div class="event-item"' + dataAttrs + ' style="display:flex;gap:8px;padding:5px 0;border-top:1px solid var(--bd);cursor:' + (isLink ? 'pointer' : 'default') + ';">'
+      + '<div class="event-date-box" style="flex-shrink:0;width:30px;text-align:center;border-top:2px solid ' + color + ';">'
+      + '<div class="event-date-month" style="font-size:8px;font-weight:700;color:' + color + ';text-transform:uppercase;letter-spacing:.04em;">' + monthAbbr + '</div>'
+      + '<div class="event-date-num" style="font-family:\'Bebas Neue\',sans-serif;font-size:18px;color:var(--navy);line-height:1;">' + e.day + '</div>'
       + '</div>'
-      + '<div class="side-cal-list-info">'
-      + '<div class="side-cal-list-title">' + (e.title || '') + '</div>'
-      + '<div class="side-cal-list-meta">' + (e.time || '') + (e.venue ? ' · ' + e.venue : '') + '</div>'
+      + '<div style="flex:1;min-width:0;">'
+      + '<div class="event-title" style="font-size:11px;font-weight:600;color:var(--navy);line-height:1.3;">' + (e.title || '') + '</div>'
+      + '<div class="event-meta" style="font-size:10px;color:var(--g2);line-height:1.3;margin-top:2px;">' + (e.time || '') + (e.venue ? ' · ' + e.venue : '') + '</div>'
       + '</div>'
       + '</div>';
   }).join('');
+  
   list.onclick = function(ev) {
-    const node = ev.target.closest('.side-cal-list-item');
+    const node = ev.target.closest('.event-item');
     if (!node) return;
     if (node.dataset.eid && typeof openEvent === 'function') {
       openEvent(node.dataset.eid);
     } else if (node.dataset.ekey && typeof openArticle === 'function') {
       openArticle(node.dataset.ekey);
-    } else if (typeof openEventInline === 'function') {
-      // Build a date string like "Friday, April 24, 2026" from day/month/year
+    } else if (node.dataset.url && typeof openEventInline === 'function') {
       const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
       const d = parseInt(node.dataset.day, 10);
@@ -246,7 +254,8 @@ function renderSideCalList() {
         const obj = new Date(y, m, d);
         dateStr = dayNames[obj.getDay()] + ', ' + monthNames[m] + ' ' + d + ', ' + y;
       }
-      const labelTitle = (node.dataset.cat || 'Event').charAt(0).toUpperCase() + (node.dataset.cat || 'Event').slice(1);
+      const cat = node.dataset.cat || 'Event';
+      const labelTitle = cat.charAt(0).toUpperCase() + cat.slice(1);
       openEventInline(
         node.dataset.title || '',
         dateStr,
@@ -257,22 +266,7 @@ function renderSideCalList() {
         labelTitle
       );
     } else if (node.dataset.url) {
-      // Last-resort fallback (shouldn't happen if openEventInline is loaded)
       window.open(node.dataset.url, '_blank', 'noopener,noreferrer');
     }
   };
 }
-
-function sideCalNav(dir) {
-  sideCalMonth += dir;
-  if (sideCalMonth > 11) { sideCalMonth = 0; sideCalYear++; }
-  if (sideCalMonth < 0)  { sideCalMonth = 11; sideCalYear--; }
-  sideCalSelDay = null;
-  var panel = document.getElementById('side-cal-day-events');
-  if (panel) { panel.style.display = 'none'; panel.innerHTML = ''; }
-  renderSideCal();
-}
-
-document.addEventListener('DOMContentLoaded', renderSideCal);
-
-// ─── END SIDEBAR CALENDAR ─────────────────────────────────────────────────────
