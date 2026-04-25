@@ -860,15 +860,15 @@ function openEvent(id) {
 }
 
 function openEventInline(titleOrEvent, dateStr, timeStr, venue, url, color, label, key, desc) {
-  // Accepts either a full event object as the first arg or the legacy positional args.
-  // Legacy positional form (kept for back-compat with existing inline onclick handlers
-  // generated before openEventFromCalendar): title, dateStr, timeStr, venue, url, color, label, key, desc.
+  // Update the existing static modal DOM (same elements openEvent uses) instead
+  // of replacing innerHTML — that previously destroyed the IDs openEvent depends
+  // on, breaking subsequent clicks on EVENTS-modal events like Fantasia, Egghunt,
+  // Bands on the Beach, Santana, etc.
+
   let title;
   if (titleOrEvent && typeof titleOrEvent === 'object') {
     const e = titleOrEvent;
     title   = e.title;
-    // CAL_EVENTS stores day/month/year separately. Build a human-readable
-    // date string and a parseable ISO date for the calendar buttons.
     if (e.date || e.dateStr) {
       dateStr = e.date || e.dateStr;
     } else if (typeof e.day === 'number' && typeof e.month === 'number' && typeof e.year === 'number') {
@@ -890,27 +890,60 @@ function openEventInline(titleOrEvent, dateStr, timeStr, venue, url, color, labe
   const modal = document.getElementById('event-modal');
   if (!modal) return;
 
-  // Meta: date / time / venue
+  const header  = document.getElementById('event-modal-header');
+  const labelEl = document.getElementById('event-modal-label');
+  const titleEl = document.getElementById('event-modal-title');
+  const metaEl  = document.getElementById('event-modal-meta');
+  const descEl  = document.getElementById('event-modal-desc');
+  const ctaEl   = document.getElementById('event-modal-cta');
+  const calRow  = document.getElementById('cal-btn-row');
+  if (!header || !labelEl || !titleEl || !metaEl || !descEl || !ctaEl || !calRow) return;
+
+  // Header tint
+  header.style.background = color || '#1E2D4A';
+  labelEl.textContent = label || 'Event';
+  titleEl.textContent = title || 'Event Details';
+
+  // Meta row: 📅 date · 🕐 time · 📍 venue
   const metaParts = [];
   if (dateStr) metaParts.push('<div class="event-modal-meta-item"><span>📅</span> ' + dateStr + '</div>');
   if (timeStr) metaParts.push('<div class="event-modal-meta-item"><span>🕐</span> ' + timeStr + '</div>');
   if (venue)   metaParts.push('<div class="event-modal-meta-item"><span>📍</span> ' + venue + '</div>');
+  metaEl.innerHTML = metaParts.join('');
 
-  // Description: prefer the event's own desc; fall back to a soft pointer at the external link.
+  // Description
   const descHtml = desc ? desc : (url ? 'Full details, ticket info, and showtimes available at the venue page below.' : '');
+  descEl.innerHTML = descHtml;
+  descEl.style.display = descHtml ? '' : 'none';
 
-  // CTA buttons: Read Article (if linked) and/or Get Tickets / More Info (external URL).
-  const ctaParts = [];
+  // CTA — replace the static button with anchor(s) so we can support both Read Article and external URL
+  // We replace the cta element itself with a container holding one or two buttons.
+  const ctaParent = ctaEl.parentNode;
+  // Remove any previously-injected sibling ctas from earlier opens
+  const prevExtras = ctaParent.querySelectorAll('.event-modal-btn-injected');
+  prevExtras.forEach(n => n.remove());
+  ctaEl.style.display = 'none';
+
+  const buildBtn = (html, onclick, href) => {
+    const a = document.createElement(href ? 'a' : 'button');
+    a.className = 'event-modal-btn event-modal-btn-injected';
+    a.innerHTML = html;
+    if (href) { a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+    if (onclick) a.onclick = onclick;
+    return a;
+  };
+
   if (key) {
-    ctaParts.push('<a class="event-modal-btn" href="javascript:void(0)" onclick="closeEvent();openArticle(\'' + key.replace(/'/g, "\\'") + '\');return false;">Read Flightline Article →</a>');
+    const btn = buildBtn('Read Flightline Article →', function() { closeEvent(); openArticle(key); return false; });
+    ctaParent.insertBefore(btn, ctaEl);
   }
   if (url) {
     const ctaLabel = key ? 'Get Tickets / Visit Site →' : 'Get Tickets / More Info →';
-    ctaParts.push('<a class="event-modal-btn" href="' + url + '" target="_blank" rel="noopener noreferrer">' + ctaLabel + '</a>');
+    const btn = buildBtn(ctaLabel, null, url);
+    ctaParent.insertBefore(btn, ctaEl);
   }
-  const ctaHtml = ctaParts.join('');
 
-  // Parse a startISO/endISO from dateStr + timeStr for calendar links.
+  // Calendar buttons row
   let startISO = '', endISO = '';
   try {
     if (dateStr && timeStr) {
@@ -926,42 +959,35 @@ function openEventInline(titleOrEvent, dateStr, timeStr, venue, url, color, labe
         endISO = new Date(d.getTime() + 24*60*60*1000).toISOString();
       }
     }
-  } catch(e) {}
+  } catch(err) {}
 
-  // Build a normalized event object the calendar helpers expect.
-  const calEvent = {
-    title:    title || 'Event',
-    desc:     (descHtml || '').replace(/<[^>]+>/g, ''),
-    address:  venue || '',
-    startISO: startISO ? startISO.replace(/[-:.]/g,'').slice(0,15) + 'Z' : '',
-    endISO:   endISO   ? endISO.replace(/[-:.]/g,'').slice(0,15) + 'Z'   : ''
-  };
-
-  // Stash the event so the Apple button can call generateICS without re-parsing.
-  window.__pendingCalEvent = calEvent;
-
-  const calBtns = (calEvent.startISO && calEvent.endISO)
-    ? '<div class="cal-row-label">Add to Calendar</div>'
-    + '<div class="cal-btn-row">'
-    + '<button class="cal-btn" onclick="generateICS(window.__pendingCalEvent)"><span class="cal-btn-icon">🍎</span> Apple</button>'
-    + '<a class="cal-btn" href="' + googleCalUrl(calEvent) + '" target="_blank" rel="noopener noreferrer"><span class="cal-btn-icon">G</span> Google</a>'
-    + '<a class="cal-btn" href="' + outlookCalUrl(calEvent) + '" target="_blank" rel="noopener noreferrer"><span class="cal-btn-icon">O</span> Outlook</a>'
-    + '</div>'
-    : '';
-
-  modal.innerHTML = '<div class="event-modal-card">'
-    + '<div class="event-modal-header" style="background:' + (color || '#1E2D4A') + ';">'
-    + '<button class="event-modal-close" onclick="closeEvent()">✕</button>'
-    + '<div class="event-modal-label">' + (label || 'Event') + '</div>'
-    + '<div class="event-modal-title">' + (title || 'Event Details') + '</div>'
-    + '</div>'
-    + '<div class="event-modal-body">'
-    + (metaParts.length ? '<div class="event-modal-meta">' + metaParts.join('') + '</div>' : '')
-    + (descHtml ? '<div class="event-modal-desc">' + descHtml + '</div>' : '')
-    + ctaHtml
-    + calBtns
-    + '</div>'
-    + '</div>';
+  if (startISO && endISO) {
+    const calEvent = {
+      title:    title || 'Event',
+      desc:     (descHtml || '').replace(/<[^>]+>/g, ''),
+      address:  venue || '',
+      startISO: startISO.replace(/[-:.]/g,'').slice(0,15) + 'Z',
+      endISO:   endISO.replace(/[-:.]/g,'').slice(0,15) + 'Z'
+    };
+    window.__pendingCalEvent = calEvent;
+    calRow.innerHTML =
+      '<button class="cal-btn" onclick="generateICS(window.__pendingCalEvent)"><span class="cal-btn-icon">🍎</span> Apple</button>' +
+      '<a class="cal-btn" href="' + googleCalUrl(calEvent) + '" target="_blank" rel="noopener noreferrer"><span class="cal-btn-icon">G</span> Google</a>' +
+      '<a class="cal-btn" href="' + outlookCalUrl(calEvent) + '" target="_blank" rel="noopener noreferrer"><span class="cal-btn-icon">O</span> Outlook</a>';
+    calRow.style.display = '';
+    // Show the "Add to Calendar" label
+    const calLabel = calRow.previousElementSibling;
+    if (calLabel && calLabel.classList && calLabel.classList.contains('cal-row-label')) {
+      calLabel.style.display = '';
+    }
+  } else {
+    calRow.innerHTML = '';
+    calRow.style.display = 'none';
+    const calLabel = calRow.previousElementSibling;
+    if (calLabel && calLabel.classList && calLabel.classList.contains('cal-row-label')) {
+      calLabel.style.display = 'none';
+    }
+  }
 
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
