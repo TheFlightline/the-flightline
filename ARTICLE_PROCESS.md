@@ -514,3 +514,24 @@ After pushing, wait ~15–20 seconds and hard-reload the live site. Confirm the 
 article appears in the correct section and that the article modal opens cleanly.
 Check the browser console for JS errors.
 
+### Hero article headline sync — mandatory check
+
+If the article being published or updated is featured in the hero section of
+index.html, the headline and date are hardcoded directly in index.html and do
+NOT update automatically when articles.js changes. They must be updated manually
+every time the headline or date changes.
+
+**After every headline or date change to a hero-featured article:**
+
+1. Search index.html for the article slug (e.g. `american-magic-saildrone-spectre`).
+2. For every match, read the surrounding HTML and locate any hardcoded headline
+   text and date text in that block.
+3. Confirm they exactly match the current `headline` and `date` fields in articles.js.
+4. If they differ, update index.html in the same push — never leave them out of sync.
+
+This applies to both the mobile hero strip and the desktop hero side panel, which
+are separate blocks and must each be checked independently. Failing to do this
+caused the Spectre article to display the old headline on the homepage after the
+article was rewritten.
+
+
