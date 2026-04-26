@@ -3385,16 +3385,7 @@ document.addEventListener('DOMContentLoaded', function() {
   setInterval(renderStrip, 60000);
 })();
 
-// ─────────────────────────────────────────────────────────────────────────────
-// LAST UPDATED TIMESTAMP
-// ─────────────────────────────────────────────────────────────────────────────
-(function() {
-  const el = document.getElementById('last-updated-stamp');
-  if (!el) return;
-  const now = new Date();
-  const t = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-  el.textContent = 'Updated ' + t;
-})();
+// LAST UPDATED TIMESTAMP — set at deploy time in index.html
 
 // ─────────────────────────────────────────────────────────────────────────────
 // NEIGHBORHOOD FILTER
