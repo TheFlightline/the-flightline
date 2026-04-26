@@ -1,7 +1,8 @@
 {
-  "outputDirectory": ".",
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/story/:path*", "destination": "/index.html" },
+    { "source": "/all", "destination": "/index.html" }
   ]
 }
