@@ -16,14 +16,19 @@ Nothing already in this queue gets re-drafted.
 
 ## Step 3 — Read the full article schema
 
-Read one complete entry from pending_articles.json to confirm every field before writing:
+Read one complete entry from assets/articles.js to confirm every field before writing:
 - `id` — slug, format: topic-date e.g. `cra-vote-hard-rock-042226`
-- `cat` — one of: government, development, military, education, sports, community, opinion, analysis
+- `cat` — one of: `govt`, `dev`, `military`, `education`, `sports`, `community`, `opinion`
+  Note: The homepage section grid maps `govt` → Government, `dev` → Business & Development,
+  `military` → Military, `sports` → Sports, `opinion` → Opinion & Analysis.
+  Articles with `cat: "education"` or `cat: "community"` are accessible via Latest and
+  search but do not appear in a homepage section block.
 - `label` — display label e.g. "Government", "Development"
 - `headline` — full headline, AP style, no period
 - `dek` — 1–2 complete sentences, no fragments
 - `byline` — "The Flightline Staff"
 - `date` — "Month D, YYYY" e.g. "April 22, 2026"
+- `thumbnail` — path to an image from /images/ — see Step 7 for assignment rules
 - `brief` — array of exactly 3 strings; each is a complete sentence summarizing a key fact
 - `body` — HTML string; paragraphs as `<p>`, subheads as `<h2>`, no other tags
 
@@ -34,7 +39,7 @@ Image lives in og-data.json (separate file), keyed by article id:
 
 Image sources: Wikimedia Commons, NARA, Library of Congress, U.S. Navy public domain,
 NOAA, Unsplash (no attribution required). No placeholder paths. If no suitable image
-exists, flag it and use `/images/flightline-og-default.jpg` as fallback.
+exists, use `/images/flightline-og-default.jpg` as fallback.
 
 ## Step 4 — Scan secondary sources for leads (do not cite)
 
@@ -312,7 +317,81 @@ Style rules:
 - Kicker = forward-motion fact
 - Dek: 1–2 complete sentences, no fragments, no em dashes
 
-## Step 10 — Build visual/interactive element if approved
+## Step 10 — Assign thumbnail image
+
+Every article requires a `thumbnail` field pointing to a real image in /images/.
+Do not use `/images/flightline-og-default.jpg` unless no better option exists.
+
+**Available images by beat:**
+
+Government / Courts:
+  editorial_gavel_005.jpg — courts, lawsuits, legal rulings
+  govt_public-hearing_009.jpg — council meetings, public hearings, votes
+  govt_office_007.jpg — general government/administrative stories
+  editorial_podium_002.jpg — press conferences, announcements
+  editorial_voting_010.jpg — elections, ballot measures
+
+Development / Infrastructure:
+  development_construction-crane_001.jpg — major construction projects
+  development_road-work_002.jpg — road projects, FDOT stories
+  development_scaffolding_003.jpg — building renovations
+  development_residential_004.jpg — housing stories
+  development_commercial_007.jpg — commercial development
+  development_demolition_006.jpg — demolition stories
+  downtown_pensacola-maritime-park_006.jpg — Maritime Park stories
+  reverb-aerial-dusk.jpg / reverb-tower-wide.jpg — REVERB/Hard Rock stories
+
+Military / NAS:
+  military_blue-angels_001.jpg — Blue Angels general
+  military_blue-angels-over-pensacola_008.jpg — Blue Angels flight/airshow
+  military_blue-angels-crowd-practice_010.jpg — Blue Angels practice season
+  military_nas-pensacola-airshow_009.jpg — NAS airshow/events
+  military_ceremony_005.jpg — military ceremonies, change of command
+  military_aviation-museum_004.jpg — Naval Aviation Museum stories
+  military_hangar_011.jpg — NAS facility/infrastructure stories
+
+Education:
+  education_teacher_006.jpg — school policy, classroom rules, conduct
+  education_graduation_005.jpg — graduation, academic achievement
+  education_science-lab_007.jpg — STEM, curriculum stories
+  education_library_004.jpg — library stories
+  education_playground_008.jpg — elementary school, facilities
+
+Sports:
+  sports_baseball_002.jpg — Blue Wahoos, baseball
+  sports_basketball_005.jpg — basketball
+  sports_golf_007.jpg — golf
+  sports_running_004.jpg — track, running events
+  sports_soccer_003.jpg — soccer
+  sports_swimming_008.jpg — swimming, aquatics
+
+Community / Events:
+  community_concert_008.jpg — concerts, music events, homecoming celebrations
+  community_festival_002.jpg — community festivals, Fiesta
+  community_palafox-festival_008.jpg — Palafox street events, Gallery Night
+  community_farmers-market_001.jpg — markets, community gatherings
+  community_volunteers_005.jpg — nonprofit, volunteer stories
+  community_mural_006.jpg — public art, Graffiti Bridge
+
+Beach / Waterfront:
+  beach_emerald-water_004.jpg — beach/water feature stories
+  beach_gulf-sunset_003.jpg — general beach atmosphere
+  beach_pensacola-bay-shoreline_019.jpg — bayfront, waterfront stories
+  beach_pier_001.jpg — pier stories
+
+Downtown:
+  downtown_pensacola-aerial-downtown_003.jpg — downtown overview stories
+  downtown_palafox-street-dusk_008.jpg — Palafox Street stories
+  downtown_pensacola-bay-center_004.jpg — Bay Center stories
+
+**Assignment rules:**
+1. Match the thumbnail to the story's primary subject, not its category label.
+   A government story about a park project should use a development image, not a gavel.
+2. Never assign `/images/flightline-og-default.jpg` when a better option exists.
+3. For stories with no clear match, use the most contextually adjacent image available.
+4. og-data.json `t` field should match the article thumbnail path.
+
+## Step 11 — Build visual/interactive element if approved
 
 If Drew approved a visual for the story, build it before finalizing the article body.
 
@@ -329,7 +408,7 @@ If Drew approved a visual for the story, build it before finalizing the article 
   or iframe, not a separate page — confirm with Drew how to wire it into the
   article template before building.
 
-## Step 11 — Pre-publish fact verification
+## Step 12 — Pre-publish fact verification
 
 Before finalizing the article JSON, run this checklist against the source document:
 
@@ -342,9 +421,9 @@ Before finalizing the article JSON, run this checklist against the source docume
   statement — never paraphrase into quotation marks.
 - Article slug (id): confirm it does not already exist as a key in og-data.json.
 
-## Step 12 — Validate article HTML before push
+## Step 13 — Validate article HTML before push
 
-Before inserting the article body into pending_articles.json:
+Before inserting the article body into articles.js:
 1. Scan `body`, `dek`, and `brief` strings for unescaped apostrophes.
    Any apostrophe inside a JS single-quoted string breaks the file. Escape as `\'`
    or rewrite to avoid the contraction.
@@ -352,22 +431,42 @@ Before inserting the article body into pending_articles.json:
 3. Confirm no tags other than `<p>` and `<h2>` appear in body unless approved.
 4. Confirm `brief` array has exactly 3 strings.
 5. Confirm `date` field matches "Month D, YYYY" format exactly.
+6. Run `node --check` on the full articles.js after inserting — do not skip this.
 
-## Step 13 — Push
+## Step 14 — Push to articles.js (the live site)
 
-Add new article object to pending_articles.json array.
-Add new og-data entry keyed by article id.
-pending_articles.json is under 1MB — use Contents API (PUT /contents/:path).
-og-data.json may be larger — check size first; use Git Data API if over 1MB.
-Validate JS if touching index.html: `node --check`.
-Confirm deploy on Netlify.
+**articles.js is the live publication file. Adding an article here publishes it immediately.**
 
----
+The file is at `assets/articles.js` in the repo. It is too large (~2.5MB) for the
+GitHub Contents API. Always use the Git Data API flow:
 
-## Standing flags on pending_articles.json (as of April 2026)
+1. GET /git/refs/heads/main → base commit SHA
+2. GET /git/commits/:sha → tree SHA
+3. POST /git/blobs with base64-encoded file content → blob SHA
+4. POST /git/trees with base_tree + path assets/articles.js + blob SHA → tree SHA
+5. POST /git/commits with message, new tree SHA, parent commit SHA → commit SHA
+6. PATCH /git/refs/heads/main with new commit SHA
 
-The three articles currently in pending_articles.json contain fabricated
-names, invented quotes, and unverifiable sourced details. They must be
-reviewed with Drew before publication. Do not push them to the live site
-without explicit approval.
+**Article insertion point:** New articles go immediately after `Object.assign(A, {` at the
+top of the file — this ensures they sort as newest in the feed.
 
+**cat values that map to homepage sections:**
+  `govt`     → Government section
+  `dev`      → Business & Development section
+  `military` → Military section
+  `sports`   → Sports section
+  `opinion`  → Opinion & Analysis section
+  `education`, `community`, `analysis` → accessible via Latest and search only;
+  no homepage section block for these categories.
+
+**After pushing articles.js**, also update og-data.json with the new article's og entry.
+og-data.json is under 1MB — use the Contents API (PUT /contents/:path) for that file.
+
+pending_articles.json is the staging queue only. Articles in pending_articles.json
+are NOT visible on the live site. They must be merged into articles.js to publish.
+
+## Step 15 — Confirm deploy on Netlify
+
+After pushing, wait ~15–20 seconds and hard-reload the live site. Confirm the new
+article appears in the correct section and that the article modal opens cleanly.
+Check the browser console for JS errors.

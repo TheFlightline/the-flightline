@@ -3,7 +3,7 @@ Object.assign(A, {
   "childers-discretionary-lawsuit-042426": {
     "cat": "govt",
     "label": "Government",
-    "thumbnail": "/images/flightline-og-default.jpg",
+    "thumbnail": "/images/editorial_gavel_005.jpg",
     "headline": "Two Escambia nonprofits sue Clerk Pam Childers after she blocks $7,000 in commission-approved payments",
     "dek": "First Tee Gulf Coast and the Warrington Emergency Aid Center filed suit Friday after Childers missed a deadline to release funds the Board of County Commissioners unanimously approved. The lawsuit could expose her to personal liability for more than a decade of similar payments.",
     "byline": "The Flightline Staff",
@@ -18,7 +18,7 @@ Object.assign(A, {
   "escambia-student-code-conduct-042226": {
     "cat": "education",
     "label": "Education",
-    "thumbnail": "/images/flightline-og-default.jpg",
+    "thumbnail": "/images/education_teacher_006.jpg",
     "headline": "Escambia school board adopts new student conduct rules for 2026-27, adding drug screens for student drivers",
     "dek": "The School Board of Escambia County approved revised elementary and secondary codes of conduct Tuesday. High school students who park on campus must now consent to random drug screening, and blankets, robes and pillows are banned from classrooms.",
     "byline": "The Flightline Staff",
@@ -33,7 +33,7 @@ Object.assign(A, {
   "keyla-richardson-idol-homecoming-042326": {
     "cat": "community",
     "label": "Community",
-    "thumbnail": "/images/flightline-og-default.jpg",
+    "thumbnail": "/images/community_concert_008.jpg",
     "headline": "Pensacola plans free hometown concert for Keyla Richardson if she makes American Idol Top 3",
     "dek": "Mayor D.C. Reeves and Commissioner Lumon May are coordinating a free event at Community Maritime Park and Wahoos Stadium tentatively set for May 6. Richardson, currently in the Top 7, finds out Monday whether she advances.",
     "byline": "The Flightline Staff",
