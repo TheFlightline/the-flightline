@@ -2543,11 +2543,125 @@ Object.assign(A, {
 
 <p>Former Council President Ann Hill announced her bid in September. She is running on what she calls "The Ann Plan" — free downtown parking, lower property taxes, neighborhood preservation, expanded affordable housing and rebuilding the Malcom Yonge Gym, demolished early in Reeves' first term. Hill represented District 6 from 2018 to 2022. She has reported $4,126.24 in monetary contributions and $10,363.60 in in-kind contributions through the most recent Escambia SOE filing.</p>
 
+
+<div id="mrf-countdown" style="margin:28px 0;background:#1E2D4A;border-radius:6px;padding:20px 16px;text-align:center;font-family:'DM Sans',sans-serif;">
+  <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#D4871A;font-weight:700;margin-bottom:12px;">Primary Election Day</div>
+  <div style="display:flex;justify-content:center;gap:8px;margin-bottom:10px;">
+    <div style="text-align:center;">
+      <div id="mrf-cd-d" style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#F5F3EE;line-height:1;min-width:64px;">--</div>
+      <div style="font-size:10px;letter-spacing:.1em;color:rgba(245,243,238,.5);text-transform:uppercase;margin-top:2px;">Days</div>
+    </div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#D4871A;line-height:1;padding-top:0;">:</div>
+    <div style="text-align:center;">
+      <div id="mrf-cd-h" style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#F5F3EE;line-height:1;min-width:56px;">--</div>
+      <div style="font-size:10px;letter-spacing:.1em;color:rgba(245,243,238,.5);text-transform:uppercase;margin-top:2px;">Hours</div>
+    </div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#D4871A;line-height:1;padding-top:0;">:</div>
+    <div style="text-align:center;">
+      <div id="mrf-cd-m" style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#F5F3EE;line-height:1;min-width:56px;">--</div>
+      <div style="font-size:10px;letter-spacing:.1em;color:rgba(245,243,238,.5);text-transform:uppercase;margin-top:2px;">Min</div>
+    </div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#D4871A;line-height:1;padding-top:0;">:</div>
+    <div style="text-align:center;">
+      <div id="mrf-cd-s" style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#F5F3EE;line-height:1;min-width:56px;">--</div>
+      <div style="font-size:10px;letter-spacing:.1em;color:rgba(245,243,238,.5);text-transform:uppercase;margin-top:2px;">Sec</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:rgba(245,243,238,.55);">Until the August 18, 2026 Pensacola Mayor primary &middot; Polls open 7 a.m. &ndash; 7 p.m.</div>
+</div>
+<script>
+(function(){
+  var target = new Date('2026-08-18T07:00:00');
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function tick(){
+    var now = new Date();
+    var diff = target - now;
+    if(diff <= 0){ return; }
+    var d = Math.floor(diff/86400000);
+    var h = Math.floor((diff%86400000)/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    var ed = document.getElementById('mrf-cd-d');
+    var eh = document.getElementById('mrf-cd-h');
+    var em = document.getElementById('mrf-cd-m');
+    var es = document.getElementById('mrf-cd-s');
+    if(ed) ed.textContent = d;
+    if(eh) eh.textContent = pad(h);
+    if(em) em.textContent = pad(m);
+    if(es) es.textContent = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
 <p><a href="https://www.dcreeves.com/" target="_blank" rel="noopener"><strong>Mayor D.C. Reeves</strong></a> filed for re-election December 19. The former Quint Studer prot&eacute;g&eacute; and entrepreneur won the 2022 mayoral race outright in the primary with 51 percent of the vote. His campaign centers on a first-term record that includes the city's grants office, the Hollice T. Williams Greenway, the American Magic High Performance Center at the Port of Pensacola, the New Palafox project and the demolition of the old Baptist Hospital site to make way for affordable housing. On his campaign site, Reeves frames his re-election around three pillars: public safety, attainable housing and job creation. Reeves leads the field in fundraising with $72,975 in monetary contributions and $2,800 in in-kind contributions through the most recent Escambia Supervisor of Elections filing.</p>
 
 <p><a href="https://theannplan.com/" target="_blank" rel="noopener"><strong>Former Council President Ann Hill</strong></a> announced her bid in September. She is running on what she calls "The Ann Plan" — a platform that emphasizes free downtown parking, lower property taxes, neighborhood preservation, expanded affordable housing and rebuilding the Malcom Yonge Gym, demolished early in Reeves' first term. Hill, who represented District 6 from 2018 to 2022, frames her candidacy around a contrast with the incumbent, arguing that city funds have gone to developer-friendly projects rather than resident needs. She calls for ending what her campaign describes as "boondoggles," restoring Carpenter's Creek and Long Hollow Pond, and strengthening heritage tree protections. Hill has reported $4,126 in monetary contributions and $10,364 in in-kind contributions — the latter consisting entirely of repurposed materials from her 2022 District 6 campaign.</p>
 
 <figure style="margin:28px 0;"><img src="/images/mayors_candidates.jpg" alt="2026 Pensacola mayoral candidates" style="width:100%;display:block;border-radius:3px;"><figcaption style="font-size:12px;color:var(--g2);margin-top:6px;line-height:1.5;">From left: D.C. Reeves, Ann Hill, Jasmine Brown, Alicia Trawick and Jermaine J. Williams. The primary is August 18, 2026.</figcaption></figure>
+
+
+<div id="mrf-moneyrace" style="margin:28px 0;font-family:'DM Sans',sans-serif;">
+  <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#D4871A;font-weight:700;margin-bottom:4px;">Money Race</div>
+  <div style="font-size:13px;color:var(--g1);margin-bottom:16px;">Total raised (monetary + in-kind) &middot; Q1 2026 &middot; <a href="https://escambiavotes.gov/current-candidates-and-finances" target="_blank" rel="noopener" style="color:var(--gold);">Escambia SOE</a></div>
+  <div id="mrf-mr-bars"></div>
+</div>
+<script>
+(function(){
+  var data = [
+    {name:'D.C. Reeves', total:75775, color:'#1E2D4A'},
+    {name:'Alicia Trawick', total:11888, color:'#2E6DA4'},
+    {name:'Jermaine Williams', total:13956, color:'#3A7CA5'},
+    {name:'Ann Hill', total:14490, color:'#D4871A'},
+    {name:'Jasmine Brown', total:2069, color:'#6B8FA8'}
+  ];
+  var max = Math.max.apply(null, data.map(function(d){ return d.total; }));
+  var container = document.getElementById('mrf-mr-bars');
+  if(!container) return;
+  var html = data.map(function(d){
+    var pct = Math.max(2, d.total/max*100).toFixed(1);
+    return '<div style="margin-bottom:14px;">' +
+      '<div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px;">' +
+        '<span>' + d.name + '</span>' +
+        '<span class="mrf-mr-num" data-val="' + d.total + '" style="color:' + d.color + ';">$0</span>' +
+      '</div>' +
+      '<div style="background:#e0ddd8;border-radius:3px;height:18px;overflow:hidden;">' +
+        '<div class="mrf-mr-bar" data-pct="' + pct + '" style="height:100%;width:0%;background:' + d.color + ';border-radius:3px;transition:width .9s cubic-bezier(.4,0,.2,1);"></div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+  container.innerHTML = html;
+
+  var animated = false;
+  function animate(){
+    if(animated) return;
+    animated = true;
+    var bars = container.querySelectorAll('.mrf-mr-bar');
+    var nums = container.querySelectorAll('.mrf-mr-num');
+    bars.forEach(function(b){
+      setTimeout(function(){ b.style.width = b.getAttribute('data-pct') + '%'; }, 80);
+    });
+    nums.forEach(function(el){
+      var target = parseInt(el.getAttribute('data-val'));
+      var start = performance.now();
+      var dur = 900;
+      function step(now){
+        var p = Math.min((now-start)/dur, 1);
+        var ease = 1 - Math.pow(1-p, 3);
+        el.textContent = '$' + Math.round(ease*target).toLocaleString('en-US');
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  var obs = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting) animate();
+  }, {threshold: 0.3});
+  obs.observe(container);
+})();
+</script>
 
 <p><a href="https://trawickformayor.com/" target="_blank" rel="noopener"><strong>Alicia Trawick</strong></a>, a Pensacola resident who works in disaster recovery and local government consulting, filed for the mayor's race after originally filing for City Council District 4. Trawick organized several of the largest public protests Pensacola saw in 2025. Her platform has three pillars: affordable housing, infrastructure and parking improvements, and a restructuring of city government. She is the only candidate calling for the strong-mayor form of government — adopted by city referendum in 2010 — to be rolled back to a hybrid council-manager system, arguing the current structure concentrates too much power in the mayor's office. On infrastructure, she is focused on stormwater flooding and transit access. Trawick has reported $9,828 in monetary contributions and $2,060 in in-kind contributions, with a burn rate of 85 percent — the highest in the race.</p>
 
