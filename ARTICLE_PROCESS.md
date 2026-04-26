@@ -421,6 +421,31 @@ Before finalizing the article JSON, run this checklist against the source docume
   statement — never paraphrase into quotation marks.
 - Article slug (id): confirm it does not already exist as a key in og-data.json.
 
+### Interactive and visual elements — additional verification required
+
+Every data point inside a widget, table, chart, spec card, or cluster graphic
+must pass the same standard as body copy. These elements get read closely and
+shared independently. Errors in them are especially damaging.
+
+**Before publishing any interactive element:**
+
+1. List every discrete claim in the element (every table row, every bullet,
+   every number, every label).
+2. For each claim, identify the exact sentence or figure in the primary source
+   document that supports it.
+3. If a claim cannot be traced to a primary source sentence or figure, DELETE IT.
+   Do not soften it, hedge it, or mark it "estimated" — remove it entirely.
+4. Labels and category names are claims too. "Pensacola-built: hull components"
+   is a factual assertion. If the source does not say it, it does not appear.
+5. Never infer what a source implies. Only state what it explicitly says.
+6. After completing steps 1–5, re-read the element as a reader would — treating
+   every cell and bullet as a standalone fact — and verify each one again.
+
+This step is not optional for interactive elements. The widget that published
+"Pensacola-built: Hull components" on the Spectre article was a fabrication.
+The primary source said only the wing is built in Pensacola. That error
+reached the live site. It cannot happen again.
+
 ## Step 13 — Validate article HTML before push
 
 Before inserting the article body into articles.js:
@@ -488,3 +513,4 @@ are NOT visible on the live site. They must be merged into articles.js to publis
 After pushing, wait ~15–20 seconds and hard-reload the live site. Confirm the new
 article appears in the correct section and that the article modal opens cleanly.
 Check the browser console for JS errors.
+
