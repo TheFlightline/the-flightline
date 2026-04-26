@@ -2537,6 +2537,8 @@ Object.assign(A, {
     "The primary is August 18, 2026. A candidate who clears 50 percent in the primary wins outright; otherwise the top two advance to a November 3 runoff."
   ],
   body: `<p class="article-lede">Five candidates have pre-filed for the Pensacola mayor's race that will be decided either in the August 18 primary or a November 3 runoff, setting up the most contested mayoral cycle since 2022.</p>
+<figure style="margin:24px 0;"><img src="/images/mayors_candidates.jpg" alt="The five candidates for Pensacola mayor in 2026" style="width:100%;display:block;border-radius:3px;"><figcaption style="font-size:12px;color:var(--g2);margin-top:6px;line-height:1.5;">From left: Mayor D.C. Reeves, former Council President Ann Hill, Jasmine Brown, Alicia Trawick and Jermaine J. Williams. All five have pre-filed for the August 18 Pensacola mayoral primary.</figcaption></figure>
+
 <p style="font-size:12px;color:var(--g2);margin-top:20px;">Source: <a href="https://myescambia.com/our-services/board-records/bcc-agendas" target="_blank" rel="noopener">Escambia County Commission agenda — April 1, 2026</a></p>
 
 <!-- MAYORS RACE FINANCE CHART — embed in mayors-race-2026-primer body -->
