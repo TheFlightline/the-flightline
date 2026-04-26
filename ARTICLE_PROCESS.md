@@ -36,7 +36,29 @@ Image sources: Wikimedia Commons, NARA, Library of Congress, U.S. Navy public do
 NOAA, Unsplash (no attribution required). No placeholder paths. If no suitable image
 exists, flag it and use `/images/flightline-og-default.jpg` as fallback.
 
-## Step 4 — Fetch government meeting agendas and primary documents
+## Step 4 — Scan secondary sources for leads (do not cite)
+
+Before fetching primary documents, scan local and regional news outlets to identify
+what is circulating. These sources are used ONLY to generate leads — they are never
+cited in Flightline articles. The job here is to notice that something happened and
+then find the primary document that proves it.
+
+Sources to scan for leads:
+- Gulf Breeze News: https://news.gulfbreezenews.com
+- Island Times (Pensacola Beach): https://www.myislandtimes.com
+- Pensacola Forward (economic development): https://www.pensacolaforward.com
+- Inweekly: https://ricksblog.biz (note: opinion-heavy; verify everything independently)
+- WUWF 88.1 (NPR Pensacola): https://www.wuwf.org
+- Florida Politics (state legislation with local impact): https://floridapolitics.com
+- Navy Times / USNI News (NAS and military stories): https://www.navytimes.com / https://news.usni.org
+- AP Florida wire and local Google News alerts
+
+Rule: If a secondary source reports something newsworthy, do not write from it.
+Find the primary document — the agenda, resolution, press release, court filing,
+or permit — and write from that. If the primary document cannot be found, the
+story does not run.
+
+## Step 5 — Fetch government meeting agendas and primary documents
 
 This step is mandatory before surfacing any story candidate. Act like a reporter
 working a beat: pull the actual documents from every relevant government body
@@ -63,36 +85,34 @@ what happened at a meeting — go to the source document first.
 
 ### Santa Rosa County
 - BCC agendas: https://www.santarosa.fl.gov/agendacenter
-- Santa Rosa County School Board: https://www.santarosa.k12.fl.us (check meeting agendas)
+- Santa Rosa County School Board: https://www.santarosa.k12.fl.us
 
 ### Gulf Breeze City Council
 - AgendaCenter: https://www.cityofgulfbreeze.us/agendacenter
 
 ### Santa Rosa Island Authority (governs Pensacola Beach)
 - SRIA meetings and agendas: https://www.sria.fl.gov
-  SRIA board actions cover leases, beach development approvals, and Pensacola Beach policy.
-  Check every round — SRIA agendas surface development stories before press releases exist.
+  SRIA board actions cover leases, beach development approvals, and Pensacola Beach
+  policy. Check every round — SRIA agendas surface development stories before
+  press releases exist.
 
 ### ECUA (Emerald Coast Utilities Authority)
 - ECUA board agendas: https://www.ecua.fl.gov
-  ECUA is the largest utility authority in the area. Rate changes, major infrastructure
-  projects, and board contract awards belong in this publication.
+  Rate changes, major infrastructure projects, and board contract awards.
 
 ### Triumph Gulf Coast
 - Board meeting notices and grant awards: https://triumphgulf.org
-  Triumph controls hundreds of millions in BP settlement funds for NW Florida.
+  Controls hundreds of millions in BP settlement funds for NW Florida.
   Grant awards and project approvals are significant economic development stories.
 
 ### NAS Pensacola / Military
-- Naval Air Station Pensacola public affairs: https://www.cnic.navy.mil/regions/cnrse/installations/nas_pensacola.html
+- NAS Pensacola public affairs: https://www.cnic.navy.mil/regions/cnrse/installations/nas_pensacola.html
 - Blue Angels schedule and policy changes: https://www.blueangels.navy.mil/show/
 - National Naval Aviation Museum: https://navalaviationmuseum.org/blueangels/
-  Check for any base access policy updates, unit activations, or command announcements.
 
 ### FDOT / Transportation
 - Northwest Florida Roads: https://nwflroads.com
   Search active projects in Escambia and Santa Rosa counties.
-  Fetch any new project notices, lane closure announcements, or public meeting notices.
 - TPO: https://www.pensacola-tpo.org
   Check for TIP amendments, public meetings, and new project initiations.
 
@@ -104,39 +124,33 @@ what happened at a meeting — go to the source document first.
 
 ### UWF
 - UWF news: https://uwf.edu/news
-  Check for any budget actions, enrollment figures, athletics news, or grant awards.
 
 ### Elections
 - Escambia County Supervisor of Elections: https://escambiavotes.gov/news
 - Santa Rosa County Supervisor of Elections: https://santarosavotes.gov
-  During qualifying and election periods, check candidate filings daily.
 
 ### Florida Legislature (when session is active or bills affect Pensacola)
 - Florida House: https://www.floridahouse.gov
 - Florida Senate: https://www.flsenate.gov
-  Search bills by keyword (Escambia, Pensacola, NAS, ECUA, etc.) for any legislation
-  with direct local impact. Track bills through committee and floor votes.
+  Search bills by keyword (Escambia, Pensacola, NAS, ECUA, etc.) for legislation
+  with direct local impact.
 
 ### Federal / Other
-- USACE public notices for bay and coastal projects:
-  https://www.saj.usace.army.mil/Missions/Regulatory/Public-Notices/
+- USACE public notices: https://www.saj.usace.army.mil/Missions/Regulatory/Public-Notices/
   Any permit application for work in Pensacola Bay, bayous, or coastal areas.
-- FAA Notices to Air Missions (NOTAMs) and environmental notices for PNS activity.
 - NOAA fisheries management notices affecting Gulf Coast operations.
 
 ### Courts and Legal Records
-- Florida state court portal: https://myeclerk.myorangeclerk.com or
-  https://www.escambiaclerk.com/official-records for Escambia County filings.
-- PACER (federal): check for any significant federal cases involving local entities.
-  Note case numbers and docket entries; do not report on filings without reading them.
+- Escambia Clerk: https://www.escambiaclerk.com/official-records
+- PACER for significant federal cases involving local entities.
+  Read the docket; do not report on a filing without reading it.
 
 ### Permits and Land Use
-- Escambia County permit search: https://myescambia.com/our-services/development-services
-- City of Pensacola building permits: https://www.mygovernmentonline.org (Pensacola)
-  Major permit applications — especially commercial, multifamily, or demolition —
-  surface development stories before press releases or groundbreakings are announced.
+- Escambia County Development Services: https://myescambia.com/our-services/development-services
+- City of Pensacola permits: https://www.mygovernmentonline.org
+  Major commercial, multifamily, or demolition permits surface stories before
+  groundbreakings are announced.
 - FDOT environmental notices (ETDM): https://etdmpub.fla-etat.org
-  New project screenings signal road or transit projects years in advance.
 
 ---
 
@@ -145,37 +159,67 @@ what happened at a meeting — go to the source document first.
   Legistar, BoardDocs, MuniDocs
 - Memos, ordinances, resolutions, RFPs, meeting video
 - Official agency press releases (city, county, NAS, UWF, FDOT, etc.)
-- Primary documents: court filings, audits, contracts, letters, budgets, permit applications
+- Primary documents: court filings, audits, contracts, letters, budgets, permits
 
-**NOT acceptable:**
-WEAR, Fox10, WKRG, PNJ, AOL, NorthEscambia.com, ricksblog, or any secondary
-outlet — even to lead to a primary source.
-If only secondary reporting exists and the primary document cannot be found, drop the story.
+**NOT acceptable as sources (usable only as leads per Step 4):**
+WEAR, Fox10, WKRG, PNJ, AOL, NorthEscambia.com, ricksblog, Gulf Breeze News,
+Island Times, Pensacola Forward, Inweekly, Florida Politics, or any secondary outlet.
+If the primary document behind a secondary report cannot be found, drop the story.
 
-## Step 5 — Verify recency and authenticity on every source
+## Step 6 — Verify recency and authenticity on every source
 
 For each candidate story:
-1. Confirm the actual URL loads and is a government or official agency domain.
-2. Confirm the publication or posting date on the primary document — not the date
-   a news aggregator indexed it.
+1. Confirm the URL loads and is a government or official agency domain.
+2. Confirm the publication or posting date on the primary document itself.
 3. Confirm the document falls within the requested time window.
-4. Confirm any dollar figures, vote counts, and named parties appear in the
-   document itself — not inferred from coverage.
+4. Confirm dollar figures, vote counts, and named parties appear in the
+   document — not inferred from coverage.
 
-Never trust aggregator dates. Go to the original page. If the primary document
-cannot be loaded or confirmed, drop the story from candidates.
+Never trust aggregator dates. If the primary document cannot be confirmed, drop the story.
 
-## Step 6 — Present candidates to Drew before writing
+## Step 7 — Assess data and visual potential for each candidate
+
+For each story candidate, before presenting it, evaluate whether it warrants
+an interactive or visual element embedded in the article body. The site supports
+inline React components, SVG charts, and HTML widgets alongside article prose.
+
+**Automatic triggers — always recommend a visual:**
+- Budget, spending, or financial stories with 3+ dollar figures → chart or table
+- Stories involving year-over-year comparison → bar chart or trend line
+- Road closures, construction zones, or geographic projects → map embed
+- Salary, compensation, or staffing stories → consider linking salary dashboard
+  or embedding a mini table
+- Phased projects with a timeline (construction, bond issuance, legislative calendar)
+  → timeline graphic
+- Election results or candidate filing counts → table or vote-share chart
+- Stories comparing two or more entities (city vs. county, this school vs. that one)
+  → side-by-side table
+
+**Evaluate case by case:**
+- Any story where numbers in prose would be clearer as a visual
+- Any story where geography matters to understanding the stakes
+- Any story where showing change over time is central to the argument
+
+**When recommending a visual, specify:**
+- What type (bar chart, map, timeline, table, etc.)
+- What data it would display
+- Where the data comes from (the primary document)
+- Whether it requires live data or can be static
+
+If a visual is warranted, flag it in the candidate list presented to Drew.
+Do not build the visual without approval — just identify the opportunity.
+
+## Step 8 — Present candidates to Drew before writing
 
 List each story candidate with:
 - Proposed headline
 - Primary source: the actual government document URL and its confirmed date
-  (not a news article — the agenda, resolution, press release, or filing itself)
 - One sentence on why it's worth covering
+- Visual/interactive flag if applicable (type of visual and data source)
 
 Wait for approval or cuts. Do not draft until approved.
 
-## Step 7 — Write to Flightline news style
+## Step 9 — Write to Flightline news style
 
 Every fact must trace to a document actually fetched and read.
 No fabricated names, composite quotes, invented details, or placeholder numbers.
@@ -194,43 +238,48 @@ Style rules:
 - Kicker = forward-motion fact
 - Dek: 1–2 complete sentences, no fragments, no em dashes
 
-## Step 8 — Pre-publish fact verification
+## Step 10 — Build visual/interactive element if approved
+
+If Drew approved a visual for the story, build it before finalizing the article body.
+
+**Standards:**
+- Use React (JSX) for interactive elements: charts, maps, calculators, sortable tables.
+- Use SVG for static diagrams or simple graphics.
+- All data must come from the primary source document — no invented or estimated values.
+- Label every axis, every data point, and include a source attribution line
+  (e.g., "Source: Escambia County FY2026 Budget, adopted Sept. 19, 2025").
+- Color palette: navy #1e2d4a, gold #d4952b, white #ffffff. No other colors unless
+  the data requires a third category.
+- Mobile-friendly: components must render cleanly at 375px width.
+- The visual is embedded in the article body as an inline component reference
+  or iframe, not a separate page — confirm with Drew how to wire it into the
+  article template before building.
+
+## Step 11 — Pre-publish fact verification
 
 Before finalizing the article JSON, run this checklist against the source document:
 
-- Every named person: confirm name spelling and title against the primary document.
+- Every named person: confirm spelling and title against the primary document.
 - Every dollar figure: confirm against the primary document — no rounding unless
   the document itself rounds.
-- Every vote count: confirm (e.g., "voted 5-2" must appear in minutes or be
-  inferable from a roll call in the agenda packet).
+- Every vote count: confirm from minutes or a roll call in the agenda packet.
 - Every date: confirm the event date, not the document posting date.
-- Every quote: if direct quotes appear, confirm they came from official video,
-  a press release, or a public statement — never paraphrase into quotation marks.
+- Every quote: confirm it came from official video, a press release, or a public
+  statement — never paraphrase into quotation marks.
 - Article slug (id): confirm it does not already exist as a key in og-data.json.
-  If it does, modify the slug (e.g., append `-2`) before proceeding.
 
-If any item cannot be verified against the primary document, rewrite that
-sentence as a paraphrase attributed to the source, or cut it.
-
-## Step 9 — Identify image
-
-Find a public domain image appropriate to the story.
-Sources: Wikimedia Commons, NARA, LOC, U.S. Navy, NOAA, Unsplash.
-Record the filename. If none exists, use default and flag it.
-
-## Step 10 — Validate article HTML before push
+## Step 12 — Validate article HTML before push
 
 Before inserting the article body into pending_articles.json:
-1. Scan the `body` string for unescaped apostrophes in possessives and contractions.
-   Any apostrophe inside a JS string delimited by single quotes will break the file.
-   Escape as `\'` or rewrite the sentence to avoid the contraction.
-2. Scan the `dek` and `brief` array strings for the same issue.
-3. Confirm all `<p>` tags are closed. Confirm no tags other than `<p>` and `<h2>`
-   appear in the body unless explicitly approved.
-4. Confirm the `brief` array has exactly 3 strings.
-5. Confirm the `date` field matches "Month D, YYYY" format exactly.
+1. Scan `body`, `dek`, and `brief` strings for unescaped apostrophes.
+   Any apostrophe inside a JS single-quoted string breaks the file. Escape as `\'`
+   or rewrite to avoid the contraction.
+2. Confirm all `<p>` tags are closed.
+3. Confirm no tags other than `<p>` and `<h2>` appear in body unless approved.
+4. Confirm `brief` array has exactly 3 strings.
+5. Confirm `date` field matches "Month D, YYYY" format exactly.
 
-## Step 11 — Push
+## Step 13 — Push
 
 Add new article object to pending_articles.json array.
 Add new og-data entry keyed by article id.
