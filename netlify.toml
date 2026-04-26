@@ -4,3 +4,15 @@
 [[edge_functions]]
   function = "og"
   path = "/story/*"
+
+# Allow social media crawlers through on story pages
+[[headers]]
+  for = "/story/*"
+  [headers.values]
+    X-Robots-Tag = "index, follow"
+
+# Allow crawlers on robots.txt
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
