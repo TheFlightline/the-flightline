@@ -5,21 +5,28 @@
   function = "og"
   path = "/story/*"
 
-# Disable bot protection on story pages so social crawlers can reach the edge function
-[[headers]]
-  for = "/story/*"
-  [headers.values]
-    X-Robots-Tag = "index, follow"
-    Access-Control-Allow-Origin = "*"
+# SPA fallback: serve index.html for all /story/* routes (browsers only, crawlers handled by edge fn)
+[[redirects]]
+  from = "/story/*"
+  to = "/index.html"
+  status = 200
+  force = false
 
-[[headers]]
-  for = "/assets/articles.js"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Cache-Control = "public, max-age=300"
+# Catch-all SPA fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
 
 [[headers]]
   for = "/images/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
     Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=300"
