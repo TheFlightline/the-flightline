@@ -43,20 +43,94 @@ what is circulating. These sources are used ONLY to generate leads — they are 
 cited in Flightline articles. The job here is to notice that something happened and
 then find the primary document that proves it.
 
-Sources to scan for leads:
-- Gulf Breeze News: https://news.gulfbreezenews.com
-- Island Times (Pensacola Beach): https://www.myislandtimes.com
-- Pensacola Forward (economic development): https://www.pensacolaforward.com
-- Inweekly: https://ricksblog.biz (note: opinion-heavy; verify everything independently)
-- WUWF 88.1 (NPR Pensacola): https://www.wuwf.org
-- Florida Politics (state legislation with local impact): https://floridapolitics.com
-- Navy Times / USNI News (NAS and military stories): https://www.navytimes.com / https://news.usni.org
-- AP Florida wire and local Google News alerts
+**Tier 1 — Highest signal value (reporters attend meetings, read documents):**
 
-Rule: If a secondary source reports something newsworthy, do not write from it.
+- Pensacola News Journal: https://www.pnj.com
+  Gannett-owned daily. The most staffed local newsroom. Reporters cover city
+  hall, county commission, courts, education, and military. When PNJ breaks
+  a government or courts story, a primary document almost always exists — find it.
+  Best beats to monitor: government votes, court filings, education budget, NAS.
+  Limitation: paywalled; many stories require a subscription to read fully.
+
+- WUWF 88.1 NPR Pensacola: https://www.wuwf.org
+  Public radio, solid sourcing standards, good on state legislation with local
+  impact and long-form accountability pieces. Smaller staff than PNJ but
+  editorially rigorous.
+
+**Tier 2 — Useful signal, verify everything (attend meetings but shallower sourcing):**
+
+- WEAR TV: https://weartv.com
+  Broadcast news. Attends press conferences and government meetings, quotes
+  officials on camera. Good for spotting that something happened; rarely has
+  enough document detail to reconstruct the full story. Best use: confirming
+  a vote or announcement occurred, then going to the agenda packet for specifics.
+
+- Fox10 (WALA): https://www.fox10tv.com
+  Similar to WEAR. Useful for breaking news alerts and press conference coverage.
+
+- WKRG: https://www.wkrg.com
+  Primarily Mobile-based but covers Pensacola. Use for regional stories with
+  local angles — naval aviation, Gulf Coast weather, I-10 corridor.
+
+**Tier 3 — High lead value, low reliability (frequent scoops, verify aggressively):**
+
+- Rick's Blog / Inweekly: https://ricksblog.biz
+  Rick Outzen has covered Pensacola politics for decades and is frequently
+  first on local government stories, contract disputes, and official misconduct.
+  Also frequently wrong on specifics and openly editorializes. Treat every
+  claim as a lead, not a fact. If Outzen says the city is considering X, go
+  find the resolution or memo — do not assume his characterization is accurate.
+  High value for spotting stories other outlets miss; zero value as a citation.
+
+- NorthEscambia.com: https://www.northescambia.com
+  Covers Cantonment, Century, Molino, and north county with genuine community
+  presence. Good for leads on rural/north Escambia government actions,
+  school board north county angles, and emergency response. Same rule: lead
+  only, verify with primary document.
+
+**Tier 4 — Community/lifestyle (leads for community beat only):**
+
+- Local Pulse: https://localpulse.com
+  "Good news" community site. Business openings, nonprofit spotlights, people
+  profiles, events. Not a hard news source and does not cover government or
+  investigations. Useful only for community beat leads: new businesses downtown,
+  nonprofit fundraising milestones, notable openings or closings. Never a source
+  for government, development, military, or education stories.
+
+- Gulf Breeze News: https://news.gulfbreezenews.com
+  Small weekly serving Gulf Breeze and Pensacola Beach. Good for SRIA actions,
+  Gulf Breeze council, and Pensacola Beach development. Thin staff; use as a
+  lead pointer to SRIA agendas and Gulf Breeze AgendaCenter.
+
+- Island Times: https://www.myislandtimes.com
+  Pensacola Beach-focused. Events, SRIA items, beach construction notices.
+  Same treatment as Gulf Breeze News.
+
+**Tier 5 — State/regional/trade (legislative and military leads):**
+
+- Pensacola Forward: https://www.pensacolaforward.com
+  Economic development focus. Good for business attraction announcements,
+  Triumph Gulf Coast actions, and port/airport stories. Often first with
+  economic development news but sourced from press releases; find the
+  underlying Triumph board action or city resolution.
+
+- Florida Politics: https://floridapolitics.com
+  State legislature and statewide politics. Best use: tracking bills with
+  local impact (DEI, vouchers, municipal finance, military). Cross-reference
+  with floridahouse.gov and flsenate.gov for bill text and vote records.
+
+- Navy Times / USNI News: https://www.navytimes.com / https://news.usni.org
+  National military trade press. Essential for NAS Pensacola stories with
+  broader Navy context — unit activations, budget cuts, training changes,
+  command decisions. Find the Navy press release or official notice to confirm.
+
+- AP Florida wire and Google News local alerts for Pensacola/Escambia.
+
+**The rule for all tiers:**
+If a secondary source reports something newsworthy, do not write from it.
 Find the primary document — the agenda, resolution, press release, court filing,
-or permit — and write from that. If the primary document cannot be found, the
-story does not run.
+or permit — and write from that. If the primary document cannot be found and
+confirmed, the story does not run.
 
 ## Step 5 — Fetch government meeting agendas and primary documents
 
@@ -296,3 +370,4 @@ The three articles currently in pending_articles.json contain fabricated
 names, invented quotes, and unverifiable sourced details. They must be
 reviewed with Drew before publication. Do not push them to the live site
 without explicit approval.
+
