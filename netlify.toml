@@ -1,18 +1,17 @@
 [build]
   publish = "."
+  functions = "netlify/functions"
 
 [[edge_functions]]
   function = "og"
   path = "/story/*"
 
-# SPA fallback: serve index.html for all /story/* routes (browsers only, crawlers handled by edge fn)
 [[redirects]]
   from = "/story/*"
   to = "/index.html"
   status = 200
   force = false
 
-# Catch-all SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"
