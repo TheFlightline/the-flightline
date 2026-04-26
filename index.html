@@ -899,14 +899,19 @@
       <div class="static-form" style="margin-top:32px;">
         <div class="static-form-title">Send Us a Tip</div>
         <div class="static-form-sub">Have a document, a lead, or something the city would rather you didn't see? Send it. We read everything.</div>
-        <div class="static-form-row">
-          <div><label>Name (optional)</label><input type="text" placeholder="Your name"></div>
-          <div><label>Email (optional)</label><input type="email" placeholder="For follow-up"></div>
-        </div>
-        <div class="static-form-row full">
-          <div><label>What's the tip?</label><textarea placeholder="Tell us what's going on. You can be anonymous."></textarea></div>
-        </div>
-        <button class="static-form-btn">Send Tip →</button>
+        <form name="tip-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleTipSubmit(event)">
+          <input type="hidden" name="form-name" value="tip-form">
+          <input type="hidden" name="bot-field" style="display:none">
+          <div class="static-form-row">
+            <div><label>Name (optional)</label><input type="text" name="name" placeholder="Your name"></div>
+            <div><label>Email (optional)</label><input type="email" name="email" placeholder="For follow-up"></div>
+          </div>
+          <div class="static-form-row full">
+            <div><label>What's the tip?</label><textarea name="tip" placeholder="Tell us what's going on. You can be anonymous."></textarea></div>
+          </div>
+          <button type="submit" class="static-form-btn">Send Tip →</button>
+        </form>
+        <div id="tip-form-success" style="display:none;padding:16px 0;color:var(--navy);font-weight:600;">Got it. We'll take it from here.</div>
         <div class="static-form-note">Tips may be submitted anonymously. We protect our sources.</div>
       </div>
 
