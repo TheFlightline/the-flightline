@@ -2,10 +2,6 @@
   publish = "."
   functions = "netlify/functions"
 
-[[edge_functions]]
-  function = "og"
-  path = "/story/*"
-
 [[redirects]]
   from = "/*"
   to = "/index.html"
