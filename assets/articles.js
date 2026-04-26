@@ -2648,7 +2648,7 @@ Object.assign(A, {
         {vendor:'Signage',purpose:'Campaign Materials',amt:300}
       ],
       donorNote:"Williams' $6,000 in in-kind comes from local media and PR firms — video production, website creation, PR services — professionally supported campaign despite modest cash fundraising. Three donors gave the maximum $1,000.",
-      expNote:'Has spent only 31% of his cash raised. The campaign\'s in-kind professional support (film, PR, web) is doing significant work that does not appear in expenditures.'
+      expNote:"Has spent only 31% of his cash raised. The campaign's in-kind professional support (film, PR, web) is doing significant work that does not appear in expenditures." 
     },
     brown: {
       name:'Jasmine Brown', color:'#6B8FA8',
