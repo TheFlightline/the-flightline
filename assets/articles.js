@@ -2583,7 +2583,7 @@ Object.assign(A, {
         {vendor:'Google',purpose:'Email Hosting',amt:42.34}
       ],
       donorNote:'55 of 106 donors gave the maximum $1,000. Donors include former Mayor Ashton Hayward, Commissioner Ashlee Hofberger, and SOE David Stafford. Donor mix: $49,475 individual / $19,000 business / $4,500 political party.',
-      expNote:'Spent heavily on Mardi Gras parade throws — a signature retail-politics move — and digital advertising. Has spent less than 7% of what he raised, by far the lowest burn rate in the race.'
+      expNote:'Spent heavily on Mardi Gras parade throws and digital advertising. Has spent less than 7% of what he raised — by far the lowest burn rate in the race.'
     },
     hill: {
       name:'Ann Hill', color:'#D4871A',
@@ -2603,8 +2603,8 @@ Object.assign(A, {
         {vendor:'Vistaprint',purpose:'Printing',amt:149.41},
         {vendor:'Facebook',purpose:'Digital Marketing',amt:168.54}
       ],
-      donorNote:"Hill's $10,364 in in-kind — all self-contributed repurposed materials from her 2022 District 6 race — inflate her totals significantly. Her cash donor base is small-dollar individuals; largest single donor gave $500.",
-      expNote:'Spending is almost entirely printing. Hill has burned 94% of her cash raised — running a lean, print-heavy ground game with minimal digital infrastructure.'
+      donorNote:"Hill's $10,364 in in-kind contributions — all self-contributed repurposed materials from her 2022 District 6 race — inflate her totals significantly. Cash donors are small-dollar individuals; largest single donor gave $500.",
+      expNote:'Spending is almost entirely printing. Hill has burned 94% of her cash raised, running a lean print-heavy ground game with minimal digital infrastructure.'
     },
     trawick: {
       name:'Alicia Trawick', color:'#2E6DA4',
@@ -2627,7 +2627,7 @@ Object.assign(A, {
         {vendor:'Pensacola Mardi Gras',purpose:'Parade Entry Fee',amt:355}
       ],
       donorNote:'Two largest donors gave $1,000 each. Uses ActBlue for small-dollar online fundraising. Donor base is largely individual contributors with no business donors at top.',
-      expNote:'Highest burn rate in the race at 85% of cash raised. Spending concentrated on yard signs, printed materials, and canvassing data — a traditional ground-game approach.'
+      expNote:'Highest burn rate in the race at 85% of cash raised. Spending concentrated on yard signs, printed materials, and canvassing data.'
     },
     williams: {
       name:'Jermaine Williams', color:'#3A7CA5',
@@ -2647,8 +2647,8 @@ Object.assign(A, {
         {vendor:'Various',purpose:'Events / Food',amt:400},
         {vendor:'Signage',purpose:'Campaign Materials',amt:300}
       ],
-      donorNote:"Williams' $6,000 in in-kind comes from local media and PR firms — video production, website creation, PR services — professionally supported campaign despite modest cash fundraising. Three donors gave the maximum $1,000.",
-      expNote:"Has spent only 31% of his cash raised. The campaign's in-kind professional support (film, PR, web) is doing significant work that does not appear in expenditures." 
+      donorNote:"Williams' $6,000 in in-kind comes from local media and PR firms — video production, website creation, PR services. Three donors gave the maximum $1,000.",
+      expNote:"Has spent only 31% of his cash raised. The campaign's in-kind professional support — film, PR, web — is doing significant work that does not appear in expenditures."
     },
     brown: {
       name:'Jasmine Brown', color:'#6B8FA8',
@@ -2667,25 +2667,57 @@ Object.assign(A, {
         {vendor:'FedEx / Printing',purpose:'Materials',amt:80}
       ],
       donorNote:'Funded almost entirely through small-dollar ActBlue donations including $206 she contributed herself. Largest single outside donor gave $103. No donors near the $1,000 maximum.',
-      expNote:'Has spent 65% of cash raised. Spending is minimal — yard signs, website hosting, and printing. Running the most grassroots operation in the field.'
+      expNote:'Has spent 65% of cash raised. Spending is minimal: yard signs, website hosting, and printing. Running the most grassroots operation in the field.'
     }
   };
 
   var order = ['reeves','hill','trawick','williams','brown'];
 
-  function fmt(n){
-    return '$' + Math.round(n).toLocaleString('en-US');
+  function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+
+  // Animated counter — counts up from 0 to target over ~600ms
+  function animateCount(el, target) {
+    var start = 0;
+    var duration = 600;
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      // Ease out cubic
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.round(eased * target);
+      el.textContent = '$' + current.toLocaleString('en-US');
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Animate all bars in the chart after render
+  function animateBars() {
+    var bars = document.querySelectorAll('.mrf-bar-fill');
+    bars.forEach(function(bar) {
+      var target = bar.getAttribute('data-pct');
+      bar.style.width = '0%';
+      // Small delay so browser registers the 0% before transitioning
+      setTimeout(function(){ bar.style.width = target + '%'; }, 30);
+    });
+    var nums = document.querySelectorAll('.mrf-animated-num');
+    nums.forEach(function(el) {
+      var target = parseFloat(el.getAttribute('data-val'));
+      animateCount(el, target);
+    });
   }
 
   function bar(val, max, color, label, link) {
-    var pct = max > 0 ? Math.max(2, val/max*100) : 0;
+    var pct = max > 0 ? Math.max(2, val / max * 100) : 0;
+    var displayColor = color === '#D4871A' ? '#B5720F' : color;
     return '<a href="' + link + '" target="_blank" rel="noopener" style="text-decoration:none;display:block;margin-bottom:16px;">' +
       '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">' +
         '<span style="font-size:13px;font-weight:700;color:#1E2D4A;">' + label + '</span>' +
-        '<span style="font-size:13px;font-weight:700;color:' + (color === '#D4871A' ? '#B5720F' : color) + ';">' + fmt(val) + '</span>' +
+        '<span class="mrf-animated-num" data-val="' + Math.round(val) + '" style="font-size:13px;font-weight:700;color:' + displayColor + ';">' + fmt(val) + '</span>' +
       '</div>' +
       '<div style="background:#e0ddd8;border-radius:3px;height:22px;overflow:hidden;">' +
-        '<div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:3px;transition:width .7s cubic-bezier(.4,0,.2,1);"></div>' +
+        '<div class="mrf-bar-fill" data-pct="' + pct.toFixed(2) + '" style="height:100%;width:0%;background:' + color + ';border-radius:3px;transition:width .75s cubic-bezier(.4,0,.2,1);"></div>' +
       '</div>' +
     '</a>';
   }
@@ -2707,7 +2739,7 @@ Object.assign(A, {
     var maxVal = Math.max.apply(null, order.map(function(k){ return C[k].spent; }));
     return order.map(function(k) {
       var c = C[k];
-      var burnPct = c.monetary > 0 ? Math.round(c.spent/c.monetary*100) : 0;
+      var burnPct = c.monetary > 0 ? Math.round(c.spent / c.monetary * 100) : 0;
       return bar(c.spent, maxVal, c.color, c.name, c.soe) +
         '<div style="margin-top:-10px;margin-bottom:14px;font-size:11px;color:#666;">' + burnPct + '% of cash raised spent</div>';
     }).join('');
@@ -2756,6 +2788,7 @@ Object.assign(A, {
   window.mrfTab = function(mode) {
     ['raised','spent','donors','expenses'].forEach(function(t) {
       var btn = document.getElementById('mrf-t-' + t);
+      if (!btn) return;
       if (t === mode) {
         btn.style.color = '#F5F3EE';
         btn.style.borderBottomColor = '#D4871A';
@@ -2765,13 +2798,17 @@ Object.assign(A, {
       }
     });
     var chart = document.getElementById('mrf-chart');
+    if (!chart) return;
     if (mode === 'raised') chart.innerHTML = renderRaised();
     else if (mode === 'spent') chart.innerHTML = renderSpent();
     else if (mode === 'donors') chart.innerHTML = renderDonors();
     else chart.innerHTML = renderExpenses();
+    // Trigger animations on bar views
+    if (mode === 'raised' || mode === 'spent') {
+      animateBars();
+    }
   };
 
-  // Defer init until article DOM is rendered by app.js
   function mrfInit() {
     var el = document.getElementById('mrf-chart');
     if (el) { mrfTab('raised'); } else { setTimeout(mrfInit, 100); }
