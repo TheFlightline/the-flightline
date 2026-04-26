@@ -2526,7 +2526,7 @@ Object.assign(A, {
 "mayors-race-2026-primer": {
   cat: "govt",
   label: "Politics",
-  thumbnail: "/images/mayors-race-banner.jpg",
+  thumbnail: "/images/mayors_candidates.jpg",
   headline: "Five Candidates Have Filed for the 2026 Pensacola Mayor's Race. Here's Where the Field Stands.",
   dek: "Five candidates have pre-filed for Pensacola mayor, setting up the most contested mayoral cycle since the 2022 election that put Mayor D.C. Reeves in office. The primary is August 18. If no one clears 50 percent, the top two finishers face a November 3 runoff.",
   byline: "The Flightline Staff",
