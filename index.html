@@ -830,22 +830,27 @@
       <div class="static-form">
         <div class="static-form-title">Sign Up — It's Free</div>
         <div class="static-form-sub">Join readers across Pensacola and Escambia County who start their day with The Flightline.</div>
-        <div class="static-form-row">
-          <div><label>First Name</label><input type="text" placeholder="First name"></div>
-          <div><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
-        </div>
-        <div class="static-form-row full">
-          <div><label>What do you care most about?</label>
-          <select>
-            <option>Everything — send it all</option>
-            <option>Local government &amp; politics</option>
-            <option>Development &amp; infrastructure</option>
-            <option>Arts, events &amp; culture</option>
-            <option>Military &amp; NAS Pensacola</option>
-            <option>Education &amp; schools</option>
-          </select></div>
-        </div>
-        <button class="static-form-btn">Subscribe to the Newsletter →</button>
+        <form name="newsletter-signup" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleNewsletterSubmit(event)">
+          <input type="hidden" name="form-name" value="newsletter-signup">
+          <input type="hidden" name="bot-field" style="display:none">
+          <div class="static-form-row">
+            <div><label>First Name</label><input type="text" name="first-name" placeholder="First name"></div>
+            <div><label>Email Address</label><input type="email" name="email" placeholder="you@email.com" required></div>
+          </div>
+          <div class="static-form-row full">
+            <div><label>What do you care most about?</label>
+            <select name="interests">
+              <option>Everything — send it all</option>
+              <option>Local government &amp; politics</option>
+              <option>Development &amp; infrastructure</option>
+              <option>Arts, events &amp; culture</option>
+              <option>Military &amp; NAS Pensacola</option>
+              <option>Education &amp; schools</option>
+            </select></div>
+          </div>
+          <button type="submit" class="static-form-btn">Subscribe to the Newsletter →</button>
+        </form>
+        <div id="newsletter-signup-success" style="display:none;padding:16px 0;color:var(--navy);font-weight:600;">You're on the list. First edition lands tomorrow morning.</div>
         <div class="static-form-note">Free forever. Unsubscribe any time. No spam — just Pensacola.</div>
       </div>
 
