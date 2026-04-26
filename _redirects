@@ -1,15 +1,6 @@
-/all                     /index.html   200
-/category/*              /index.html   200
-/story/*                 /index.html   200
-/community-calendar      /index.html   200
-/about                   /index.html   200
-/newsletter              /index.html   200
-/our-mission             /index.html   200
-/letters                 /index.html   200
-/tips                    /index.html   200
-/advertise               /index.html   200
-/subscribe               /index.html   200
-/privacy                 /index.html   200
-/terms                   /index.html   200
-/contact                 /index.html   200
-/pay                     /index.html   200
+/story/:id  /.netlify/functions/og-social  200  User-Agent=facebookexternalhit*
+/story/:id  /.netlify/functions/og-social  200  User-Agent=Facebot*
+/story/:id  /.netlify/functions/og-social  200  User-Agent=Twitterbot*
+/story/:id  /.netlify/functions/og-social  200  User-Agent=LinkedInBot*
+/story/:id  /index.html  200
+/*  /index.html  200
