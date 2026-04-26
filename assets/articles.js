@@ -2771,7 +2771,12 @@ Object.assign(A, {
     else chart.innerHTML = renderExpenses();
   };
 
-  mrfTab('raised');
+  // Defer init until article DOM is rendered by app.js
+  function mrfInit() {
+    var el = document.getElementById('mrf-chart');
+    if (el) { mrfTab('raised'); } else { setTimeout(mrfInit, 100); }
+  }
+  setTimeout(mrfInit, 50);
 })();
 </script>
 
