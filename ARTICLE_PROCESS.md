@@ -40,9 +40,8 @@ exists, flag it and use `/images/flightline-og-default.jpg` as fallback.
 
 This step is mandatory before surfacing any story candidate. Act like a reporter
 working a beat: pull the actual documents from every relevant government body
-covering the requested time window.
-
-**Required sources to check every round:**
+covering the requested time window. Do not rely on news coverage to discover
+what happened at a meeting — go to the source document first.
 
 ### City of Pensacola
 - Legistar meeting calendar: https://pensacola.legistar.com/Calendar.aspx
@@ -50,7 +49,7 @@ covering the requested time window.
   in the window. Pull the agenda packet PDF for each meeting found.
 - City newsflash/press releases: https://www.cityofpensacola.com/m/newsflash
 
-### Escambia County
+### Escambia County BCC
 - CivicClerk portal: https://escambiacofl.civicclerk.com/web/Home.aspx
   Fetch agenda packets for BCC regular meetings, committee of the whole, and
   any special meetings in the window.
@@ -64,63 +63,114 @@ covering the requested time window.
 
 ### Santa Rosa County
 - BCC agendas: https://www.santarosa.fl.gov/agendacenter
-- Santa Rosa County School Board: check district site for meeting agendas
+- Santa Rosa County School Board: https://www.santarosa.k12.fl.us (check meeting agendas)
 
 ### Gulf Breeze City Council
-- AgendaCenter: https://www.cityofgulfbreeze.us/agendacenter or equivalent
+- AgendaCenter: https://www.cityofgulfbreeze.us/agendacenter
+
+### Santa Rosa Island Authority (governs Pensacola Beach)
+- SRIA meetings and agendas: https://www.sria.fl.gov
+  SRIA board actions cover leases, beach development approvals, and Pensacola Beach policy.
+  Check every round — SRIA agendas surface development stories before press releases exist.
+
+### ECUA (Emerald Coast Utilities Authority)
+- ECUA board agendas: https://www.ecua.fl.gov
+  ECUA is the largest utility authority in the area. Rate changes, major infrastructure
+  projects, and board contract awards belong in this publication.
+
+### Triumph Gulf Coast
+- Board meeting notices and grant awards: https://triumphgulf.org
+  Triumph controls hundreds of millions in BP settlement funds for NW Florida.
+  Grant awards and project approvals are significant economic development stories.
 
 ### NAS Pensacola / Military
-- Naval Air Station Pensacola public affairs releases: check navy.mil and
-  navalaviationmuseum.org for any base policy changes, unit activations, or
-  command announcements
-- Blue Angels: https://www.blueangels.navy.mil/show/ for schedule changes
+- Naval Air Station Pensacola public affairs: https://www.cnic.navy.mil/regions/cnrse/installations/nas_pensacola.html
+- Blue Angels schedule and policy changes: https://www.blueangels.navy.mil/show/
+- National Naval Aviation Museum: https://navalaviationmuseum.org/blueangels/
+  Check for any base access policy updates, unit activations, or command announcements.
 
 ### FDOT / Transportation
 - Northwest Florida Roads: https://nwflroads.com
-  Search for active projects in Escambia and Santa Rosa counties.
+  Search active projects in Escambia and Santa Rosa counties.
   Fetch any new project notices, lane closure announcements, or public meeting notices.
-- TPO (Pensacola Bay Area Transportation Planning Organization):
-  Check https://www.pensacola-tpo.org for any new TIP amendments or meeting actions.
+- TPO: https://www.pensacola-tpo.org
+  Check for TIP amendments, public meetings, and new project initiations.
 
-### Other agencies to check each round:
-- Pensacola International Airport: https://flypensacola.com and https://transformpns.com
-- Port of Pensacola: https://portofpensacola.com/news
-- UWF: https://uwf.edu/news
+### Port of Pensacola
+- Port news and board agendas: https://portofpensacola.com/news
+
+### Pensacola International Airport
+- Airport news and construction updates: https://flypensacola.com and https://transformpns.com
+
+### UWF
+- UWF news: https://uwf.edu/news
+  Check for any budget actions, enrollment figures, athletics news, or grant awards.
+
+### Elections
 - Escambia County Supervisor of Elections: https://escambiavotes.gov/news
-  (especially during election filing periods)
+- Santa Rosa County Supervisor of Elections: https://santarosavotes.gov
+  During qualifying and election periods, check candidate filings daily.
 
-**How to fetch:**
-- For each source, load the calendar or agenda center page.
-- Identify every meeting that falls within the requested time window.
-- Fetch the agenda or packet document directly (PDF or HTML).
-- Read it. Note any items with dollar amounts, votes, contract awards,
-  ordinance readings, rezoning requests, personnel actions, or public hearings.
-- These items are your raw story candidates. Do not rely on news coverage
-  to discover what happened at meetings — go to the document.
+### Florida Legislature (when session is active or bills affect Pensacola)
+- Florida House: https://www.floridahouse.gov
+- Florida Senate: https://www.flsenate.gov
+  Search bills by keyword (Escambia, Pensacola, NAS, ECUA, etc.) for any legislation
+  with direct local impact. Track bills through committee and floor votes.
+
+### Federal / Other
+- USACE public notices for bay and coastal projects:
+  https://www.saj.usace.army.mil/Missions/Regulatory/Public-Notices/
+  Any permit application for work in Pensacola Bay, bayous, or coastal areas.
+- FAA Notices to Air Missions (NOTAMs) and environmental notices for PNS activity.
+- NOAA fisheries management notices affecting Gulf Coast operations.
+
+### Courts and Legal Records
+- Florida state court portal: https://myeclerk.myorangeclerk.com or
+  https://www.escambiaclerk.com/official-records for Escambia County filings.
+- PACER (federal): check for any significant federal cases involving local entities.
+  Note case numbers and docket entries; do not report on filings without reading them.
+
+### Permits and Land Use
+- Escambia County permit search: https://myescambia.com/our-services/development-services
+- City of Pensacola building permits: https://www.mygovernmentonline.org (Pensacola)
+  Major permit applications — especially commercial, multifamily, or demolition —
+  surface development stories before press releases or groundbreakings are announced.
+- FDOT environmental notices (ETDM): https://etdmpub.fla-etat.org
+  New project screenings signal road or transit projects years in advance.
+
+---
 
 **Acceptable sources (full list):**
 - Government agenda packets fetched directly from CivicClerk, AgendaCenter,
   Legistar, BoardDocs, MuniDocs
 - Memos, ordinances, resolutions, RFPs, meeting video
 - Official agency press releases (city, county, NAS, UWF, FDOT, etc.)
-- Primary documents: court filings, audits, contracts, letters, budgets
+- Primary documents: court filings, audits, contracts, letters, budgets, permit applications
 
 **NOT acceptable:**
 WEAR, Fox10, WKRG, PNJ, AOL, NorthEscambia.com, ricksblog, or any secondary
 outlet — even to lead to a primary source.
 If only secondary reporting exists and the primary document cannot be found, drop the story.
 
-## Step 5 — Verify recency on every source
+## Step 5 — Verify recency and authenticity on every source
 
-Confirm the actual URL, the actual publication date on the primary document,
-and that it falls within the requested time window.
-Never trust aggregator dates. Go to the original page.
+For each candidate story:
+1. Confirm the actual URL loads and is a government or official agency domain.
+2. Confirm the publication or posting date on the primary document — not the date
+   a news aggregator indexed it.
+3. Confirm the document falls within the requested time window.
+4. Confirm any dollar figures, vote counts, and named parties appear in the
+   document itself — not inferred from coverage.
+
+Never trust aggregator dates. Go to the original page. If the primary document
+cannot be loaded or confirmed, drop the story from candidates.
 
 ## Step 6 — Present candidates to Drew before writing
 
 List each story candidate with:
 - Proposed headline
-- Primary source URL and date (the actual government document, not a news article)
+- Primary source: the actual government document URL and its confirmed date
+  (not a news article — the agenda, resolution, press release, or filing itself)
 - One sentence on why it's worth covering
 
 Wait for approval or cuts. Do not draft until approved.
@@ -144,13 +194,43 @@ Style rules:
 - Kicker = forward-motion fact
 - Dek: 1–2 complete sentences, no fragments, no em dashes
 
-## Step 8 — Identify image
+## Step 8 — Pre-publish fact verification
+
+Before finalizing the article JSON, run this checklist against the source document:
+
+- Every named person: confirm name spelling and title against the primary document.
+- Every dollar figure: confirm against the primary document — no rounding unless
+  the document itself rounds.
+- Every vote count: confirm (e.g., "voted 5-2" must appear in minutes or be
+  inferable from a roll call in the agenda packet).
+- Every date: confirm the event date, not the document posting date.
+- Every quote: if direct quotes appear, confirm they came from official video,
+  a press release, or a public statement — never paraphrase into quotation marks.
+- Article slug (id): confirm it does not already exist as a key in og-data.json.
+  If it does, modify the slug (e.g., append `-2`) before proceeding.
+
+If any item cannot be verified against the primary document, rewrite that
+sentence as a paraphrase attributed to the source, or cut it.
+
+## Step 9 — Identify image
 
 Find a public domain image appropriate to the story.
 Sources: Wikimedia Commons, NARA, LOC, U.S. Navy, NOAA, Unsplash.
 Record the filename. If none exists, use default and flag it.
 
-## Step 9 — Push
+## Step 10 — Validate article HTML before push
+
+Before inserting the article body into pending_articles.json:
+1. Scan the `body` string for unescaped apostrophes in possessives and contractions.
+   Any apostrophe inside a JS string delimited by single quotes will break the file.
+   Escape as `\'` or rewrite the sentence to avoid the contraction.
+2. Scan the `dek` and `brief` array strings for the same issue.
+3. Confirm all `<p>` tags are closed. Confirm no tags other than `<p>` and `<h2>`
+   appear in the body unless explicitly approved.
+4. Confirm the `brief` array has exactly 3 strings.
+5. Confirm the `date` field matches "Month D, YYYY" format exactly.
+
+## Step 11 — Push
 
 Add new article object to pending_articles.json array.
 Add new og-data entry keyed by article id.
