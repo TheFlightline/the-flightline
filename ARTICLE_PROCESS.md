@@ -442,10 +442,26 @@ GitHub Contents API. Always use the Git Data API flow:
 
 1. GET /git/refs/heads/main → base commit SHA
 2. GET /git/commits/:sha → tree SHA
-3. POST /git/blobs with base64-encoded file content → blob SHA
-4. POST /git/trees with base_tree + path assets/articles.js + blob SHA → tree SHA
-5. POST /git/commits with message, new tree SHA, parent commit SHA → commit SHA
-6. PATCH /git/refs/heads/main with new commit SHA
+3. Patch the "Updated" timestamp in index.html (see below)
+4. POST /git/blobs for articles.js with base64-encoded file content → blob SHA
+5. POST /git/blobs for index.html with updated timestamp → blob SHA
+6. POST /git/trees with base_tree + both file paths and blob SHAs → tree SHA
+7. POST /git/commits with message, new tree SHA, parent commit SHA → commit SHA
+8. PATCH /git/refs/heads/main with new commit SHA
+
+**Updating the "Updated" timestamp in index.html:**
+Every push must update the `last-updated-stamp` span in `index.html` with the
+current local time. Find and replace this pattern:
+
+  `id="last-updated-stamp">Updated H:MM AM</span>`
+
+with:
+
+  `id="last-updated-stamp">Updated {current_time}</span>`
+
+where `current_time` is formatted as e.g. `7:51 PM`. The JS block that previously
+set this from `new Date()` has been removed from app.js — the HTML value is now
+authoritative and only changes when a push is made.
 
 **Article insertion point:** New articles go immediately after `Object.assign(A, {` at the
 top of the file — this ensures they sort as newest in the feed.
