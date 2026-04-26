@@ -1,6 +1,1 @@
-/story/:id  /.netlify/functions/og-social  200  User-Agent=facebookexternalhit*
-/story/:id  /.netlify/functions/og-social  200  User-Agent=Facebot*
-/story/:id  /.netlify/functions/og-social  200  User-Agent=Twitterbot*
-/story/:id  /.netlify/functions/og-social  200  User-Agent=LinkedInBot*
-/story/:id  /index.html  200
 /*  /index.html  200
