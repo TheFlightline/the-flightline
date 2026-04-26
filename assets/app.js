@@ -3385,7 +3385,16 @@ document.addEventListener('DOMContentLoaded', function() {
   setInterval(renderStrip, 60000);
 })();
 
-// LAST UPDATED TIMESTAMP — set at deploy time in index.html
+// LAST UPDATED TIMESTAMP — epoch embedded at deploy time, formatted in user's local TZ
+(function() {
+  const el = document.getElementById('last-updated-stamp');
+  if (!el) return;
+  const epoch = parseInt(el.getAttribute('data-deploy'), 10);
+  if (!epoch) return;
+  const d = new Date(epoch * 1000);
+  const t = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  el.textContent = 'Updated ' + t;
+})();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // NEIGHBORHOOD FILTER
