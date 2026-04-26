@@ -2508,8 +2508,8 @@ Object.assign(A, {
   cat: "dev",
   label: "Maritime",
   thumbnail: "/images/spectre_pair.jpg",
-  headline: "American Magic and Saildrone Unveil Pensacola-Built Unmanned Navy Warship at Port",
-  dek: "A 65-foot unmanned warship designed for U.S. Navy anti-submarine and strike missions was christened at the Port of Pensacola on April 16. The Spectre is a joint project between America's Cup challenger American Magic and California-based unmanned maritime company Saildrone — and the first vessel of its kind built in the city.",
+  headline: "A Pensacola Sailing Team Is Now Building Weapons of War",
+  dek: "American Magic and Saildrone unveiled an autonomous warship at the Sea-Air-Space defense expo in April. The 170-foot vessel is designed for submarine hunting and missile strikes. Its propulsion wing will be built at the Port of Pensacola.",
   byline: "The Flightline Staff",
   date: "April 16, 2026",
   brief: [
@@ -2519,74 +2519,51 @@ Object.assign(A, {
   ],
   body: `<p class="article-lede">The sailing team from the New York Yacht Club didn\'t come to Pensacola just to race. They came to build weapons.</p>
 
-<p>On April 16, American Magic and California-based Saildrone unveiled the Spectre at the Port of Pensacola — a 170-foot autonomous warship designed to hunt submarines, gather intelligence, and fire missiles, all without a single sailor aboard. Four days later, at the Sea-Air-Space defense expo outside Washington, the companies formally introduced Spectre to the Navy and the world. The wing that powers its quietest, most lethal variant will be manufactured right here, at the American Magic High Performance Center on the waterfront.</p>
+<p>On April 20, Saildrone and American Magic unveiled the Spectre at the Sea-Air-Space defense expo outside Washington — a 170-foot autonomous warship designed to hunt submarines, gather intelligence, and fire missiles, all without a single sailor aboard. The wing that powers its quietest, most lethal variant will be manufactured at the American Magic High Performance Center on the Pensacola waterfront.</p>
 
 <figure style="margin:24px 0;"><img src="/images/spectre_pair.jpg" alt="Two Saildrone Spectre unmanned surface vessels" style="width:100%;display:block;border-radius:3px;"><figcaption style="font-size:12px;color:var(--g2);margin-top:6px;line-height:1.5;">The two Saildrone Spectre variants: Silent Endurance (background, with wing) and Stealth Strike. The composite wing is built in Pensacola by American Magic Services. Photo: Saildrone</figcaption></figure>
 
 <h2>What It Is</h2>
 
-<p>Spectre is not a drone boat in the hobbyist sense. It is 250 tonnes of composite and aluminum, 170 feet long, capable of 30 knots, with a concealed payload deck that can carry over 70 tonnes of weapons and sensors. The hull will be built by Fincantieri in Wisconsin. The propulsion wing — the technology that makes the most sensitive variant nearly silent at sea — will be built in Pensacola.</p>
+<p>Spectre is not a drone boat in the hobbyist sense. It is 250 tonnes of aluminum, 170 feet long, capable of up to 30 knots, with a concealed payload deck that can carry over 70 tonnes of weapons and sensors. The hull will be built by Fincantieri in Wisconsin. The propulsion wing — the technology that makes the most sensitive variant nearly silent at sea — will be built in Pensacola.</p>
 
-<p>Two variants exist. The Silent Endurance version carries the 140-foot composite wing, which catches wind to run electric motors at up to 12 knots without triggering the acoustic sensors that submarines and sonar arrays are designed to detect. When it needs to move fast, 5,000 horsepower of Caterpillar diesel engines kick in and push the vessel to 27 knots carrying 25,000 kilograms of payload. Range in flat water: 3,280 nautical miles. The Stealth Strike version drops the wing entirely for a lower profile and higher sprint speed, optimized for kinetic strike missions where a different kind of stealth — visual and radar — matters more than acoustic quiet.</p>
+<p>Two variants exist. The Silent Endurance version carries the 140-foot composite wing, which catches wind to run electric motors at up to 12 knots without triggering the acoustic sensors that submarines and sonar arrays are designed to detect. When it needs to move fast, 5,000 horsepower of Caterpillar diesel engines kick in and push the vessel to 27 knots carrying 25,000 kilograms of payload. Cruising at 25 knots with a full payload, range is 3,280 nautical miles in flat water and 2,790 nm in rough head seas. The Stealth Strike version drops the wing entirely for a lower profile and higher sprint speed, optimized for kinetic strike missions where a different kind of stealth — visual and radar — matters more than acoustic quiet.</p>
 
-<p>Both variants share the same payload deck. Spectre can carry two Mk70 Vertical Launch System launchers — the same systems used on manned Navy surface combatants — along with thin-line towed arrays and a CAPTAS-4 variable-depth sonar from Thales. Lockheed Martin, which is handling weapons integration, says it expects to demonstrate Spectre\'s strike capability at a live-fire event on the water.</p>
+<p>Both variants share the same payload deck. Spectre can carry two Mk70 Vertical Launch System launchers — the same systems used on manned Navy surface combatants — along with thin-line towed arrays including the TB29 and a CAPTAS-4 variable-depth sonar from Thales. Lockheed Martin, which is handling weapons integration, says it expects to demonstrate Spectre\'s strike capability at upcoming live-fire events on the water.</p>
 
-<div id="spectre-specs-widget" style="margin:32px 0;border:1px solid var(--border,#e0e0e0);border-radius:8px;overflow:hidden;font-family:inherit;">
-  <div style="background:var(--navy,#1e2d4a);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;">
-    <span style="color:#fff;font-weight:700;font-size:14px;letter-spacing:.03em;text-transform:uppercase;">Saildrone Spectre — At a Glance</span>
-    <span style="color:var(--gold,#d4952b);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Interactive</span>
+<div id="spectre-specs-widget" style="margin:32px 0;border:1px solid #ccc;border-radius:8px;overflow:hidden;font-family:inherit;">
+  <div style="background:#1e2d4a;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;">
+    <span style="color:#fff;font-weight:700;font-size:14px;letter-spacing:.03em;text-transform:uppercase;">Saildrone Spectre: At a Glance</span>
+    <span style="color:#d4952b;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;">Interactive</span>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
-    <div id="spec-tab-se" onclick="switchSpec(\'se\')" style="padding:10px 18px;background:var(--navy,#1e2d4a);border-bottom:3px solid var(--gold,#d4952b);cursor:pointer;text-align:center;">
-      <span style="color:#fff;font-size:13px;font-weight:700;">Silent Endurance</span>
+    <div id="spec-tab-se" onclick="switchSpec(\'se\')" style="padding:10px 18px;background:#1e2d4a;border-bottom:3px solid #d4952b;cursor:pointer;text-align:center;">
+      <span id="se-label" style="color:#fff;font-size:13px;font-weight:700;">Silent Endurance</span>
     </div>
-    <div id="spec-tab-ss" onclick="switchSpec(\'ss\')" style="padding:10px 18px;background:var(--g5,#f4f4f4);border-bottom:3px solid transparent;cursor:pointer;text-align:center;">
-      <span style="color:var(--navy,#1e2d4a);font-size:13px;font-weight:600;">Stealth Strike</span>
+    <div id="spec-tab-ss" onclick="switchSpec(\'ss\')" style="padding:10px 18px;background:#e8edf4;border-bottom:3px solid transparent;cursor:pointer;text-align:center;">
+      <span id="ss-label" style="color:#1e2d4a;font-size:13px;font-weight:700;">Stealth Strike</span>
     </div>
   </div>
-  <div id="spec-content" style="padding:18px;">
+  <div style="padding:18px;background:#fff;">
     <table style="width:100%;border-collapse:collapse;font-size:13px;">
       <tbody id="spec-rows"></tbody>
     </table>
-    <p id="spec-note" style="font-size:11px;color:var(--g2,#888);margin-top:12px;margin-bottom:0;">Source: Saildrone press release, April 20, 2026</p>
+    <p style="font-size:11px;color:#555;margin-top:12px;margin-bottom:0;">Source: Saildrone press release, April 20, 2026</p>
   </div>
 </div>
 <script>
 (function(){
-  var specs = {
-    se: [
-      ["Length","170 ft (52 m)"],["Weight","250 tonnes"],["Top speed","27 knots (with diesel)"],
-      ["Silent speed","Up to 12 knots (electric)"],["Range","3,280 nm (flat water)"],
-      ["Propulsion","Wing + electric + 5,000 hp diesel"],["Primary mission","Anti-submarine warfare"],
-      ["Key payload","Towed arrays, variable-depth sonar"],["Pensacola-built","140-ft composite wing"],
-      ["Est. unit cost","~$40 million"]
-    ],
-    ss: [
-      ["Length","170 ft (52 m)"],["Weight","250 tonnes"],["Top speed","30 knots"],
-      ["Silent speed","N/A (no wing)"],["Range","Classified"],
-      ["Propulsion","Diesel — lower radar/visual profile"],["Primary mission","Kinetic strike"],
-      ["Key payload","2x Mk70 VLS launchers"],["Pensacola-built","Hull components (wing omitted)"],
-      ["Est. unit cost","~$40 million"]
-    ]
-  };
-  var current = "se";
+  var specs={se:[["Length","170 ft (52 m)"],["Weight","250 tonnes"],["Top speed","27 knots (diesel, full payload)"],["Silent speed","Up to 12 knots (electric/wing)"],["Range","3,280 nm flat water at 25 kts"],["Propulsion","Wing + electric + 5,000 hp Caterpillar diesel"],["Primary mission","Anti-submarine warfare"],["Key payload","TB29 towed array, CAPTAS-4 sonar"],["Pensacola-built","140-ft composite wing"],["Est. unit cost","~$40 million"]],ss:[["Length","170 ft (52 m)"],["Weight","250 tonnes"],["Top speed","Up to 30 knots"],["Silent speed","N/A (no wing)"],["Range","Not published"],["Propulsion","Diesel — lower radar/visual profile"],["Primary mission","Kinetic strike"],["Key payload","2x Mk70 VLS launchers"],["Pensacola-built","Wing omitted on this variant"],["Est. unit cost","~$40 million"]]};
+  var cur="se";
   function render(){
-    var rows = specs[current];
-    var html = rows.map(function(r){
-      return "<tr><td style=\'padding:6px 4px;color:var(--g2,#888);border-bottom:1px solid var(--border,#eee);width:45%;\'>" + r[0] + "</td><td style=\'padding:6px 4px;font-weight:600;border-bottom:1px solid var(--border,#eee);\'>" + r[1] + "</td></tr>";
-    }).join("");
-    document.getElementById("spec-rows").innerHTML = html;
-    var se = document.getElementById("spec-tab-se"), ss = document.getElementById("spec-tab-ss");
-    if(current==="se"){
-      se.style.background="var(--navy,#1e2d4a)";se.style.borderBottomColor="var(--gold,#d4952b)";se.querySelector("span").style.color="#fff";
-      ss.style.background="var(--g5,#f4f4f4)";ss.style.borderBottomColor="transparent";ss.querySelector("span").style.color="var(--navy,#1e2d4a)";
-    } else {
-      ss.style.background="var(--navy,#1e2d4a)";ss.style.borderBottomColor="var(--gold,#d4952b)";ss.querySelector("span").style.color="#fff";
-      se.style.background="var(--g5,#f4f4f4)";se.style.borderBottomColor="transparent";se.querySelector("span").style.color="var(--navy,#1e2d4a)";
-    }
+    var html=specs[cur].map(function(r){return "<tr><td style=\'padding:7px 4px;color:#444;border-bottom:1px solid #ddd;width:45%;font-size:13px;\'>"+r[0]+"</td><td style=\'padding:7px 4px;font-weight:700;color:#1e2d4a;border-bottom:1px solid #ddd;font-size:13px;\'>"+r[1]+"</td></tr>";}).join("");
+    document.getElementById("spec-rows").innerHTML=html;
+    var se=document.getElementById("spec-tab-se"),ss=document.getElementById("spec-tab-ss");
+    var sl=document.getElementById("se-label"),tl=document.getElementById("ss-label");
+    if(cur==="se"){se.style.background="#1e2d4a";se.style.borderBottomColor="#d4952b";sl.style.color="#fff";ss.style.background="#e8edf4";ss.style.borderBottomColor="transparent";tl.style.color="#1e2d4a";}
+    else{ss.style.background="#1e2d4a";ss.style.borderBottomColor="#d4952b";tl.style.color="#fff";se.style.background="#e8edf4";se.style.borderBottomColor="transparent";sl.style.color="#1e2d4a";}
   }
-  window.switchSpec=function(v){current=v;render();};
-  render();
+  window.switchSpec=function(v){cur=v;render();};render();
 })();
 </script>
 
@@ -2596,7 +2573,7 @@ Object.assign(A, {
 
 <p>That infrastructure is exactly what a 140-foot composite wing requires. Tyson Lamond, CEO of American Magic Services, said the facility can produce five Spectre wings per year — and that proximity to NAS Pensacola and the broader Gulf Coast Navy presence was a deliberate part of the pitch. "There are not many facilities where you can roll a 40-meter wing outside of a building," Lamond said. "You can do that here at the Port of Pensacola."</p>
 
-<figure style="margin:28px 0;"><img src="/images/spectre_silent_endurance.jpg" alt="Saildrone Spectre Silent Endurance variant" style="width:100%;display:block;border-radius:3px;"><figcaption style="font-size:12px;color:var(--g2);margin-top:6px;line-height:1.5;">The Spectre Silent Endurance, wing deployed. The wing provides both propulsion and acoustic signature management — at low speeds, the vessel runs entirely on electric motors, making it extremely difficult for submarines to detect. Photo: Saildrone</figcaption></figure>
+<figure style="margin:28px 0;"><img src="/images/spectre_silent_endurance.jpg" alt="Saildrone Spectre Silent Endurance variant" style="width:100%;display:block;border-radius:3px;"><figcaption style="font-size:12px;color:var(--g2);margin-top:6px;line-height:1.5;">The Spectre Silent Endurance, wing deployed. At low speeds, the vessel runs on electric motors, making it extremely difficult for submarines to detect. Photo: Saildrone</figcaption></figure>
 
 <h2>The Navy\'s Problem</h2>
 
@@ -2604,36 +2581,36 @@ Object.assign(A, {
 
 <p>Saildrone CEO Richard Jenkins framed the stakes plainly at Sea-Air-Space: the service needs more platforms on the field, more shooters at sea. Spectre is designed to fill that gap without putting sailors at risk and without the operating costs of a destroyer. At roughly $40 million per vessel, it costs a fraction of a manned surface combatant. Jenkins said Saildrone will compete in the Navy\'s Medium Uncrewed Surface Vessel program and that Spectre "fits perfectly" with what the service is asking for.</p>
 
-<p>The design reflects 12 years of Saildrone operating unmanned vessels at sea — more than 2 million nautical miles, 60,000 days of operational data. The autonomy software has been refined through those deployments to comply with international maritime collision regulations in both day and night conditions. The American Bureau of Shipping has already granted Approval in Principle, the first formal certification step toward operational deployment.</p>
+<p>The design reflects more than a decade of Saildrone operating unmanned vessels at sea — more than 2 million nautical miles and 60,000 days of operational data. The autonomy software has been refined through those deployments to comply with international maritime collision regulations in both day and night conditions. ABS has already granted Approval in Principle for the design under its High Speed Naval Craft classification, the first formal certification step toward operational deployment.</p>
 
 <h2>What It Means for Pensacola</h2>
 
 <p>The Port of Pensacola has been executing a deliberate strategy for the past five years: trade low-margin bulk cargo for advanced maritime manufacturing and defense. American Magic was the first major win. The Spectre wing contract is the first proof that the bet is paying off in defense dollars.</p>
 
-<div style="margin:32px 0;border:1px solid var(--border,#e0e0e0);border-radius:8px;overflow:hidden;font-family:inherit;">
-  <div style="background:var(--navy,#1e2d4a);padding:14px 18px;">
-    <span style="color:#fff;font-weight:700;font-size:14px;letter-spacing:.03em;text-transform:uppercase;">Pensacola\'s Emerging Defense Manufacturing Cluster</span>
+<div style="margin:32px 0;border:1px solid #ccc;border-radius:8px;overflow:hidden;font-family:inherit;">
+  <div style="background:#1e2d4a;padding:14px 18px;">
+    <span style="color:#fff;font-weight:700;font-size:14px;letter-spacing:.03em;text-transform:uppercase;">Pensacola\'s Emerging Defense Cluster</span>
   </div>
-  <div style="padding:4px 0;">
-    <div style="padding:14px 18px;border-bottom:1px solid var(--border,#eee);display:grid;grid-template-columns:12px 1fr;gap:12px;align-items:start;">
-      <div style="width:10px;height:10px;border-radius:50%;background:var(--gold,#d4952b);margin-top:4px;"></div>
-      <div><strong style="font-size:13px;">American Magic Services</strong><br><span style="font-size:12px;color:var(--g2,#888);">Port of Pensacola — Composite wing manufacturing for Saildrone Spectre. Capacity: 5 wings/year. Built on $20.8M city investment in Warehouse No. 10.</span></div>
+  <div style="background:#fff;padding:4px 0;">
+    <div style="padding:14px 18px;border-bottom:1px solid #ddd;display:grid;grid-template-columns:14px 1fr;gap:12px;align-items:start;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#d4952b;margin-top:4px;flex-shrink:0;"></div>
+      <div><strong style="font-size:13px;color:#1e2d4a;">American Magic Services</strong><br><span style="font-size:12px;color:#333;line-height:1.6;">Port of Pensacola — Composite wing manufacturing for Saildrone Spectre. Capacity: 5 wings/year. Built on $20.8M city investment in Warehouse No. 10.</span></div>
     </div>
-    <div style="padding:14px 18px;border-bottom:1px solid var(--border,#eee);display:grid;grid-template-columns:12px 1fr;gap:12px;align-items:start;">
-      <div style="width:10px;height:10px;border-radius:50%;background:var(--gold,#d4952b);margin-top:4px;"></div>
-      <div><strong style="font-size:13px;">Birdon America</strong><br><span style="font-size:12px;color:var(--g2,#888);">Port of Pensacola — $275M shipyard under development. Projected 2,000 jobs. Army, Navy, and Marine Corps vessel contracts. Operations target: Q3 2027.</span></div>
+    <div style="padding:14px 18px;border-bottom:1px solid #ddd;display:grid;grid-template-columns:14px 1fr;gap:12px;align-items:start;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#d4952b;margin-top:4px;flex-shrink:0;"></div>
+      <div><strong style="font-size:13px;color:#1e2d4a;">Birdon America</strong><br><span style="font-size:12px;color:#333;line-height:1.6;">Port of Pensacola — $275M shipyard under development. Projected 2,000 jobs. Army, Navy, and Marine Corps vessel contracts. Operations target: Q3 2027.</span></div>
     </div>
-    <div style="padding:14px 18px;border-bottom:1px solid var(--border,#eee);display:grid;grid-template-columns:12px 1fr;gap:12px;align-items:start;">
-      <div style="width:10px;height:10px;border-radius:50%;background:var(--gold,#d4952b);margin-top:4px;"></div>
-      <div><strong style="font-size:13px;">NAS Pensacola</strong><br><span style="font-size:12px;color:var(--g2,#888);">Pensacola\'s largest employer. Home to Naval Aviation Schools Command, the Blue Angels, and the National Naval Aviation Museum. Entry point for all U.S. Navy, Marine Corps, and Coast Guard aviators.</span></div>
+    <div style="padding:14px 18px;border-bottom:1px solid #ddd;display:grid;grid-template-columns:14px 1fr;gap:12px;align-items:start;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#d4952b;margin-top:4px;flex-shrink:0;"></div>
+      <div><strong style="font-size:13px;color:#1e2d4a;">NAS Pensacola</strong><br><span style="font-size:12px;color:#333;line-height:1.6;">Pensacola\'s largest employer. Home to Naval Aviation Schools Command, the Blue Angels, and the National Naval Aviation Museum. Entry point for all U.S. Navy, Marine Corps, and Coast Guard aviators.</span></div>
     </div>
-    <div style="padding:14px 18px;display:grid;grid-template-columns:12px 1fr;gap:12px;align-items:start;">
-      <div style="width:10px;height:10px;border-radius:50%;background:var(--gold,#d4952b);margin-top:4px;"></div>
-      <div><strong style="font-size:13px;">SailGP Training Base</strong><br><span style="font-size:12px;color:var(--g2,#888);">Port of Pensacola — High-performance sailing teams expected to begin training September 2026, expanding composites and maritime tech talent at the port.</span></div>
+    <div style="padding:14px 18px;display:grid;grid-template-columns:14px 1fr;gap:12px;align-items:start;">
+      <div style="width:10px;height:10px;border-radius:50%;background:#d4952b;margin-top:4px;flex-shrink:0;"></div>
+      <div><strong style="font-size:13px;color:#1e2d4a;">SailGP Training Base</strong><br><span style="font-size:12px;color:#333;line-height:1.6;">Port of Pensacola — High-performance sailing teams expected to begin training September 2026, expanding composites and maritime tech talent at the port.</span></div>
     </div>
   </div>
-  <div style="padding:10px 18px;background:var(--g5,#f8f8f8);border-top:1px solid var(--border,#eee);">
-    <span style="font-size:11px;color:var(--g2,#888);">Sources: City of Pensacola, Port of Pensacola, Saildrone press release, April 2026</span>
+  <div style="padding:10px 18px;background:#f0f3f8;border-top:1px solid #ddd;">
+    <span style="font-size:11px;color:#555;">Sources: City of Pensacola, Port of Pensacola, Saildrone press release, April 2026</span>
   </div>
 </div>
 
