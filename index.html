@@ -1116,17 +1116,22 @@
       <div class="static-form" style="margin-top:8px;">
         <div class="static-form-title">Send a Tip</div>
         <div class="static-form-sub">Anonymous tips accepted. We read every submission.</div>
-        <div class="static-form-row">
-          <div><label>Name (optional)</label><input type="text" placeholder="Leave blank to remain anonymous"></div>
-          <div><label>Contact Email (optional)</label><input type="email" placeholder="For follow-up only"></div>
-        </div>
-        <div class="static-form-row full">
-          <div><label>What's the tip?</label><textarea style="min-height:140px;" placeholder="Give us as much detail as you can — who, what, when, where. Specific names, meeting dates, document titles, or addresses help us investigate."></textarea></div>
-        </div>
-        <div class="static-form-row full">
-          <div><label>Any documents or links?</label><input type="text" placeholder="Paste a URL or describe what you have"></div>
-        </div>
-        <button class="static-form-btn">Send Tip →</button>
+        <form name="tip-form-tips-page" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleTipsPageSubmit(event)">
+          <input type="hidden" name="form-name" value="tip-form-tips-page">
+          <input type="hidden" name="bot-field" style="display:none">
+          <div class="static-form-row">
+            <div><label>Name (optional)</label><input type="text" name="name" placeholder="Leave blank to remain anonymous"></div>
+            <div><label>Contact Email (optional)</label><input type="email" name="email" placeholder="For follow-up only"></div>
+          </div>
+          <div class="static-form-row full">
+            <div><label>What's the tip?</label><textarea name="tip" style="min-height:140px;" placeholder="Give us as much detail as you can — who, what, when, where. Specific names, meeting dates, document titles, or addresses help us investigate."></textarea></div>
+          </div>
+          <div class="static-form-row full">
+            <div><label>Any documents or links?</label><input type="text" name="documents" placeholder="Paste a URL or describe what you have"></div>
+          </div>
+          <button type="submit" class="static-form-btn">Send Tip →</button>
+        </form>
+        <div id="tip-form-tips-page-success" style="display:none;padding:16px 0;color:var(--navy);font-weight:600;">Got it. We'll take it from here.</div>
         <div class="static-form-note">Tips may be submitted completely anonymously. We never share source identities.</div>
       </div>
     </div>
