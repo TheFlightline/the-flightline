@@ -1108,6 +1108,12 @@ function openArticle(id){
       </div>
     </div>`
   processArticleLinks();
+  // Execute any <script> tags injected via innerHTML (they don't run automatically)
+  document.querySelectorAll('#modal-content script').forEach(function(oldScript){
+    var newScript = document.createElement('script');
+    newScript.textContent = oldScript.textContent;
+    oldScript.parentNode.replaceChild(newScript, oldScript);
+  });
   renderArticleEventWidget(Object.assign({id: id}, a));
   document.getElementById('modal').classList.add('open');
   history.pushState({articleId: id}, '', '/story/' + id);
