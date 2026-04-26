@@ -2539,6 +2539,119 @@ Object.assign(A, {
   body: `<p class="article-lede">Five candidates have pre-filed for the Pensacola mayor's race that will be decided either in the August 18 primary or a November 3 runoff, setting up the most contested mayoral cycle since 2022.</p>
 <p style="font-size:12px;color:var(--g2);margin-top:20px;">Source: <a href="https://myescambia.com/our-services/board-records/bcc-agendas" target="_blank" rel="noopener">Escambia County Commission agenda — April 1, 2026</a></p>
 
+<!-- MAYORS RACE FINANCE CHART — embed in mayors-race-2026-primer body -->
+<div id="mrf-widget" style="margin:32px 0;font-family:'DM Sans',sans-serif;">
+  <div style="background:#1E2D4A;color:#F5F3EE;padding:16px 20px 12px;border-radius:6px 6px 0 0;">
+    <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#D4871A;font-weight:700;margin-bottom:4px;">2026 Pensacola Mayor's Race</div>
+    <div style="font-size:18px;font-weight:700;line-height:1.2;">Campaign Finance Tracker</div>
+    <div style="font-size:12px;color:rgba(245,243,238,.65);margin-top:4px;">Source: Escambia SOE · Updated April 2026 · <a href="https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia&op=cv&rellevel=4&e=26" target="_blank" rel="noopener" style="color:#D4871A;">Full reports →</a></div>
+  </div>
+
+  <!-- Tab bar -->
+  <div style="display:flex;background:#152238;border-bottom:2px solid #D4871A;">
+    <button onclick="mrfTab('totals')" id="mrf-t-totals" style="flex:1;padding:10px 4px;background:transparent;border:none;color:#F5F3EE;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;cursor:pointer;border-bottom:3px solid #D4871A;transition:all .2s;">TOTALS</button>
+    <button onclick="mrfTab('monetary')" id="mrf-t-monetary" style="flex:1;padding:10px 4px;background:transparent;border:none;color:rgba(245,243,238,.5);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;">MONETARY</button>
+    <button onclick="mrfTab('inkind')" id="mrf-t-inkind" style="flex:1;padding:10px 4px;background:transparent;border:none;color:rgba(245,243,238,.5);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;">IN-KIND</button>
+  </div>
+
+  <!-- Chart area -->
+  <div style="background:#F5F3EE;padding:20px 20px 8px;border:1px solid #ddd;border-top:none;">
+    <div id="mrf-chart"></div>
+    <div style="font-size:11px;color:#888;margin-top:12px;padding-top:8px;border-top:1px solid #e0ddd8;">* In-kind contributions include goods and services donated to campaigns. Click any candidate to view their full SOE report.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const candidates = [
+    {
+      name: 'D.C. Reeves',
+      short: 'Reeves',
+      monetary: 72975,
+      inkind: 2800,
+      soe: 'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&c=escambia&ca=700&rellevel=4&committee=N',
+      color: '#1E2D4A'
+    },
+    {
+      name: 'Alicia Trawick',
+      short: 'Trawick',
+      monetary: 9828,
+      inkind: 2059.94,
+      soe: 'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia&op=cv&rellevel=4&e=26',
+      color: '#2E5077'
+    },
+    {
+      name: 'Jermaine Williams',
+      short: 'Williams',
+      monetary: 7956,
+      inkind: 6000,
+      soe: 'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia&op=cv&rellevel=4&e=26',
+      color: '#3A6491'
+    },
+    {
+      name: 'Ann Hill',
+      short: 'Hill',
+      monetary: 4126.24,
+      inkind: 10363.60,
+      soe: 'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia&op=cv&rellevel=4&e=26',
+      color: '#D4871A'
+    },
+    {
+      name: 'Jasmine Brown',
+      short: 'Brown',
+      monetary: 2068.66,
+      inkind: 0,
+      soe: 'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia&op=cv&rellevel=4&e=26',
+      color: '#8BA3BC'
+    }
+  ];
+
+  function fmt(n){ return '$' + n.toLocaleString('en-US', {minimumFractionDigits:0,maximumFractionDigits:0}); }
+
+  function renderChart(mode){
+    const chart = document.getElementById('mrf-chart');
+    let data;
+    if(mode === 'totals') data = candidates.map(c => ({...c, val: c.monetary + c.inkind}));
+    else if(mode === 'monetary') data = candidates.map(c => ({...c, val: c.monetary}));
+    else data = candidates.map(c => ({...c, val: c.inkind}));
+
+    const max = Math.max(...data.map(d => d.val));
+    chart.innerHTML = data.map(d => {
+      const pct = max > 0 ? (d.val / max * 100) : 0;
+      return \`
+        <a href="\${d.soe}" target="_blank" rel="noopener" style="text-decoration:none;display:block;margin-bottom:14px;" title="View \${d.name} SOE report">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
+            <div style="font-size:13px;font-weight:700;color:#1E2D4A;width:120px;flex-shrink:0;">\${d.name}</div>
+            <div style="font-size:13px;font-weight:700;color:\${d.color === '#D4871A' ? '#B5720F' : d.color};">\${fmt(d.val)}</div>
+          </div>
+          <div style="background:#e0ddd8;border-radius:3px;height:24px;width:100%;overflow:hidden;">
+            <div style="height:100%;width:\${pct}%;background:\${d.color};border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;padding-left:8px;box-sizing:border-box;min-width:\${d.val > 0 ? 4 : 0}px;">
+            </div>
+          </div>
+        </a>
+      \`;
+    }).join('');
+  }
+
+  window.mrfTab = function(mode){
+    ['totals','monetary','inkind'].forEach(t => {
+      const btn = document.getElementById('mrf-t-' + t);
+      if(t === mode){
+        btn.style.color = '#F5F3EE';
+        btn.style.borderBottomColor = '#D4871A';
+      } else {
+        btn.style.color = 'rgba(245,243,238,.5)';
+        btn.style.borderBottomColor = 'transparent';
+      }
+    });
+    renderChart(mode);
+  };
+
+  renderChart('totals');
+})();
+</script>
+
+
 <p>Mayor D.C. Reeves filed for re-election December 19. The former Quint Studer protégé and entrepreneur won the 2022 mayoral race outright in the primary with 51 percent of the vote. He is running on a first-term record that includes the city's grants office, the Hollice T. Williams Greenway, the American Magic High Performance Center at the Port of Pensacola, the New Palafox project and the demolition of the old Baptist Hospital site to make way for affordable housing. Reeves leads the field in fundraising with $72,975 in monetary contributions and $2,800 in in-kind contributions through the most recent Escambia Supervisor of Elections filing.</p>
 
 <p>Former Council President Ann Hill announced her bid in September. She is running on what she calls "The Ann Plan" — free downtown parking, lower property taxes, neighborhood preservation, expanded affordable housing and rebuilding the Malcom Yonge Gym, demolished early in Reeves' first term. Hill represented District 6 from 2018 to 2022. She has reported $4,126.24 in monetary contributions and $10,363.60 in in-kind contributions through the most recent Escambia SOE filing.</p>
