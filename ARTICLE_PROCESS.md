@@ -450,18 +450,20 @@ GitHub Contents API. Always use the Git Data API flow:
 8. PATCH /git/refs/heads/main with new commit SHA
 
 **Updating the "Updated" timestamp in index.html:**
-Every push must update the `last-updated-stamp` span in `index.html` with the
-current local time. Find and replace this pattern:
+Every push must update the `data-deploy` attribute on the `last-updated-stamp` span
+in `index.html` with the current UTC Unix epoch (seconds). Find and replace:
 
-  `id="last-updated-stamp">Updated H:MM AM</span>`
+  `id="last-updated-stamp" data-deploy="OLD_EPOCH"></span>`
 
 with:
 
-  `id="last-updated-stamp">Updated {current_time}</span>`
+  `id="last-updated-stamp" data-deploy="NEW_EPOCH"></span>`
 
-where `current_time` is formatted as e.g. `7:51 PM`. The JS block that previously
-set this from `new Date()` has been removed from app.js — the HTML value is now
-authoritative and only changes when a push is made.
+where `NEW_EPOCH` is `int(time.time())` in Python or `Math.floor(Date.now()/1000)` in JS.
+
+The JS in app.js reads this epoch and formats it in the visitor's local timezone,
+so a reader in Central time sees Central time, a reader in Eastern sees Eastern, etc.
+The span text content is always empty in HTML — JS fills it on page load.
 
 **Article insertion point:** New articles go immediately after `Object.assign(A, {` at the
 top of the file — this ensures they sort as newest in the feed.
