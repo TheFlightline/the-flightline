@@ -2538,7 +2538,6 @@ Object.assign(A, {
   ],
   body: `<p class="article-lede">Five candidates have pre-filed for the Pensacola mayor's race that will be decided either in the August 18 primary or a November 3 runoff, setting up the most contested mayoral cycle since 2022.</p>
 
-<figure style="margin:24px 0;"><img src="/images/mayors_candidates.jpg" alt="The five candidates for Pensacola mayor in 2026" style="width:100%;display:block;border-radius:3px;"><figcaption style="font-size:12px;color:var(--g2);margin-top:6px;line-height:1.5;">From left: Mayor D.C. Reeves, former Council President Ann Hill, Jasmine Brown, Alicia Trawick and Jermaine J. Williams. All five have pre-filed for the August 18 Pensacola mayoral primary. <a href="https://escambiavotes.gov/current-candidates-and-finances" target="_blank" rel="noopener" style="color:var(--gold);">Escambia SOE</a></figcaption></figure>
 
 <p>Mayor D.C. Reeves filed for re-election December 19. The former Quint Studer protégé and entrepreneur won the 2022 mayoral race outright in the primary with 51 percent of the vote. He is running on a first-term record that includes the city's grants office, the Hollice T. Williams Greenway, the American Magic High Performance Center at the Port of Pensacola, the New Palafox project and the demolition of the old Baptist Hospital site to make way for affordable housing. Reeves leads the field in fundraising with $72,975 in monetary contributions and $2,800 in in-kind contributions through the most recent Escambia Supervisor of Elections filing.</p>
 
