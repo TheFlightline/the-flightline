@@ -1,7 +1,7 @@
 var A = window.A || {};
 Object.assign(A, {
   "childers-discretionary-lawsuit-042426": {
-    "cat": "government",
+    "cat": "govt",
     "label": "Government",
     "thumbnail": "/images/flightline-og-default.jpg",
     "headline": "Two Escambia nonprofits sue Clerk Pam Childers after she blocks $7,000 in commission-approved payments",
