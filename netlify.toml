@@ -1,2 +1,11 @@
 [build]
   publish = "."
+
+[[edge_functions]]
+  function = "prerender"
+  path = "/*"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
