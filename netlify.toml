@@ -5,14 +5,21 @@
   function = "og"
   path = "/story/*"
 
-# Allow social media crawlers through on story pages
+# Disable bot protection on story pages so social crawlers can reach the edge function
 [[headers]]
   for = "/story/*"
   [headers.values]
     X-Robots-Tag = "index, follow"
+    Access-Control-Allow-Origin = "*"
 
-# Allow crawlers on robots.txt
 [[headers]]
-  for = "/robots.txt"
+  for = "/assets/articles.js"
   [headers.values]
-    Cache-Control = "public, max-age=3600"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=300"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=86400"
