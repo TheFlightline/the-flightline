@@ -2540,114 +2540,238 @@ Object.assign(A, {
 <p style="font-size:12px;color:var(--g2);margin-top:20px;">Source: <a href="https://myescambia.com/our-services/board-records/bcc-agendas" target="_blank" rel="noopener">Escambia County Commission agenda — April 1, 2026</a></p>
 
 <!-- MAYORS RACE FINANCE CHART — embed in mayors-race-2026-primer body -->
-<div id="mrf-widget" style="margin:32px 0;font-family:'DM Sans',sans-serif;">
-  <div style="background:#1E2D4A;color:#F5F3EE;padding:16px 20px 12px;border-radius:6px 6px 0 0;">
+<div id="mrf-widget" style="margin:32px 0;font-family:'DM Sans',sans-serif;border-radius:6px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.12);">
+  <div style="background:#1E2D4A;color:#F5F3EE;padding:16px 20px 12px;">
     <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#D4871A;font-weight:700;margin-bottom:4px;">2026 Pensacola Mayor's Race</div>
-    <div style="font-size:18px;font-weight:700;line-height:1.2;">Campaign Finance Tracker</div>
-    <div style="font-size:12px;color:rgba(245,243,238,.65);margin-top:4px;">Source: Escambia SOE · Updated April 2026 · <a href="https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia&op=cv&rellevel=4&e=26" target="_blank" rel="noopener" style="color:#D4871A;">Full reports →</a></div>
+    <div style="font-size:19px;font-weight:700;line-height:1.2;">Campaign Finance Tracker</div>
+    <div style="font-size:12px;color:rgba(245,243,238,.6);margin-top:5px;">Q1 2026 &middot; Source: <a href="https://escambiavotes.gov/current-candidates-and-finances" target="_blank" rel="noopener" style="color:#D4871A;">Escambia SOE</a> &middot; <a href="https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia" target="_blank" rel="noopener" style="color:#D4871A;">Full reports &rarr;</a></div>
   </div>
-
-  <!-- Tab bar -->
-  <div style="display:flex;background:#152238;border-bottom:2px solid #D4871A;">
-    <button onclick="mrfTab('totals')" id="mrf-t-totals" style="flex:1;padding:10px 4px;background:transparent;border:none;color:#F5F3EE;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;cursor:pointer;border-bottom:3px solid #D4871A;transition:all .2s;">TOTALS</button>
-    <button onclick="mrfTab('monetary')" id="mrf-t-monetary" style="flex:1;padding:10px 4px;background:transparent;border:none;color:rgba(245,243,238,.5);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;">MONETARY</button>
-    <button onclick="mrfTab('inkind')" id="mrf-t-inkind" style="flex:1;padding:10px 4px;background:transparent;border:none;color:rgba(245,243,238,.5);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;">IN-KIND</button>
+  <div style="display:flex;background:#152238;">
+    <button onclick="mrfTab('raised')" id="mrf-t-raised" style="flex:1;padding:10px 4px;background:transparent;border:none;border-bottom:3px solid #D4871A;color:#F5F3EE;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;">Raised</button>
+    <button onclick="mrfTab('spent')" id="mrf-t-spent" style="flex:1;padding:10px 4px;background:transparent;border:none;border-bottom:3px solid transparent;color:rgba(245,243,238,.45);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;">Spent</button>
+    <button onclick="mrfTab('donors')" id="mrf-t-donors" style="flex:1;padding:10px 4px;background:transparent;border:none;border-bottom:3px solid transparent;color:rgba(245,243,238,.45);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;">Top Donors</button>
+    <button onclick="mrfTab('expenses')" id="mrf-t-expenses" style="flex:1;padding:10px 4px;background:transparent;border:none;border-bottom:3px solid transparent;color:rgba(245,243,238,.45);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;">Expenses</button>
   </div>
-
-  <!-- Chart area -->
-  <div style="background:#F5F3EE;padding:20px 20px 8px;border:1px solid #ddd;border-top:none;">
+  <div style="background:#F5F3EE;padding:20px 20px 6px;border:1px solid #e0ddd8;border-top:none;">
     <div id="mrf-chart"></div>
-    <div style="font-size:11px;color:#888;margin-top:12px;padding-top:8px;border-top:1px solid #e0ddd8;">* In-kind contributions include goods and services donated to campaigns. Click any candidate to view their full SOE report.</div>
+    <div style="font-size:11px;color:#999;margin-top:10px;padding-top:8px;border-top:1px solid #e8e5e0;">Data: Escambia County Supervisor of Elections Q1 2026 filings. Click any candidate name to view their full SOE report.</div>
   </div>
 </div>
 
 <script>
 (function(){
-  const candidates = [
-    {
-      name: 'D.C. Reeves',
-      short: 'Reeves',
-      monetary: 72975,
-      inkind: 2800,
-      soe: 'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&c=escambia&ca=700&rellevel=4&committee=N',
-      color: '#1E2D4A'
+  var C = {
+    reeves: {
+      name:'D.C. Reeves', color:'#1E2D4A',
+      monetary:72975, inkind:2800, spent:4755.09,
+      soe:'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=rp_all&e=1&c=escambia&ca=827&cname=Darcy+%22D.C.%22+Reeves&coffice=City+of+Pensacola+Mayor&Yr=2026',
+      donors:[
+        {name:'Floridians for Limited Govt',type:'Political Party',amt:1000},
+        {name:'Ashton Hayward III',type:'Individual / Healthcare',amt:1000},
+        {name:'Ashlee Hofberger',type:'Individual',amt:1000},
+        {name:'Greenhut Construction',type:'Business',amt:1000},
+        {name:'H+H Building Group',type:'Business',amt:1000},
+        {name:'Barry Beroset',type:'Individual / Legal',amt:1000},
+        {name:'David Stafford',type:'Individual',amt:1000},
+        {name:'Rebecca Matthews',type:'Individual',amt:1000}
+      ],
+      expenses:[
+        {vendor:'850 Screen Printing',purpose:'Mardi Gras Parade Throws',amt:2695.86},
+        {vendor:'Red Iron Enterprises',purpose:'Digital Advertising',amt:1160},
+        {vendor:'Sydney Dawson',purpose:'Parade Throws Reimbursement',amt:802.38},
+        {vendor:'Christopher Henning',purpose:'Transportation',amt:800},
+        {vendor:'Google',purpose:'Email Hosting',amt:42.34}
+      ],
+      donorNote:'55 of 106 donors gave the maximum $1,000. Donors include former Mayor Ashton Hayward, Commissioner Ashlee Hofberger, and SOE David Stafford. Donor mix: $49,475 individual / $19,000 business / $4,500 political party.',
+      expNote:'Spent heavily on Mardi Gras parade throws — a signature retail-politics move — and digital advertising. Has spent less than 7% of what he raised, by far the lowest burn rate in the race.'
     },
-    {
-      name: 'Alicia Trawick',
-      short: 'Trawick',
-      monetary: 9828,
-      inkind: 2059.94,
-      soe: 'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia&op=cv&rellevel=4&e=26',
-      color: '#2E5077'
+    hill: {
+      name:'Ann Hill', color:'#D4871A',
+      monetary:4126.24, inkind:10363.60, spent:3887.27,
+      soe:'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=rp_all&e=1&c=escambia&ca=821&cname=Ann+Hill&coffice=City+of+Pensacola+Mayor&Yr=2026',
+      donors:[
+        {name:'Nikki A. Dotter',type:'Individual',amt:500},
+        {name:'Christopher J. Lewis',type:'Individual',amt:500},
+        {name:'Kyle Kopytchak',type:'Individual',amt:300},
+        {name:'Mark Leemon',type:'Individual',amt:200},
+        {name:'Stanley Grossman',type:'Individual',amt:100}
+      ],
+      expenses:[
+        {vendor:'Dope Marketing',purpose:'Printing',amt:1197},
+        {vendor:'Printers of Pcola',purpose:'Printing / Decals',amt:374},
+        {vendor:'Bizay',purpose:'Printing',amt:253.61},
+        {vendor:'Vistaprint',purpose:'Printing',amt:149.41},
+        {vendor:'Facebook',purpose:'Digital Marketing',amt:168.54}
+      ],
+      donorNote:"Hill's $10,364 in in-kind — all self-contributed repurposed materials from her 2022 District 6 race — inflate her totals significantly. Her cash donor base is small-dollar individuals; largest single donor gave $500.",
+      expNote:'Spending is almost entirely printing. Hill has burned 94% of her cash raised — running a lean, print-heavy ground game with minimal digital infrastructure.'
     },
-    {
-      name: 'Jermaine Williams',
-      short: 'Williams',
-      monetary: 7956,
-      inkind: 6000,
-      soe: 'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia&op=cv&rellevel=4&e=26',
-      color: '#3A6491'
+    trawick: {
+      name:'Alicia Trawick', color:'#2E6DA4',
+      monetary:9828, inkind:2059.94, spent:8318.08,
+      soe:'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=rp_all&e=1&c=escambia&ca=830&cname=Alicia+Trawick&coffice=City+of+Pensacola+Mayor&Yr=2026',
+      donors:[
+        {name:'Deborah Merwin',type:'Individual',amt:1000},
+        {name:'Anita Feliciano',type:'Individual',amt:1000},
+        {name:'Dianne Krumel',type:'Individual',amt:500},
+        {name:'Marilyn Brown',type:'Individual',amt:600},
+        {name:'Kristen Brown-Sanders',type:'Individual',amt:300},
+        {name:'Sunya Trawick',type:'Individual',amt:300}
+      ],
+      expenses:[
+        {vendor:'Gulf Coast Signs',purpose:'Yard Signs',amt:1779.14},
+        {vendor:'Go Union Printing',purpose:'Palm Cards',amt:1100.78},
+        {vendor:'Logo Motion Marketing',purpose:'Campaign Shirts',amt:855.27},
+        {vendor:'Vistaprint',purpose:'Campaign Hats',amt:490},
+        {vendor:'FL Democratic Party',purpose:'Canvassing Data',amt:412.26},
+        {vendor:'Pensacola Mardi Gras',purpose:'Parade Entry Fee',amt:355}
+      ],
+      donorNote:'Two largest donors gave $1,000 each. Uses ActBlue for small-dollar online fundraising. Donor base is largely individual contributors with no business donors at top.',
+      expNote:'Highest burn rate in the race at 85% of cash raised. Spending concentrated on yard signs, printed materials, and canvassing data — a traditional ground-game approach.'
     },
-    {
-      name: 'Ann Hill',
-      short: 'Hill',
-      monetary: 4126.24,
-      inkind: 10363.60,
-      soe: 'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia&op=cv&rellevel=4&e=26',
-      color: '#D4871A'
+    williams: {
+      name:'Jermaine Williams', color:'#3A7CA5',
+      monetary:7956, inkind:6000, spent:2503.06,
+      soe:'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=rp_all&e=1&c=escambia&ca=831&cname=Jermaine+Williams&coffice=City+of+Pensacola+Mayor&Yr=2026',
+      donors:[
+        {name:'Floyd Lewis',type:'Individual',amt:1000},
+        {name:'Lillie Johnson',type:'Individual',amt:1000},
+        {name:'Synetta Harris',type:'Individual',amt:1000},
+        {name:'Tammie Booker',type:'Individual',amt:300},
+        {name:'Ada Harrison Wallace',type:'Individual',amt:250},
+        {name:'Nakisha Lowery',type:'Individual',amt:250}
+      ],
+      expenses:[
+        {vendor:'The Print Center',purpose:'Campaign Shirts',amt:457.41},
+        {vendor:'Warrington Business Ctr',purpose:'Office / Campaign Space',amt:326.93},
+        {vendor:'Various',purpose:'Events / Food',amt:400},
+        {vendor:'Signage',purpose:'Campaign Materials',amt:300}
+      ],
+      donorNote:"Williams' $6,000 in in-kind comes from local media and PR firms — video production, website creation, PR services — professionally supported campaign despite modest cash fundraising. Three donors gave the maximum $1,000.",
+      expNote:'Has spent only 31% of his cash raised. The campaign\'s in-kind professional support (film, PR, web) is doing significant work that does not appear in expenditures.'
     },
-    {
-      name: 'Jasmine Brown',
-      short: 'Brown',
-      monetary: 2068.66,
-      inkind: 0,
-      soe: 'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?c=escambia&op=cv&rellevel=4&e=26',
-      color: '#8BA3BC'
+    brown: {
+      name:'Jasmine Brown', color:'#6B8FA8',
+      monetary:2068.66, inkind:0, spent:1347.09,
+      soe:'https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=rp_all&e=1&c=escambia&ca=822&cname=Jasmine+Brown&coffice=City+of+Pensacola+Mayor&Yr=2026',
+      donors:[
+        {name:'Lucas Pallone',type:'Individual',amt:103.48},
+        {name:'Jasmine Brown (self)',type:'Candidate',amt:206},
+        {name:'Elizabeth Black-Kimbrell',type:'Individual',amt:51.50},
+        {name:'Charles Dyell',type:'Individual',amt:100},
+        {name:'Jenori Burroughs',type:'Individual',amt:41.20}
+      ],
+      expenses:[
+        {vendor:'UZ Marketing',purpose:'Yard Signs',amt:319.98},
+        {vendor:'Squarespace',purpose:'Website',amt:108},
+        {vendor:'FedEx / Printing',purpose:'Materials',amt:80}
+      ],
+      donorNote:'Funded almost entirely through small-dollar ActBlue donations including $206 she contributed herself. Largest single outside donor gave $103. No donors near the $1,000 maximum.',
+      expNote:'Has spent 65% of cash raised. Spending is minimal — yard signs, website hosting, and printing. Running the most grassroots operation in the field.'
     }
-  ];
+  };
 
-  function fmt(n){ return '$' + n.toLocaleString('en-US', {minimumFractionDigits:0,maximumFractionDigits:0}); }
+  var order = ['reeves','hill','trawick','williams','brown'];
 
-  function renderChart(mode){
-    const chart = document.getElementById('mrf-chart');
-    let data;
-    if(mode === 'totals') data = candidates.map(c => ({...c, val: c.monetary + c.inkind}));
-    else if(mode === 'monetary') data = candidates.map(c => ({...c, val: c.monetary}));
-    else data = candidates.map(c => ({...c, val: c.inkind}));
+  function fmt(n){
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
 
-    const max = Math.max(...data.map(d => d.val));
-    chart.innerHTML = data.map(d => {
-      const pct = max > 0 ? (d.val / max * 100) : 0;
-      return \`
-        <a href="\${d.soe}" target="_blank" rel="noopener" style="text-decoration:none;display:block;margin-bottom:14px;" title="View \${d.name} SOE report">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
-            <div style="font-size:13px;font-weight:700;color:#1E2D4A;width:120px;flex-shrink:0;">\${d.name}</div>
-            <div style="font-size:13px;font-weight:700;color:\${d.color === '#D4871A' ? '#B5720F' : d.color};">\${fmt(d.val)}</div>
-          </div>
-          <div style="background:#e0ddd8;border-radius:3px;height:24px;width:100%;overflow:hidden;">
-            <div style="height:100%;width:\${pct}%;background:\${d.color};border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;padding-left:8px;box-sizing:border-box;min-width:\${d.val > 0 ? 4 : 0}px;">
-            </div>
-          </div>
-        </a>
-      \`;
+  function bar(val, max, color, label, link) {
+    var pct = max > 0 ? Math.max(2, val/max*100) : 0;
+    return '<a href="' + link + '" target="_blank" rel="noopener" style="text-decoration:none;display:block;margin-bottom:16px;">' +
+      '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">' +
+        '<span style="font-size:13px;font-weight:700;color:#1E2D4A;">' + label + '</span>' +
+        '<span style="font-size:13px;font-weight:700;color:' + (color === '#D4871A' ? '#B5720F' : color) + ';">' + fmt(val) + '</span>' +
+      '</div>' +
+      '<div style="background:#e0ddd8;border-radius:3px;height:22px;overflow:hidden;">' +
+        '<div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:3px;transition:width .7s cubic-bezier(.4,0,.2,1);"></div>' +
+      '</div>' +
+    '</a>';
+  }
+
+  function renderRaised() {
+    var maxVal = Math.max.apply(null, order.map(function(k){ return C[k].monetary + C[k].inkind; }));
+    return order.map(function(k) {
+      var c = C[k];
+      var total = c.monetary + c.inkind;
+      return bar(total, maxVal, c.color, c.name, c.soe) +
+        '<div style="display:flex;gap:16px;margin-top:-10px;margin-bottom:14px;font-size:11px;color:#666;">' +
+          '<span>Cash: ' + fmt(c.monetary) + '</span>' +
+          '<span>In-Kind: ' + fmt(c.inkind) + '</span>' +
+        '</div>';
     }).join('');
   }
 
-  window.mrfTab = function(mode){
-    ['totals','monetary','inkind'].forEach(t => {
-      const btn = document.getElementById('mrf-t-' + t);
-      if(t === mode){
+  function renderSpent() {
+    var maxVal = Math.max.apply(null, order.map(function(k){ return C[k].spent; }));
+    return order.map(function(k) {
+      var c = C[k];
+      var burnPct = c.monetary > 0 ? Math.round(c.spent/c.monetary*100) : 0;
+      return bar(c.spent, maxVal, c.color, c.name, c.soe) +
+        '<div style="margin-top:-10px;margin-bottom:14px;font-size:11px;color:#666;">' + burnPct + '% of cash raised spent</div>';
+    }).join('');
+  }
+
+  function donorRow(d) {
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px dotted #e8e5e0;">' +
+      '<div><span style="font-size:13px;color:#222;">' + d.name + '</span>' +
+      '<span style="font-size:11px;color:#888;margin-left:6px;">' + d.type + '</span></div>' +
+      '<span style="font-size:13px;font-weight:600;color:#1E2D4A;">' + fmt(d.amt) + '</span>' +
+    '</div>';
+  }
+
+  function expRow(e) {
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px dotted #e8e5e0;">' +
+      '<div><span style="font-size:13px;color:#222;">' + e.vendor + '</span>' +
+      '<span style="font-size:11px;color:#888;margin-left:6px;">' + e.purpose + '</span></div>' +
+      '<span style="font-size:13px;font-weight:600;color:#1E2D4A;">' + fmt(e.amt) + '</span>' +
+    '</div>';
+  }
+
+  function candidateBlock(k, rowFn, dataKey, amtKey, noteKey) {
+    var c = C[k];
+    var rows = c[dataKey].map(rowFn).join('');
+    return '<div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #e8e5e0;">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">' +
+        '<a href="' + c.soe + '" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;color:#1E2D4A;text-decoration:none;">' + c.name + '</a>' +
+        '<span style="font-size:12px;color:#888;">' + fmt(c[amtKey]) + ' ' + amtKey + '</span>' +
+      '</div>' + rows +
+      '<div style="margin-top:8px;font-size:11px;color:#666;line-height:1.5;">' + c[noteKey] + '</div>' +
+    '</div>';
+  }
+
+  function renderDonors() {
+    return order.map(function(k){
+      return candidateBlock(k, donorRow, 'donors', 'monetary', 'donorNote');
+    }).join('');
+  }
+
+  function renderExpenses() {
+    return order.map(function(k){
+      return candidateBlock(k, expRow, 'expenses', 'spent', 'expNote');
+    }).join('');
+  }
+
+  window.mrfTab = function(mode) {
+    ['raised','spent','donors','expenses'].forEach(function(t) {
+      var btn = document.getElementById('mrf-t-' + t);
+      if (t === mode) {
         btn.style.color = '#F5F3EE';
         btn.style.borderBottomColor = '#D4871A';
       } else {
-        btn.style.color = 'rgba(245,243,238,.5)';
+        btn.style.color = 'rgba(245,243,238,.45)';
         btn.style.borderBottomColor = 'transparent';
       }
     });
-    renderChart(mode);
+    var chart = document.getElementById('mrf-chart');
+    if (mode === 'raised') chart.innerHTML = renderRaised();
+    else if (mode === 'spent') chart.innerHTML = renderSpent();
+    else if (mode === 'donors') chart.innerHTML = renderDonors();
+    else chart.innerHTML = renderExpenses();
   };
 
-  renderChart('totals');
+  mrfTab('raised');
 })();
 </script>
 
