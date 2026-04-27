@@ -1888,7 +1888,7 @@ function renderCalList() {
 
 // ── LIVE TRAFFIC — Google Distance Matrix (live, traffic-aware) ──────────
 // Replaced Open Route Service (was returning 503s) with Google Distance Matrix.
-// Browser calls route through corsproxy.io; falls back to time-of-day estimate.
+// API key is server-side in GOOGLE_MAPS_KEY env var via traffic-proxy Netlify function.
 (function() {
 
   const ORIGINS = {
@@ -1988,26 +1988,19 @@ function renderCalList() {
     if (viaEl) viaEl.textContent = labels.via + ' · ' + labels.miles + ' mi';
   }
 
-  // ── Google Distance Matrix — live traffic-aware drive time ──────────
+  // ── Traffic proxy — Google Distance Matrix via Netlify function ──────
+  // API key lives in GOOGLE_MAPS_KEY env var on Netlify, never in client code.
   async function fetchRouteDuration() {
     const orig = ORIGINS[currentOrigin].coords;
-    const originStr = orig[1] + ',' + orig[0];
-    const destStr   = DESTINATION.coords[1] + ',' + DESTINATION.coords[0];
-    const GMAPS_KEY = 'AIzaSyCTpjZrvGO61nLJjNgbombdEhnk8SVXwFk';
+    const url = '/.netlify/functions/traffic-proxy' +
+      '?origin_lat=' + orig[1] +
+      '&origin_lng=' + orig[0];
 
-    const url = 'https://maps.googleapis.com/maps/api/distancematrix/json' +
-      '?origins=' + encodeURIComponent(originStr) +
-      '&destinations=' + encodeURIComponent(destStr) +
-      '&departure_time=now' +
-      '&traffic_model=best_guess' +
-      '&key=' + GMAPS_KEY;
-
-    const res = await fetch('https://corsproxy.io/?' + encodeURIComponent(url));
-    if (!res.ok) throw new Error('GMaps ' + res.status);
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('traffic-proxy ' + res.status);
     const data = await res.json();
-    const el = data?.rows?.[0]?.elements?.[0];
-    if (!el || el.status !== 'OK') throw new Error('GMaps element status: ' + (el?.status || 'unknown'));
-    return el.duration_in_traffic?.value ?? el.duration?.value ?? null;
+    if (!data.ok) throw new Error('traffic-proxy error: ' + data.error);
+    return data.duration_seconds;
   }
 
   // ── Main update ───────────────────────────────────────────────────
