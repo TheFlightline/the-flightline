@@ -1886,12 +1886,10 @@ function renderCalList() {
   }).join('');
 }
 
-// ── LIVE TRAFFIC — Open Route Service (CORS-safe, browser-direct) ────────
-// ORS Matrix API is free, browser-accessible, and needs no server proxy.
-// HERE was blocked by CORS for cross-origin browser requests.
+// ── LIVE TRAFFIC — Google Distance Matrix (live, traffic-aware) ──────────
+// Replaced Open Route Service (was returning 503s) with Google Distance Matrix.
+// Browser calls route through corsproxy.io; falls back to time-of-day estimate.
 (function() {
-  // Open Route Service free tier — no CORS restrictions on browser calls
-  const ORS_KEY = '5b3ce3597851110001cf62484aef3f0d40a04c0fbbaf1fcc29ef36d6';
 
   const ORIGINS = {
     downtown: { label:'Veterans Memorial Park',  coords:[-87.2037076, 30.4124489] },
@@ -1990,31 +1988,26 @@ function renderCalList() {
     if (viaEl) viaEl.textContent = labels.via + ' · ' + labels.miles + ' mi';
   }
 
-  // ── ORS Matrix — single source → single destination ───────────────
+  // ── Google Distance Matrix — live traffic-aware drive time ──────────
   async function fetchRouteDuration() {
     const orig = ORIGINS[currentOrigin].coords;
-    const body = {
-      locations: [orig, DESTINATION.coords],
-      metrics: ['duration'],
-      sources: [0],
-      destinations: [1]
-    };
+    const originStr = orig[1] + ',' + orig[0];
+    const destStr   = DESTINATION.coords[1] + ',' + DESTINATION.coords[0];
+    const GMAPS_KEY = 'AIzaSyCTpjZrvGO61nLJjNgbombdEhnk8SVXwFk';
 
-    const res = await fetch(
-      'https://api.openrouteservice.org/v2/matrix/driving-car',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': ORS_KEY
-        },
-        body: JSON.stringify(body)
-      }
-    );
+    const url = 'https://maps.googleapis.com/maps/api/distancematrix/json' +
+      '?origins=' + encodeURIComponent(originStr) +
+      '&destinations=' + encodeURIComponent(destStr) +
+      '&departure_time=now' +
+      '&traffic_model=best_guess' +
+      '&key=' + GMAPS_KEY;
 
-    if (!res.ok) throw new Error('ORS ' + res.status);
+    const res = await fetch('https://corsproxy.io/?' + encodeURIComponent(url));
+    if (!res.ok) throw new Error('GMaps ' + res.status);
     const data = await res.json();
-    return data.durations?.[0]?.[0] ?? null;
+    const el = data?.rows?.[0]?.elements?.[0];
+    if (!el || el.status !== 'OK') throw new Error('GMaps element status: ' + (el?.status || 'unknown'));
+    return el.duration_in_traffic?.value ?? el.duration?.value ?? null;
   }
 
   // ── Main update ───────────────────────────────────────────────────
@@ -2178,7 +2171,7 @@ function renderCalList() {
         </div>
       </div>
       <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--bd);font-size:10px;color:var(--g2);">
-        Data: Open Route Service · Updated ${new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+        Data: Google Maps · Live traffic · Updated ${new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
         &nbsp;·&nbsp; Click route to open in Google Maps
       </div>`;
 
