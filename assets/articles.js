@@ -2618,7 +2618,7 @@ Object.assign(A, {
 
 <p>If voters approve the change in August, the first elected superintendent in Escambia County since 2020 would take office following the November 2028 general election. If voters reject the change, the school board retains the hiring authority it has held since 2018 — and the question, raised six times over the decades, will likely rest for a while longer.</p>
 
-<p><em>The August 18 primary is open to all registered Escambia County voters. Florida's general election is Nov. 3, 2026.</em></p>`
+<p><em>Florida holds a closed primary, but referenda are nonpartisan. All registered Escambia County voters — regardless of party affiliation — are eligible to vote on the superintendent question on August 18. Florida's general election is Nov. 3, 2026.</em></p>`
 },
 
 // ============================================================================
