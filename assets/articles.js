@@ -2473,8 +2473,8 @@ Object.assign(A, {
   cat: "education",
   label: "Education",
   thumbnail: "/images/editorial_voting_010.jpg",
-  headline: "Escambia County Voters Will Decide in August Whether to Return to Electing the School Superintendent",
-  dek: "The county commission voted 4-1 on April 1 to place the school board's request on the August 18 primary ballot, despite community pushback urging the question be moved to the higher-turnout November general election. If voters approve, the first elected superintendent in nearly a decade would take office after November 2028.",
+  headline: "Escambia Is Asking Voters to Undo a 2018 Decision — During the Primary Election Most of Them Skip",
+  dek: "The county commission voted 4-1 on April 1 to place the school board's referendum on the August 18 primary ballot, despite objections that primary turnout is roughly a quarter of what it is in November. The last time Escambia voters weighed this question, the margin was less than one percent.",
   byline: "The Flightline Staff",
   date: "April 17, 2026",
   brief: [
@@ -2482,23 +2482,143 @@ Object.assign(A, {
     "Commissioner Lumon May was the dissenting vote, citing concerns that primary turnout is roughly a quarter of general election turnout and would not reflect a representative voter sample on a major governance question.",
     "Escambia voters narrowly switched from an elected to an appointed superintendent in 2018. If the August referendum passes, an elected superintendent would take office after the November 2028 general election."
   ],
-  body: `<p class="article-lede">Escambia County voters will decide on August 18 whether to reverse their 2018 decision to switch from an elected to an appointed school superintendent, after the county commission voted 4-1 on April 1 to place the question on the statewide primary election ballot at the school board's request.</p>
+  body: `<p class="article-lede">In November 2018, Escambia County voters decided by the thinnest possible margin — 50.36 percent to 49.64 percent — to hand control of the superintendent's office from the ballot box to the school board. It was the sixth time voters had weighed the question. For the first time, it passed. Now the school board wants to ask again. And it wants to ask in August, when far fewer people vote.</p>
 
-<p>The ballot language voters will see asks: "Shall the superintendent of schools of Escambia County, Florida, be elected by the majority of the qualified electors of Escambia County, Florida?" A yes vote returns the position to elected status. A no vote keeps the current appointed model, in which the school board hires the superintendent.</p>
+<p>The Escambia County Commission voted 4-1 on April 1 to place a referendum on the August 18 primary ballot asking voters whether to return to an elected school superintendent. The exact question voters will see on the ballot:</p>
 
-<p>Commissioner Lumon May cast the lone dissenting vote on placing the referendum on the August primary rather than the November general election. May framed the timing as a turnout problem.</p>
+<!-- INTERACTIVE: Ballot Card -->
+<div class="fl-interactive" style="margin:2rem 0;font-family:inherit">
+  <div style="background:#f7f7f5;border:2px solid #1E2D4A;border-radius:8px;padding:1.5rem 2rem;max-width:620px;margin:0 auto">
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#1E2D4A;margin-bottom:0.75rem">Official Ballot Language — August 18, 2026 Primary</div>
+    <p style="font-size:1.1rem;font-style:italic;color:#1a1a1a;line-height:1.6;margin:0 0 1.25rem 0">"Shall the superintendent of schools of Escambia County, Florida, be elected by the majority of the qualified electors of Escambia County, Florida?"</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap">
+      <div style="flex:1;min-width:120px;background:#1E2D4A;color:#fff;border-radius:6px;padding:0.75rem 1rem;text-align:center">
+        <div style="font-weight:700;font-size:1rem">YES</div>
+        <div style="font-size:0.8rem;margin-top:0.25rem;opacity:0.85">Returns superintendent to elected status</div>
+      </div>
+      <div style="flex:1;min-width:120px;background:#fff;color:#1a1a1a;border:1.5px solid #ccc;border-radius:6px;padding:0.75rem 1rem;text-align:center">
+        <div style="font-weight:700;font-size:1rem">NO</div>
+        <div style="font-size:0.8rem;margin-top:0.25rem;color:#555">Keeps current appointed model</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>"There's without a doubt that this will probably be the most contested governor's race in November in recent history," May said at the meeting. "I think that if there's ever an opportunity to eliminate voter suppression, give every person an opportunity to vote, we should give it at the chance that allows for the most people to come out."</p>
+<p>Commissioner Lumon May cast the lone dissenting vote — not on the referendum itself, but on putting it in August rather than November.</p>
 
-<p>The numbers favor May's argument. In the 2024 cycle, Escambia County recorded approximately 48,385 votes in the August primary and 164,515 votes in the November general election — November turnout roughly three and a half times higher. Several residents echoed the concern at the public hearing before the vote, including retired schoolteacher Lily Eubanks and resident Craig Jones, both of whom argued school referendums belong on the general election ballot.</p>
+<p>"That seems to be, you know, politically motivated to put it in the primary where we have the least amount of votes," May said. "I think that if there's ever an opportunity to eliminate voter suppression, give every person an opportunity to vote, we should give it at the chance that allows for the most people to come out."</p>
 
-<p>Commissioners Mike Kohler and Steven Barry said their yes votes were driven less by preference than by legal risk. Escambia County Attorney Alison Rogers told the commission she had requested an Attorney General's Office opinion in October on whether the commission could place the referendum on the general election ballot instead of the primary as the school board had requested. As of the April 1 hearing, the AG's office had not responded. Rogers told commissioners her legal advice was to follow the school board's request.</p>
+<!-- INTERACTIVE: Turnout Chart -->
+<div class="fl-interactive" style="margin:2rem 0;font-family:inherit">
+  <div style="background:#f7f7f5;border-radius:8px;padding:1.5rem 2rem;max-width:620px;margin:0 auto">
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#1E2D4A;margin-bottom:1.25rem">Escambia County Voter Turnout — 2024</div>
+    <div style="margin-bottom:1rem">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.4rem">
+        <div style="font-size:0.85rem;width:130px;flex-shrink:0;color:#555">August Primary</div>
+        <div style="flex:1;background:#e0e0e0;border-radius:4px;height:32px;position:relative">
+          <div style="width:29.4%;background:#D4871A;height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:0.5rem">
+            <span style="color:#fff;font-size:0.8rem;font-weight:700;white-space:nowrap">48,385</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <div style="font-size:0.85rem;width:130px;flex-shrink:0;color:#555">November General</div>
+        <div style="flex:1;background:#e0e0e0;border-radius:4px;height:32px;position:relative">
+          <div style="width:100%;background:#1E2D4A;height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:0.5rem">
+            <span style="color:#fff;font-size:0.8rem;font-weight:700;white-space:nowrap">164,515</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:0.78rem;color:#666;border-top:1px solid #ddd;padding-top:0.75rem;margin-top:0.5rem">The referendum will be decided by whoever shows up. In 2024, three times as many Escambia voters cast ballots in November as in August. Source: Escambia County Supervisor of Elections</div>
+  </div>
+</div>
 
-<p>The path to the April 1 vote began February 18, when the Escambia County School Board voted 3-2 to ask the county to place the referendum on the August 2026 primary ballot. District 5 Board Member Tom Harrell introduced the resolution and was joined by Kevin Adams and Paul Fetsko in voting yes. Carissa Bergosh and David Williams voted no. Harrell campaigned on returning to an elected superintendent and has repeatedly said the appointed model has not produced the continuity Escambia families want.</p>
+<p>Several residents made the same argument at the public hearing before the vote. Retired schoolteacher Lily Eubanks called the primary timing deliberate. Resident Craig Jones was more direct: "School referendums belong on the general ballot. That's where the full community is present."</p>
 
-<p>Escambia County voters last weighed in on the question in November 2018, when they narrowly approved the switch from elected to appointed. Following that vote, the school board conducted a national search and hired Tim Smith as the first appointed superintendent. The board terminated Smith in a 3-2 vote in 2023. Keith Leonard has served as superintendent since. Leonard has indicated publicly that he plans to retire in 2027 or 2028, meaning the question of how the next superintendent is selected has practical urgency regardless of how the referendum turns out.</p>
+<p>Commissioners Mike Kohler and Steven Barry said their yes votes were driven less by preference than by legal exposure. Escambia County Attorney Alison Rogers told the board she had sought a Florida Attorney General's Office opinion in October 2025 on whether commissioners could move the referendum to November against the school board's wishes. The AG's office had not responded as of April 1. Rogers advised the commission to follow the school board's request.</p>
 
-<p>If voters approve the change in August, an elected superintendent would take office following the November 2028 general election. If voters reject the change, the school board would continue to appoint the position.</p>`
+<p>The school board's request originated at a February 13, 2025 workshop, where District 5 Board Member Tom Harrell introduced the resolution. Harrell campaigned for his seat on a pledge to return to an elected superintendent and has said repeatedly that the appointed model has not delivered the stability Escambia families expect. The board voted 3-2 on February 18 to send the request to the commission, with Harrell, Kevin Adams and Paul Fetsko in favor. Carissa Bergosh and David Williams voted no.</p>
+
+<!-- INTERACTIVE: Then vs. Now Superintendent Timeline -->
+<div class="fl-interactive" style="margin:2rem 0;font-family:inherit">
+  <div style="background:#f7f7f5;border-radius:8px;padding:1.5rem 2rem;max-width:620px;margin:0 auto">
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#1E2D4A;margin-bottom:1.25rem">The Appointed Era: A Record</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div style="background:#fff;border-radius:6px;padding:1rem;border-left:4px solid #1E2D4A">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1E2D4A;margin-bottom:0.5rem">Elected Era</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:0.25rem">Malcolm Thomas</div>
+        <div style="font-size:0.82rem;color:#555">2008 – 2020</div>
+        <div style="font-size:0.82rem;color:#555;margin-top:0.4rem">12 years. Named Florida Superintendent of the Year in 2018.</div>
+      </div>
+      <div style="background:#fff;border-radius:6px;padding:1rem;border-left:4px solid #D4871A">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#D4871A;margin-bottom:0.5rem">Appointed Era</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:0.25rem">Tim Smith</div>
+        <div style="font-size:0.82rem;color:#555">Sept. 2020 – May 2023</div>
+        <div style="font-size:0.82rem;color:#555;margin-top:0.4rem">Fired in a surprise 3-2 vote after less than 3 years.</div>
+      </div>
+      <div style="grid-column:1/-1;background:#fff;border-radius:6px;padding:1rem;border-left:4px solid #D4871A">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#D4871A;margin-bottom:0.5rem">Appointed Era — Current</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:0.25rem">Keith Leonard</div>
+        <div style="font-size:0.82rem;color:#555">Interim June 2023 → Permanent Jan. 2024 → Present</div>
+        <div style="font-size:0.82rem;color:#555;margin-top:0.4rem">30-year district veteran. Appointed unanimously after Smith was fired.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>The turbulence of the appointed era gives the debate its sharpest edge. When voters backed the switch in 2018, Thomas was still finishing his term. The school board then conducted a national search and hired Timothy Smith from Orange County Public Schools. The board fired Smith in a surprise 3-2 vote in May 2023, after a public clash over Warrington Middle School's charter school negotiations and a broader breakdown in board confidence. Keith Leonard — a 30-year district veteran who had been considered a frontrunner for the appointed position the first time — stepped in as interim and was made permanent superintendent in a unanimous vote in January 2024.</p>
+
+<!-- INTERACTIVE: How We Got Here Timeline -->
+<div class="fl-interactive" style="margin:2rem 0;font-family:inherit">
+  <div style="background:#f7f7f5;border-radius:8px;padding:1.5rem 2rem;max-width:620px;margin:0 auto">
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#1E2D4A;margin-bottom:1.25rem">How We Got Here</div>
+    <div style="position:relative;padding-left:1.5rem">
+      <div style="position:absolute;left:0.45rem;top:0.5rem;bottom:0.5rem;width:2px;background:#ddd"></div>
+      <div style="display:flex;flex-direction:column;gap:1.1rem">
+        <div style="position:relative">
+          <div style="position:absolute;left:-1.2rem;top:0.3rem;width:10px;height:10px;border-radius:50%;background:#1E2D4A;border:2px solid #fff;box-shadow:0 0 0 1px #1E2D4A"></div>
+          <div style="font-size:0.7rem;font-weight:700;color:#D4871A;text-transform:uppercase;letter-spacing:0.08em">Nov. 2018</div>
+          <div style="font-size:0.87rem;color:#1a1a1a;margin-top:0.1rem">Voters approve appointed superintendent model — 50.36% to 49.64%. The sixth referendum on the question. The first to pass.</div>
+        </div>
+        <div style="position:relative">
+          <div style="position:absolute;left:-1.2rem;top:0.3rem;width:10px;height:10px;border-radius:50%;background:#1E2D4A;border:2px solid #fff;box-shadow:0 0 0 1px #1E2D4A"></div>
+          <div style="font-size:0.7rem;font-weight:700;color:#D4871A;text-transform:uppercase;letter-spacing:0.08em">Sept. 2020</div>
+          <div style="font-size:0.87rem;color:#1a1a1a;margin-top:0.1rem">School board hires Timothy Smith as Escambia's first appointed superintendent after a national search.</div>
+        </div>
+        <div style="position:relative">
+          <div style="position:absolute;left:-1.2rem;top:0.3rem;width:10px;height:10px;border-radius:50%;background:#1E2D4A;border:2px solid #fff;box-shadow:0 0 0 1px #1E2D4A"></div>
+          <div style="font-size:0.7rem;font-weight:700;color:#D4871A;text-transform:uppercase;letter-spacing:0.08em">May 2023</div>
+          <div style="font-size:0.87rem;color:#1a1a1a;margin-top:0.1rem">School board fires Smith 3-2 in a surprise vote over Warrington Middle School dispute. Keith Leonard named interim.</div>
+        </div>
+        <div style="position:relative">
+          <div style="position:absolute;left:-1.2rem;top:0.3rem;width:10px;height:10px;border-radius:50%;background:#1E2D4A;border:2px solid #fff;box-shadow:0 0 0 1px #1E2D4A"></div>
+          <div style="font-size:0.7rem;font-weight:700;color:#D4871A;text-transform:uppercase;letter-spacing:0.08em">Jan. 2024</div>
+          <div style="font-size:0.87rem;color:#1a1a1a;margin-top:0.1rem">School board unanimously makes Leonard permanent superintendent.</div>
+        </div>
+        <div style="position:relative">
+          <div style="position:absolute;left:-1.2rem;top:0.3rem;width:10px;height:10px;border-radius:50%;background:#1E2D4A;border:2px solid #fff;box-shadow:0 0 0 1px #1E2D4A"></div>
+          <div style="font-size:0.7rem;font-weight:700;color:#D4871A;text-transform:uppercase;letter-spacing:0.08em">Feb. 18, 2025</div>
+          <div style="font-size:0.87rem;color:#1a1a1a;margin-top:0.1rem">School board votes 3-2 to request the referendum be placed on the August 2026 primary ballot.</div>
+        </div>
+        <div style="position:relative">
+          <div style="position:absolute;left:-1.2rem;top:0.3rem;width:10px;height:10px;border-radius:50%;background:#D4871A;border:2px solid #fff;box-shadow:0 0 0 1px #D4871A"></div>
+          <div style="font-size:0.7rem;font-weight:700;color:#D4871A;text-transform:uppercase;letter-spacing:0.08em">April 1, 2026</div>
+          <div style="font-size:0.87rem;color:#1a1a1a;margin-top:0.1rem">County commission votes 4-1 to place referendum on August 18 primary ballot. Commissioner Lumon May dissents.</div>
+        </div>
+        <div style="position:relative">
+          <div style="position:absolute;left:-1.2rem;top:0.3rem;width:10px;height:10px;border-radius:50%;background:#D4871A;border:2px solid #fff;box-shadow:0 0 0 1px #D4871A"></div>
+          <div style="font-size:0.7rem;font-weight:700;color:#D4871A;text-transform:uppercase;letter-spacing:0.08em">Aug. 18, 2026</div>
+          <div style="font-size:0.87rem;color:#1a1a1a;margin-top:0.1rem">Escambia voters decide. A yes vote triggers an election for superintendent in November 2028.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>If voters approve the change in August, the first elected superintendent in Escambia County since 2020 would take office following the November 2028 general election. If voters reject the change, the school board retains the hiring authority it has held since 2018 — and the question, raised six times over the decades, will likely rest for a while longer.</p>
+
+<p><em>The August 18 primary is open to all registered Escambia County voters. Florida's general election is Nov. 3, 2026.</em></p>`
 },
 
 // ============================================================================
