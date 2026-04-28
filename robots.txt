@@ -1,6 +1,18 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 User-agent: facebookexternalhit
 Allow: /
 
@@ -14,3 +26,4 @@ User-agent: LinkedInBot
 Allow: /
 
 Sitemap: https://theflightline.news/sitemap.xml
+Sitemap: https://theflightline.news/news-sitemap.xml
