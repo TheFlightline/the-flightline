@@ -1965,22 +1965,60 @@ Object.assign(A, {
 .article-body .fl-timeline-help { padding:6px 12px 0; font-family:'DM Sans',sans-serif; font-size:11px; color:#9ca3af; font-style:italic; }
 </style>
 
-<p class="article-lede">Stand on the lawn at Community Maritime Park on a Saturday afternoon and the scene is almost what voters were promised in 2006. Families on the waterfront. Wahoos baseball drifting over the bay. A band on the grass. You can forget, for a minute, that the thing you're looking at is a promise that was only half-kept.</p>
+<p class="article-lede">Stand on the lawn at Community Maritime Park on a Saturday afternoon and the scene is almost what voters were promised in 2006. Families on the waterfront. The crack of a bat carrying across the bay. A band on the grass. You can forget, for a minute, that what you're looking at is a promise that was only half-kept. Then you turn around.</p>
 
-<p>Then you turn around.</p>
+<figure class="fl-render">
+  <img src="/images/reverb-portal.jpg" alt="Pedestrian-level rendering of the public portal between Rhythm Lofts and REVERB hotel, showing palm trees, mural artwork, and a stairway leading toward the waterfront.">
+  <figcaption>The public "portal" between the Rhythm Lofts entrance (left) and the REVERB hotel (right), connecting Main Street toward Blue Wahoos Stadium and the waterfront beyond. The plaza-stair element is one of the project's principal contributions to the public realm. <span class="credit">Rendering by Gensler / Dawson Company submitted to the City of Pensacola. Final design subject to change.</span></figcaption>
+</figure>
+
+
+
+<figure class="fl-render">
+  <img src="/images/reverb-aerial-night.jpg" alt="Night aerial rendering showing the REVERB hotel and Rhythm Lofts tower on Lot 5 of Community Maritime Park, with Blue Wahoos Stadium adjacent and downtown Pensacola in the background.">
+  <figcaption>Night aerial view of the proposed Lot 5 buildings, with Blue Wahoos Stadium visible at lower right. The project would sit immediately across from the stadium's main entrance on a parcel that has been empty since the park opened in 2012. <span class="credit">Rendering by Gensler / Dawson Company submitted to the City of Pensacola. Final design subject to change.</span></figcaption>
+</figure>
+
+
+
+<figure class="fl-render">
+  <img src="/images/reverb-street-entry.jpg" alt="Street-level rendering of the REVERB by Hard Rock hotel entrance at Main Street, Pensacola, with REVERB signage, mural-clad street wall, and pedestrians.">
+  <figcaption>The REVERB by Hard Rock hotel's Main Street frontage, with the planned mural-clad streetwall and signage. The 15-story Rhythm Lofts tower rises in the background. <span class="credit">Rendering by Gensler / Dawson Company submitted to the City of Pensacola. Final design subject to change.</span></figcaption>
+</figure>
+
+
 
 <figure class="fl-render">
   <img src="/images/reverb-aerial-dusk.jpg" alt="Aerial dusk rendering of the proposed REVERB by Hard Rock hotel and Rhythm Lofts tower at Community Maritime Park, with Blue Wahoos Stadium and the Pensacola Bay marina in the foreground.">
   <figcaption>The proposed Dawson Company project at Community Maritime Park as seen from the southwest, with the 15-story Rhythm Lofts tower at left and the 10-story REVERB by Hard Rock hotel at right. Blue Wahoos Stadium and the marina are in the foreground; downtown Pensacola is behind. <span class="credit">Rendering by Gensler / Dawson Company submitted to the City of Pensacola. Final design subject to change.</span></figcaption>
 </figure>
 
-<p>Across the street from the stadium's main entrance is Lot 5. A flat, mostly empty rectangle of gravel and grass and parked cars. It has looked like this since the park opened 14 years ago. It has looked like this for longer than some of the kids at the game have been alive. And for 20 years, since before there was a stadium, before there was a park, before there was anything, the city has been trying to figure out what to put there.</p>
+
+
+<p>Across the street from the stadium's main entrance is Lot 5. A flat, mostly empty rectangle of gravel and grass and parked cars. It has looked like this since the park opened 14 years ago. It has looked like this for longer than some of the kids at the game have been alive. And for 20 years — since before there was a stadium, before there was a park, before there was anything — the city has been trying to figure out what to put there.</p>
 
 <p>The latest answer is a $250 million hotel-and-apartment project that would put a 15-story tower on the site, the tallest building in Pensacola, and a 10-story Reverb by Hard Rock hotel next to it. The developer is Dawson Company, a second-generation Pensacola firm partnered with Hard Rock International and NFL Hall of Famer Emmitt Smith. The architecture is Gensler. The interiors are by Lenny Kravitz's design firm. The structural engineering is Thornton Tomasetti, and the plan calls for one of the larger mass timber buildings in the Southeast. The 100-year ground lease was signed in August 2024. The project is real. It is also, by any honest read, the best shot Lot 5 has seen.</p>
 
 <aside class="fl-pullquote">
+  <p class="fl-pullquote-text">Lot 5 has waited 20 years for a project. It can wait three more weeks for the right one.</p>
+  <span class="fl-pullquote-attr">The Flightline Editorial Board</span>
+</aside>
+
+
+
+<aside class="fl-pullquote">
+  <p class="fl-pullquote-text">The public is being asked to take a larger share of the downside than the developer is taking. That inverts what subsidy is supposed to do.</p>
+</aside>
+
+
+
+<aside class="fl-pullquote">
   <p class="fl-pullquote-text">The project is real. It is also, by any honest read, the best shot Lot 5 has seen.</p>
 </aside>
+
+
+
+<div class="editor-note" style="border-left:3px solid var(--gold); background:#faf6ee; padding:14px 18px; margin:24px 0; font-size:14px; line-height:1.55; color:var(--g1);"><strong style="color:var(--navy); text-transform:uppercase; font-size:11px; letter-spacing:0.06em; display:block; margin-bottom:6px;">For Background</strong>The Flightline's news coverage of the rejection — what the CRA administrator's letter said, what the developer requested, and what comes next — is here: <a href="javascript:void(0)" onclick="openArticle('reverb-cra-rejection-news');return false;" style="color:var(--navy); font-weight:700; text-decoration:underline;">Pensacola CRA Rejects $58 Million Tax Rebate Application for Reverb Hard Rock Hotel at Maritime Park →</a></div>
 
 <p>Which is exactly why the city's April 16 rejection of the developer's $58 million tax rebate application is so important. And why it is, on the merits, the right call.</p>
 
@@ -2010,138 +2048,43 @@ Object.assign(A, {
 </div>
 <p class="fl-statstrip-caption">By the numbers · Source: CRA Administrator letter, April 16, 2026; Lambert Advisory consultant memo</p>
 
+
+
 <p>The first is what planners call the "but for" test. Under Florida law, a tax-increment-financing rebate is supposed to go only to a project that would not happen without it. That is the whole point. Public subsidy exists to close the gap between possible and impossible. The developer's application effectively argued the project would not pencil at the margins they want without the rebate. That is a different claim. Hard Rock is signed. The architects are drawing. The engineers are engineering. Emmitt Smith is on the term sheet. There is a hundred-year lease in a drawer downtown. This is not a project teetering on the edge of nonexistence. It is a project that wants a better return.</p>
 
 <p>The second is the equity gap. The developers have $50 million of their own capital at risk against a $250 million project. Twenty percent. The city's own published CRA policy prefers at least 30 percent. What happens when a developer comes in under the equity threshold and asks for public money to cover the difference is that the public is being asked to take a larger share of the downside than the developer is taking. That inverts what subsidy is supposed to do.</p>
 
-<aside class="fl-pullquote">
-  <p class="fl-pullquote-text">The public is being asked to take a larger share of the downside than the developer is taking. That inverts what subsidy is supposed to do.</p>
-</aside>
+<p>The structure of the request matters as much as the total. Dawson asked for a 100% rebate of eligible property taxes on the hotel and residential components — not a partial subsidy tied to specific cost gaps, but a complete return of every dollar the project would otherwise pay into the tax base for two decades. The application projects roughly $5.6 million in annual tax increment once the project is stabilized. The city would see none of it until 2046. The tool exists to close a documented financing gap, not to fully offset a developer's tax liability on a project that four major banks have already agreed to finance — contingently — once the rebate is approved.</p>
 
 <p>The other four items in D'Angelo's letter are technical. The rebate would extend past the CRA's own statutory sunset in 2043, the TIF math doesn't self-support, the cap language in the application doesn't match the cap language in city policy, the assumptions are (per the CRA's independent consultant at Lambert Advisory) "highly questionable." All of that is real. But the two above are the ones a voter can hold in one hand. Did the project need this money? And how much skin did the developer actually have in the game?</p>
-
-<figure class="fl-render">
-  <img src="/images/reverb-street-entry.jpg" alt="Street-level rendering of the REVERB by Hard Rock hotel entrance at Main Street, Pensacola, with REVERB signage, mural-clad street wall, and pedestrians.">
-  <figcaption>The REVERB by Hard Rock hotel's Main Street frontage, with the planned mural-clad streetwall and signage. The 15-story Rhythm Lofts tower rises in the background. <span class="credit">Rendering by Gensler / Dawson Company submitted to the City of Pensacola. Final design subject to change.</span></figcaption>
-</figure>
 
 <p>To understand why those two questions matter so much at Lot 5 specifically, you have to understand what happened on this parcel before.</p>
 
 <p>In 2000, the city paid $3.63 million for 27.5 acres of contaminated chemical-company land and started trying to figure out what to build on it. The first answer was Festival Park, a $40 million downtown auditorium approved by the City Council in 2002 and rejected by city voters in a 2003 referendum. The second answer was what we have now: a 2005 concept for a baseball stadium and mixed-use waterfront, refined in public focus groups, approved in concept by the council, and then forced to a referendum by a citizens' group called Save Our City that collected more than 7,000 signatures. On September 5, 2006, Pensacola voters approved Community Maritime Park by about 2,000 votes, or 56 percent to 44. The public put $40 million in CRA bonds into it and another $20 million into cleaning up generations of petroleum contamination.</p>
 
+<div class="fl-timeline-help">↑ Tap any milestone to expand</div>
+
+
+
+<div class="fl-timeline-rail">
+
+    <div class="fl-tl-item" onclick="this.classList.toggle('fl-open')">
+      <div class="fl-tl-dot"></div>
+
+
+
+<div class="fl-timeline-sub">A history of Community Maritime Park and the parcel that's still gravel</div>
+
+
+
 <div class="fl-timeline">
   <div class="fl-timeline-title">Lot 5 — Twenty years of trying</div>
-  <div class="fl-timeline-sub">A history of Community Maritime Park and the parcel that's still gravel</div>
-  <div class="fl-timeline-rail">
 
-    <div class="fl-tl-item" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">2000</div>
-      <div class="fl-tl-headline">City buys the Trillium parcel for $3.63 million</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">Pensacola purchases 27.5 acres of contaminated former chemical-company land on the downtown waterfront, then begins a multi-year effort to determine what to build on it. Cleanup of generations of petroleum and chemical contamination becomes a parallel track that will eventually consume more than $20 million.</div>
-    </div>
 
-    <div class="fl-tl-item" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">2002</div>
-      <div class="fl-tl-headline">Festival Park approved by City Council</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">The City Council approves a concept for Festival Park, a $40 million downtown auditorium and event venue on the parcel. The plan is referred to a public referendum after concerns about cost and design.</div>
-    </div>
-
-    <div class="fl-tl-item" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">2003</div>
-      <div class="fl-tl-headline">Voters reject Festival Park</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">Pensacola voters defeat the Festival Park referendum, leaving the parcel without an approved use heading into the mid-2000s. The defeat sends planners back to the drawing board and shapes the eventual baseball-stadium-anchored alternative.</div>
-    </div>
-
-    <div class="fl-tl-item" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">2005</div>
-      <div class="fl-tl-headline">Maritime Park concept developed</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">A new concept emerges centered on a Double-A baseball stadium with surrounding mixed-use development and public open space. The plan is refined through community focus groups and presented to City Council in late 2005 and early 2006.</div>
-    </div>
-
-    <div class="fl-tl-item fl-pivot" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">2006</div>
-      <div class="fl-tl-headline">Voters approve Community Maritime Park, 56-44</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">A citizens' group called Save Our City collects more than 7,000 signatures forcing the project to a referendum. On September 5, 2006, Pensacola voters approve Community Maritime Park by about 2,000 votes, 56 percent to 44. The vote authorizes $40 million in CRA bonds toward stadium construction and infrastructure.</div>
-    </div>
-
-    <div class="fl-tl-item" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">2012</div>
-      <div class="fl-tl-headline">Blue Wahoos Stadium opens</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">The stadium, the marina, the public lawn and the amphitheater open. The promised mixed-use development on the surrounding lots — the part of the deal designed to generate enough tax revenue to pay back the bonds faster than taxpayers would — does not.</div>
-    </div>
-
-    <div class="fl-tl-item" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">2019</div>
-      <div class="fl-tl-headline">Studer Family delivers West Main Master Plan</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">Quint Studer's team funds and delivers the West Main Master Plan, a comprehensive vision for the streets and lots surrounding Community Maritime Park, and hands it to the city. The plan becomes the design framework that will eventually govern review of projects on the empty parcels.</div>
-    </div>
-
-    <div class="fl-tl-item" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">2021–22</div>
-      <div class="fl-tl-headline">Silver Hills walks away from Lots 4 and 5</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">Silver Hills Development Inc. holds lease options on both Lot 4 and Lot 5 and proposes mixed-use plans, but ultimately walks away without breaking ground. The departure leaves the parcels open again and resets the city's effort to find a viable developer for the centerpiece sites.</div>
-    </div>
-
-    <div class="fl-tl-item fl-pivot" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">Aug 2024</div>
-      <div class="fl-tl-headline">City Council approves 100-year ground lease for Lot 5</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">The City Council approves the Dawson Company / Hard Rock / Emmitt Smith team's 100-year ground lease for Lot 5. The deal requires the developer to obtain construction permits within one year. Hard Rock International publicly announces the REVERB hotel partnership the day before the council vote.</div>
-    </div>
-
-    <div class="fl-tl-item" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">Mar 2025</div>
-      <div class="fl-tl-headline">Pensacola Planning Board approves design concept</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">Lester Yuen of Gensler presents the design concept to the Pensacola Planning Board, which unanimously approves the proposed 15-story Rhythm Lofts apartment tower (171 feet, the tallest building in the city) and 10-story REVERB hotel. Several board members raise concerns about the dark color palette and the windowless north wall.</div>
-    </div>
-
-    <div class="fl-tl-item fl-pivot" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">Apr 16, 2026</div>
-      <div class="fl-tl-headline">CRA rejects $58 million tax rebate application</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">CRA Administrator Victoria D'Angelo sends Dawson Company a letter declaring the 345-page rebate application "incomplete and cannot be processed further in its current form." The letter lists six specific deficiencies including failure to satisfy the "but-for" test and developer equity below the CRA's published 30 percent policy floor.</div>
-    </div>
-
-    <div class="fl-tl-item fl-pivot" onclick="this.classList.toggle('fl-open')">
-      <div class="fl-tl-dot"></div>
-      <div class="fl-tl-year">Apr 23, 2026</div>
-      <div class="fl-tl-headline">The Flightline Editorial Board publishes</div>
-      <div class="fl-tl-toggle">+ tap to expand</div>
-      <div class="fl-tl-detail">This editorial. The next CRA board meeting, where a revised application could be heard, is scheduled for May 11.</div>
-    </div>
-
-  </div>
-  <div class="fl-timeline-help">↑ Tap any milestone to expand</div>
-</div>
 
 <p>That vote bought Blue Wahoos Stadium. It bought the waterfront lawn. It bought the amphitheater and the festival grounds and the concerts on summer nights. What it did not buy, and what it was supposed to buy, was a mixed-use district around the stadium that would generate the tax revenue to pay off the bonds faster than the taxpayers would. The private investment was the other half of the deal. For 14 years, that half has not arrived. Not in 2012 when the stadium opened. Not when Quint Studer's team paid for the West Main Master Plan in 2019 and handed it to the city. Not when Silver Hills Development took lease options on Lots 4 and 5 and then walked away. Not through five years of RFPs and press conferences and renderings that ended up in drawers.</p>
 
 <p>Lot 5 has been, all this time, the open wound of the Maritime Park deal. The place you can stand and see what was promised and what wasn't built. Every council member of the last three terms has felt that weight. Every mayor. And that weight is now, in the spring of 2026, pressing down on one question: do we finally let something get built, or do we lose Dawson too.</p>
-
-<figure class="fl-render">
-  <img src="/images/reverb-aerial-night.jpg" alt="Night aerial rendering showing the REVERB hotel and Rhythm Lofts tower on Lot 5 of Community Maritime Park, with Blue Wahoos Stadium adjacent and downtown Pensacola in the background.">
-  <figcaption>Night aerial view of the proposed Lot 5 buildings, with Blue Wahoos Stadium visible at lower right. The project would sit immediately across from the stadium's main entrance on a parcel that has been empty since the park opened in 2012. <span class="credit">Rendering by Gensler / Dawson Company submitted to the City of Pensacola. Final design subject to change.</span></figcaption>
-</figure>
 
 <p>This is the moment where cities make bad deals.</p>
 
@@ -2155,25 +2098,13 @@ Object.assign(A, {
 
 <p>Mayor D.C. Reeves put his card on the table early. On April 13, at his weekly press conference, he told reporters he does not support the rebate "in its current form." He was right to say so, and he was right to note that the final call is not his. The CRA board is the seven-member City Council sitting in a separate legal role. They are the ones who will approve or reject whatever comes back. They should take D'Angelo's letter, the consultant's memo, and the CRA's own published policy, and treat those three documents as the floor. Not the ceiling. Not the starting point for a negotiation about how much of them to waive.</p>
 
-<figure class="fl-render">
-  <img src="/images/reverb-portal.jpg" alt="Pedestrian-level rendering of the public portal between Rhythm Lofts and REVERB hotel, showing palm trees, mural artwork, and a stairway leading toward the waterfront.">
-  <figcaption>The public "portal" between the Rhythm Lofts entrance (left) and the REVERB hotel (right), connecting Main Street toward Blue Wahoos Stadium and the waterfront beyond. The plaza-stair element is one of the project's principal contributions to the public realm. <span class="credit">Rendering by Gensler / Dawson Company submitted to the City of Pensacola. Final design subject to change.</span></figcaption>
-</figure>
-
 <p>Dawson Company Chief Operating Officer Tamara Bowens told the Pensacola News Journal earlier this month that without the abatement the team would need to "go back to the drawing board" on a plan B. We hope they do. A revised application that scales the ask to what the CRA is legally permitted to give, raises equity to match city policy, and makes an honest case for why the rebate is actually necessary is a revised application worth hearing. The next CRA board meeting is May 11. That gives everyone three weeks. Three weeks is enough time to either file the real application or admit the first one was a negotiating position.</p>
 
-<p>Before then, the city can do one thing that would be useful for this project and every one that comes after it. Publish the checklist. Tell the public, in plain language, what a complete CRA rebate application is required to demonstrate on "but for," on equity, on term, on TIF self-sufficiency. Put the standard on paper so the next round of review is an audit of the math, not a negotiation over the rules. That is what a city that has learned from 20 years of Lot 5 would do.</p>
+<p>Before then, the city can do one thing that would be useful for this project and every one that comes after it. Publish the checklist. Tell the public, in plain language, what a complete CRA rebate application is required to demonstrate on "but for," on equity, on term, on TIF self-sufficiency. Put the standard on paper so the next round of review is an audit of the math, not a negotiation over the rules. That is what a city that has learned from 20 years of Lot 5 would do.</p>\n<p style=\"font-size:12px;color:var(--g2);margin-top:20px;\">Source: <a href=\"https://pensacolafl.portal.civicclerk.com/\" target=\"_blank\" rel=\"noopener\">Pensacola City Council agenda &mdash; April 9, 2026</a></p>
 
 <p>Because the real question at Community Maritime Park is not whether to build on Lot 5. Of course we should build on Lot 5. The question is whether Pensacola, in the year 2026, can tell the difference between a project it needs and a deal it is being told it needs. The April 16 letter is the city saying: we can.</p>
 
-<aside class="fl-pullquote">
-  <p class="fl-pullquote-text">Lot 5 has waited 20 years for a project. It can wait three more weeks for the right one.</p>
-  <span class="fl-pullquote-attr">The Flightline Editorial Board</span>
-</aside>
-`
-}
-
-});`
+<p>Lot 5 has waited 20 years for a project. It can wait three more weeks for the right one.</p>`
 },
 
 // ============================================================================
