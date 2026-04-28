@@ -1912,10 +1912,10 @@ function renderCalList() {
 
   // Per-origin route description + miles to Pensacola Beach.
   const ROUTE_LABELS = {
-    downtown: { via:'Via US-98 E + Bob Sikes Bridge',           miles:'8' },
-    nas:      { via:'Via Navy Blvd + US-98 + Bob Sikes Bridge', miles:'13' },
-    airport:  { via:'Via I-110 + US-98 + Bob Sikes Bridge',     miles:'12' },
-    uwf:      { via:'Via I-110 + US-98 + Bob Sikes Bridge',     miles:'17' }
+    downtown: { via:'US-98 E + Bob Sikes Bridge',    miles:'8' },
+    nas:      { via:'Navy Blvd + Bob Sikes Bridge',  miles:'13' },
+    airport:  { via:'I-110 + Bob Sikes Bridge',      miles:'12' },
+    uwf:      { via:'I-110 + Bob Sikes Bridge',      miles:'17' }
   };
 
   // Google Maps click-through destination — Casino Beach Boardwalk
