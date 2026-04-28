@@ -1,5 +1,35 @@
 var A = window.A || {};
 Object.assign(A, {
+  "uwf-synapse-groundbreaking-042326": {
+    "cat": "education",
+    "label": "Education",
+    "thumbnail": "/images/education_science-lab_007.jpg",
+    "headline": "UWF Breaks Ground on $53 Million Research Building Designed to Mirror the Brain",
+    "dek": "The Synapse, a 55,000-square-foot facility funded by Triumph Gulf Coast and state appropriations, will anchor UWF\'s push into AI, cybersecurity and computational research.",
+    "byline": "The Flightline Staff",
+    "date": "April 27, 2026",
+    "brief": [
+      "The University of West Florida broke ground April 23 on The Synapse, a 55,000-square-foot research building backed by $32.5 million from Triumph Gulf Coast and more than $21 million in state funding.",
+      "The Y-shaped building, designed by Caldwell Architects to mimic the structure of neurons, will house both the Center for Computational Intelligence and the Center for Cybersecurity and AI.",
+      "The facility will support research across AI, robotics, cybersecurity, power systems, material science and civil engineering, with no public completion date yet announced."
+    ],
+    "body": "<p>Shovels hit dirt on the University of West Florida\'s Pensacola campus Wednesday as university leaders, elected officials and community partners celebrated the groundbreaking of The Synapse, a 55,000-square-foot advanced research building backed by $53.5 million in public funding.</p><p>The project draws $32.5 million from Triumph Gulf Coast, the state agency managing BP oil spill settlement funds for Northwest Florida, and more than $21 million in additional state appropriations. Designed by Caldwell Architects, the building will sit just south of the John C. Pace Library and is designated Building 129 on the Pensacola campus.</p><p>The shape is not incidental. Caldwell designed The Synapse in a Y configuration to reflect neuromorphic architecture — a design philosophy that mimics the way neurons connect and transmit information in the human brain. Research labs, office hubs and open collaboration spaces ring a central multi-story atrium with interconnected corridors, built to keep researchers from different disciplines crossing paths.</p><p>\'The Synapse is a transformational facility made possible through the support of Triumph Gulf Coast and the state of Florida,\' UWF President Manny Diaz Jr. said. \'This new modern facility will allow the University to expand research capacity, strengthen industry partnerships and better prepare students for career fields critical to our region\'s future.\'</p><p>The building will serve as the permanent home for two of UWF\'s flagship research operations: the Center for Computational Intelligence, housed within the Institute for Analytics and Industry Advancement, and the Center for Cybersecurity and AI. Both have operated without a dedicated facility. The Synapse consolidates them under one roof for the first time.</p><p>The CCI focuses on computational models with applications across healthcare, defense, engineering, energy and environmental monitoring. The Cybersecurity and AI center prepares workforce-ready professionals while advancing research on responsible AI systems. The facility will also support work in robotics, power systems, material science and civil engineering.</p><p>\'The Synapse represents the future of innovation, where AI, cybersecurity and advanced computing come together to solve complex challenges,\' said Dr. Eman El-Sheikh, associate vice president of the UWF Center for Cybersecurity and AI. \'This state-of-the-art environment will accelerate research, strengthen collaboration and position UWF as a leader in securing and advancing intelligent systems.\'</p><p>No completion date has been publicly announced. The Synapse is the largest research infrastructure investment in UWF\'s history and among the most significant Triumph Gulf Coast-funded projects in Escambia County since the agency began distributing BP settlement dollars.</p>"
+  },
+  "pensacola-summit-recycling-relocation-042726": {
+    "cat": "govt",
+    "label": "Government",
+    "thumbnail": "/images/govt_office_007.jpg",
+    "headline": "Pensacola\'s Summit Recycling Center Moves to Leonard Street on May 5 After Years of Contamination Problems",
+    "dek": "The city is relocating the drop-off site to a staffed, fenced facility that will cut annual operating costs from $300,000 to $30,000 — a 90 percent reduction.",
+    "byline": "The Flightline Staff",
+    "date": "April 27, 2026",
+    "brief": [
+      "The City of Pensacola will close the Summit Boulevard Recycling Center on May 5 and reopen at 100 W. Leonard St., the site of the city\'s Sanitation Services Transfer Center.",
+      "Contamination rates at the Summit location ran between 85 and 90 percent, sending nearly five tons of material to the Perdido Landfill every week.",
+      "The new staffed and fenced location will cost $30,000 per year to operate compared to $300,000 at the current site, Mayor D.C. Reeves said."
+    ],
+    "body": "<p>The City of Pensacola will shut down its Summit Boulevard Recycling Center on May 5 and relocate the drop-off site to 100 W. Leonard St., the address of the city\'s Sanitation Services Transfer Center, after years of contamination rates that rendered most of the material unusable.</p><p>Contamination at the Summit location ran between 85 and 90 percent — meaning nearly five tons of material collected each week was being sent to the Perdido Landfill rather than recycled. The new Transfer Center location is fenced and staffed, designed to give residents sorting assistance and education on proper recycling procedures.</p><p>\'Summit\'s current contamination rates are approximately 85 to 90 percent, so a secure, staffed location at a 90 percent decrease in operational cost is a win for everyone,\' Mayor D.C. Reeves said.</p><p>The numbers behind that shift are significant. Annual operating costs at the Summit location run $300,000. The Transfer Station site will cost $30,000 per year — a reduction of $270,000. City officials said the staffed model is expected to reduce contamination by screening material before it enters the collection containers.</p><p>Beginning May 5, the Leonard Street facility will be open to city residents on Mondays, Tuesdays, Thursdays and Fridays from 6 a.m. to 4 p.m., weather permitting. Accepted materials include cardboard, #1 PET plastics, #2 plastics, steel cans and aluminum cans. All cardboard must be broken down flat and all items must be clean and free of food residue. Household garbage and yard waste are not accepted.</p><p>The city is asking residents to presort recyclables before arriving to speed the process. The old Summit Boulevard location will close permanently when the new site opens.</p>"
+  },
   "childers-discretionary-lawsuit-042426": {
     "cat": "govt",
     "label": "Government",
