@@ -160,6 +160,40 @@ function renderMobileLatest() {
   }).join('');
 }
 
+function renderLatestFeed() {
+  var el = document.getElementById('latest-feed-body');
+  if (!el) return;
+  var EXCLUDED = ['events'];
+  var INITIAL = 5;
+  var EXPANDED = 15;
+  var sorted = Object.keys(A)
+    .filter(function(id) { return EXCLUDED.indexOf(A[id].cat) === -1; })
+    .sort(function(a, b) { return pubDate(b) - pubDate(a); });
+
+  function renderItems(count) {
+    var items = sorted.slice(0, count);
+    var html = items.map(function(id) {
+      var h = A[id].headline || '';
+      return '<div class="sidebar-story" onclick="openArticle(\'' + id + '\')">'
+        + '<div class="headline-sm">' + h + '</div>'
+        + '</div>';
+    }).join('');
+    if (sorted.length > INITIAL && count === INITIAL) {
+      html += '<div id="latest-feed-more" onclick="window._expandLatestFeed()" '
+        + 'style="padding-top:6px;font-family:\'DM Sans\',sans-serif;font-weight:700;font-size:10px;'
+        + 'letter-spacing:0.06em;text-transform:uppercase;color:var(--gold);cursor:pointer;">'
+        + 'Show more ↓</div>';
+    }
+    el.innerHTML = html;
+  }
+
+  window._expandLatestFeed = function() {
+    renderItems(EXPANDED);
+  };
+
+  renderItems(INITIAL);
+}
+
 
 // articles.js loaded synchronously via <script> tag — boot immediately
 articlesReady = true;
@@ -167,6 +201,7 @@ articleReadyCallbacks.forEach(fn => fn());
 buildHomeFeed();
 setTimeout(buildHomeFeed, 300);
 renderMobileLatest();
+renderLatestFeed();
 function updateBackToTop() {
   const btn = document.getElementById('back-to-top');
   if (!btn) return;
