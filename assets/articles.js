@@ -1975,7 +1975,9 @@ Object.assign(A, {
 
 <p>Across the street from the stadium's main entrance is Lot 5. A flat, mostly empty rectangle of gravel and grass and parked cars. It has looked like this since the park opened 14 years ago. It has looked like this for longer than some of the kids at the game have been alive. And for 20 years — since before there was a stadium, before there was a park, before there was anything — the city has been trying to figure out what to put there.</p>
 
-<p>The latest answer is a $250 million hotel-and-apartment project that would put a 15-story tower on the site, the tallest building in Pensacola, and a 10-story Reverb by Hard Rock hotel next to it. The developer is Dawson Company, a second-generation Pensacola firm partnered with Hard Rock International and NFL Hall of Famer Emmitt Smith. The architecture is Gensler. The interiors are by Lenny Kravitz's design firm. The structural engineering is Thornton Tomasetti, and the plan calls for one of the larger mass timber buildings in the Southeast. The 100-year ground lease was signed in August 2024. The project is real. It is also, by any honest read, the best shot Lot 5 has seen.</p>
+<p>The Dawson Company proposal is, by any honest accounting, the best thing anyone has ever offered for that site. A Reverb by Hard Rock hotel with 147 rooms. A 15-story residential tower called Rhythm Lofts with 247 units. Ground-floor retail and restaurant space oriented toward Cedar Street and the waterfront. A project designed by Gensler, one of the largest architecture firms in the country. The renderings show what Pensacola's waterfront could look like if the city finally stopped waiting for something better to come along. Nothing better is coming.</p>
+
+<p>The problem is not the project. The problem is the ask.</p>
 
 <aside class="fl-pullquote">
   <p class="fl-pullquote-text">The project is real. It is also, by any honest read, the best shot Lot 5 has seen.</p>
