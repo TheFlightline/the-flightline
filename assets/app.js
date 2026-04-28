@@ -2116,6 +2116,26 @@ function renderCalList() {
               <div style="font-size:11px;color:var(--g2);margin-top:2px;">${b.text}</div>
             </div>
           </div>`).join('')}
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--bd);">
+          <div style="font-family:'DM Sans',sans-serif;font-weight:800;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--g2);margin-bottom:6px;">Bridge Cameras · Opens in New Tab</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+            ${[
+              { label:'Bay Bridge — North', loc:'Toll plaza northbound approach', url:'https://streaming.myescambia.com:8080/' },
+              { label:'Bay Bridge — South', loc:'Toll plaza southbound approach', url:'https://streaming.myescambia.com:8083' },
+              { label:'Gulf Breeze Bridge', loc:'US-98 Bob Sikes / Gulf Breeze', url:'https://streaming.myescambia.com:8081/' },
+              { label:'Casino Beach Cam',   loc:'Santa Rosa Island beach approach', url:'https://streaming.myescambia.com:8082/' },
+              { label:'FL511 Bay Bridge',   loc:'FDOT traffic cameras — all angles', url:'https://fl511.com/cctv?start=0&length=10&filters%5B0%5D%5Bi%5D=2&filters%5B0%5D%5Bs%5D=Panhandle&filters%5B1%5D%5Bi%5D=3&filters%5B1%5D%5Bs%5D=Escambia&filters%5B2%5D%5Bi%5D=4&filters%5B2%5D%5Bs%5D=SR30+Pensacola+Bay+Bridge&order%5Bi%5D=1&order%5Bdir%5D=desc' },
+              { label:'Escambia Beach Cams', loc:'All live bridge &amp; beach feeds', url:'https://myescambia.com/pensacola-beach' },
+            ].map(c => `
+              <a href="${c.url}" target="_blank" rel="noopener"
+                 style="display:block;padding:7px 9px;border:1px solid var(--bd);border-radius:2px;text-decoration:none;transition:border-color 0.12s,background 0.12s;"
+                 onmouseover="this.style.borderColor='var(--gold)';this.style.background='#fff8ed'"
+                 onmouseout="this.style.borderColor='var(--bd)';this.style.background='white'">
+                <div style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;color:var(--navy);">📷 ${c.label}</div>
+                <div style="font-size:10px;color:var(--g2);margin-top:1px;">${c.loc}</div>
+              </a>`).join('')}
+          </div>
+        </div>
       </div>`;
 
     const incHtml = incs.length ? `
