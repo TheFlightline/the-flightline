@@ -178,17 +178,19 @@ function renderLatestFeed() {
         + '<div class="headline-sm">' + h + '</div>'
         + '</div>';
     }).join('');
-    if (sorted.length > INITIAL && count === INITIAL) {
-      html += '<div id="latest-feed-more" onclick="window._expandLatestFeed()" '
+    if (sorted.length > INITIAL) {
+      var expanded = count === EXPANDED;
+      html += '<div onclick="window._toggleLatestFeed()" '
         + 'style="padding-top:6px;font-family:\'DM Sans\',sans-serif;font-weight:700;font-size:10px;'
         + 'letter-spacing:0.06em;text-transform:uppercase;color:var(--gold);cursor:pointer;">'
-        + 'Show more ↓</div>';
+        + (expanded ? 'Show less ↑' : 'Show more ↓') + '</div>';
     }
     el.innerHTML = html;
   }
 
-  window._expandLatestFeed = function() {
-    renderItems(EXPANDED);
+  window._toggleLatestFeed = function() {
+    var expanded = el.querySelectorAll('.sidebar-story').length >= EXPANDED;
+    renderItems(expanded ? INITIAL : EXPANDED);
   };
 
   renderItems(INITIAL);
