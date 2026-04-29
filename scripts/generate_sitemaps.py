@@ -191,7 +191,14 @@ def build_records(entries):
             "slug": slug,
             "headline": headline,
             "datetime": dt,
+            "date": date_str,
+            "dek": field(val, "dek"),
+            "byline": field(val, "byline"),
+            "cat": field(val, "cat"),
+            "label": field(val, "label"),
             "thumbnail": field(val, "thumbnail"),
+            "body": field(val, "body"),
+            "brief": field(val, "brief"),
         })
     # Sort newest first
     records.sort(key=lambda r: r["datetime"], reverse=True)
@@ -232,6 +239,56 @@ def build_main_sitemap(records, lastmod_iso):
         lines.append("  </url>")
     lines.append("</urlset>")
     return "\n".join(lines) + "\n"
+
+
+def build_articles_json(records, generated_at):
+    """Emit a JSON file the SSR edge function can read at runtime.
+
+    Schema:
+      {
+        "generated_at": "2026-04-29T...Z",
+        "count": 124,
+        "articles": {
+           "<slug>": {
+             "slug": "...",
+             "headline": "...",
+             "dek": "...",
+             "byline": "...",
+             "date": "April 27, 2026",
+             "datePublished": "2026-04-27T12:00:00+00:00",
+             "cat": "govt",
+             "label": "Government",
+             "thumbnail": "/images/...",
+             "body": "<p>...</p>",
+             "brief": "..."
+           },
+           ...
+        }
+      }
+
+    Keyed by slug (object, not array) so the edge function can do O(1) lookup.
+    """
+    articles = {}
+    for r in records:
+        articles[r["slug"]] = {
+            "slug": r["slug"],
+            "headline": r["headline"],
+            "dek": r.get("dek"),
+            "byline": r.get("byline"),
+            "date": r.get("date"),
+            "datePublished": r["datetime"].strftime("%Y-%m-%dT%H:%M:%S+00:00"),
+            "cat": r.get("cat"),
+            "label": r.get("label"),
+            "thumbnail": r.get("thumbnail"),
+            "body": r.get("body"),
+            "brief": r.get("brief"),
+        }
+    payload = {
+        "generated_at": generated_at,
+        "count": len(records),
+        "articles": articles,
+    }
+    return json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n"
 
 
 def build_news_sitemap(records, now):
@@ -286,14 +343,18 @@ def main():
 
     main_xml = build_main_sitemap(records, lastmod_iso)
     news_xml, news_count = build_news_sitemap(records, now)
+    articles_json = build_articles_json(records, lastmod_iso)
 
     with open("sitemap.xml", "w", encoding="utf-8") as f:
         f.write(main_xml)
     with open("news-sitemap.xml", "w", encoding="utf-8") as f:
         f.write(news_xml)
+    with open("articles.json", "w", encoding="utf-8") as f:
+        f.write(articles_json)
 
     print(f"Wrote sitemap.xml      ({len(records)} articles + {len(STATIC_PAGES)} static pages)")
     print(f"Wrote news-sitemap.xml ({news_count} articles in last 48h)")
+    print(f"Wrote articles.json    ({len(records)} articles, {len(articles_json):,} bytes)")
 
 
 if __name__ == "__main__":
