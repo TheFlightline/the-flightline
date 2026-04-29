@@ -1,6 +1,15 @@
 [build]
   publish = "."
 
+# story.js runs first -- it server-renders /story/:slug with full NewsArticle
+# schema. Declared first so it wins for /story/* paths over the catch-all
+# prerender function.
+[[edge_functions]]
+  function = "story"
+  path = "/story/*"
+
+# prerender.js handles bot traffic for the SPA homepage and other paths.
+# It defensively skips /story/* (handled above) and static assets.
 [[edge_functions]]
   function = "prerender"
   path = "/*"
