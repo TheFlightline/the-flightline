@@ -116,10 +116,13 @@ body {
   width: 120%;
   max-width: none;
   height: auto;
-  opacity: 0.14;
+  opacity: 0.10;
   pointer-events: none;
   z-index: 0;
   filter: blur(0.3px);
+  /* Soft vignette: full opacity in the middle, fades to transparent at the edges */
+  -webkit-mask-image: radial-gradient(ellipse 65% 75% at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0) 95%);
+  mask-image: radial-gradient(ellipse 65% 75% at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0) 95%);
 }
 
 /* Make sure the hero text content stacks above the map */
@@ -1030,7 +1033,7 @@ body {
   .neon-text { font-size: clamp(54px, 18vw, 140px); }
   .hero-map {
     width: 160%;
-    opacity: 0.12;
+    opacity: 0.09;
   }
   .hero-tag-line {
     font-size: 16px;
