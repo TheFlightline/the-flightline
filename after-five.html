@@ -127,7 +127,9 @@ body {
   letter-spacing: 0.02em;
   color: var(--paper);
   position: relative;
-  display: inline-block;
+  display: block;
+  text-align: center;
+  width: 100%;
 }
 .neon-text .line-1 {
   display: block;
@@ -805,21 +807,64 @@ body {
   .day-pick { padding: 12px 4px; font-size: 13px; }
   .day-pick .day-num { font-size: 8px; }
 
-  .status-banner { padding: 14px 18px; }
-  .status-clock { font-size: 26px; }
-  .status-text { font-size: 16px; }
+  .status-banner {
+    padding: 14px 18px;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  .status-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+    width: 100%;
+  }
+  .status-text { font-size: 15px; }
+  .status-text small { font-size: 9px; }
+  .status-clock { font-size: 22px; }
+  .status-action { width: 100%; padding: 12px; }
 
-  .newsletter-card { grid-template-columns: 1fr; gap: 18px; padding: 24px; }
+  .newsletter-card { grid-template-columns: 1fr; gap: 18px; padding: 24px; text-align: center; }
   .newsletter-form { flex-direction: column; }
   .newsletter-form input { width: 100%; }
 
+  /* Top breadcrumb - stack and center on mobile */
+  .top-strip {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 10px;
+  }
+
+  /* Hero block - all centered, tighter */
   .neon-hero { padding: 32px 0 24px; }
   .matchbook { margin-bottom: 18px; }
-  .hero-tag-line { font-size: 16px; margin-top: 18px; }
-  .hero-meta { font-size: 9px; margin-top: 16px; gap: 10px; }
+  .neon-text { font-size: clamp(54px, 18vw, 140px); }
+  .hero-tag-line {
+    font-size: 16px;
+    margin-top: 18px;
+    padding: 0 12px;
+    max-width: 100%;
+  }
+  .hero-meta {
+    font-size: 9px;
+    margin-top: 16px;
+    gap: 10px;
+    padding: 0 16px;
+    text-align: center;
+    line-height: 1.5;
+  }
   .hero-meta::before, .hero-meta::after { display: none; }
-  .filter-strip { padding: 12px 14px; }
+
+  .filter-strip { padding: 12px 14px; justify-content: center; }
   .f-chip { font-size: 12px; padding: 4px 10px; }
+  .f-spacer { display: none; }
+  .f-count { width: 100%; text-align: center; margin-top: 4px; }
+
+  /* Section banners - keep centered title, hide the long flanking lines on small screens */
+  .section-banner h2 { font-size: 22px; }
+  .section-banner .small { font-size: 9px; }
 }
 </style>
 </head>
@@ -849,7 +894,7 @@ body {
   </section>
 
   <!-- Launch banner -->
-  <div style="background: var(--gold); color: var(--ink); padding: 12px 18px; font-family: 'Special Elite', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; text-align: center; margin: 24px 0 0;">
+  <div style="background: var(--gold); color: var(--ink); padding: 14px 18px; font-family: 'Special Elite', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; margin: 24px 0 0; line-height: 1.7;">
     ★ Launching with a starter list. <a href="mailto:tips@theflightline.news?subject=After Five tip" style="color: var(--ink); font-weight: 600; text-decoration: underline;">Tell us what we missed</a> or <a href="mailto:tips@theflightline.news?subject=List my bar in After Five" style="color: var(--ink); font-weight: 600; text-decoration: underline;">list your bar</a>.
   </div>
 
