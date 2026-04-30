@@ -107,37 +107,39 @@ body {
   overflow: hidden;
 }
 
-/* 1896 Pensacola bird's-eye map - barely visible texture behind hero.
-   Focus point shifted left-of-center because the harbor with the tall ships
-   is on the LEFT side of the engraving. That's the detail we want visible. */
+/* 1896 Pensacola bird's-eye map - background atmosphere behind hero.
+   No mask-image (was causing hard edges). Instead the map renders flat at
+   low opacity and a separate overlay gradient (.neon-hero::after) creates
+   the fog by fading from transparent at center to the page background at
+   the edges. True smooth fade to zero. */
 .hero-map {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 120%;
+  width: 110%;
   max-width: none;
   height: auto;
-  opacity: 0.22;
+  opacity: 0.28;
   pointer-events: none;
   z-index: 0;
   filter: blur(0.4px);
-  /* Long, soft fade to zero. The gradient must reach 0 well inside the
-     visible bounds of the element so the edges actually dissolve into the
-     page rather than getting cut off. Anchored at 38% horizontal (over
-     the harbor), the fade ramps down through a wide gradient zone. */
-  -webkit-mask-image: radial-gradient(ellipse 55% 70% at 38% 50%,
-    rgba(0,0,0,1) 0%,
-    rgba(0,0,0,1) 35%,
-    rgba(0,0,0,0.7) 60%,
-    rgba(0,0,0,0.3) 80%,
-    rgba(0,0,0,0) 95%);
-  mask-image: radial-gradient(ellipse 55% 70% at 38% 50%,
-    rgba(0,0,0,1) 0%,
-    rgba(0,0,0,1) 35%,
-    rgba(0,0,0,0.7) 60%,
-    rgba(0,0,0,0.3) 80%,
-    rgba(0,0,0,0) 95%);
+}
+
+/* Fog overlay: from transparent in the center (over the harbor) to solid
+   page background at the edges. Sits between the map and the text. */
+.neon-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 60% 75% at 38% 50%,
+    transparent 0%,
+    transparent 30%,
+    rgba(13, 10, 8, 0.4) 55%,
+    rgba(13, 10, 8, 0.85) 80%,
+    rgba(13, 10, 8, 1) 100%);
 }
 
 /* Make sure the hero text content stacks above the map */
@@ -1036,20 +1038,19 @@ body {
   .matchbook { margin-bottom: 18px; }
   .neon-text { font-size: clamp(54px, 18vw, 140px); }
   .hero-map {
-    width: 130%;
-    opacity: 0.20;
-    -webkit-mask-image: radial-gradient(ellipse 55% 65% at center,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,1) 35%,
-      rgba(0,0,0,0.7) 60%,
-      rgba(0,0,0,0.3) 80%,
-      rgba(0,0,0,0) 95%);
-    mask-image: radial-gradient(ellipse 55% 65% at center,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,1) 35%,
-      rgba(0,0,0,0.7) 60%,
-      rgba(0,0,0,0.3) 80%,
-      rgba(0,0,0,0) 95%);
+    width: 100%;
+    opacity: 0.30;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  /* Mobile: shift fog focus to center since cropped image puts ships there */
+  .neon-hero::after {
+    background: radial-gradient(ellipse 65% 70% at 50% 50%,
+      transparent 0%,
+      transparent 25%,
+      rgba(13, 10, 8, 0.4) 55%,
+      rgba(13, 10, 8, 0.85) 80%,
+      rgba(13, 10, 8, 1) 100%);
   }
   .hero-tag-line {
     font-size: 16px;
