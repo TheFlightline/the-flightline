@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Port of Call — Pensacola Happy Hour Guide | The Flightline</title>
+<meta name="description" content="A working guide to where the locals drink in downtown Pensacola and on Pensacola Beach. Verified happy hour and food specials, updated seasonally. From The Flightline.">
+<meta property="og:title" content="Port of Call — Pensacola Happy Hour Guide">
+<meta property="og:description" content="A working guide to where the locals drink in Pensacola. Verified, updated, never faked.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://theflightline.news/portofcall">
+<meta property="og:site_name" content="The Flightline">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Special+Elite&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0a08;
+  --bg-2: #1a1410;
+  --card: #1f1814;
+  --card-2: #2a201a;
+  --paper: #f0e6d2;
+  --paper-warm: #e8d9b8;
+  --gold: #f0a93d;
+  --gold-deep: #c97f1e;
+  --neon-pink: #ff4b8b;
+  --neon-blue: #4dd6ff;
+  --neon-mint: #6ee7b7;
+  --red: #e63946;
+  --ink: #1a1410;
+  --ink-soft: #5a4a3a;
+  --rule: rgba(240, 230, 210, 0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--paper);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background atmospherics */
+.bg-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.7;
+}
+.bg-glow-1 {
+  position: fixed;
+  top: 5%; left: 10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(240, 169, 61, 0.1) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+.bg-glow-2 {
+  position: fixed;
+  bottom: 10%; right: 5%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255, 75, 139, 0.06) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Top strip - Flightline brand bar */
+.top-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  opacity: 0.7;
+}
+.top-strip a { color: var(--gold); text-decoration: none; }
+.top-strip a:hover { color: var(--paper); }
+
+/* Hero - the neon sign */
+.neon-hero {
+  padding: 72px 0 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 1896 Pensacola bird's-eye map - barely visible texture behind hero.
+   Focus point shifted left-of-center because the harbor with the tall ships
+   is on the LEFT side of the engraving. That's the detail we want visible. */
+.hero-map {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  max-width: none;
+  height: auto;
+  opacity: 0.20;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(0.3px);
+  /* Gentle vignette anchored at 38% horizontally (over the harbor/ships).
+     Wide gradient so the middle stays clearly visible, soft fade only at the
+     outer edges. */
+  -webkit-mask-image: radial-gradient(ellipse 65% 80% at 38% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(ellipse 65% 80% at 38% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,0) 100%);
+}
+
+/* Make sure the hero text content stacks above the map */
+.neon-hero > .matchbook,
+.neon-hero > .neon-text,
+.neon-hero > .hero-tag-line,
+.neon-hero > .hero-meta {
+  position: relative;
+  z-index: 1;
+}
+
+.matchbook {
+  display: inline-block;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 4px 14px;
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  transform: rotate(-2deg);
+  box-shadow: 2px 3px 0 var(--gold-deep);
+}
+
+.neon-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 13vw, 160px);
+  line-height: 0.88;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+  position: relative;
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+.neon-text .line-1 {
+  display: block;
+  color: var(--neon-pink);
+  text-shadow:
+    0 0 10px rgba(255, 75, 139, 0.8),
+    0 0 24px rgba(255, 75, 139, 0.5),
+    0 0 48px rgba(255, 75, 139, 0.3);
+  animation: flicker-pink 7s infinite;
+}
+.neon-text .line-2 {
+  display: block;
+  color: var(--neon-blue);
+  text-shadow:
+    0 0 10px rgba(77, 214, 255, 0.8),
+    0 0 24px rgba(77, 214, 255, 0.5),
+    0 0 48px rgba(77, 214, 255, 0.3);
+  animation: flicker-blue 9s infinite, sway 6s ease-in-out infinite;
+  transform-origin: 30% 0%;
+  display: inline-block;
+  position: relative;
+}
+/* Hanging-sign sway: tilts down-right, drifts very subtly */
+@keyframes sway {
+  0%, 100% { transform: rotate(4deg); }
+  50% { transform: rotate(5.5deg); }
+}
+/* Subtle neon flicker - pink letters glitch occasionally */
+@keyframes flicker-pink {
+  0%, 100% { opacity: 1; }
+  46% { opacity: 1; }
+  47% { opacity: 0.85; }
+  48% { opacity: 1; }
+  49% { opacity: 0.7; }
+  50% { opacity: 1; }
+  82% { opacity: 1; }
+  83% { opacity: 0.9; }
+  84% { opacity: 1; }
+}
+/* Blue flickers on a different timing so it never flickers in sync */
+@keyframes flicker-blue {
+  0%, 100% { opacity: 1; }
+  22% { opacity: 1; }
+  23% { opacity: 0.8; }
+  24% { opacity: 1; }
+  68% { opacity: 1; }
+  69% { opacity: 0.92; }
+  70% { opacity: 0.7; }
+  71% { opacity: 1; }
+}
+
+.hero-tag-line {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(17px, 2.2vw, 22px);
+  color: var(--paper-warm);
+  margin: 28px auto 0;
+  max-width: 580px;
+  line-height: 1.4;
+  text-wrap: balance;
+  padding: 0 8px;
+}
+.hero-tag-line em { color: var(--gold); font-style: italic; }
+
+.hero-meta {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  margin-top: 24px;
+  opacity: 0.7;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero-meta::before, .hero-meta::after {
+  content: '✦';
+  color: var(--gold);
+}
+
+/* Status banner - the genius bit. Tells you what state of day we're in. */
+.status-banner {
+  background: var(--card);
+  border: 1px solid rgba(240, 169, 61, 0.25);
+  border-radius: 0;
+  padding: 18px 24px;
+  margin: 40px 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.status-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--neon-mint);
+}
+.status-banner.upcoming::before { background: var(--gold); }
+.status-banner.late::before { background: var(--neon-pink); }
+.status-info { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.status-clock {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--gold);
+}
+.status-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  line-height: 1.3;
+}
+.status-text strong { color: var(--gold); font-weight: 400; }
+.status-text small {
+  display: block;
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  opacity: 0.6;
+  margin-top: 4px;
+}
+.status-action {
+  padding: 10px 16px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.1s;
+}
+.status-action:hover { background: var(--paper); }
+.status-action:active { transform: translateY(1px); }
+
+/* Day picker */
+.day-picker {
+  display: flex;
+  gap: 0;
+  margin: 0 0 24px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+}
+.day-pick {
+  flex: 1;
+  padding: 18px 6px 14px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--rule);
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  color: var(--paper-warm);
+  transition: background 0.15s, color 0.15s, transform 0.1s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 56px;
+}
+.day-pick:last-child { border-right: none; }
+.day-pick:hover {
+  background: var(--bg-2);
+  color: var(--paper);
+}
+.day-pick:active { transform: scale(0.96); }
+.day-pick.active {
+  background: var(--paper);
+  color: var(--ink);
+  z-index: 2;
+}
+.day-pick.active::before {
+  content: '★';
+  position: absolute;
+  top: 4px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  color: var(--red);
+}
+.day-pick.today:not(.active) {
+  background: rgba(240, 169, 61, 0.12);
+  color: var(--gold);
+}
+.day-pick.today:not(.active):hover {
+  background: rgba(240, 169, 61, 0.2);
+}
+.today-tag-inline {
+  display: block;
+  font-family: 'Special Elite', monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-top: 1px;
+  font-weight: normal;
+}
+.day-pick.active .today-tag-inline { color: var(--red); opacity: 1; }
+
+/* Filter strip */
+.filter-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 18px;
+  background: var(--bg-2);
+  border: 1px dashed rgba(240, 169, 61, 0.3);
+  margin-bottom: 36px;
+}
+.filter-strip-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-right: 4px;
+}
+.f-chip {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid rgba(240, 230, 210, 0.2);
+  color: var(--paper-warm);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+}
+.f-chip:hover { border-color: var(--gold); color: var(--paper); }
+.f-chip:active { transform: scale(0.95); }
+.f-chip.on {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+  font-weight: 500;
+}
+.f-spacer { flex: 1; min-width: 8px; }
+.f-count {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--paper-warm);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+/* Section banner */
+.section-banner {
+  display: flex;
+  align-items: center;
+  margin: 56px 0 28px;
+  gap: 16px;
+}
+.section-banner .line { flex: 1; height: 1px; background: rgba(240, 230, 210, 0.15); }
+.section-banner h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+.section-banner .small {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  opacity: 0.6;
+}
+
+/* Featured ticket */
+.ticket {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0;
+  background: var(--paper);
+  color: var(--ink);
+  margin-bottom: 56px;
+  position: relative;
+  box-shadow: 6px 8px 0 var(--gold-deep), 12px 16px 32px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.ticket:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 10px 0 var(--gold-deep), 14px 18px 36px rgba(0, 0, 0, 0.6);
+}
+.ticket::before, .ticket::after {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+  background: var(--bg);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ticket::before { left: -10px; }
+.ticket::after { right: 80px; }
+.ticket-main {
+  padding: 32px 36px;
+  border-right: 2px dashed var(--ink-soft);
+}
+.ticket-stamp {
+  display: inline-block;
+  border: 2px solid var(--red);
+  color: var(--red);
+  padding: 4px 12px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+  transform: rotate(-3deg);
+}
+.ticket-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+.ticket-meta {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+.ticket-meta span { color: var(--gold-deep); margin-right: 6px; }
+.ticket-deal {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+.ticket-deal em { font-style: italic; color: var(--gold-deep); }
+.ticket-foot {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--ink-soft);
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+.ticket-stub {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 16px;
+  background: var(--paper-warm);
+}
+.stub-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--ink);
+}
+.stub-day {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  color: var(--ink-soft);
+}
+.stub-num {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--red);
+  margin-top: 14px;
+}
+
+/* Card grid */
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 22px;
+  margin-bottom: 56px;
+}
+.match {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.match:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(240, 169, 61, 0.3);
+}
+.match:hover .match-img { filter: brightness(1.05); }
+.match:active { transform: translateY(-1px); }
+.match-strip {
+  height: 24px;
+  background: linear-gradient(90deg, var(--neon-pink), var(--gold), var(--neon-mint));
+  position: relative;
+}
+.match-strip::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--bg) 0 4px,
+    transparent 4px 12px
+  );
+}
+.match-img {
+  height: 130px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: filter 0.2s;
+}
+/* Subtle dark overlay so the labels stay readable on any photo */
+.match-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 10, 8, 0.15) 0%, rgba(13, 10, 8, 0.55) 100%);
+  pointer-events: none;
+}
+.match-img.beach { background-color: #87a8c4; }
+.match-img.bar { background-color: #3d2a1a; }
+.match-img.cocktail { background-color: #8a3a2a; }
+.match-img.brew { background-color: #d4a256; }
+.match-img.wine { background-color: #6a1a3a; }
+.match-img.seafood { background-color: #4a7aa8; }
+.match-img-tag {
+  position: absolute;
+  z-index: 2;
+  top: 12px; left: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 3px 10px;
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.match-status {
+  position: absolute;
+  z-index: 2;
+  top: 12px; right: 12px;
+  background: var(--neon-mint);
+  color: var(--ink);
+  font-family: 'Bebas Neue', sans-serif;
+  padding: 3px 10px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.match-status.upcoming { background: var(--gold); }
+.match-status.ended { background: rgba(240, 230, 210, 0.4); color: var(--ink); }
+.match-body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.match-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 4px;
+  color: var(--paper);
+}
+.match-loc {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.match-deal {
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--paper-warm);
+  margin-bottom: 16px;
+  flex: 1;
+}
+.match-deal em { font-style: italic; color: var(--gold); }
+.match-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(240, 230, 210, 0.15);
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+.match-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+}
+.match-verified { color: var(--paper-warm); opacity: 0.5; text-transform: uppercase; }
+
+/* Off-hours / quiet state */
+.quiet-state {
+  background: var(--bg-2);
+  border: 2px dashed rgba(240, 169, 61, 0.3);
+  padding: 48px 32px;
+  text-align: center;
+  margin: 32px 0;
+}
+.quiet-state h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.quiet-state p {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--paper-warm);
+  max-width: 500px;
+  margin: 0 auto 20px;
+  line-height: 1.5;
+}
+.quiet-state .next-up {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: var(--card);
+  border: 1px solid var(--gold);
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.quiet-state .next-up strong {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  font-weight: normal;
+}
+
+/* Editor's note */
+.note-card {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 32px 36px;
+  margin-bottom: 48px;
+  border-left: 6px solid var(--red);
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  line-height: 1.6;
+  position: relative;
+}
+.note-card::before {
+  content: '"';
+  position: absolute;
+  top: -10px; left: 24px;
+  font-size: 80px;
+  color: var(--red);
+  line-height: 1;
+  font-family: 'DM Serif Display', serif;
+}
+.note-card .note-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.note-card .note-sig {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  margin-top: 18px;
+  text-transform: uppercase;
+}
+
+/* "Behind the Name" history block */
+.history-block {
+  margin: 64px 0 48px;
+  padding: 0;
+  position: relative;
+}
+
+.history-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.history-banner-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(240, 230, 210, 0.15);
+}
+.history-banner-text {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  background: var(--bg-2);
+  border: 1px solid rgba(240, 169, 61, 0.15);
+  padding: 40px 44px;
+  position: relative;
+}
+.history-grid::before {
+  content: '◆';
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  color: var(--gold);
+  font-size: 14px;
+  opacity: 0.5;
+}
+.history-grid::after {
+  content: '◆';
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  color: var(--gold);
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.history-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 52px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--paper);
+  margin-bottom: 8px;
+}
+.history-dek {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 22px);
+  color: var(--gold);
+  margin-bottom: 24px;
+  line-height: 1.4;
+  border-bottom: 1px solid rgba(240, 169, 61, 0.25);
+  padding-bottom: 16px;
+}
+.history-prose p {
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--paper-warm);
+  margin-bottom: 16px;
+}
+.history-coda {
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 22px !important;
+  letter-spacing: 0.06em;
+  color: var(--gold) !important;
+  margin-top: 24px !important;
+  padding-top: 16px;
+  border-top: 1px solid rgba(240, 169, 61, 0.25);
+  line-height: 1.3 !important;
+}
+
+.history-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 20px;
+}
+.history-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  background: var(--card);
+  border-left: 3px solid var(--gold);
+}
+.fact-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  opacity: 0.6;
+}
+.fact-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--gold);
+  margin: 2px 0 6px;
+}
+.fact-detail {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--paper-warm);
+}
+
+.history-sources {
+  font-family: 'Special Elite', monospace !important;
+  font-size: 10px !important;
+  letter-spacing: 0.12em !important;
+  color: var(--paper-warm);
+  opacity: 0.5;
+  text-transform: uppercase;
+  margin-top: 20px !important;
+  text-align: center;
+  line-height: 1.6;
+  font-style: normal !important;
+}
+
+/* Newsletter card */
+.newsletter-card {
+  background: linear-gradient(135deg, var(--card-2), var(--card));
+  border: 1px solid var(--gold);
+  padding: 36px;
+  margin-bottom: 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+}
+.newsletter-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.newsletter-card p {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--paper-warm);
+  line-height: 1.4;
+}
+.newsletter-form { display: flex; gap: 8px; }
+.newsletter-form input {
+  width: 240px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+.newsletter-form input:focus { outline: 1px solid var(--gold); border-color: var(--gold); }
+.newsletter-form button {
+  padding: 12px 18px;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.newsletter-form button:hover { background: var(--paper); }
+
+/* Footer */
+.coda {
+  text-align: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--rule);
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--paper-warm);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+.coda a { color: var(--gold); margin: 0 8px; text-decoration: none; }
+
+/* Mobile - tighten everything up */
+@media (max-width: 700px) {
+  .ticket { grid-template-columns: 1fr; }
+  .ticket-main { border-right: none; border-bottom: 2px dashed var(--ink-soft); padding: 24px; }
+  .ticket::after { display: none; }
+  .ticket-stub { width: 100%; padding: 18px; flex-direction: row; gap: 16px; }
+  .stub-time { font-size: 24px; }
+  .stub-day { margin-top: 0; }
+  .stub-num { margin-top: 0; }
+
+  .day-pick { padding: 12px 4px; font-size: 13px; }
+  .day-pick .day-num { font-size: 8px; }
+
+  .status-banner {
+    padding: 14px 18px;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  .status-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+    width: 100%;
+  }
+  .status-text { font-size: 15px; }
+  .status-text small { font-size: 9px; }
+  .status-clock { font-size: 22px; }
+  .status-action { width: 100%; padding: 12px; }
+
+  .newsletter-card { grid-template-columns: 1fr; gap: 18px; padding: 24px; text-align: center; }
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form input { width: 100%; }
+
+  /* Top breadcrumb - stack and center on mobile */
+  .top-strip {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 10px;
+  }
+
+  /* Hero block - all centered, tighter */
+  .neon-hero { padding: 32px 0 24px; }
+  .matchbook { margin-bottom: 18px; }
+  .neon-text { font-size: clamp(54px, 18vw, 140px); }
+  .hero-map {
+    width: 160%;
+    opacity: 0.16;
+  }
+  .hero-tag-line {
+    font-size: 16px;
+    margin-top: 18px;
+    padding: 0 12px;
+    max-width: 100%;
+  }
+  .hero-meta {
+    font-size: 9px;
+    margin-top: 16px;
+    gap: 10px;
+    padding: 0 16px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .hero-meta::before, .hero-meta::after { display: none; }
+
+  .filter-strip { padding: 12px 14px; justify-content: center; }
+  .f-chip { font-size: 12px; padding: 4px 10px; }
+  .f-spacer { display: none; }
+  .f-count { width: 100%; text-align: center; margin-top: 4px; }
+
+  /* Section banners - keep centered title, hide the long flanking lines on small screens */
+  .section-banner h2 { font-size: 22px; }
+  .section-banner .small { font-size: 9px; }
+
+  /* History block on mobile */
+  .history-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 28px 22px;
+  }
+  .history-banner-text { font-size: 10px; letter-spacing: 0.25em; }
+  .history-aside {
+    padding-top: 24px;
+    border-top: 1px solid rgba(240, 169, 61, 0.15);
+  }
+  .history-fact { padding: 12px 14px; }
+  .fact-value { font-size: 24px; }
+  .history-prose p { font-size: 15px; line-height: 1.65; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
+<div class="bg-grain"></div>
+
+<div class="wrap">
+
+  <!-- Top strip -->
+  <div class="top-strip">
+    <span><a href="/">← The Flightline</a></span>
+    <span>Pensacola FL · Updated Seasonally</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="neon-hero">
+
+    <!-- Antique Pensacola Harbor map - barely visible texture behind the neon -->
+    <picture>
+      <source media="(max-width: 700px)" srcset="/images/pensacola-1896-mobile.webp" type="image/webp">
+      <source srcset="/images/pensacola-1896.webp" type="image/webp">
+      <img src="/images/pensacola-1896.png" alt="" class="hero-map" aria-hidden="true">
+    </picture>
+
+    <div class="matchbook">A Flightline Guide</div>
+    <h1 class="neon-text">
+      <span class="line-1">PORT OF</span>
+      <span class="line-2">CALL</span>
+    </h1>
+    <p class="hero-tag-line">A working guide to <em>where the locals go</em>, what they're drinking, and what it costs to get in on it.</p>
+    <p class="hero-meta">Verified March 2026 · 17 venues · Downtown + Beach</p>
+  </section>
+
+  <!-- Launch banner -->
+  <div style="background: var(--gold); color: var(--ink); padding: 14px 18px; font-family: 'Special Elite', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; margin: 24px 0 0; line-height: 1.7;">
+    ★ Launching with a starter list. <a href="mailto:tips@theflightline.news?subject=Port of Call tip" style="color: var(--ink); font-weight: 600; text-decoration: underline;">Tell us what we missed</a> or <a href="mailto:tips@theflightline.news?subject=List my bar in Port of Call" style="color: var(--ink); font-weight: 600; text-decoration: underline;">list your bar</a>.
+  </div>
+
+  <!-- Status banner — context-aware. -->
+  <!-- This shown when something is active right now -->
+  <div class="status-banner" id="statusBanner">
+    <div class="status-info">
+      <div class="status-clock">5:42 PM</div>
+      <div class="status-text">
+        <strong>9 specials</strong> running right now.
+        <small>Wednesday · Open until 6 PM at most spots</small>
+      </div>
+    </div>
+    <button class="status-action">See What's Open →</button>
+  </div>
+
+  <!-- Day picker - data-driven, click to filter -->
+  <div class="day-picker" id="dayPicker">
+    <button class="day-pick" data-day="1">Mon</button>
+    <button class="day-pick" data-day="2">Tue</button>
+    <button class="day-pick" data-day="3">Wed</button>
+    <button class="day-pick" data-day="4">Thu</button>
+    <button class="day-pick" data-day="5">Fri</button>
+    <button class="day-pick" data-day="6">Sat</button>
+    <button class="day-pick" data-day="0">Sun</button>
+  </div>
+
+  <!-- Filter strip -->
+  <div class="filter-strip">
+    <span class="filter-strip-label">Filter:</span>
+    <button class="f-chip on" data-neighborhood="all">All</button>
+    <button class="f-chip" data-neighborhood="Downtown">Downtown</button>
+    <button class="f-chip" data-neighborhood="Palafox">Palafox</button>
+    <button class="f-chip" data-neighborhood="Seville">Seville</button>
+    <button class="f-chip" data-neighborhood="Pensacola Beach">Beach</button>
+    <button class="f-chip" data-neighborhood="Belmont-DeVilliers">Belmont</button>
+    <span class="f-spacer"></span>
+    <span class="f-count" id="resultCount">7 results</span>
+  </div>
+
+  <!-- Featured ticket - re-renders for the selected day's pick -->
+  <div class="section-banner">
+    <span class="line"></span>
+    <h2 id="featuredTitle">Tonight's Headliner</h2>
+    <span class="line"></span>
+  </div>
+
+  <div id="featuredSlot"></div>
+
+  <!-- Card grid -->
+  <div class="section-banner">
+    <span class="line"></span>
+    <h2 id="lineupTitle">The Lineup</h2>
+    <span class="small" id="lineupSummary"></span>
+    <span class="line"></span>
+  </div>
+
+  <div class="match-grid" id="matchGrid"></div>
+
+  <!-- Empty state when no specials match the filters -->
+  <div id="emptyState" style="display: none; padding: 48px 24px; text-align: center; background: var(--bg-2); border: 2px dashed rgba(240, 169, 61, 0.3); margin-bottom: 56px;">
+    <div style="font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 8px;">Nothing pouring here.</div>
+    <p style="font-family: 'DM Serif Display', serif; font-style: italic; font-size: 16px; color: var(--paper-warm); max-width: 480px; margin: 0 auto;">No specials match the day and filter you picked. Try a different day or clear the filter.</p>
+  </div>
+
+  <!-- "Behind the Name" history section -->
+  <section class="history-block">
+    <div class="history-banner">
+      <span class="history-banner-line"></span>
+      <span class="history-banner-text">Behind the Name</span>
+      <span class="history-banner-line"></span>
+    </div>
+
+    <div class="history-grid">
+      <div class="history-prose">
+        <h3 class="history-headline">A Port of Call.</h3>
+        <p class="history-dek">Pensacola was drinking before Pensacola was a city.</p>
+        <p>The pier at the foot of Palafox once stretched out into the bay loaded with masts. Between 1870 and 1880, the city doubled in size on the back of yellow pine, naval stores and red snapper. Hundreds of vessels at a time tied off along Palafox Wharf. Crews stepped onto the dock and went exactly where you'd expect them to go.</p>
+        <p>Saloons grew alongside the chandleries and the caulkers' shops. The downtown bar district isn't a recent invention. It's the descendant of an entertainment quarter built to receive sailors with money in their pockets and shore time to spend. One saloon at Pine and Palafox earned a reputation for unsolved murders. Another, the Alligator at Wright and Tarragona, kept its own kind of order. The blocks now occupied by Old Hickory, Hub Stacey's and the Seville Quarter sit on top of buildings that were doing the same job 140 years ago.</p>
+        <p>A "port of call" is a stop a ship makes during a voyage. A place to take on cargo, take on water, let the crew off for a night. Pensacola was that for thousands of working sailors across four flags and three centuries. It still is, in its way. The ships are different. The instinct is the same.</p>
+        <p class="history-coda">This is a guide to where they go now.</p>
+      </div>
+
+      <aside class="history-aside">
+        <div class="history-fact">
+          <span class="fact-label">Established</span>
+          <span class="fact-value">1559</span>
+          <span class="fact-detail">First European settlement in what's now the United States.</span>
+        </div>
+        <div class="history-fact">
+          <span class="fact-label">Navy Yard</span>
+          <span class="fact-value">1825</span>
+          <span class="fact-detail">President John Quincy Adams ordered it built. The Pensacola Navy Yard ran for 86 years.</span>
+        </div>
+        <div class="history-fact">
+          <span class="fact-label">Boom</span>
+          <span class="fact-value">1870 — 1900</span>
+          <span class="fact-detail">Pensacola's busiest port era. Yellow pine and red snapper to ports across the Atlantic. The city doubled in size.</span>
+        </div>
+        <div class="history-fact">
+          <span class="fact-label">The Pier</span>
+          <span class="fact-value">Palafox</span>
+          <span class="fact-detail">South Palafox was originally a working pier. Where you walk now, ships docked.</span>
+        </div>
+      </aside>
+    </div>
+
+    <p class="history-sources">Sources: City of Pensacola Port Authority records, UWF Historic Trust, Palafox Historic District nomination (NR 14001085), Naval History and Heritage Command archives.</p>
+  </section>
+
+  <!-- Newsletter signup -->
+  <section class="newsletter-card">
+    <div>
+      <h3>The Pour</h3>
+      <p>Wednesdays. What's new on the lineup, what changed this week, what's worth your time. From The Flightline.</p>
+    </div>
+    <form class="newsletter-form" onsubmit="event.preventDefault();">
+      <input type="email" placeholder="your@email.com">
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Editor's note -->
+  <div class="note-card">
+    <div class="note-label">Editor's Note</div>
+    Every listing here is verified by us. Times shift. Specials get pulled. If a deal isn't what we say it is, tell us — and we'll fix it before the next round. The bartender's word beats ours every time.
+    <div class="note-sig">— The Flightline · tips@theflightline.news</div>
+  </div>
+
+  <!-- Coda -->
+  <footer class="coda">
+    <a href="mailto:tips@theflightline.news?subject=Port of Call tip">Submit a Tip</a> · <a href="mailto:tips@theflightline.news?subject=List my bar in Port of Call">List Your Bar</a> · <a href="/">Back to The Flightline</a>
+  </footer>
+
+</div>
+
+<script>
+// =============================================================================
+// PORT OF CALL — venue data and rendering logic
+//
+// Venue data is inlined here for v1 simplicity. Future versions will fetch from
+// a separate JSON file synced via Make. To add or update a venue, edit the
+// VENUES array below and push.
+//
+// Days: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat. Use "all" for daily.
+// =============================================================================
+
+const VENUES = [
+  {
+    id: "old-hickory",
+    name: "Old Hickory",
+    type: "Whiskey Bar",
+    neighborhood: "Palafox",
+    neighborhoodTag: "Palafox",
+    locLine: "Whiskey Bar · Downtown",
+    photo: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80",
+    color: "bar",
+    featured: false,
+    specials: [
+      { day: 1, start: "16:00", end: "19:00", deal: "<em>$5 well</em> drinks all night. Burger and beer combo for $12.", display: "4 — 7 PM" },
+      { day: 2, start: "21:00", end: "26:00", deal: "Industry night. <em>50% off</em> for service workers with ID.", display: "9 PM — Close" },
+      { day: 3, start: "16:00", end: "19:00", deal: "<em>$2 off</em> all whiskeys under $12. House Manhattans for $9. Cigar lounge open until 11.", display: "4 — 7 PM" },
+      { day: 4, start: "17:00", end: "20:00", deal: "<em>Bourbon flights</em> half-price. Live jazz on the patio at 8.", display: "5 — 8 PM" },
+      { day: 5, start: "16:00", end: "19:00", deal: "Half-price <em>small plates</em>. House cocktails $9.", display: "4 — 7 PM" },
+      { day: 0, start: "11:00", end: "16:00", deal: "<em>Bloody Marys</em> $7. All-day. Until they run out.", display: "11 AM — 4 PM" }
+    ]
+  },
+  {
+    id: "the-grand-marlin",
+    name: "The Grand Marlin",
+    type: "Restaurant",
+    neighborhood: "Pensacola Beach",
+    neighborhoodTag: "Beach",
+    locLine: "Sound-side · Pensacola Beach",
+    photo: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
+    color: "seafood",
+    featured: true,
+    rating: "4.6",
+    specials: [
+      { day: "all", start: "16:00", end: "18:30", deal: "Half-price oysters and <em>$6 select wines</em> on the deck. Add the smoked tuna dip for $4 off.", display: "4 — 6:30 PM" }
+    ]
+  },
+  {
+    id: "the-magnolia",
+    name: "The Magnolia",
+    type: "Cocktail Lounge",
+    neighborhood: "Seville",
+    neighborhoodTag: "Seville",
+    locLine: "Cocktail Lounge · Seville",
+    photo: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80",
+    color: "cocktail",
+    featured: false,
+    specials: [
+      { day: 3, start: "17:00", end: "20:00", deal: "Old Standards night. <em>$8 classic cocktails</em> — Negroni, Sazerac, Vieux Carré.", display: "5 — 8 PM" },
+      { day: 5, start: "16:00", end: "19:00", deal: "<em>$2 off</em> every cocktail on the menu.", display: "4 — 7 PM" }
+    ]
+  },
+  {
+    id: "paradise-bar-grill",
+    name: "Paradise B&G",
+    type: "Beach Bar",
+    neighborhood: "Pensacola Beach",
+    neighborhoodTag: "Beach",
+    locLine: "Casual · Pensacola Beach",
+    photo: "https://images.unsplash.com/photo-1533777324565-a040eb52facd?w=800&q=80",
+    color: "beach",
+    featured: false,
+    specials: [
+      { day: 1, start: "15:00", end: "18:00", deal: "<em>Half-price wings</em> and $3 domestics.", display: "3 — 6 PM" },
+      { day: 3, start: "15:00", end: "18:00", deal: "Locals' day. <em>$3 domestic drafts</em>, $5 wells, half-price wings. Live acoustic after 6.", display: "3 — 6 PM" },
+      { day: 5, start: "15:00", end: "19:00", deal: "<em>$5 frozen drinks</em> and $4 Bushwackers.", display: "3 — 7 PM" }
+    ]
+  },
+  {
+    id: "perfect-plain",
+    name: "Perfect Plain",
+    type: "Brewery",
+    neighborhood: "Belmont-DeVilliers",
+    neighborhoodTag: "Belmont",
+    locLine: "Craft Brewery · Belmont",
+    photo: "https://images.unsplash.com/photo-1586993451228-09818021e309?w=800&q=80",
+    color: "brew",
+    featured: false,
+    specials: [
+      { day: 3, start: "16:00", end: "19:00", deal: "Pint Night. <em>$4 house pours</em>, $1 off flights. Pizzaria stays open until 9.", display: "4 — 7 PM" },
+      { day: 4, start: "16:00", end: "19:00", deal: "<em>$1 off all drafts</em> and a rotating cask special.", display: "4 — 7 PM" }
+    ]
+  },
+  {
+    id: "hub-staceys",
+    name: "Hub Stacey's",
+    type: "Pub",
+    neighborhood: "Downtown",
+    neighborhoodTag: "Downtown",
+    locLine: "Sandwich Pub · Downtown",
+    photo: "https://images.unsplash.com/photo-1546726747-421c6d69c929?w=800&q=80",
+    color: "bar",
+    featured: false,
+    specials: [
+      { day: "all", start: "15:00", end: "18:00", deal: "Half-price apps and <em>$4 well drinks</em>. Half-pound burger is $8 until 6.", display: "3 — 6 PM" }
+    ]
+  },
+  {
+    id: "garden-and-grain",
+    name: "Garden & Grain",
+    type: "Wine Bar",
+    neighborhood: "Palafox",
+    neighborhoodTag: "Palafox",
+    locLine: "Wine Bar · Palafox",
+    photo: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80",
+    color: "wine",
+    featured: false,
+    specials: [
+      { day: 3, start: "16:00", end: "19:00", deal: "Wine Down Wednesday. <em>Half-off bottles</em> under $60. Cheese board $12 before 6.", display: "4 — 7 PM" },
+      { day: 4, start: "16:00", end: "19:00", deal: "<em>$2 off</em> glass pours.", display: "4 — 7 PM" }
+    ]
+  },
+  {
+    id: "jacos-bayfront",
+    name: "Jaco's Bayfront",
+    type: "Restaurant",
+    neighborhood: "Downtown",
+    neighborhoodTag: "Downtown",
+    locLine: "Waterfront · Downtown",
+    photo: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
+    color: "seafood",
+    featured: false,
+    specials: [
+      { day: "all", start: "17:00", end: "19:00", deal: "<em>$1 oysters</em> and the sunset lines up over Pensacola Bay.", display: "5 — 7 PM" }
+    ]
+  }
+];
+
+const state = {
+  selectedDay: new Date().getDay(),
+  selectedNeighborhood: "all"
+};
+
+const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const DAY_NAMES_SHORT = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+function nowMinutes() {
+  const d = new Date();
+  return d.getHours() * 60 + d.getMinutes();
+}
+
+function timeToMinutes(t) {
+  const [h, m] = t.split(":").map(Number);
+  return h * 60 + m;
+}
+
+function specialStatus(special, isToday) {
+  if (!isToday) return null;
+  const now = nowMinutes();
+  const startM = timeToMinutes(special.start);
+  let endM = timeToMinutes(special.end);
+  if (endM <= startM) endM += 24 * 60;
+  if (now >= startM && now < endM) return { type: "now", label: "Open Now" };
+  if (now < startM) {
+    const diff = startM - now;
+    if (diff < 120) return { type: "upcoming", label: `Starts ${special.display.split(' — ')[0]}` };
+    return { type: "upcoming", label: "Today" };
+  }
+  return { type: "ended", label: "Ended" };
+}
+
+function venueSpecialFor(venue, day) {
+  const daySpecific = venue.specials.find(s => s.day === day);
+  if (daySpecific) return daySpecific;
+  const daily = venue.specials.find(s => s.day === "all");
+  return daily || null;
+}
+
+function render() {
+  renderDayPicker();
+  renderCards();
+  renderFeatured();
+  renderStatusBanner();
+}
+
+function renderDayPicker() {
+  const today = new Date().getDay();
+  const buttons = document.querySelectorAll('#dayPicker .day-pick');
+  buttons.forEach(btn => {
+    const day = parseInt(btn.dataset.day);
+    btn.classList.toggle('today', day === today);
+    btn.classList.toggle('active', day === state.selectedDay);
+    const isToday = day === today;
+    btn.innerHTML = DAY_NAMES_SHORT[day] +
+      (isToday ? '<span class="today-tag-inline">Today</span>' : '');
+  });
+}
+
+function renderCards() {
+  const grid = document.getElementById('matchGrid');
+  const empty = document.getElementById('emptyState');
+  const today = new Date().getDay();
+
+  const featuredVenue = VENUES.find(v => v.featured);
+  const matches = VENUES
+    .filter(v => !v.featured)
+    .map(v => ({ venue: v, special: venueSpecialFor(v, state.selectedDay) }))
+    .filter(x => x.special !== null)
+    .filter(x => state.selectedNeighborhood === "all" || x.venue.neighborhood === state.selectedNeighborhood);
+
+  if (matches.length === 0) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+  } else {
+    grid.style.display = '';
+    empty.style.display = 'none';
+  }
+
+  grid.innerHTML = matches.map(({ venue, special }) => {
+    const status = specialStatus(special, state.selectedDay === today);
+    const statusHTML = status ?
+      `<span class="match-status ${status.type === 'now' ? '' : status.type}">${status.label}</span>` :
+      '';
+    return `
+      <article class="match" data-venue-id="${venue.id}">
+        <div class="match-strip"></div>
+        <div class="match-img ${venue.color}" style="background-image: url('${venue.photo}');">
+          <span class="match-img-tag">${venue.neighborhoodTag}</span>
+          ${statusHTML}
+        </div>
+        <div class="match-body">
+          <h3 class="match-name">${venue.name}</h3>
+          <div class="match-loc">${venue.locLine}</div>
+          <p class="match-deal">${special.deal}</p>
+          <div class="match-meta">
+            <span class="match-time">${special.display}</span>
+            <span class="match-verified">Verified Mar '26</span>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  const totalForDay = matches.length + (featuredVenue && venueSpecialFor(featuredVenue, state.selectedDay) ? 1 : 0);
+  document.getElementById('resultCount').textContent = totalForDay + (totalForDay === 1 ? ' venue' : ' venues');
+
+  const summary = document.getElementById('lineupSummary');
+  if (state.selectedDay === today) {
+    const activeNow = matches.filter(m => {
+      const s = specialStatus(m.special, true);
+      return s && s.type === 'now';
+    }).length;
+    summary.textContent = activeNow > 0 ? `${activeNow} active now` : `${matches.length} for ${DAY_NAMES[state.selectedDay].toLowerCase()}`;
+  } else {
+    summary.textContent = `${matches.length} for ${DAY_NAMES[state.selectedDay].toLowerCase()}`;
+  }
+
+  const lineupTitle = document.getElementById('lineupTitle');
+  lineupTitle.textContent = state.selectedDay === today ? "The Lineup" : `${DAY_NAMES[state.selectedDay]}'s Lineup`;
+}
+
+function renderFeatured() {
+  const slot = document.getElementById('featuredSlot');
+  const featuredTitle = document.getElementById('featuredTitle');
+  const today = new Date().getDay();
+
+  const featuredVenue = VENUES.find(v => v.featured);
+  if (!featuredVenue) {
+    slot.innerHTML = '';
+    return;
+  }
+
+  const special = venueSpecialFor(featuredVenue, state.selectedDay);
+  if (!special) {
+    slot.innerHTML = '';
+    featuredTitle.textContent = state.selectedDay === today ? "Tonight's Headliner" : `${DAY_NAMES[state.selectedDay]}'s Headliner`;
+    return;
+  }
+
+  featuredTitle.textContent = state.selectedDay === today ? "Tonight's Headliner" : `${DAY_NAMES[state.selectedDay]}'s Headliner`;
+
+  const [startDisp, endDisp] = special.display.split(' — ');
+
+  slot.innerHTML = `
+    <article class="ticket" data-venue-id="${featuredVenue.id}">
+      <div class="ticket-main">
+        <span class="ticket-stamp">★ Editor's Pick</span>
+        <h3 class="ticket-name">${featuredVenue.name}</h3>
+        <div class="ticket-meta"><span>◆</span>${featuredVenue.neighborhood} <span>◆</span> Sound-side</div>
+        <p class="ticket-deal">${special.deal}</p>
+        <div class="ticket-foot">
+          <span>VERIFIED · MAR 2026</span>
+          <span>★ ★ ★ ★ ${featuredVenue.rating || ''}</span>
+        </div>
+      </div>
+      <div class="ticket-stub">
+        <div style="width: 100%; aspect-ratio: 4/3; background-image: url('${featuredVenue.photo}'); background-size: cover; background-position: center; margin-bottom: 12px; filter: sepia(0.15) contrast(0.95);"></div>
+        <div class="stub-time">${startDisp}<br>${endDisp || ''}</div>
+        <div class="stub-day">${DAY_NAMES[state.selectedDay]}</div>
+      </div>
+    </article>
+  `;
+}
+
+function renderStatusBanner() {
+  const banner = document.getElementById('statusBanner');
+  if (!banner) return;
+  const today = new Date().getDay();
+
+  if (state.selectedDay !== today) {
+    banner.classList.remove('upcoming', 'late');
+    const matchCount = VENUES.filter(v => venueSpecialFor(v, state.selectedDay)).length;
+    banner.querySelector('.status-clock').textContent = DAY_NAMES_SHORT[state.selectedDay];
+    banner.querySelector('.status-text').innerHTML =
+      `<strong>${matchCount} venues</strong> with specials.<small>Browsing ${DAY_NAMES[state.selectedDay].toLowerCase()} · Tap a different day or jump back to today</small>`;
+    banner.querySelector('.status-action').textContent = 'Back to Today';
+    banner.querySelector('.status-action').onclick = (e) => {
+      e.preventDefault();
+      state.selectedDay = today;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    return;
+  }
+
+  const now = nowMinutes();
+  const activeNow = VENUES.filter(v => {
+    const s = venueSpecialFor(v, today);
+    if (!s) return false;
+    const startM = timeToMinutes(s.start);
+    let endM = timeToMinutes(s.end);
+    if (endM <= startM) endM += 24 * 60;
+    return now >= startM && now < endM;
+  }).length;
+
+  const d = new Date();
+  const hh = d.getHours();
+  const mm = d.getMinutes().toString().padStart(2, '0');
+  const ampm = hh >= 12 ? 'PM' : 'AM';
+  const h12 = hh === 0 ? 12 : hh > 12 ? hh - 12 : hh;
+  banner.querySelector('.status-clock').textContent = `${h12}:${mm} ${ampm}`;
+
+  if (activeNow > 0) {
+    banner.classList.remove('upcoming', 'late');
+    banner.querySelector('.status-text').innerHTML =
+      `<strong>${activeNow} ${activeNow === 1 ? 'special' : 'specials'}</strong> running right now.<small>${DAY_NAMES[today]} · Scroll for the lineup</small>`;
+    banner.querySelector('.status-action').textContent = 'See Open Now →';
+    banner.querySelector('.status-action').onclick = (e) => {
+      e.preventDefault();
+      document.getElementById('matchGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+  } else {
+    banner.classList.add('upcoming');
+    banner.querySelector('.status-text').innerHTML =
+      `<strong>No specials right now.</strong><small>${DAY_NAMES[today]} · Browse the week's lineup below</small>`;
+    banner.querySelector('.status-action').textContent = 'Browse the Week';
+    banner.querySelector('.status-action').onclick = (e) => {
+      e.preventDefault();
+      document.getElementById('dayPicker').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#dayPicker .day-pick').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.selectedDay = parseInt(btn.dataset.day);
+      render();
+    });
+  });
+
+  document.querySelectorAll('.f-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.f-chip').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      state.selectedNeighborhood = btn.dataset.neighborhood;
+      render();
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.match[data-venue-id], .ticket[data-venue-id]');
+    if (card) {
+      card.style.transform = 'scale(0.99)';
+      setTimeout(() => { card.style.transform = ''; }, 120);
+    }
+  });
+
+  render();
+});
+</script>
+</body>
+</html>
