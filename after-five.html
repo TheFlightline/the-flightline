@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>After Five — Pensacola Happy Hour Guide | The Flightline</title>
+<meta name="description" content="A working guide to where the locals drink in downtown Pensacola and on Pensacola Beach. Verified happy hour and food specials, updated seasonally. From The Flightline.">
+<meta property="og:title" content="After Five — Pensacola Happy Hour Guide">
+<meta property="og:description" content="A working guide to where the locals drink in Pensacola. Verified, updated, never faked.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://theflightline.news/after-five">
+<meta property="og:site_name" content="The Flightline">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Special+Elite&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0a08;
+  --bg-2: #1a1410;
+  --card: #1f1814;
+  --card-2: #2a201a;
+  --paper: #f0e6d2;
+  --paper-warm: #e8d9b8;
+  --gold: #f0a93d;
+  --gold-deep: #c97f1e;
+  --neon-pink: #ff4b8b;
+  --neon-blue: #4dd6ff;
+  --neon-mint: #6ee7b7;
+  --red: #e63946;
+  --ink: #1a1410;
+  --ink-soft: #5a4a3a;
+  --rule: rgba(240, 230, 210, 0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--paper);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background atmospherics */
+.bg-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.7;
+}
+.bg-glow-1 {
+  position: fixed;
+  top: 5%; left: 10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(240, 169, 61, 0.1) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+.bg-glow-2 {
+  position: fixed;
+  bottom: 10%; right: 5%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255, 75, 139, 0.06) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Top strip - Flightline brand bar */
+.top-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  opacity: 0.7;
+}
+.top-strip a { color: var(--gold); text-decoration: none; }
+.top-strip a:hover { color: var(--paper); }
+
+/* Hero - the neon sign */
+.neon-hero {
+  padding: 72px 0 48px;
+  text-align: center;
+  position: relative;
+}
+
+.matchbook {
+  display: inline-block;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 4px 14px;
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  transform: rotate(-2deg);
+  box-shadow: 2px 3px 0 var(--gold-deep);
+}
+
+.neon-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 13vw, 160px);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+  position: relative;
+  display: inline-block;
+}
+.neon-text .line-1 {
+  display: block;
+  color: var(--neon-pink);
+  text-shadow:
+    0 0 10px rgba(255, 75, 139, 0.8),
+    0 0 24px rgba(255, 75, 139, 0.5),
+    0 0 48px rgba(255, 75, 139, 0.3);
+}
+.neon-text .ampersand {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  color: var(--gold);
+  text-shadow:
+    0 0 10px rgba(240, 169, 61, 0.8),
+    0 0 24px rgba(240, 169, 61, 0.4);
+  font-size: 0.7em;
+  display: inline-block;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin: 0 0.05em;
+  transform: translateY(-0.1em);
+}
+.neon-text .line-2 {
+  display: block;
+  color: var(--neon-blue);
+  text-shadow:
+    0 0 10px rgba(77, 214, 255, 0.8),
+    0 0 24px rgba(77, 214, 255, 0.5),
+    0 0 48px rgba(77, 214, 255, 0.3);
+}
+
+.hero-tag-line {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.4vw, 24px);
+  color: var(--paper-warm);
+  margin: 28px auto 0;
+  max-width: 640px;
+  line-height: 1.4;
+}
+.hero-tag-line em { color: var(--gold); font-style: italic; }
+
+.hero-meta {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  margin-top: 24px;
+  opacity: 0.7;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero-meta::before, .hero-meta::after {
+  content: '✦';
+  color: var(--gold);
+}
+
+/* Status banner - the genius bit. Tells you what state of day we're in. */
+.status-banner {
+  background: var(--card);
+  border: 1px solid rgba(240, 169, 61, 0.25);
+  border-radius: 0;
+  padding: 18px 24px;
+  margin: 40px 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.status-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--neon-mint);
+}
+.status-banner.upcoming::before { background: var(--gold); }
+.status-banner.late::before { background: var(--neon-pink); }
+.status-info { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.status-clock {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--gold);
+}
+.status-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  line-height: 1.3;
+}
+.status-text strong { color: var(--gold); font-weight: 400; }
+.status-text small {
+  display: block;
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  opacity: 0.6;
+  margin-top: 4px;
+}
+.status-action {
+  padding: 10px 16px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.status-action:hover { background: var(--paper); }
+
+/* Day picker */
+.day-picker {
+  display: flex;
+  gap: 0;
+  margin: 0 0 24px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+}
+.day-pick {
+  flex: 1;
+  padding: 16px 6px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--rule);
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  color: var(--paper-warm);
+  transition: 0.15s;
+  position: relative;
+}
+.day-pick:last-child { border-right: none; }
+.day-pick:hover { background: var(--bg-2); color: var(--paper); }
+.day-pick.active {
+  background: var(--paper);
+  color: var(--ink);
+  z-index: 2;
+}
+.day-pick.active::before {
+  content: '★';
+  position: absolute;
+  top: 4px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  color: var(--red);
+}
+.day-pick .day-num {
+  display: block;
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  margin-top: 2px;
+  opacity: 0.6;
+}
+.day-pick.today {
+  background: var(--gold);
+  color: var(--ink);
+}
+.day-pick.today.active { background: var(--paper); }
+.day-pick.today::after {
+  content: 'TODAY';
+  position: absolute;
+  bottom: 4px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Special Elite', monospace;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+/* Filter strip */
+.filter-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 18px;
+  background: var(--bg-2);
+  border: 1px dashed rgba(240, 169, 61, 0.3);
+  margin-bottom: 36px;
+}
+.filter-strip-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-right: 4px;
+}
+.f-chip {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid rgba(240, 230, 210, 0.2);
+  color: var(--paper-warm);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.f-chip:hover { border-color: var(--gold); color: var(--paper); }
+.f-chip.on {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+  font-weight: 500;
+}
+.f-spacer { flex: 1; min-width: 8px; }
+.f-count {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--paper-warm);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+/* Section banner */
+.section-banner {
+  display: flex;
+  align-items: center;
+  margin: 56px 0 28px;
+  gap: 16px;
+}
+.section-banner .line { flex: 1; height: 1px; background: rgba(240, 230, 210, 0.15); }
+.section-banner h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+.section-banner .small {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  opacity: 0.6;
+}
+
+/* Featured ticket */
+.ticket {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0;
+  background: var(--paper);
+  color: var(--ink);
+  margin-bottom: 56px;
+  position: relative;
+  box-shadow: 6px 8px 0 var(--gold-deep), 12px 16px 32px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.ticket:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 10px 0 var(--gold-deep), 14px 18px 36px rgba(0, 0, 0, 0.6);
+}
+.ticket::before, .ticket::after {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+  background: var(--bg);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ticket::before { left: -10px; }
+.ticket::after { right: 80px; }
+.ticket-main {
+  padding: 32px 36px;
+  border-right: 2px dashed var(--ink-soft);
+}
+.ticket-stamp {
+  display: inline-block;
+  border: 2px solid var(--red);
+  color: var(--red);
+  padding: 4px 12px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+  transform: rotate(-3deg);
+}
+.ticket-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+.ticket-meta {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+.ticket-meta span { color: var(--gold-deep); margin-right: 6px; }
+.ticket-deal {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+.ticket-deal em { font-style: italic; color: var(--gold-deep); }
+.ticket-foot {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--ink-soft);
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+.ticket-stub {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 16px;
+  background: var(--paper-warm);
+}
+.stub-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--ink);
+}
+.stub-day {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  color: var(--ink-soft);
+}
+.stub-num {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--red);
+  margin-top: 14px;
+}
+
+/* Card grid */
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 22px;
+  margin-bottom: 56px;
+}
+.match {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+  transition: 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.match:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+.match-strip {
+  height: 24px;
+  background: linear-gradient(90deg, var(--neon-pink), var(--gold), var(--neon-mint));
+  position: relative;
+}
+.match-strip::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--bg) 0 4px,
+    transparent 4px 12px
+  );
+}
+.match-img {
+  height: 130px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+/* Subtle dark overlay so the labels stay readable on any photo */
+.match-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 10, 8, 0.15) 0%, rgba(13, 10, 8, 0.55) 100%);
+  pointer-events: none;
+}
+.match-img.beach { background-color: #87a8c4; }
+.match-img.bar { background-color: #3d2a1a; }
+.match-img.cocktail { background-color: #8a3a2a; }
+.match-img.brew { background-color: #d4a256; }
+.match-img.wine { background-color: #6a1a3a; }
+.match-img.seafood { background-color: #4a7aa8; }
+.match-img-tag {
+  position: absolute;
+  z-index: 2;
+  top: 12px; left: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 3px 10px;
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.match-status {
+  position: absolute;
+  z-index: 2;
+  top: 12px; right: 12px;
+  background: var(--neon-mint);
+  color: var(--ink);
+  font-family: 'Bebas Neue', sans-serif;
+  padding: 3px 10px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.match-status.upcoming { background: var(--gold); }
+.match-status.ended { background: rgba(240, 230, 210, 0.4); color: var(--ink); }
+.match-body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.match-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 4px;
+  color: var(--paper);
+}
+.match-loc {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.match-deal {
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--paper-warm);
+  margin-bottom: 16px;
+  flex: 1;
+}
+.match-deal em { font-style: italic; color: var(--gold); }
+.match-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(240, 230, 210, 0.15);
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+.match-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+}
+.match-verified { color: var(--paper-warm); opacity: 0.5; text-transform: uppercase; }
+
+/* Off-hours / quiet state */
+.quiet-state {
+  background: var(--bg-2);
+  border: 2px dashed rgba(240, 169, 61, 0.3);
+  padding: 48px 32px;
+  text-align: center;
+  margin: 32px 0;
+}
+.quiet-state h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.quiet-state p {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--paper-warm);
+  max-width: 500px;
+  margin: 0 auto 20px;
+  line-height: 1.5;
+}
+.quiet-state .next-up {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: var(--card);
+  border: 1px solid var(--gold);
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.quiet-state .next-up strong {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  font-weight: normal;
+}
+
+/* Editor's note */
+.note-card {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 32px 36px;
+  margin-bottom: 48px;
+  border-left: 6px solid var(--red);
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  line-height: 1.6;
+  position: relative;
+}
+.note-card::before {
+  content: '"';
+  position: absolute;
+  top: -10px; left: 24px;
+  font-size: 80px;
+  color: var(--red);
+  line-height: 1;
+  font-family: 'DM Serif Display', serif;
+}
+.note-card .note-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.note-card .note-sig {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  margin-top: 18px;
+  text-transform: uppercase;
+}
+
+/* Newsletter card */
+.newsletter-card {
+  background: linear-gradient(135deg, var(--card-2), var(--card));
+  border: 1px solid var(--gold);
+  padding: 36px;
+  margin-bottom: 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+}
+.newsletter-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.newsletter-card p {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--paper-warm);
+  line-height: 1.4;
+}
+.newsletter-form { display: flex; gap: 8px; }
+.newsletter-form input {
+  width: 240px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+.newsletter-form input:focus { outline: 1px solid var(--gold); border-color: var(--gold); }
+.newsletter-form button {
+  padding: 12px 18px;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.newsletter-form button:hover { background: var(--paper); }
+
+/* Footer */
+.coda {
+  text-align: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--rule);
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--paper-warm);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+.coda a { color: var(--gold); margin: 0 8px; text-decoration: none; }
+
+/* Mobile - tighten everything up */
+@media (max-width: 700px) {
+  .ticket { grid-template-columns: 1fr; }
+  .ticket-main { border-right: none; border-bottom: 2px dashed var(--ink-soft); padding: 24px; }
+  .ticket::after { display: none; }
+  .ticket-stub { width: 100%; padding: 18px; flex-direction: row; gap: 16px; }
+  .stub-time { font-size: 24px; }
+  .stub-day { margin-top: 0; }
+  .stub-num { margin-top: 0; }
+
+  .day-pick { padding: 12px 4px; font-size: 13px; }
+  .day-pick .day-num { font-size: 8px; }
+
+  .status-banner { padding: 14px 18px; }
+  .status-clock { font-size: 26px; }
+  .status-text { font-size: 16px; }
+
+  .newsletter-card { grid-template-columns: 1fr; gap: 18px; padding: 24px; }
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form input { width: 100%; }
+
+  .neon-hero { padding: 48px 0 32px; }
+  .filter-strip { padding: 12px 14px; }
+  .f-chip { font-size: 12px; padding: 4px 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
+<div class="bg-grain"></div>
+
+<div class="wrap">
+
+  <!-- Top strip -->
+  <div class="top-strip">
+    <span><a href="/">← The Flightline</a></span>
+    <span>Pensacola FL · Updated Seasonally</span>
+  </div>
+
+  <!-- Hero -->
+  <section class="neon-hero">
+    <div class="matchbook">A Flightline Guide</div>
+    <h1 class="neon-text">
+      <span class="line-1">AFTER</span>
+      <span class="ampersand">&amp;</span>
+      <span class="line-2">FIVE</span>
+    </h1>
+    <p class="hero-tag-line">A working guide to <em>where the locals go</em>, what they're drinking, and what it costs to get in on it.</p>
+    <p class="hero-meta">Verified March 2026 · 17 venues · Downtown + Beach</p>
+  </section>
+
+  <!-- Launch banner -->
+  <div style="background: var(--gold); color: var(--ink); padding: 12px 18px; font-family: 'Special Elite', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; text-align: center; margin: 24px 0 0;">
+    ★ Launching with a starter list. <a href="mailto:tips@theflightline.news?subject=After Five tip" style="color: var(--ink); font-weight: 600; text-decoration: underline;">Tell us what we missed</a> or <a href="mailto:tips@theflightline.news?subject=List my bar in After Five" style="color: var(--ink); font-weight: 600; text-decoration: underline;">list your bar</a>.
+  </div>
+
+  <!-- Status banner — context-aware. -->
+  <!-- This shown when something is active right now -->
+  <div class="status-banner">
+    <div class="status-info">
+      <div class="status-clock">5:42 PM</div>
+      <div class="status-text">
+        <strong>9 specials</strong> running right now.
+        <small>Wednesday · Open until 6 PM at most spots</small>
+      </div>
+    </div>
+    <a href="#" class="status-action">See What's Open →</a>
+  </div>
+
+  <!-- Day picker — 'today' is highlighted; click to browse other days -->
+  <div class="day-picker">
+    <button class="day-pick">Mon<span class="day-num">02</span></button>
+    <button class="day-pick">Tue<span class="day-num">03</span></button>
+    <button class="day-pick today active">Wed<span class="day-num">04</span></button>
+    <button class="day-pick">Thu<span class="day-num">05</span></button>
+    <button class="day-pick">Fri<span class="day-num">06</span></button>
+    <button class="day-pick">Sat<span class="day-num">07</span></button>
+    <button class="day-pick">Sun<span class="day-num">08</span></button>
+  </div>
+
+  <!-- Filter strip -->
+  <div class="filter-strip">
+    <span class="filter-strip-label">Filter:</span>
+    <button class="f-chip on">All</button>
+    <button class="f-chip">Downtown</button>
+    <button class="f-chip">Palafox</button>
+    <button class="f-chip">Seville</button>
+    <button class="f-chip">Beach</button>
+    <button class="f-chip">Beer</button>
+    <button class="f-chip">Cocktails</button>
+    <button class="f-chip">Wine</button>
+    <span class="f-spacer"></span>
+    <span class="f-count">7 results</span>
+  </div>
+
+  <!-- Featured ticket -->
+  <div class="section-banner">
+    <span class="line"></span>
+    <h2>Tonight's Headliner</h2>
+    <span class="line"></span>
+  </div>
+
+  <a href="#" style="text-decoration: none; color: inherit;">
+  <article class="ticket">
+    <div class="ticket-main">
+      <span class="ticket-stamp">★ Editor's Pick</span>
+      <h3 class="ticket-name">The Grand Marlin</h3>
+      <div class="ticket-meta"><span>◆</span>Pensacola Beach <span>◆</span> Sound-side</div>
+      <p class="ticket-deal">Half-price oysters and <em>$6 select wines</em> on the deck. Add the smoked tuna dip for $4 off. The view is the rest of the deal.</p>
+      <div class="ticket-foot">
+        <span>VERIFIED · MAR 2026</span>
+        <span>★ ★ ★ ★ 4.6</span>
+      </div>
+    </div>
+    <div class="ticket-stub">
+      <div style="width: 100%; aspect-ratio: 4/3; background-image: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&q=80'); background-size: cover; background-position: center; margin-bottom: 12px; filter: sepia(0.15) contrast(0.95);"></div>
+      <div class="stub-time">4:00<br>6:30</div>
+      <div class="stub-day">Wednesday</div>
+      <div class="stub-num">No. 04</div>
+    </div>
+  </article>
+  </a>
+
+  <!-- Card grid -->
+  <div class="section-banner">
+    <span class="line"></span>
+    <h2>The Lineup</h2>
+    <span class="small">9 active · 6 upcoming</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="match-grid">
+
+    <article class="match">
+      <div class="match-strip"></div>
+      <div class="match-img bar" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80');">
+        <span class="match-img-tag">Palafox</span>
+        <span class="match-status">Open Now</span>
+      </div>
+      <div class="match-body">
+        <h3 class="match-name">Old Hickory</h3>
+        <div class="match-loc">Whiskey Bar · Downtown</div>
+        <p class="match-deal"><em>$2 off</em> all whiskeys under $12. House Manhattans for $9. Cigar lounge open until 11.</p>
+        <div class="match-meta">
+          <span class="match-time">4 — 7 PM</span>
+          <span class="match-verified">Verified Mar '26</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="match">
+      <div class="match-strip"></div>
+      <div class="match-img cocktail" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80');">
+        <span class="match-img-tag">Seville</span>
+        <span class="match-status">Open Now</span>
+      </div>
+      <div class="match-body">
+        <h3 class="match-name">The Magnolia</h3>
+        <div class="match-loc">Cocktail Lounge · Seville</div>
+        <p class="match-deal">Wednesday is Old Standards night. <em>$8 classic cocktails</em> — Negroni, Sazerac, Vieux Carré.</p>
+        <div class="match-meta">
+          <span class="match-time">5 — 8 PM</span>
+          <span class="match-verified">Verified Mar '26</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="match">
+      <div class="match-strip"></div>
+      <div class="match-img beach" style="background-image: url('https://images.unsplash.com/photo-1533777324565-a040eb52facd?w=800&q=80');">
+        <span class="match-img-tag">Beach</span>
+        <span class="match-status">Open Now</span>
+      </div>
+      <div class="match-body">
+        <h3 class="match-name">Paradise B&amp;G</h3>
+        <div class="match-loc">Casual · Pensacola Beach</div>
+        <p class="match-deal">Locals' day. <em>$3 domestic drafts</em>, $5 wells, half-price wings. Live acoustic on the deck.</p>
+        <div class="match-meta">
+          <span class="match-time">3 — 6 PM</span>
+          <span class="match-verified">Verified Mar '26</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="match">
+      <div class="match-strip"></div>
+      <div class="match-img brew" style="background-image: url('https://images.unsplash.com/photo-1586993451228-09818021e309?w=800&q=80');">
+        <span class="match-img-tag">Belmont</span>
+        <span class="match-status upcoming">Starts 4 PM</span>
+      </div>
+      <div class="match-body">
+        <h3 class="match-name">Perfect Plain</h3>
+        <div class="match-loc">Craft Brewery · Belmont</div>
+        <p class="match-deal">Pint Night. <em>$4 house pours</em>, $1 off flights. Pizzaria stays open until 9.</p>
+        <div class="match-meta">
+          <span class="match-time">4 — 7 PM</span>
+          <span class="match-verified">Verified Mar '26</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="match">
+      <div class="match-strip"></div>
+      <div class="match-img bar" style="background-image: url('https://images.unsplash.com/photo-1546726747-421c6d69c929?w=800&q=80');">
+        <span class="match-img-tag">Downtown</span>
+        <span class="match-status">Open Now</span>
+      </div>
+      <div class="match-body">
+        <h3 class="match-name">Hub Stacey's</h3>
+        <div class="match-loc">Sandwich Pub · Downtown</div>
+        <p class="match-deal">Half-price apps and <em>$4 well drinks</em>. Half-pound burger is $8 until 6.</p>
+        <div class="match-meta">
+          <span class="match-time">3 — 6 PM</span>
+          <span class="match-verified">Verified Mar '26</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="match">
+      <div class="match-strip"></div>
+      <div class="match-img wine" style="background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80');">
+        <span class="match-img-tag">Palafox</span>
+        <span class="match-status">Open Now</span>
+      </div>
+      <div class="match-body">
+        <h3 class="match-name">Garden &amp; Grain</h3>
+        <div class="match-loc">Wine Bar · Palafox</div>
+        <p class="match-deal">Wine Down Wednesday. <em>Half-off bottles</em> under $60. Cheese board $12 before 6.</p>
+        <div class="match-meta">
+          <span class="match-time">4 — 7 PM</span>
+          <span class="match-verified">Verified Mar '26</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="match">
+      <div class="match-strip"></div>
+      <div class="match-img seafood" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80');">
+        <span class="match-img-tag">Downtown</span>
+        <span class="match-status ended">Ended</span>
+      </div>
+      <div class="match-body">
+        <h3 class="match-name">Jaco's Bayfront</h3>
+        <div class="match-loc">Waterfront · Downtown</div>
+        <p class="match-deal"><em>$1 oysters</em> and the sunset lines up over Pensacola Bay.</p>
+        <div class="match-meta">
+          <span class="match-time">5 — 7 PM</span>
+          <span class="match-verified">Verified Mar '26</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Newsletter signup -->
+  <section class="newsletter-card">
+    <div>
+      <h3>The Pour</h3>
+      <p>Wednesdays. What's new on the lineup, what changed this week, what's worth your time. From The Flightline.</p>
+    </div>
+    <form class="newsletter-form" onsubmit="event.preventDefault();">
+      <input type="email" placeholder="your@email.com">
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Editor's note -->
+  <div class="note-card">
+    <div class="note-label">Editor's Note</div>
+    Every listing here is verified by us. Times shift. Specials get pulled. If a deal isn't what we say it is, tell us — and we'll fix it before the next round. The bartender's word beats ours every time.
+    <div class="note-sig">— The Flightline · tips@theflightline.news</div>
+  </div>
+
+  <!-- Coda -->
+  <footer class="coda">
+    <a href="mailto:tips@theflightline.news?subject=After Five tip">Submit a Tip</a> · <a href="mailto:tips@theflightline.news?subject=List my bar in After Five">List Your Bar</a> · <a href="/">Back to The Flightline</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
