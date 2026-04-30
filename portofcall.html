@@ -116,7 +116,8 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, calc(-50% + var(--parallax-map, 0px)));
+  will-change: transform;
   width: 110%;
   max-width: none;
   height: auto;
@@ -161,7 +162,8 @@ body {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   margin-bottom: 28px;
-  transform: rotate(-2deg);
+  transform: translateY(var(--parallax-mid, 0px)) rotate(-2deg);
+  will-change: transform;
   box-shadow: 2px 3px 0 var(--gold-deep);
 }
 
@@ -175,6 +177,8 @@ body {
   display: block;
   text-align: center;
   width: 100%;
+  transform: translateY(var(--parallax-fast, 0px));
+  will-change: transform;
 }
 .neon-text .line-1 {
   display: block;
@@ -1400,6 +1404,64 @@ body {
 </div>
 
 <script>
+// =============================================================================
+// HERO PARALLAX
+// Three layers move at different rates as the user scrolls past the hero:
+//   - Map (slowest, sinks): translates DOWN as scroll increases
+//   - Matchbook label (mid): slight downward drift
+//   - Neon text (fastest, lifts): translates UP as scroll increases
+// Disabled on mobile (perf + iOS quirks) and when prefers-reduced-motion is set.
+// =============================================================================
+(function initHeroParallax() {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isSmall = window.matchMedia('(max-width: 700px)').matches;
+  if (reduceMotion || isSmall) return;
+
+  const hero = document.querySelector('.neon-hero');
+  if (!hero) return;
+
+  let ticking = false;
+  let lastProgress = -1;
+
+  function update() {
+    ticking = false;
+    const rect = hero.getBoundingClientRect();
+    const heroHeight = rect.height;
+    // progress: 0 when hero top is at viewport top, 1 when hero bottom is at viewport top.
+    // Negative when user hasn't scrolled to hero yet; clamp to [0, 1] for translate range
+    // but allow slight overshoot so the effect continues smoothly off-screen.
+    const raw = -rect.top / heroHeight;
+    const progress = Math.max(-0.2, Math.min(1.2, raw));
+
+    // Skip updates when nothing meaningful has changed (rounded to 3 decimals)
+    const rounded = Math.round(progress * 1000) / 1000;
+    if (rounded === lastProgress) return;
+    lastProgress = rounded;
+
+    // Layer translation amounts (in pixels). Map drifts down most.
+    // Range total ~120px keeps the effect noticeable but not nauseating.
+    const mapDrift = progress * 70;        // sinks downward
+    const midDrift = progress * 28;        // mild downward
+    const fastLift = progress * -22;       // lifts upward
+
+    hero.style.setProperty('--parallax-map', mapDrift.toFixed(1) + 'px');
+    hero.style.setProperty('--parallax-mid', midDrift.toFixed(1) + 'px');
+    hero.style.setProperty('--parallax-fast', fastLift.toFixed(1) + 'px');
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+
+  // Initial calculation, then bind
+  update();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+})();
+
 // =============================================================================
 // PORT OF CALL — venue data and rendering logic
 //
