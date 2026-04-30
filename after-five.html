@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>After Five — Pensacola Happy Hour Guide | The Flightline</title>
+<title>Port of Call — Pensacola Happy Hour Guide | The Flightline</title>
 <meta name="description" content="A working guide to where the locals drink in downtown Pensacola and on Pensacola Beach. Verified happy hour and food specials, updated seasonally. From The Flightline.">
-<meta property="og:title" content="After Five — Pensacola Happy Hour Guide">
+<meta property="og:title" content="Port of Call — Pensacola Happy Hour Guide">
 <meta property="og:description" content="A working guide to where the locals drink in Pensacola. Verified, updated, never faked.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://theflightline.news/after-five">
@@ -107,20 +107,19 @@ body {
   overflow: hidden;
 }
 
-/* Antique Pensacola Harbor map - barely visible texture behind hero */
+/* 1896 Pensacola bird's-eye map - barely visible texture behind hero */
 .hero-map {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 110%;
+  width: 120%;
   max-width: none;
   height: auto;
-  opacity: 0.18;
+  opacity: 0.14;
   pointer-events: none;
   z-index: 0;
-  /* Slight blur softens the engraving so it reads as background, not foreground */
-  filter: blur(0.4px);
+  filter: blur(0.3px);
 }
 
 /* Make sure the hero text content stacks above the map */
@@ -778,6 +777,147 @@ body {
   text-transform: uppercase;
 }
 
+/* "Behind the Name" history block */
+.history-block {
+  margin: 64px 0 48px;
+  padding: 0;
+  position: relative;
+}
+
+.history-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.history-banner-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(240, 230, 210, 0.15);
+}
+.history-banner-text {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  background: var(--bg-2);
+  border: 1px solid rgba(240, 169, 61, 0.15);
+  padding: 40px 44px;
+  position: relative;
+}
+.history-grid::before {
+  content: '◆';
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  color: var(--gold);
+  font-size: 14px;
+  opacity: 0.5;
+}
+.history-grid::after {
+  content: '◆';
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  color: var(--gold);
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.history-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 52px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--paper);
+  margin-bottom: 8px;
+}
+.history-dek {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 22px);
+  color: var(--gold);
+  margin-bottom: 24px;
+  line-height: 1.4;
+  border-bottom: 1px solid rgba(240, 169, 61, 0.25);
+  padding-bottom: 16px;
+}
+.history-prose p {
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--paper-warm);
+  margin-bottom: 16px;
+}
+.history-coda {
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 22px !important;
+  letter-spacing: 0.06em;
+  color: var(--gold) !important;
+  margin-top: 24px !important;
+  padding-top: 16px;
+  border-top: 1px solid rgba(240, 169, 61, 0.25);
+  line-height: 1.3 !important;
+}
+
+.history-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 20px;
+}
+.history-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  background: var(--card);
+  border-left: 3px solid var(--gold);
+}
+.fact-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  opacity: 0.6;
+}
+.fact-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--gold);
+  margin: 2px 0 6px;
+}
+.fact-detail {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--paper-warm);
+}
+
+.history-sources {
+  font-family: 'Special Elite', monospace !important;
+  font-size: 10px !important;
+  letter-spacing: 0.12em !important;
+  color: var(--paper-warm);
+  opacity: 0.5;
+  text-transform: uppercase;
+  margin-top: 20px !important;
+  text-align: center;
+  line-height: 1.6;
+  font-style: normal !important;
+}
+
 /* Newsletter card */
 .newsletter-card {
   background: linear-gradient(135deg, var(--card-2), var(--card));
@@ -889,8 +1029,8 @@ body {
   .matchbook { margin-bottom: 18px; }
   .neon-text { font-size: clamp(54px, 18vw, 140px); }
   .hero-map {
-    width: 140%;
-    opacity: 0.15;
+    width: 160%;
+    opacity: 0.12;
   }
   .hero-tag-line {
     font-size: 16px;
@@ -916,6 +1056,21 @@ body {
   /* Section banners - keep centered title, hide the long flanking lines on small screens */
   .section-banner h2 { font-size: 22px; }
   .section-banner .small { font-size: 9px; }
+
+  /* History block on mobile */
+  .history-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 28px 22px;
+  }
+  .history-banner-text { font-size: 10px; letter-spacing: 0.25em; }
+  .history-aside {
+    padding-top: 24px;
+    border-top: 1px solid rgba(240, 169, 61, 0.15);
+  }
+  .history-fact { padding: 12px 14px; }
+  .fact-value { font-size: 24px; }
+  .history-prose p { font-size: 15px; line-height: 1.65; }
 }
 </style>
 </head>
@@ -938,14 +1093,15 @@ body {
 
     <!-- Antique Pensacola Harbor map - barely visible texture behind the neon -->
     <picture>
-      <source srcset="/images/pensacola-harbor-map.webp" type="image/webp">
-      <img src="/images/pensacola-harbor-map.png" alt="" class="hero-map" aria-hidden="true">
+      <source media="(max-width: 700px)" srcset="/images/pensacola-1896-mobile.webp" type="image/webp">
+      <source srcset="/images/pensacola-1896.webp" type="image/webp">
+      <img src="/images/pensacola-1896.png" alt="" class="hero-map" aria-hidden="true">
     </picture>
 
     <div class="matchbook">A Flightline Guide</div>
     <h1 class="neon-text">
-      <span class="line-1">AFTER</span>
-      <span class="line-2">FIVE</span>
+      <span class="line-1">PORT OF</span>
+      <span class="line-2">CALL</span>
     </h1>
     <p class="hero-tag-line">A working guide to <em>where the locals go</em>, what they're drinking, and what it costs to get in on it.</p>
     <p class="hero-meta">Verified March 2026 · 17 venues · Downtown + Beach</p>
@@ -953,7 +1109,7 @@ body {
 
   <!-- Launch banner -->
   <div style="background: var(--gold); color: var(--ink); padding: 14px 18px; font-family: 'Special Elite', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; margin: 24px 0 0; line-height: 1.7;">
-    ★ Launching with a starter list. <a href="mailto:tips@theflightline.news?subject=After Five tip" style="color: var(--ink); font-weight: 600; text-decoration: underline;">Tell us what we missed</a> or <a href="mailto:tips@theflightline.news?subject=List my bar in After Five" style="color: var(--ink); font-weight: 600; text-decoration: underline;">list your bar</a>.
+    ★ Launching with a starter list. <a href="mailto:tips@theflightline.news?subject=Port of Call tip" style="color: var(--ink); font-weight: 600; text-decoration: underline;">Tell us what we missed</a> or <a href="mailto:tips@theflightline.news?subject=List my bar in Port of Call" style="color: var(--ink); font-weight: 600; text-decoration: underline;">list your bar</a>.
   </div>
 
   <!-- Status banner — context-aware. -->
@@ -1018,6 +1174,51 @@ body {
     <p style="font-family: 'DM Serif Display', serif; font-style: italic; font-size: 16px; color: var(--paper-warm); max-width: 480px; margin: 0 auto;">No specials match the day and filter you picked. Try a different day or clear the filter.</p>
   </div>
 
+  <!-- "Behind the Name" history section -->
+  <section class="history-block">
+    <div class="history-banner">
+      <span class="history-banner-line"></span>
+      <span class="history-banner-text">Behind the Name</span>
+      <span class="history-banner-line"></span>
+    </div>
+
+    <div class="history-grid">
+      <div class="history-prose">
+        <h3 class="history-headline">A Port of Call.</h3>
+        <p class="history-dek">Pensacola was drinking before Pensacola was a city.</p>
+        <p>The pier at the foot of Palafox once stretched out into the bay loaded with masts. Between 1870 and 1880, the city doubled in size on the back of yellow pine, naval stores and red snapper. Hundreds of vessels at a time tied off along Palafox Wharf. Crews stepped onto the dock and went exactly where you'd expect them to go.</p>
+        <p>Saloons grew alongside the chandleries and the caulkers' shops. The downtown bar district isn't a recent invention. It's the descendant of an entertainment quarter built to receive sailors with money in their pockets and shore time to spend. One saloon at Pine and Palafox earned a reputation for unsolved murders. Another, the Alligator at Wright and Tarragona, kept its own kind of order. The blocks now occupied by Old Hickory, Hub Stacey's and the Seville Quarter sit on top of buildings that were doing the same job 140 years ago.</p>
+        <p>A "port of call" is a stop a ship makes during a voyage. A place to take on cargo, take on water, let the crew off for a night. Pensacola was that for thousands of working sailors across four flags and three centuries. It still is, in its way. The ships are different. The instinct is the same.</p>
+        <p class="history-coda">This is a guide to where they go now.</p>
+      </div>
+
+      <aside class="history-aside">
+        <div class="history-fact">
+          <span class="fact-label">Established</span>
+          <span class="fact-value">1559</span>
+          <span class="fact-detail">First European settlement in what's now the United States.</span>
+        </div>
+        <div class="history-fact">
+          <span class="fact-label">Navy Yard</span>
+          <span class="fact-value">1825</span>
+          <span class="fact-detail">President John Quincy Adams ordered it built. The Pensacola Navy Yard ran for 86 years.</span>
+        </div>
+        <div class="history-fact">
+          <span class="fact-label">Boom</span>
+          <span class="fact-value">1870 — 1900</span>
+          <span class="fact-detail">Pensacola's busiest port era. Yellow pine and red snapper to ports across the Atlantic. The city doubled in size.</span>
+        </div>
+        <div class="history-fact">
+          <span class="fact-label">The Pier</span>
+          <span class="fact-value">Palafox</span>
+          <span class="fact-detail">South Palafox was originally a working pier. Where you walk now, ships docked.</span>
+        </div>
+      </aside>
+    </div>
+
+    <p class="history-sources">Sources: City of Pensacola Port Authority records, UWF Historic Trust, Palafox Historic District nomination (NR 14001085), Naval History and Heritage Command archives.</p>
+  </section>
+
   <!-- Newsletter signup -->
   <section class="newsletter-card">
     <div>
@@ -1039,14 +1240,14 @@ body {
 
   <!-- Coda -->
   <footer class="coda">
-    <a href="mailto:tips@theflightline.news?subject=After Five tip">Submit a Tip</a> · <a href="mailto:tips@theflightline.news?subject=List my bar in After Five">List Your Bar</a> · <a href="/">Back to The Flightline</a>
+    <a href="mailto:tips@theflightline.news?subject=Port of Call tip">Submit a Tip</a> · <a href="mailto:tips@theflightline.news?subject=List my bar in Port of Call">List Your Bar</a> · <a href="/">Back to The Flightline</a>
   </footer>
 
 </div>
 
 <script>
 // =============================================================================
-// AFTER FIVE — venue data and rendering logic
+// PORT OF CALL — venue data and rendering logic
 //
 // Venue data is inlined here for v1 simplicity. Future versions will fetch from
 // a separate JSON file synced via Make. To add or update a venue, edit the
