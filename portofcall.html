@@ -580,18 +580,23 @@ body {
   border: 1px solid var(--rule);
   position: relative;
   overflow: hidden;
-  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s, box-shadow 0.25s;
   cursor: pointer;
   display: flex;
   flex-direction: column;
 }
 .match:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px) rotate(-0.4deg);
   border-color: var(--gold);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(240, 169, 61, 0.3);
+  box-shadow: 0 20px 36px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(240, 169, 61, 0.4), 0 0 32px rgba(255, 75, 139, 0.15);
 }
-.match:hover .match-img { filter: brightness(1.05); }
-.match:active { transform: translateY(-1px); }
+.match:hover .match-img { filter: brightness(1.08); }
+.match:hover .match-strip { animation: strip-shimmer 1.4s ease-in-out infinite; }
+@keyframes strip-shimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.25) saturate(1.15); }
+}
+.match:active { transform: translateY(-2px) rotate(-0.2deg); }
 .match-strip {
   height: 24px;
   background: linear-gradient(90deg, var(--neon-pink), var(--gold), var(--neon-mint));
@@ -703,6 +708,38 @@ body {
   color: var(--gold);
 }
 .match-verified { color: var(--paper-warm); opacity: 0.5; text-transform: uppercase; }
+.match-link {
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s, transform 0.2s;
+  display: inline-block;
+  z-index: 5;
+  position: relative;
+}
+.match-link:hover {
+  color: var(--neon-pink);
+  transform: translateX(2px);
+}
+.ticket-link {
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.ticket-link:hover {
+  color: var(--neon-pink);
+  transform: translateX(2px);
+}
 
 /* Off-hours / quiet state */
 .quiet-state {
@@ -889,6 +926,36 @@ body {
   padding: 16px 18px;
   background: var(--card);
   border-left: 3px solid var(--gold);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-left-color 0.2s, background 0.2s, box-shadow 0.25s;
+  cursor: default;
+}
+.history-fact:hover {
+  transform: translateX(6px);
+  border-left-width: 5px;
+  border-left-color: var(--neon-pink);
+  background: var(--bg-2);
+  box-shadow: -2px 0 12px rgba(255, 75, 139, 0.18);
+}
+.history-fact:hover .fact-value {
+  color: var(--neon-pink);
+  text-shadow: 0 0 12px rgba(255, 75, 139, 0.4);
+}
+.history-fact-fun {
+  border-left-color: var(--neon-mint);
+  background: linear-gradient(135deg, var(--card) 0%, rgba(115, 255, 196, 0.04) 100%);
+}
+.history-fact-fun .fact-value {
+  color: var(--neon-mint);
+  font-size: 22px;
+}
+.history-fact-fun:hover {
+  transform: translateX(6px) rotate(-0.4deg);
+  border-left-color: var(--neon-mint);
+  box-shadow: -2px 0 16px rgba(115, 255, 196, 0.25);
+}
+.history-fact-fun:hover .fact-value {
+  color: var(--neon-mint);
+  text-shadow: 0 0 12px rgba(115, 255, 196, 0.5);
 }
 .fact-label {
   font-family: 'Special Elite', monospace;
@@ -1205,39 +1272,45 @@ body {
     <div class="history-grid">
       <div class="history-prose">
         <h3 class="history-headline">A Port of Call.</h3>
-        <p class="history-dek">Pensacola was drinking before Pensacola was a city.</p>
-        <p>The pier at the foot of Palafox once stretched out into the bay loaded with masts. Between 1870 and 1880, the city doubled in size on the back of yellow pine, naval stores and red snapper. Hundreds of vessels at a time tied off along Palafox Wharf. Crews stepped onto the dock and went exactly where you'd expect them to go.</p>
-        <p>Saloons grew alongside the chandleries and the caulkers' shops. The downtown bar district isn't a recent invention. It's the descendant of an entertainment quarter built to receive sailors with money in their pockets and shore time to spend. One saloon at Pine and Palafox earned a reputation for unsolved murders. Another, the Alligator at Wright and Tarragona, kept its own kind of order. The blocks now occupied by Old Hickory, Hub Stacey's and the Seville Quarter sit on top of buildings that were doing the same job 140 years ago.</p>
-        <p>That's only one of Pensacola's drinking histories. A few blocks west, in Belmont-DeVilliers — the neighborhood locals still call the Blocks — a different city was alive. Jim Crow had pushed Black Pensacola out of the white-only rooms downtown, and the Blocks became a Chitlin Circuit stop. Billie Holiday played here. Cab Calloway. Etta James. Ike and Tina. Some of the rooms are still standing. Blue Dot opened in 1947 and is still pouring. Chizuko occupies the former Abe's 506 Club. Five Sisters Blues Café sits where Gussie's Record Shop used to be. The Blocks aren't a footnote. They're a parallel main story.</p>
-        <p>A "port of call" is a stop a ship makes during a voyage. A place to take on cargo, take on water, let the crew off for a night. Pensacola has been that across four flags, three centuries and many neighborhoods. It still is. The ships are different. The instinct is the same.</p>
+        <p class="history-dek">Rachel Jackson called it "the Great Babylon."</p>
+        <p>In 1821, Andrew Jackson became the first territorial governor of Florida. He set up house with his wife Rachel at the corner of Palafox and Intendencia — where Abbott's now stands. Rachel, a devout Presbyterian, was horrified. The locals drank. They worked Sundays. She wrote her friend Eliza Kingsley calling Pensacola a "Great Babylon." The Jacksons left after four months. The Babylon stayed.</p>
+        <p>Fifty years later it had its excuse. Between 1870 and 1900, Pensacola was one of the busiest deepwater ports on the Gulf — yellow pine, naval stores, red snapper, hundreds of ships tied off along Palafox Wharf at a time. Saloons grew up next to the chandleries. The corner of Pine and Palafox earned a reputation for unsolved murders. The Alligator at Wright and Tarragona kept its own kind of order. The blocks where Old Hickory, Hub Stacey's and Seville Quarter stand today were doing the same job 140 years ago.</p>
+        <p>A few streets west, Belmont-DeVilliers — the neighborhood Pensacolians still call the Blocks — held a parallel city. Jim Crow had pushed Black Pensacola out of the white rooms downtown, and the Blocks became a Chitlin Circuit stop. Billie Holiday played here. Cab Calloway. Etta James. Ike and Tina. Blue Dot opened in 1947 and is still pouring. Chizuko occupies the old Abe's 506 Club. Five Sisters Blues Café sits where Gussie's Record Shop used to be.</p>
+        <p>Then there was Trader Jon's. From 1953 until 2003, Martin "Trader Jon" Weissman ran a bar at 511 South Palafox that was the unofficial wardroom of Naval Air Station Pensacola. He wore mismatched socks. Drink prices changed depending on his mood and how well he knew you — regulars called it Tradernomics. The walls were covered in flight memorabilia traded for drinks. John Wayne came in. So did Bob Hope, Larry King, Prince Andrew, John Glenn and Alan Shepard. The bar inspired "TJ's" in <em>An Officer and a Gentleman</em>. The Navy named a runway after him: TRADR-ONE. The bar closed in 2003. The collection now lives at the T.T. Wentworth Museum.</p>
+        <p>Four flags, three centuries, many neighborhoods. The ships changed. The instinct didn't.</p>
         <p class="history-coda">This is a guide to where they go now.</p>
       </div>
 
       <aside class="history-aside">
         <div class="history-fact">
-          <span class="fact-label">Established</span>
-          <span class="fact-value">1559</span>
-          <span class="fact-detail">First European settlement in what's now the United States.</span>
-        </div>
-        <div class="history-fact">
-          <span class="fact-label">Navy Yard</span>
-          <span class="fact-value">1825</span>
-          <span class="fact-detail">President John Quincy Adams ordered it built. The Pensacola Navy Yard ran for 86 years.</span>
+          <span class="fact-label">Great Babylon</span>
+          <span class="fact-value">1821</span>
+          <span class="fact-detail">Rachel Jackson, on Pensacola: "a Great Babylon." She lasted four months.</span>
         </div>
         <div class="history-fact">
           <span class="fact-label">Port Boom</span>
           <span class="fact-value">1870 — 1900</span>
-          <span class="fact-detail">Pensacola's busiest port era. Yellow pine and red snapper to ports across the Atlantic. The city doubled in size.</span>
+          <span class="fact-detail">Yellow pine and red snapper to ports across the Atlantic. The city doubled in size.</span>
         </div>
         <div class="history-fact">
           <span class="fact-label">The Blocks</span>
           <span class="fact-value">Belmont-DeVilliers</span>
-          <span class="fact-detail">Pensacola's historic Black entertainment district. A Chitlin Circuit stop where Billie Holiday, Cab Calloway, Etta James and Ike and Tina performed.</span>
+          <span class="fact-detail">A Chitlin Circuit stop. Holiday, Calloway, Etta James, Ike and Tina.</span>
+        </div>
+        <div class="history-fact">
+          <span class="fact-label">Trader Jon's</span>
+          <span class="fact-value">1953 — 2003</span>
+          <span class="fact-detail">Mismatched socks. Tradernomics. NAS Pensacola named a runway TRADR-ONE.</span>
+        </div>
+        <div class="history-fact history-fact-fun">
+          <span class="fact-label">Still On the Books</span>
+          <span class="fact-value">Pensacola Code</span>
+          <span class="fact-detail">Rolling a barrel down a city street is illegal. The fine varies depending on what's inside.</span>
         </div>
       </aside>
     </div>
 
-    <p class="history-sources">Sources: City of Pensacola Port Authority records, UWF Historic Trust, Palafox Historic District nomination (NR 14001085), Naval History and Heritage Command archives, Visit Pensacola historical archives.</p>
+    <p class="history-sources">Sources: Pensapedia, UWF Historic Trust, Library of Congress (Andrew Jackson Papers), <em>Florida Historical Quarterly</em>, Visit Pensacola, Pensacola city ordinances.</p>
   </section>
 
   <!-- Newsletter signup -->
@@ -1281,6 +1354,7 @@ const VENUES = [
   {
     id: "old-hickory",
     name: "Old Hickory",
+    website: "https://www.oldhickorywhiskeybar.com",
     type: "Whiskey Bar",
     neighborhood: "Palafox",
     neighborhoodTag: "Palafox",
@@ -1300,6 +1374,7 @@ const VENUES = [
   {
     id: "the-grand-marlin",
     name: "The Grand Marlin",
+    website: "https://thegrandmarlin.com",
     type: "Restaurant",
     neighborhood: "Pensacola Beach",
     neighborhoodTag: "Beach",
@@ -1346,6 +1421,7 @@ const VENUES = [
   {
     id: "perfect-plain",
     name: "Perfect Plain",
+    website: "https://perfectplain.com",
     type: "Brewery",
     neighborhood: "Belmont-DeVilliers",
     neighborhoodTag: "Belmont",
@@ -1361,6 +1437,7 @@ const VENUES = [
   {
     id: "hub-staceys",
     name: "Hub Stacey's",
+    website: "https://www.hubstaceyspensacolaperdido.com",
     type: "Pub",
     neighborhood: "Downtown",
     neighborhoodTag: "Downtown",
@@ -1525,7 +1602,9 @@ function renderCards() {
           <p class="match-deal">${special.deal}</p>
           <div class="match-meta">
             <span class="match-time">${special.display}</span>
-            <span class="match-verified">Verified Mar '26</span>
+            ${venue.website
+              ? `<a class="match-link" href="${venue.website}" target="_blank" rel="noopener">Visit site →</a>`
+              : `<span class="match-verified">Verified Mar '26</span>`}
           </div>
         </div>
       </article>
@@ -1580,7 +1659,9 @@ function renderFeatured() {
         <div class="ticket-meta"><span>◆</span>${featuredVenue.neighborhood} <span>◆</span> Sound-side</div>
         <p class="ticket-deal">${special.deal}</p>
         <div class="ticket-foot">
-          <span>VERIFIED · MAR 2026</span>
+          ${featuredVenue.website
+            ? `<a class="ticket-link" href="${featuredVenue.website}" target="_blank" rel="noopener">Visit site →</a>`
+            : `<span>VERIFIED · MAR 2026</span>`}
           <span>★ ★ ★ ★ ${featuredVenue.rating || ''}</span>
         </div>
       </div>
