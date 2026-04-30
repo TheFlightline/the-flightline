@@ -16,117 +16,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
-<!-- Port of Call nav and floating badge styles -->
-<style>
-  /* Port of Call nav link with subtle neon-pink dot before it */
-  .nav-portofcall {
-    position: relative;
-    color: #ff4b8b !important;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    transition: text-shadow 0.3s ease;
-  }
-  .nav-portofcall::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: #ff4b8b;
-    border-radius: 50%;
-    margin-right: 8px;
-    vertical-align: middle;
-    box-shadow: 0 0 6px rgba(255, 75, 139, 0.7);
-    animation: portCallPulse 3s ease-in-out infinite;
-  }
-  .nav-portofcall:hover {
-    text-shadow: 0 0 8px rgba(255, 75, 139, 0.6);
-  }
-  @keyframes portCallPulse {
-    0%, 100% { opacity: 0.85; box-shadow: 0 0 6px rgba(255, 75, 139, 0.6); }
-    50% { opacity: 1; box-shadow: 0 0 10px rgba(255, 75, 139, 0.9); }
-  }
-  .mnav-portofcall {
-    color: #ff4b8b !important;
-    font-weight: 600;
-  }
-  .mnav-portofcall::before {
-    content: '●';
-    color: #ff4b8b;
-    margin-right: 8px;
-    font-size: 10px;
-    text-shadow: 0 0 6px rgba(255, 75, 139, 0.7);
-  }
-
-  /* Floating Port of Call badge - bottom right */
-  .floating-portofcall {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 999;
-    background: #1a1a1a;
-    color: #4dd6ff;
-    padding: 10px 18px 10px 14px;
-    border-radius: 100px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    text-decoration: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5),
-                0 0 24px rgba(77, 214, 255, 0.18),
-                inset 0 0 0 1px rgba(77, 214, 255, 0.35);
-    text-shadow: 0 0 8px rgba(77, 214, 255, 0.6);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    animation: floatGlow 4s ease-in-out infinite;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: floatIn 0.6s ease 1.5s forwards, floatGlow 4s ease-in-out 2.1s infinite;
-  }
-  .floating-portofcall::before {
-    content: '';
-    width: 7px;
-    height: 7px;
-    background: #ff4b8b;
-    border-radius: 50%;
-    box-shadow: 0 0 8px rgba(255, 75, 139, 0.9);
-    animation: portCallPulse 3s ease-in-out infinite;
-  }
-  .floating-portofcall:hover {
-    color: #fff;
-    text-shadow: 0 0 12px rgba(77, 214, 255, 0.9);
-    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.6),
-                0 0 36px rgba(77, 214, 255, 0.35),
-                inset 0 0 0 1px rgba(77, 214, 255, 0.6);
-    transform: translateY(-2px);
-  }
-  .floating-portofcall:hover::before {
-    background: #ff4b8b;
-    box-shadow: 0 0 14px rgba(255, 75, 139, 1);
-  }
-  @keyframes floatIn {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes floatGlow {
-    0%, 100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 24px rgba(77, 214, 255, 0.18), inset 0 0 0 1px rgba(77, 214, 255, 0.35); }
-    50% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 32px rgba(77, 214, 255, 0.3), inset 0 0 0 1px rgba(77, 214, 255, 0.5); }
-  }
-
-  /* Mobile: smaller, less prominent */
-  @media (max-width: 700px) {
-    .floating-portofcall {
-      bottom: 16px;
-      right: 16px;
-      padding: 8px 14px 8px 12px;
-      font-size: 11px;
-    }
-    .floating-portofcall::before {
-      width: 6px;
-      height: 6px;
-    }
-  }
-</style>
 <!-- Leaflet for inline article maps -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin=""></script>
@@ -170,11 +59,12 @@
   50% { opacity: 0.45; }
 }
 
-/* Floating Port of Call badge - shows on home page, fixed bottom-right */
+/* Floating Port of Call badge - shows on home page, fixed bottom-left
+   (bottom-right is reserved for the back-to-top button) */
 .poc-badge {
   position: fixed;
   bottom: 24px;
-  right: 24px;
+  left: 24px;
   z-index: 200;
   display: flex;
   align-items: center;
@@ -234,7 +124,7 @@
 @media (max-width: 700px) {
   .poc-badge {
     bottom: 14px;
-    right: 14px;
+    left: 14px;
     padding: 10px 14px 10px 12px;
     font-size: 12px;
   }
@@ -274,7 +164,6 @@
       <a href="javascript:void(0)" onclick="goCategory('military');return false;" id="nav-military">Military</a>
       <a href="javascript:void(0)" onclick="goCategory('sports');return false;" id="nav-sports">Sports</a>
       <a href="javascript:void(0)" onclick="goCategory('opinion');return false;" id="nav-opinion">Opinion</a>
-      <a href="/portofcall" id="nav-portofcall" class="nav-portofcall">Port of Call</a>
       <a href="/portofcall" id="nav-portofcall" class="nav-portofcall">Port of Call<span class="nav-dot"></span></a>
     </nav>
 
@@ -292,7 +181,6 @@
   <a href="#" onclick="toggleMobileNav();goCategory('military');return false;" id="mnav-military">Military</a>
   <a href="#" onclick="toggleMobileNav();goCategory('sports');return false;" id="mnav-sports">Sports</a>
   <a href="#" onclick="toggleMobileNav();goCategory('opinion');return false;" id="mnav-opinion">Opinion</a>
-  <a href="/portofcall" id="mnav-portofcall" class="mnav-portofcall">Port of Call</a>
   <a href="/portofcall" id="mnav-portofcall" class="mnav-portofcall">Port of Call<span class="nav-dot"></span></a>
   <div class="mobile-nav-section">The Flightline</div>
   <a href="#" onclick="toggleMobileNav();goPage('community-calendar');return false;" id="mnav-calendar">Community Calendar</a>
@@ -1876,11 +1764,6 @@
 <script src="/assets/articles.js"></script>
   <script src="/assets/app.js"></script>
 <script src="/assets/sidebar-cal.js"></script>
-
-<!-- Floating Port of Call badge -->
-<a href="/portofcall" class="floating-portofcall" aria-label="Port of Call - Pensacola happy hour guide">
-  PORT OF CALL
-</a>
 
 </body>
 </html>
