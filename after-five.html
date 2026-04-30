@@ -122,8 +122,8 @@ body {
 
 .neon-text {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(72px, 13vw, 160px);
-  line-height: 0.85;
+  font-size: clamp(56px, 13vw, 160px);
+  line-height: 0.88;
   letter-spacing: 0.02em;
   color: var(--paper);
   position: relative;
@@ -136,20 +136,7 @@ body {
     0 0 10px rgba(255, 75, 139, 0.8),
     0 0 24px rgba(255, 75, 139, 0.5),
     0 0 48px rgba(255, 75, 139, 0.3);
-}
-.neon-text .ampersand {
-  font-family: 'DM Serif Display', serif;
-  font-style: italic;
-  color: var(--gold);
-  text-shadow:
-    0 0 10px rgba(240, 169, 61, 0.8),
-    0 0 24px rgba(240, 169, 61, 0.4);
-  font-size: 0.7em;
-  display: inline-block;
-  font-weight: 400;
-  letter-spacing: 0;
-  margin: 0 0.05em;
-  transform: translateY(-0.1em);
+  animation: flicker-pink 7s infinite;
 }
 .neon-text .line-2 {
   display: block;
@@ -158,16 +145,42 @@ body {
     0 0 10px rgba(77, 214, 255, 0.8),
     0 0 24px rgba(77, 214, 255, 0.5),
     0 0 48px rgba(77, 214, 255, 0.3);
+  animation: flicker-blue 9s infinite;
+}
+/* Subtle neon flicker - pink letters glitch occasionally */
+@keyframes flicker-pink {
+  0%, 100% { opacity: 1; }
+  46% { opacity: 1; }
+  47% { opacity: 0.85; }
+  48% { opacity: 1; }
+  49% { opacity: 0.7; }
+  50% { opacity: 1; }
+  82% { opacity: 1; }
+  83% { opacity: 0.9; }
+  84% { opacity: 1; }
+}
+/* Blue flickers on a different timing so it never flickers in sync */
+@keyframes flicker-blue {
+  0%, 100% { opacity: 1; }
+  22% { opacity: 1; }
+  23% { opacity: 0.8; }
+  24% { opacity: 1; }
+  68% { opacity: 1; }
+  69% { opacity: 0.92; }
+  70% { opacity: 0.7; }
+  71% { opacity: 1; }
 }
 
 .hero-tag-line {
   font-family: 'DM Serif Display', serif;
   font-style: italic;
-  font-size: clamp(18px, 2.4vw, 24px);
+  font-size: clamp(17px, 2.2vw, 22px);
   color: var(--paper-warm);
   margin: 28px auto 0;
-  max-width: 640px;
+  max-width: 580px;
   line-height: 1.4;
+  text-wrap: balance;
+  padding: 0 8px;
 }
 .hero-tag-line em { color: var(--gold); font-style: italic; }
 
@@ -247,8 +260,10 @@ body {
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
+  transition: background 0.15s, transform 0.1s;
 }
 .status-action:hover { background: var(--paper); }
+.status-action:active { transform: translateY(1px); }
 
 /* Day picker */
 .day-picker {
@@ -260,21 +275,31 @@ body {
 }
 .day-pick {
   flex: 1;
-  padding: 16px 6px;
+  padding: 18px 6px 14px;
   background: transparent;
   border: none;
   border-right: 1px solid var(--rule);
   cursor: pointer;
   text-align: center;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   letter-spacing: 0.08em;
   color: var(--paper-warm);
-  transition: 0.15s;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 56px;
 }
 .day-pick:last-child { border-right: none; }
-.day-pick:hover { background: var(--bg-2); color: var(--paper); }
+.day-pick:hover {
+  background: var(--bg-2);
+  color: var(--paper);
+}
+.day-pick:active { transform: scale(0.96); }
 .day-pick.active {
   background: var(--paper);
   color: var(--ink);
@@ -288,29 +313,24 @@ body {
   font-size: 9px;
   color: var(--red);
 }
-.day-pick .day-num {
+.day-pick.today:not(.active) {
+  background: rgba(240, 169, 61, 0.12);
+  color: var(--gold);
+}
+.day-pick.today:not(.active):hover {
+  background: rgba(240, 169, 61, 0.2);
+}
+.today-tag-inline {
   display: block;
   font-family: 'Special Elite', monospace;
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  margin-top: 2px;
-  opacity: 0.6;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-top: 1px;
+  font-weight: normal;
 }
-.day-pick.today {
-  background: var(--gold);
-  color: var(--ink);
-}
-.day-pick.today.active { background: var(--paper); }
-.day-pick.today::after {
-  content: 'TODAY';
-  position: absolute;
-  bottom: 4px; left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Special Elite', monospace;
-  font-size: 7px;
-  letter-spacing: 0.2em;
-  opacity: 0.7;
-}
+.day-pick.active .today-tag-inline { color: var(--red); opacity: 1; }
 
 /* Filter strip */
 .filter-strip {
@@ -340,9 +360,10 @@ body {
   font-size: 13px;
   letter-spacing: 0.08em;
   cursor: pointer;
-  transition: 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
 }
 .f-chip:hover { border-color: var(--gold); color: var(--paper); }
+.f-chip:active { transform: scale(0.95); }
 .f-chip.on {
   background: var(--gold);
   border-color: var(--gold);
@@ -502,16 +523,18 @@ body {
   border: 1px solid var(--rule);
   position: relative;
   overflow: hidden;
-  transition: 0.2s;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
   cursor: pointer;
   display: flex;
   flex-direction: column;
 }
 .match:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: var(--gold);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(240, 169, 61, 0.3);
 }
+.match:hover .match-img { filter: brightness(1.05); }
+.match:active { transform: translateY(-1px); }
 .match-strip {
   height: 24px;
   background: linear-gradient(90deg, var(--neon-pink), var(--gold), var(--neon-mint));
@@ -534,6 +557,7 @@ body {
   overflow: hidden;
   background-size: cover;
   background-position: center;
+  transition: filter 0.2s;
 }
 /* Subtle dark overlay so the labels stay readable on any photo */
 .match-img::after {
@@ -789,7 +813,11 @@ body {
   .newsletter-form { flex-direction: column; }
   .newsletter-form input { width: 100%; }
 
-  .neon-hero { padding: 48px 0 32px; }
+  .neon-hero { padding: 32px 0 24px; }
+  .matchbook { margin-bottom: 18px; }
+  .hero-tag-line { font-size: 16px; margin-top: 18px; }
+  .hero-meta { font-size: 9px; margin-top: 16px; gap: 10px; }
+  .hero-meta::before, .hero-meta::after { display: none; }
   .filter-strip { padding: 12px 14px; }
   .f-chip { font-size: 12px; padding: 4px 10px; }
 }
@@ -814,7 +842,6 @@ body {
     <div class="matchbook">A Flightline Guide</div>
     <h1 class="neon-text">
       <span class="line-1">AFTER</span>
-      <span class="ampersand">&amp;</span>
       <span class="line-2">FIVE</span>
     </h1>
     <p class="hero-tag-line">A working guide to <em>where the locals go</em>, what they're drinking, and what it costs to get in on it.</p>
@@ -828,7 +855,7 @@ body {
 
   <!-- Status banner — context-aware. -->
   <!-- This shown when something is active right now -->
-  <div class="status-banner">
+  <div class="status-banner" id="statusBanner">
     <div class="status-info">
       <div class="status-clock">5:42 PM</div>
       <div class="status-text">
@@ -836,192 +863,56 @@ body {
         <small>Wednesday · Open until 6 PM at most spots</small>
       </div>
     </div>
-    <a href="#" class="status-action">See What's Open →</a>
+    <button class="status-action">See What's Open →</button>
   </div>
 
-  <!-- Day picker — 'today' is highlighted; click to browse other days -->
-  <div class="day-picker">
-    <button class="day-pick">Mon<span class="day-num">02</span></button>
-    <button class="day-pick">Tue<span class="day-num">03</span></button>
-    <button class="day-pick today active">Wed<span class="day-num">04</span></button>
-    <button class="day-pick">Thu<span class="day-num">05</span></button>
-    <button class="day-pick">Fri<span class="day-num">06</span></button>
-    <button class="day-pick">Sat<span class="day-num">07</span></button>
-    <button class="day-pick">Sun<span class="day-num">08</span></button>
+  <!-- Day picker - data-driven, click to filter -->
+  <div class="day-picker" id="dayPicker">
+    <button class="day-pick" data-day="1">Mon</button>
+    <button class="day-pick" data-day="2">Tue</button>
+    <button class="day-pick" data-day="3">Wed</button>
+    <button class="day-pick" data-day="4">Thu</button>
+    <button class="day-pick" data-day="5">Fri</button>
+    <button class="day-pick" data-day="6">Sat</button>
+    <button class="day-pick" data-day="0">Sun</button>
   </div>
 
   <!-- Filter strip -->
   <div class="filter-strip">
     <span class="filter-strip-label">Filter:</span>
-    <button class="f-chip on">All</button>
-    <button class="f-chip">Downtown</button>
-    <button class="f-chip">Palafox</button>
-    <button class="f-chip">Seville</button>
-    <button class="f-chip">Beach</button>
-    <button class="f-chip">Beer</button>
-    <button class="f-chip">Cocktails</button>
-    <button class="f-chip">Wine</button>
+    <button class="f-chip on" data-neighborhood="all">All</button>
+    <button class="f-chip" data-neighborhood="Downtown">Downtown</button>
+    <button class="f-chip" data-neighborhood="Palafox">Palafox</button>
+    <button class="f-chip" data-neighborhood="Seville">Seville</button>
+    <button class="f-chip" data-neighborhood="Pensacola Beach">Beach</button>
+    <button class="f-chip" data-neighborhood="Belmont-DeVilliers">Belmont</button>
     <span class="f-spacer"></span>
-    <span class="f-count">7 results</span>
+    <span class="f-count" id="resultCount">7 results</span>
   </div>
 
-  <!-- Featured ticket -->
+  <!-- Featured ticket - re-renders for the selected day's pick -->
   <div class="section-banner">
     <span class="line"></span>
-    <h2>Tonight's Headliner</h2>
+    <h2 id="featuredTitle">Tonight's Headliner</h2>
     <span class="line"></span>
   </div>
 
-  <a href="#" style="text-decoration: none; color: inherit;">
-  <article class="ticket">
-    <div class="ticket-main">
-      <span class="ticket-stamp">★ Editor's Pick</span>
-      <h3 class="ticket-name">The Grand Marlin</h3>
-      <div class="ticket-meta"><span>◆</span>Pensacola Beach <span>◆</span> Sound-side</div>
-      <p class="ticket-deal">Half-price oysters and <em>$6 select wines</em> on the deck. Add the smoked tuna dip for $4 off. The view is the rest of the deal.</p>
-      <div class="ticket-foot">
-        <span>VERIFIED · MAR 2026</span>
-        <span>★ ★ ★ ★ 4.6</span>
-      </div>
-    </div>
-    <div class="ticket-stub">
-      <div style="width: 100%; aspect-ratio: 4/3; background-image: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&q=80'); background-size: cover; background-position: center; margin-bottom: 12px; filter: sepia(0.15) contrast(0.95);"></div>
-      <div class="stub-time">4:00<br>6:30</div>
-      <div class="stub-day">Wednesday</div>
-      <div class="stub-num">No. 04</div>
-    </div>
-  </article>
-  </a>
+  <div id="featuredSlot"></div>
 
   <!-- Card grid -->
   <div class="section-banner">
     <span class="line"></span>
-    <h2>The Lineup</h2>
-    <span class="small">9 active · 6 upcoming</span>
+    <h2 id="lineupTitle">The Lineup</h2>
+    <span class="small" id="lineupSummary"></span>
     <span class="line"></span>
   </div>
 
-  <div class="match-grid">
+  <div class="match-grid" id="matchGrid"></div>
 
-    <article class="match">
-      <div class="match-strip"></div>
-      <div class="match-img bar" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80');">
-        <span class="match-img-tag">Palafox</span>
-        <span class="match-status">Open Now</span>
-      </div>
-      <div class="match-body">
-        <h3 class="match-name">Old Hickory</h3>
-        <div class="match-loc">Whiskey Bar · Downtown</div>
-        <p class="match-deal"><em>$2 off</em> all whiskeys under $12. House Manhattans for $9. Cigar lounge open until 11.</p>
-        <div class="match-meta">
-          <span class="match-time">4 — 7 PM</span>
-          <span class="match-verified">Verified Mar '26</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="match">
-      <div class="match-strip"></div>
-      <div class="match-img cocktail" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80');">
-        <span class="match-img-tag">Seville</span>
-        <span class="match-status">Open Now</span>
-      </div>
-      <div class="match-body">
-        <h3 class="match-name">The Magnolia</h3>
-        <div class="match-loc">Cocktail Lounge · Seville</div>
-        <p class="match-deal">Wednesday is Old Standards night. <em>$8 classic cocktails</em> — Negroni, Sazerac, Vieux Carré.</p>
-        <div class="match-meta">
-          <span class="match-time">5 — 8 PM</span>
-          <span class="match-verified">Verified Mar '26</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="match">
-      <div class="match-strip"></div>
-      <div class="match-img beach" style="background-image: url('https://images.unsplash.com/photo-1533777324565-a040eb52facd?w=800&q=80');">
-        <span class="match-img-tag">Beach</span>
-        <span class="match-status">Open Now</span>
-      </div>
-      <div class="match-body">
-        <h3 class="match-name">Paradise B&amp;G</h3>
-        <div class="match-loc">Casual · Pensacola Beach</div>
-        <p class="match-deal">Locals' day. <em>$3 domestic drafts</em>, $5 wells, half-price wings. Live acoustic on the deck.</p>
-        <div class="match-meta">
-          <span class="match-time">3 — 6 PM</span>
-          <span class="match-verified">Verified Mar '26</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="match">
-      <div class="match-strip"></div>
-      <div class="match-img brew" style="background-image: url('https://images.unsplash.com/photo-1586993451228-09818021e309?w=800&q=80');">
-        <span class="match-img-tag">Belmont</span>
-        <span class="match-status upcoming">Starts 4 PM</span>
-      </div>
-      <div class="match-body">
-        <h3 class="match-name">Perfect Plain</h3>
-        <div class="match-loc">Craft Brewery · Belmont</div>
-        <p class="match-deal">Pint Night. <em>$4 house pours</em>, $1 off flights. Pizzaria stays open until 9.</p>
-        <div class="match-meta">
-          <span class="match-time">4 — 7 PM</span>
-          <span class="match-verified">Verified Mar '26</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="match">
-      <div class="match-strip"></div>
-      <div class="match-img bar" style="background-image: url('https://images.unsplash.com/photo-1546726747-421c6d69c929?w=800&q=80');">
-        <span class="match-img-tag">Downtown</span>
-        <span class="match-status">Open Now</span>
-      </div>
-      <div class="match-body">
-        <h3 class="match-name">Hub Stacey's</h3>
-        <div class="match-loc">Sandwich Pub · Downtown</div>
-        <p class="match-deal">Half-price apps and <em>$4 well drinks</em>. Half-pound burger is $8 until 6.</p>
-        <div class="match-meta">
-          <span class="match-time">3 — 6 PM</span>
-          <span class="match-verified">Verified Mar '26</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="match">
-      <div class="match-strip"></div>
-      <div class="match-img wine" style="background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80');">
-        <span class="match-img-tag">Palafox</span>
-        <span class="match-status">Open Now</span>
-      </div>
-      <div class="match-body">
-        <h3 class="match-name">Garden &amp; Grain</h3>
-        <div class="match-loc">Wine Bar · Palafox</div>
-        <p class="match-deal">Wine Down Wednesday. <em>Half-off bottles</em> under $60. Cheese board $12 before 6.</p>
-        <div class="match-meta">
-          <span class="match-time">4 — 7 PM</span>
-          <span class="match-verified">Verified Mar '26</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="match">
-      <div class="match-strip"></div>
-      <div class="match-img seafood" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80');">
-        <span class="match-img-tag">Downtown</span>
-        <span class="match-status ended">Ended</span>
-      </div>
-      <div class="match-body">
-        <h3 class="match-name">Jaco's Bayfront</h3>
-        <div class="match-loc">Waterfront · Downtown</div>
-        <p class="match-deal"><em>$1 oysters</em> and the sunset lines up over Pensacola Bay.</p>
-        <div class="match-meta">
-          <span class="match-time">5 — 7 PM</span>
-          <span class="match-verified">Verified Mar '26</span>
-        </div>
-      </div>
-    </article>
-
+  <!-- Empty state when no specials match the filters -->
+  <div id="emptyState" style="display: none; padding: 48px 24px; text-align: center; background: var(--bg-2); border: 2px dashed rgba(240, 169, 61, 0.3); margin-bottom: 56px;">
+    <div style="font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 8px;">Nothing pouring here.</div>
+    <p style="font-family: 'DM Serif Display', serif; font-style: italic; font-size: 16px; color: var(--paper-warm); max-width: 480px; margin: 0 auto;">No specials match the day and filter you picked. Try a different day or clear the filter.</p>
   </div>
 
   <!-- Newsletter signup -->
@@ -1050,5 +941,395 @@ body {
 
 </div>
 
+<script>
+// =============================================================================
+// AFTER FIVE — venue data and rendering logic
+//
+// Venue data is inlined here for v1 simplicity. Future versions will fetch from
+// a separate JSON file synced via Make. To add or update a venue, edit the
+// VENUES array below and push.
+//
+// Days: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat. Use "all" for daily.
+// =============================================================================
+
+const VENUES = [
+  {
+    id: "old-hickory",
+    name: "Old Hickory",
+    type: "Whiskey Bar",
+    neighborhood: "Palafox",
+    neighborhoodTag: "Palafox",
+    locLine: "Whiskey Bar · Downtown",
+    photo: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80",
+    color: "bar",
+    featured: false,
+    specials: [
+      { day: 1, start: "16:00", end: "19:00", deal: "<em>$5 well</em> drinks all night. Burger and beer combo for $12.", display: "4 — 7 PM" },
+      { day: 2, start: "21:00", end: "26:00", deal: "Industry night. <em>50% off</em> for service workers with ID.", display: "9 PM — Close" },
+      { day: 3, start: "16:00", end: "19:00", deal: "<em>$2 off</em> all whiskeys under $12. House Manhattans for $9. Cigar lounge open until 11.", display: "4 — 7 PM" },
+      { day: 4, start: "17:00", end: "20:00", deal: "<em>Bourbon flights</em> half-price. Live jazz on the patio at 8.", display: "5 — 8 PM" },
+      { day: 5, start: "16:00", end: "19:00", deal: "Half-price <em>small plates</em>. House cocktails $9.", display: "4 — 7 PM" },
+      { day: 0, start: "11:00", end: "16:00", deal: "<em>Bloody Marys</em> $7. All-day. Until they run out.", display: "11 AM — 4 PM" }
+    ]
+  },
+  {
+    id: "the-grand-marlin",
+    name: "The Grand Marlin",
+    type: "Restaurant",
+    neighborhood: "Pensacola Beach",
+    neighborhoodTag: "Beach",
+    locLine: "Sound-side · Pensacola Beach",
+    photo: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
+    color: "seafood",
+    featured: true,
+    rating: "4.6",
+    specials: [
+      { day: "all", start: "16:00", end: "18:30", deal: "Half-price oysters and <em>$6 select wines</em> on the deck. Add the smoked tuna dip for $4 off.", display: "4 — 6:30 PM" }
+    ]
+  },
+  {
+    id: "the-magnolia",
+    name: "The Magnolia",
+    type: "Cocktail Lounge",
+    neighborhood: "Seville",
+    neighborhoodTag: "Seville",
+    locLine: "Cocktail Lounge · Seville",
+    photo: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80",
+    color: "cocktail",
+    featured: false,
+    specials: [
+      { day: 3, start: "17:00", end: "20:00", deal: "Old Standards night. <em>$8 classic cocktails</em> — Negroni, Sazerac, Vieux Carré.", display: "5 — 8 PM" },
+      { day: 5, start: "16:00", end: "19:00", deal: "<em>$2 off</em> every cocktail on the menu.", display: "4 — 7 PM" }
+    ]
+  },
+  {
+    id: "paradise-bar-grill",
+    name: "Paradise B&G",
+    type: "Beach Bar",
+    neighborhood: "Pensacola Beach",
+    neighborhoodTag: "Beach",
+    locLine: "Casual · Pensacola Beach",
+    photo: "https://images.unsplash.com/photo-1533777324565-a040eb52facd?w=800&q=80",
+    color: "beach",
+    featured: false,
+    specials: [
+      { day: 1, start: "15:00", end: "18:00", deal: "<em>Half-price wings</em> and $3 domestics.", display: "3 — 6 PM" },
+      { day: 3, start: "15:00", end: "18:00", deal: "Locals' day. <em>$3 domestic drafts</em>, $5 wells, half-price wings. Live acoustic after 6.", display: "3 — 6 PM" },
+      { day: 5, start: "15:00", end: "19:00", deal: "<em>$5 frozen drinks</em> and $4 Bushwackers.", display: "3 — 7 PM" }
+    ]
+  },
+  {
+    id: "perfect-plain",
+    name: "Perfect Plain",
+    type: "Brewery",
+    neighborhood: "Belmont-DeVilliers",
+    neighborhoodTag: "Belmont",
+    locLine: "Craft Brewery · Belmont",
+    photo: "https://images.unsplash.com/photo-1586993451228-09818021e309?w=800&q=80",
+    color: "brew",
+    featured: false,
+    specials: [
+      { day: 3, start: "16:00", end: "19:00", deal: "Pint Night. <em>$4 house pours</em>, $1 off flights. Pizzaria stays open until 9.", display: "4 — 7 PM" },
+      { day: 4, start: "16:00", end: "19:00", deal: "<em>$1 off all drafts</em> and a rotating cask special.", display: "4 — 7 PM" }
+    ]
+  },
+  {
+    id: "hub-staceys",
+    name: "Hub Stacey's",
+    type: "Pub",
+    neighborhood: "Downtown",
+    neighborhoodTag: "Downtown",
+    locLine: "Sandwich Pub · Downtown",
+    photo: "https://images.unsplash.com/photo-1546726747-421c6d69c929?w=800&q=80",
+    color: "bar",
+    featured: false,
+    specials: [
+      { day: "all", start: "15:00", end: "18:00", deal: "Half-price apps and <em>$4 well drinks</em>. Half-pound burger is $8 until 6.", display: "3 — 6 PM" }
+    ]
+  },
+  {
+    id: "garden-and-grain",
+    name: "Garden & Grain",
+    type: "Wine Bar",
+    neighborhood: "Palafox",
+    neighborhoodTag: "Palafox",
+    locLine: "Wine Bar · Palafox",
+    photo: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80",
+    color: "wine",
+    featured: false,
+    specials: [
+      { day: 3, start: "16:00", end: "19:00", deal: "Wine Down Wednesday. <em>Half-off bottles</em> under $60. Cheese board $12 before 6.", display: "4 — 7 PM" },
+      { day: 4, start: "16:00", end: "19:00", deal: "<em>$2 off</em> glass pours.", display: "4 — 7 PM" }
+    ]
+  },
+  {
+    id: "jacos-bayfront",
+    name: "Jaco's Bayfront",
+    type: "Restaurant",
+    neighborhood: "Downtown",
+    neighborhoodTag: "Downtown",
+    locLine: "Waterfront · Downtown",
+    photo: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
+    color: "seafood",
+    featured: false,
+    specials: [
+      { day: "all", start: "17:00", end: "19:00", deal: "<em>$1 oysters</em> and the sunset lines up over Pensacola Bay.", display: "5 — 7 PM" }
+    ]
+  }
+];
+
+const state = {
+  selectedDay: new Date().getDay(),
+  selectedNeighborhood: "all"
+};
+
+const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const DAY_NAMES_SHORT = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+function nowMinutes() {
+  const d = new Date();
+  return d.getHours() * 60 + d.getMinutes();
+}
+
+function timeToMinutes(t) {
+  const [h, m] = t.split(":").map(Number);
+  return h * 60 + m;
+}
+
+function specialStatus(special, isToday) {
+  if (!isToday) return null;
+  const now = nowMinutes();
+  const startM = timeToMinutes(special.start);
+  let endM = timeToMinutes(special.end);
+  if (endM <= startM) endM += 24 * 60;
+  if (now >= startM && now < endM) return { type: "now", label: "Open Now" };
+  if (now < startM) {
+    const diff = startM - now;
+    if (diff < 120) return { type: "upcoming", label: `Starts ${special.display.split(' — ')[0]}` };
+    return { type: "upcoming", label: "Today" };
+  }
+  return { type: "ended", label: "Ended" };
+}
+
+function venueSpecialFor(venue, day) {
+  const daySpecific = venue.specials.find(s => s.day === day);
+  if (daySpecific) return daySpecific;
+  const daily = venue.specials.find(s => s.day === "all");
+  return daily || null;
+}
+
+function render() {
+  renderDayPicker();
+  renderCards();
+  renderFeatured();
+  renderStatusBanner();
+}
+
+function renderDayPicker() {
+  const today = new Date().getDay();
+  const buttons = document.querySelectorAll('#dayPicker .day-pick');
+  buttons.forEach(btn => {
+    const day = parseInt(btn.dataset.day);
+    btn.classList.toggle('today', day === today);
+    btn.classList.toggle('active', day === state.selectedDay);
+    const isToday = day === today;
+    btn.innerHTML = DAY_NAMES_SHORT[day] +
+      (isToday ? '<span class="today-tag-inline">Today</span>' : '');
+  });
+}
+
+function renderCards() {
+  const grid = document.getElementById('matchGrid');
+  const empty = document.getElementById('emptyState');
+  const today = new Date().getDay();
+
+  const featuredVenue = VENUES.find(v => v.featured);
+  const matches = VENUES
+    .filter(v => !v.featured)
+    .map(v => ({ venue: v, special: venueSpecialFor(v, state.selectedDay) }))
+    .filter(x => x.special !== null)
+    .filter(x => state.selectedNeighborhood === "all" || x.venue.neighborhood === state.selectedNeighborhood);
+
+  if (matches.length === 0) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+  } else {
+    grid.style.display = '';
+    empty.style.display = 'none';
+  }
+
+  grid.innerHTML = matches.map(({ venue, special }) => {
+    const status = specialStatus(special, state.selectedDay === today);
+    const statusHTML = status ?
+      `<span class="match-status ${status.type === 'now' ? '' : status.type}">${status.label}</span>` :
+      '';
+    return `
+      <article class="match" data-venue-id="${venue.id}">
+        <div class="match-strip"></div>
+        <div class="match-img ${venue.color}" style="background-image: url('${venue.photo}');">
+          <span class="match-img-tag">${venue.neighborhoodTag}</span>
+          ${statusHTML}
+        </div>
+        <div class="match-body">
+          <h3 class="match-name">${venue.name}</h3>
+          <div class="match-loc">${venue.locLine}</div>
+          <p class="match-deal">${special.deal}</p>
+          <div class="match-meta">
+            <span class="match-time">${special.display}</span>
+            <span class="match-verified">Verified Mar '26</span>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  const totalForDay = matches.length + (featuredVenue && venueSpecialFor(featuredVenue, state.selectedDay) ? 1 : 0);
+  document.getElementById('resultCount').textContent = totalForDay + (totalForDay === 1 ? ' venue' : ' venues');
+
+  const summary = document.getElementById('lineupSummary');
+  if (state.selectedDay === today) {
+    const activeNow = matches.filter(m => {
+      const s = specialStatus(m.special, true);
+      return s && s.type === 'now';
+    }).length;
+    summary.textContent = activeNow > 0 ? `${activeNow} active now` : `${matches.length} for ${DAY_NAMES[state.selectedDay].toLowerCase()}`;
+  } else {
+    summary.textContent = `${matches.length} for ${DAY_NAMES[state.selectedDay].toLowerCase()}`;
+  }
+
+  const lineupTitle = document.getElementById('lineupTitle');
+  lineupTitle.textContent = state.selectedDay === today ? "The Lineup" : `${DAY_NAMES[state.selectedDay]}'s Lineup`;
+}
+
+function renderFeatured() {
+  const slot = document.getElementById('featuredSlot');
+  const featuredTitle = document.getElementById('featuredTitle');
+  const today = new Date().getDay();
+
+  const featuredVenue = VENUES.find(v => v.featured);
+  if (!featuredVenue) {
+    slot.innerHTML = '';
+    return;
+  }
+
+  const special = venueSpecialFor(featuredVenue, state.selectedDay);
+  if (!special) {
+    slot.innerHTML = '';
+    featuredTitle.textContent = state.selectedDay === today ? "Tonight's Headliner" : `${DAY_NAMES[state.selectedDay]}'s Headliner`;
+    return;
+  }
+
+  featuredTitle.textContent = state.selectedDay === today ? "Tonight's Headliner" : `${DAY_NAMES[state.selectedDay]}'s Headliner`;
+
+  const [startDisp, endDisp] = special.display.split(' — ');
+
+  slot.innerHTML = `
+    <article class="ticket" data-venue-id="${featuredVenue.id}">
+      <div class="ticket-main">
+        <span class="ticket-stamp">★ Editor's Pick</span>
+        <h3 class="ticket-name">${featuredVenue.name}</h3>
+        <div class="ticket-meta"><span>◆</span>${featuredVenue.neighborhood} <span>◆</span> Sound-side</div>
+        <p class="ticket-deal">${special.deal}</p>
+        <div class="ticket-foot">
+          <span>VERIFIED · MAR 2026</span>
+          <span>★ ★ ★ ★ ${featuredVenue.rating || ''}</span>
+        </div>
+      </div>
+      <div class="ticket-stub">
+        <div style="width: 100%; aspect-ratio: 4/3; background-image: url('${featuredVenue.photo}'); background-size: cover; background-position: center; margin-bottom: 12px; filter: sepia(0.15) contrast(0.95);"></div>
+        <div class="stub-time">${startDisp}<br>${endDisp || ''}</div>
+        <div class="stub-day">${DAY_NAMES[state.selectedDay]}</div>
+      </div>
+    </article>
+  `;
+}
+
+function renderStatusBanner() {
+  const banner = document.getElementById('statusBanner');
+  if (!banner) return;
+  const today = new Date().getDay();
+
+  if (state.selectedDay !== today) {
+    banner.classList.remove('upcoming', 'late');
+    const matchCount = VENUES.filter(v => venueSpecialFor(v, state.selectedDay)).length;
+    banner.querySelector('.status-clock').textContent = DAY_NAMES_SHORT[state.selectedDay];
+    banner.querySelector('.status-text').innerHTML =
+      `<strong>${matchCount} venues</strong> with specials.<small>Browsing ${DAY_NAMES[state.selectedDay].toLowerCase()} · Tap a different day or jump back to today</small>`;
+    banner.querySelector('.status-action').textContent = 'Back to Today';
+    banner.querySelector('.status-action').onclick = (e) => {
+      e.preventDefault();
+      state.selectedDay = today;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    return;
+  }
+
+  const now = nowMinutes();
+  const activeNow = VENUES.filter(v => {
+    const s = venueSpecialFor(v, today);
+    if (!s) return false;
+    const startM = timeToMinutes(s.start);
+    let endM = timeToMinutes(s.end);
+    if (endM <= startM) endM += 24 * 60;
+    return now >= startM && now < endM;
+  }).length;
+
+  const d = new Date();
+  const hh = d.getHours();
+  const mm = d.getMinutes().toString().padStart(2, '0');
+  const ampm = hh >= 12 ? 'PM' : 'AM';
+  const h12 = hh === 0 ? 12 : hh > 12 ? hh - 12 : hh;
+  banner.querySelector('.status-clock').textContent = `${h12}:${mm} ${ampm}`;
+
+  if (activeNow > 0) {
+    banner.classList.remove('upcoming', 'late');
+    banner.querySelector('.status-text').innerHTML =
+      `<strong>${activeNow} ${activeNow === 1 ? 'special' : 'specials'}</strong> running right now.<small>${DAY_NAMES[today]} · Scroll for the lineup</small>`;
+    banner.querySelector('.status-action').textContent = 'See Open Now →';
+    banner.querySelector('.status-action').onclick = (e) => {
+      e.preventDefault();
+      document.getElementById('matchGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+  } else {
+    banner.classList.add('upcoming');
+    banner.querySelector('.status-text').innerHTML =
+      `<strong>No specials right now.</strong><small>${DAY_NAMES[today]} · Browse the week's lineup below</small>`;
+    banner.querySelector('.status-action').textContent = 'Browse the Week';
+    banner.querySelector('.status-action').onclick = (e) => {
+      e.preventDefault();
+      document.getElementById('dayPicker').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#dayPicker .day-pick').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.selectedDay = parseInt(btn.dataset.day);
+      render();
+    });
+  });
+
+  document.querySelectorAll('.f-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.f-chip').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      state.selectedNeighborhood = btn.dataset.neighborhood;
+      render();
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.match[data-venue-id], .ticket[data-venue-id]');
+    if (card) {
+      card.style.transform = 'scale(0.99)';
+      setTimeout(() => { card.style.transform = ''; }, 120);
+    }
+  });
+
+  render();
+});
+</script>
 </body>
 </html>
