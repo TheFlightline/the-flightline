@@ -120,9 +120,11 @@ body {
   pointer-events: none;
   z-index: 0;
   filter: blur(0.3px);
-  /* Soft vignette: full opacity in the middle, fades to transparent at the edges */
-  -webkit-mask-image: radial-gradient(ellipse 65% 75% at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0) 95%);
-  mask-image: radial-gradient(ellipse 65% 75% at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0) 95%);
+  /* Tight vignette so edges fade to 0 well before the element boundary.
+     Element is 120% wide, container is 100%. Mask must reach 0 by ~50% of element
+     so the visible edges (at ~58% of element from center) are already transparent. */
+  -webkit-mask-image: radial-gradient(ellipse 42% 65% at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0) 85%);
+  mask-image: radial-gradient(ellipse 42% 65% at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0) 85%);
 }
 
 /* Make sure the hero text content stacks above the map */
@@ -179,19 +181,6 @@ body {
   transform-origin: 30% 0%;
   display: inline-block;
   position: relative;
-}
-/* Tiny anchor dot at the pivot, subtle gold so it reads as a hanging point */
-.neon-text .line-2::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: 30%;
-  width: 6px;
-  height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(240, 169, 61, 0.8);
-  transform: translateX(-50%);
 }
 /* Hanging-sign sway: tilts down-right, drifts very subtly */
 @keyframes sway {
