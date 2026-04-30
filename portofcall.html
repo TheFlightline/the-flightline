@@ -118,15 +118,15 @@ body {
   width: 120%;
   max-width: none;
   height: auto;
-  opacity: 0.20;
+  opacity: 0.22;
   pointer-events: none;
   z-index: 0;
   filter: blur(0.3px);
-  /* Gentle vignette anchored at 38% horizontally (over the harbor/ships).
-     Wide gradient so the middle stays clearly visible, soft fade only at the
-     outer edges. */
-  -webkit-mask-image: radial-gradient(ellipse 65% 80% at 38% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,0) 100%);
-  mask-image: radial-gradient(ellipse 65% 80% at 38% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,0) 100%);
+  /* Wide gentle vignette anchored over the harbor (38% horizontal, 50% vertical).
+     Map stays at full mask opacity through 65% of the radius (so the harbor and
+     city detail read clearly). Soft fade only at the outer edges. */
+  -webkit-mask-image: radial-gradient(ellipse 80% 95% at 38% 50%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.85) 82%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(ellipse 80% 95% at 38% 50%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.85) 82%, rgba(0,0,0,0) 100%);
 }
 
 /* Make sure the hero text content stacks above the map */
@@ -167,18 +167,20 @@ body {
   display: block;
   color: var(--neon-pink);
   text-shadow:
-    0 0 10px rgba(255, 75, 139, 0.8),
-    0 0 24px rgba(255, 75, 139, 0.5),
-    0 0 48px rgba(255, 75, 139, 0.3);
+    0 0 4px rgba(255, 255, 255, 0.4),
+    0 0 8px rgba(255, 75, 139, 0.9),
+    0 0 16px rgba(255, 75, 139, 0.5),
+    0 0 32px rgba(255, 75, 139, 0.25);
   animation: flicker-pink 7s infinite;
 }
 .neon-text .line-2 {
   display: block;
   color: var(--neon-blue);
   text-shadow:
-    0 0 10px rgba(77, 214, 255, 0.8),
-    0 0 24px rgba(77, 214, 255, 0.5),
-    0 0 48px rgba(77, 214, 255, 0.3);
+    0 0 4px rgba(255, 255, 255, 0.4),
+    0 0 8px rgba(77, 214, 255, 0.9),
+    0 0 16px rgba(77, 214, 255, 0.5),
+    0 0 32px rgba(77, 214, 255, 0.25);
   animation: flicker-blue 9s infinite, sway 6s ease-in-out infinite;
   transform-origin: 30% 0%;
   display: inline-block;
@@ -1024,7 +1026,7 @@ body {
   .neon-text { font-size: clamp(54px, 18vw, 140px); }
   .hero-map {
     width: 160%;
-    opacity: 0.16;
+    opacity: 0.18;
   }
   .hero-tag-line {
     font-size: 16px;
