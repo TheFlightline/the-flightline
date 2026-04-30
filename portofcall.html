@@ -1124,7 +1124,7 @@ body {
       <span class="line-2">CALL</span>
     </h1>
     <p class="hero-tag-line">A working guide to <em>where the locals go</em>, what they're drinking, and what it costs to get in on it.</p>
-    <p class="hero-meta">Verified March 2026 · 17 venues · Downtown + Beach</p>
+    <p class="hero-meta">Downtown Pensacola + Pensacola Beach · Updated seasonally</p>
   </section>
 
   <!-- Launch banner -->
@@ -1208,7 +1208,8 @@ body {
         <p class="history-dek">Pensacola was drinking before Pensacola was a city.</p>
         <p>The pier at the foot of Palafox once stretched out into the bay loaded with masts. Between 1870 and 1880, the city doubled in size on the back of yellow pine, naval stores and red snapper. Hundreds of vessels at a time tied off along Palafox Wharf. Crews stepped onto the dock and went exactly where you'd expect them to go.</p>
         <p>Saloons grew alongside the chandleries and the caulkers' shops. The downtown bar district isn't a recent invention. It's the descendant of an entertainment quarter built to receive sailors with money in their pockets and shore time to spend. One saloon at Pine and Palafox earned a reputation for unsolved murders. Another, the Alligator at Wright and Tarragona, kept its own kind of order. The blocks now occupied by Old Hickory, Hub Stacey's and the Seville Quarter sit on top of buildings that were doing the same job 140 years ago.</p>
-        <p>A "port of call" is a stop a ship makes during a voyage. A place to take on cargo, take on water, let the crew off for a night. Pensacola was that for thousands of working sailors across four flags and three centuries. It still is, in its way. The ships are different. The instinct is the same.</p>
+        <p>That's only one of Pensacola's drinking histories. A few blocks west, in Belmont-DeVilliers — the neighborhood locals still call the Blocks — a different city was alive. Jim Crow had pushed Black Pensacola out of the white-only rooms downtown, and the Blocks became a Chitlin Circuit stop. Billie Holiday played here. Cab Calloway. Etta James. Ike and Tina. Some of the rooms are still standing. Blue Dot opened in 1947 and is still pouring. Chizuko occupies the former Abe's 506 Club. Five Sisters Blues Café sits where Gussie's Record Shop used to be. The Blocks aren't a footnote. They're a parallel main story.</p>
+        <p>A "port of call" is a stop a ship makes during a voyage. A place to take on cargo, take on water, let the crew off for a night. Pensacola has been that across four flags, three centuries and many neighborhoods. It still is. The ships are different. The instinct is the same.</p>
         <p class="history-coda">This is a guide to where they go now.</p>
       </div>
 
@@ -1224,19 +1225,19 @@ body {
           <span class="fact-detail">President John Quincy Adams ordered it built. The Pensacola Navy Yard ran for 86 years.</span>
         </div>
         <div class="history-fact">
-          <span class="fact-label">Boom</span>
+          <span class="fact-label">Port Boom</span>
           <span class="fact-value">1870 — 1900</span>
           <span class="fact-detail">Pensacola's busiest port era. Yellow pine and red snapper to ports across the Atlantic. The city doubled in size.</span>
         </div>
         <div class="history-fact">
-          <span class="fact-label">The Pier</span>
-          <span class="fact-value">Palafox</span>
-          <span class="fact-detail">South Palafox was originally a working pier. Where you walk now, ships docked.</span>
+          <span class="fact-label">The Blocks</span>
+          <span class="fact-value">Belmont-DeVilliers</span>
+          <span class="fact-detail">Pensacola's historic Black entertainment district. A Chitlin Circuit stop where Billie Holiday, Cab Calloway, Etta James and Ike and Tina performed.</span>
         </div>
       </aside>
     </div>
 
-    <p class="history-sources">Sources: City of Pensacola Port Authority records, UWF Historic Trust, Palafox Historic District nomination (NR 14001085), Naval History and Heritage Command archives.</p>
+    <p class="history-sources">Sources: City of Pensacola Port Authority records, UWF Historic Trust, Palafox Historic District nomination (NR 14001085), Naval History and Heritage Command archives, Visit Pensacola historical archives.</p>
   </section>
 
   <!-- Newsletter signup -->
@@ -1402,8 +1403,32 @@ const VENUES = [
   }
 ];
 
+// Always use Pensacola local time (America/Chicago) regardless of where the
+// visitor is. This is a hyperlocal happy hour guide — Hawaii readers checking
+// at 8 PM HST should see Pensacola is at 1 AM, not "open now."
+const PENSACOLA_TZ = 'America/Chicago';
+function pensacolaParts() {
+  const fmt = new Intl.DateTimeFormat('en-US', {
+    timeZone: PENSACOLA_TZ,
+    weekday: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false
+  });
+  const parts = fmt.formatToParts(new Date());
+  const get = (type) => parts.find(p => p.type === type).value;
+  const weekdayMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+  let hour = parseInt(get('hour'), 10);
+  if (hour === 24) hour = 0; // Intl quirk: midnight may come back as "24"
+  return {
+    day: weekdayMap[get('weekday')],
+    hour,
+    minute: parseInt(get('minute'), 10)
+  };
+}
+
 const state = {
-  selectedDay: new Date().getDay(),
+  selectedDay: pensacolaParts().day,
   selectedNeighborhood: "all"
 };
 
@@ -1411,8 +1436,8 @@ const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frid
 const DAY_NAMES_SHORT = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function nowMinutes() {
-  const d = new Date();
-  return d.getHours() * 60 + d.getMinutes();
+  const p = pensacolaParts();
+  return p.hour * 60 + p.minute;
 }
 
 function timeToMinutes(t) {
@@ -1450,7 +1475,7 @@ function render() {
 }
 
 function renderDayPicker() {
-  const today = new Date().getDay();
+  const today = pensacolaParts().day;
   const buttons = document.querySelectorAll('#dayPicker .day-pick');
   buttons.forEach(btn => {
     const day = parseInt(btn.dataset.day);
@@ -1465,7 +1490,7 @@ function renderDayPicker() {
 function renderCards() {
   const grid = document.getElementById('matchGrid');
   const empty = document.getElementById('emptyState');
-  const today = new Date().getDay();
+  const today = pensacolaParts().day;
 
   const featuredVenue = VENUES.find(v => v.featured);
   const matches = VENUES
@@ -1528,7 +1553,7 @@ function renderCards() {
 function renderFeatured() {
   const slot = document.getElementById('featuredSlot');
   const featuredTitle = document.getElementById('featuredTitle');
-  const today = new Date().getDay();
+  const today = pensacolaParts().day;
 
   const featuredVenue = VENUES.find(v => v.featured);
   if (!featuredVenue) {
@@ -1571,7 +1596,7 @@ function renderFeatured() {
 function renderStatusBanner() {
   const banner = document.getElementById('statusBanner');
   if (!banner) return;
-  const today = new Date().getDay();
+  const today = pensacolaParts().day;
 
   if (state.selectedDay !== today) {
     banner.classList.remove('upcoming', 'late');
@@ -1599,12 +1624,12 @@ function renderStatusBanner() {
     return now >= startM && now < endM;
   }).length;
 
-  const d = new Date();
-  const hh = d.getHours();
-  const mm = d.getMinutes().toString().padStart(2, '0');
+  const p = pensacolaParts();
+  const hh = p.hour;
+  const mm = p.minute.toString().padStart(2, '0');
   const ampm = hh >= 12 ? 'PM' : 'AM';
   const h12 = hh === 0 ? 12 : hh > 12 ? hh - 12 : hh;
-  banner.querySelector('.status-clock').textContent = `${h12}:${mm} ${ampm}`;
+  banner.querySelector('.status-clock').textContent = `${h12}:${mm} ${ampm} CT`;
 
   if (activeNow > 0) {
     banner.classList.remove('upcoming', 'late');
