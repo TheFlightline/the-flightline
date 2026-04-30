@@ -1,3 +1,15 @@
+# Static asset passthroughs
 /images/*  /images/:splat  200
 /assets/*  /assets/:splat  200
+
+# Port of Call: serve the page at canonical URL
+/portofcall   /portofcall.html   200
+/portofcall/  /portofcall.html   200
+
+# Old after-five URL redirects permanently to new canonical URL
+/after-five      /portofcall  301
+/after-five/     /portofcall  301
+/after-five.html /portofcall  301
+
+# SPA catch-all
 /*         /index.html     200
