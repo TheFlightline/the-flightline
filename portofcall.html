@@ -121,12 +121,23 @@ body {
   opacity: 0.22;
   pointer-events: none;
   z-index: 0;
-  filter: blur(0.3px);
-  /* Wide gentle vignette anchored over the harbor (38% horizontal, 50% vertical).
-     Map stays at full mask opacity through 65% of the radius (so the harbor and
-     city detail read clearly). Soft fade only at the outer edges. */
-  -webkit-mask-image: radial-gradient(ellipse 80% 95% at 38% 50%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.85) 82%, rgba(0,0,0,0) 100%);
-  mask-image: radial-gradient(ellipse 80% 95% at 38% 50%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.85) 82%, rgba(0,0,0,0) 100%);
+  filter: blur(0.4px);
+  /* Long, soft fade to zero. The gradient must reach 0 well inside the
+     visible bounds of the element so the edges actually dissolve into the
+     page rather than getting cut off. Anchored at 38% horizontal (over
+     the harbor), the fade ramps down through a wide gradient zone. */
+  -webkit-mask-image: radial-gradient(ellipse 55% 70% at 38% 50%,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 35%,
+    rgba(0,0,0,0.7) 60%,
+    rgba(0,0,0,0.3) 80%,
+    rgba(0,0,0,0) 95%);
+  mask-image: radial-gradient(ellipse 55% 70% at 38% 50%,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 35%,
+    rgba(0,0,0,0.7) 60%,
+    rgba(0,0,0,0.3) 80%,
+    rgba(0,0,0,0) 95%);
 }
 
 /* Make sure the hero text content stacks above the map */
@@ -1025,8 +1036,20 @@ body {
   .matchbook { margin-bottom: 18px; }
   .neon-text { font-size: clamp(54px, 18vw, 140px); }
   .hero-map {
-    width: 160%;
-    opacity: 0.18;
+    width: 130%;
+    opacity: 0.20;
+    -webkit-mask-image: radial-gradient(ellipse 55% 65% at center,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,1) 35%,
+      rgba(0,0,0,0.7) 60%,
+      rgba(0,0,0,0.3) 80%,
+      rgba(0,0,0,0) 95%);
+    mask-image: radial-gradient(ellipse 55% 65% at center,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,1) 35%,
+      rgba(0,0,0,0.7) 60%,
+      rgba(0,0,0,0.3) 80%,
+      rgba(0,0,0,0) 95%);
   }
   .hero-tag-line {
     font-size: 16px;
