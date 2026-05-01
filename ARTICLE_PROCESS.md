@@ -1,6 +1,70 @@
 # Flightline Article Process
 
-Follow every step in order. Do not skip. Do not draft before step 6.
+## Step 0 — Enforcement preamble (read first, every session)
+
+This document is binding. It is not a checklist of suggestions. The rules
+below exist because they have been violated in past sessions and that
+caused real problems — secondary-source contamination, missed primary
+documents, fabricated details, and Drew having to spend his time
+re-prompting because the work was incomplete.
+
+### Hard rules
+
+1. **Re-read this entire document at the start of every article session.**
+   Not the summary. Not the memory version. The actual current file in the
+   repo. The process changes over time and memory may be stale.
+
+2. **Execute every numbered step in order, fully, before moving to the
+   next.** Do not skip. Do not partially complete a step and circle back.
+   "I'll come back to that" is how things get missed.
+
+3. **Do not present a candidate slate until Steps 1–7 are complete.**
+   Presenting partial work and asking "want me to keep checking?" is a
+   process violation. Either the sweep is done or it isn't. If it isn't,
+   keep working — don't surface anything.
+
+4. **The Step 8 candidate format is fixed.** Each candidate gets:
+   - Proposed headline
+   - Primary-source URL with confirmed posting date (the document, not a
+     news article about the document)
+   - One sentence on why it's worth covering
+   - Visual flag (type + data source) if applicable per Step 7
+
+   Prose summaries, bullet lists of "stories I considered," and "honorable
+   mentions" sections do NOT substitute for this format.
+
+5. **When a primary source is blocked, say so explicitly.** If a CivicClerk
+   portal, BoardDocs, ECUA agenda system, or any other primary source
+   cannot be reached because of a Chrome extension permission prompt, a
+   TLS error from the API, a robots.txt block, or any other technical
+   reason — name the block, name the body it affects, and ask Drew how to
+   proceed. Do not silently substitute Google search results, news
+   coverage, or aggregator snippets. That is exactly the contamination the
+   tier system in Step 4 exists to prevent.
+
+6. **Use Claude in Chrome before falling back to web_fetch or search.**
+   When a portal is a JavaScript SPA (CivicClerk, BoardDocs, AgendaCenter
+   variants), open it in Chrome and pull the data through the rendered
+   page, not through the unrendered HTML shell. The PDF text inside the
+   pdf.js iframe is extractable via `iframe.contentWindow.PDFViewerApplication`.
+
+7. **If Drew asks "did you follow your instructions," the answer is almost
+   always no.** That question means a corner got cut. Do not defend the
+   work — restart from Step 1 and do it properly.
+
+### Soft rules (judgment calls, but lean toward strictness)
+
+- When a primary source is reachable but the agenda packet PDF is image-
+  only (scanned, no text layer), say so. Do not infer contents from the
+  attachment filename.
+- When secondary coverage exists for an item but the underlying primary
+  doc cannot be located, the story does not run. There is no "well, WUWF
+  is reliable, so" exception.
+- When in doubt about whether a meeting body has been checked, check it
+  again. The cost of a redundant fetch is seconds. The cost of missing a
+  story is the entire reason this publication exists.
+
+---
 
 ---
 
