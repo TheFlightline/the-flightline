@@ -126,6 +126,67 @@ Image sources: Wikimedia Commons, NARA, Library of Congress, U.S. Navy public do
 NOAA, Unsplash (no attribution required). No placeholder paths. If no suitable image
 exists, use `/images/flightline-og-default.jpg` as fallback.
 
+
+### Required for all NEW articles dated May 1, 2026 or later
+
+The 157 articles published before May 1, 2026 are grandfathered.
+Articles dated May 1, 2026 onward MUST include two additional fields,
+enforced by the Step 13 validator:
+
+- `sources` — array of `{type, url, label, retrieved_at}` for every primary
+  document the article relies on. At least one entry required.
+  Allowed `type` values: `agenda_packet`, `memo`, `resolution`, `ordinance`,
+  `vote_panel`, `meeting_recording`, `press_release` (only from the agency
+  itself, not a news outlet), `court_filing`, `contract`, `letter`, `budget`,
+  `permit`, `report`, `other` (with description in `label`).
+- `verification` — object with `vote_recorded`, `vote_url`, `key_facts_checked`
+  (array of strings), `verified_at`, `verified_by`. The `vote_recorded` and
+  `vote_url` fields are required if the article body mentions any vote (words
+  like "approved," "adopted," "rejected," "passed," "failed," "voted," "voted
+  down," "voted to," "unanimously," "split," "motion").
+
+Example for a meeting-action article:
+
+```javascript
+{
+  // ... cat, label, thumbnail, headline, dek, byline, date, brief, body ...
+
+  sources: [
+    {
+      type: "agenda_packet",
+      url: "https://pensacolafl.portal.civicclerk.com/event/1783/files/report/4256",
+      label: "Memorandum, File 26-486",
+      retrieved_at: "2026-05-01"
+    },
+    {
+      type: "vote_panel",
+      url: "https://pensacolafl.portal.civicclerk.com/event/1783/overview",
+      label: "City Council April 23 2026 — Item 6 motion detail",
+      retrieved_at: "2026-05-01"
+    }
+  ],
+  verification: {
+    vote_recorded: "5-2 against (Yes: Brahier, Bare; No: Patton, Broughton, Jones, Moore, Wiggins)",
+    vote_url: "https://pensacolafl.portal.civicclerk.com/event/1783/overview",
+    key_facts_checked: [
+      "Sponsor: Charles Bare (File 26-486)",
+      "Subject: Article 2.2 staff supervision (Amendment No. 2 attachment 10862)",
+      "Debate length: 42 minutes (recording 01:28:22 — 02:10:09)"
+    ],
+    verified_at: "2026-05-01",
+    verified_by: "Claude"
+  }
+}
+```
+
+Why these fields exist: they are the structural countermeasure to the
+cra-interlocal-amendment failure (April 24, 2026), where an article said
+the council approved an amendment that the vote panel actually showed had
+failed 5-2. With these fields and the Step 13 validator, an article cannot
+publish without naming the documents it relies on and (for vote stories)
+the URL of the vote panel that confirms the outcome.
+
+
 ## Step 4 — Scan secondary sources for leads (do not cite)
 
 Before fetching primary documents, scan local and regional news outlets to identify
@@ -330,6 +391,80 @@ WEAR, Fox10, WKRG, PNJ, AOL, NorthEscambia.com, ricksblog, Gulf Breeze News,
 Island Times, Pensacola Forward, Inweekly, Florida Politics, or any secondary outlet.
 If the primary document behind a secondary report cannot be found, drop the story.
 
+## Step 5.5 — Pre-write research file (mandatory before drafting body)
+
+Before writing any article body, create a research file at
+`/tmp/article-research-{slug}.md`. The body of the article may only
+contain claims that trace to a line in this file. No research file =
+no article.
+
+### Required structure
+
+```markdown
+# Research file: {slug}
+
+## Item identification
+- Meeting: [body name, date]
+- Agenda item: [item number]
+- File: [file number if applicable]
+- Sponsor: [name, title]
+  → confirmed in: [URL of memo or attachment, page reference]
+
+## Subject
+- Title: [verbatim from agenda or memo]
+- Substance: [what the action actually does]
+  → confirmed in: [URL of attachment, section reference]
+
+## Vote (for vote items)
+- Result: [PASSED/FAILED, vote count]
+- Yes: [names]
+- No: [names]
+- Abstain: [count, names]
+  → confirmed in: [URL of vote panel]
+
+## Discussion (for substantive items)
+- Length: [duration, with timestamps]
+- Source: [meeting recording URL or minutes]
+
+## Background facts (each must trace to source)
+- [fact] → [URL or document reference]
+- [fact] → [URL or document reference]
+
+## Body claims that DO NOT appear in primary sources (DO NOT WRITE)
+- [tempting claim] — would need: [what document would have to confirm it]
+```
+
+### Discipline
+
+- The "DO NOT WRITE" section is the most important section. It surfaces
+  what the writer wants to assume but cannot confirm. Writing it down
+  forces the choice between (a) finding the source or (b) cutting the claim.
+- Empty slots in the research file are not failures — they are the
+  honest record of what is and isn't sourced. Publishing an article
+  whose claims fill those empty slots is the failure.
+- After publishing, the research file is committed to a `research/`
+  directory in the repo with the same slug name. This creates an audit
+  trail. Any future fact-check against the article goes through this file.
+
+### What this catches
+
+The cra-interlocal-amendment failure (April 24, 2026) would have been
+caught here. The Vote section would have read:
+
+```
+## Vote
+- Result: ???
+- Yes: ???
+- No: ???
+  → confirmed in: ???
+```
+
+Empty. Writing the article anyway would have left the research file
+visibly incomplete. With the Step 13 validator in place (Fix 1), an
+article whose body says "approved" but whose `verification.vote_url`
+field is empty cannot push to the live site.
+
+
 ## Step 6 — Verify recency and authenticity on every source
 
 For each candidate story:
@@ -401,6 +536,39 @@ Style rules:
 - Min 350w; 400–500w standard; 500–700w for complex stories
 - Kicker = forward-motion fact
 - Dek: 1–2 complete sentences, no fragments, no em dashes
+
+
+### Lede comes last for meeting stories (mandatory)
+
+For any article whose primary subject is a meeting action — a vote, a
+public hearing, a board decision, an ordinance adoption, a resolution
+passage, an RFP award, a permit approval — the writing order is fixed:
+
+1. Read the agenda packet PDF for the item.
+2. Read the vote panel (or, if the meeting hasn't happened, the
+   recommendation in the memo).
+3. Watch the discussion if substantive; scrub timestamps for length and
+   key exchanges.
+4. Pull background facts from linked attachments (prior amendments,
+   related ordinances).
+5. Fill out the "Body claims that DO NOT appear in primary sources"
+   section of the research file.
+6. ONLY NOW write the lede.
+
+The cra-interlocal-amendment failure was a lede-first failure. The agenda
+title ("Amendment No. 2 — Interlocal — Administrative Services") suggested
+a routine update. The lede was drafted off that suggestion. The body was
+filled in around the lede. The vote panel was never read. Writing the lede
+last constrains it to what's actually in the research file.
+
+This rule covers: City Council action items, BCC action items, School
+Board action items, Planning Board / ARB / BOA decisions, CRA Board
+actions, Triumph Gulf Coast grant approvals, TPO project approvals,
+SRIA actions, and any state or federal agency action affecting Pensacola.
+
+It does NOT cover: pure profile pieces, cultural or arts coverage, sports,
+op-eds (Drew writes those himself), or press release rewrites where the
+press release is itself the primary source.
 
 ## Step 10 — Assign thumbnail image
 
@@ -576,6 +744,38 @@ Before inserting the article body into articles.js:
 4. Confirm `brief` array has exactly 3 strings.
 5. Confirm `date` field matches "Month D, YYYY" format exactly.
 6. Run `node --check` on the full articles.js after inserting — do not skip this.
+
+
+### Schema validator (mandatory for articles dated May 1, 2026 or later)
+
+Run the schema validator before push:
+
+```bash
+node scripts/validate_article.js {slug}
+```
+
+The validator checks the article entry in `assets/articles.js` against
+the schema rules from Step 3 and refuses the push if any rule fails:
+
+- `sources` field exists and is a non-empty array.
+- Every entry in `sources` has `type`, `url`, `label`, and `retrieved_at`.
+- Every `sources[].type` value is in the allowed list.
+- If the body contains any vote-outcome word (`approved`, `adopted`,
+  `rejected`, `passed`, `failed`, `voted`, `voted down`, `voted to`,
+  `unanimously`, `split`, `motion`), then `verification.vote_recorded`
+  and `verification.vote_url` are non-empty.
+- If the body contains a dollar figure (regex `\$[\d,]+`), then `sources`
+  contains at least one entry of type `budget`, `contract`, `agenda_packet`,
+  `memo`, `resolution`, or `report`.
+- `verification.verified_at` is a valid ISO date.
+- `verification.verified_by` is non-empty.
+
+For articles dated before May 1, 2026, the validator skips these checks
+(grandfathered).
+
+If the validator fails, the fix is to go back to Step 5 and read the
+sources, then update the article fields — not to weaken the article
+language to bypass the check.
 
 ## Step 14 — Push to articles.js (the live site)
 
