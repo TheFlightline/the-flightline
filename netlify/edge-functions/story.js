@@ -253,6 +253,22 @@ function renderPage(article, canonicalUrl) {
 </html>`;
 }
 
+
+// User-agent detection. We render the SSR shell for crawlers (so they get full
+// HTML + JSON-LD on first byte for SEO and link previews), and fall through to
+// the SPA for humans (so they get the full Flightline article experience —
+// nav, ticker, Flightline Brief, font controls, related stories, etc.).
+//
+// Conservative bot list: matches well-known indexers, social link previewers,
+// and headless/automation UAs. Anything else is treated as a human and routed
+// to the SPA via context.next().
+const BOT_UA_PATTERN = /bot|crawler|spider|crawling|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|facebookexternalhit|twitterbot|linkedinbot|slackbot|telegrambot|whatsapp|discordbot|pinterestbot|redditbot|applebot|petalbot|semrushbot|ahrefsbot|mj12bot|dotbot|chrome-lighthouse|headlesschrome|prerender|embedly|quora link preview|outbrain|tineye|gptbot|chatgpt-user|claudebot|claude-web|anthropic-ai|google-extended|perplexitybot|youbot|cohere-ai|bytespider/i;
+
+function isBot(userAgent) {
+  if (!userAgent) return false;
+  return BOT_UA_PATTERN.test(userAgent);
+}
+
 export default async function handler(request, context) {
   const url = new URL(request.url);
 
@@ -268,6 +284,15 @@ export default async function handler(request, context) {
   }
 
   const slug = decodeURIComponent(m[1]);
+
+  // Humans → fall through to the SPA. The SPA's index.html loads, app.js boots,
+  // routeFromUrl() reads the /story/:slug path and calls openArticle(slug),
+  // and the user gets the full article experience (nav, ticker, Flightline
+  // Brief, font controls, related stories). Crawlers below still get SSR.
+  const ua = request.headers.get("user-agent") || "";
+  if (!isBot(ua)) {
+    return context.next();
+  }
 
   let articlesData;
   try {
