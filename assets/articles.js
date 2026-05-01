@@ -2372,30 +2372,42 @@ Object.assign(A, {
   cat: "govt",
   label: "City Government",
   thumbnail: "/images/govt_office_007.jpg",
-  headline: "Pensacola Extends Administrative Services Agreement Between City and Community Redevelopment Agency",
-  dek: "An amendment to the 2016 interlocal agreement between Pensacola and its Community Redevelopment Agency governs how city departments provide staff support to the CRA. The council approved Amendment No. 2 on April 23.",
+  headline: "Council Rejects Bid to Strip Mayor's Office of CRA Staff Oversight",
+  dek: "Council Member Charles Bare proposed restoring pre-2016 language that would have moved supervision of Community Redevelopment Agency staff out of the mayor's chain. The motion failed 5-2 after 42 minutes of debate.",
   byline: "The Flightline Staff",
   date: "April 24, 2026",
   brief: [
-    "The City Council approved Amendment No. 2 to the 2016 interlocal agreement between the City of Pensacola and the Community Redevelopment Agency on April 23.",
-    "The interlocal sets the terms under which city staff provide planning, finance, legal and administrative services to the CRA, which operates as a separate legal entity.",
-    "The amendment updates cost-allocation and service-delivery language that had been revised once before in a 2019 amendment."
+    "The Pensacola City Council voted 5-2 on April 23 to reject Amendment No. 2 to the 2017 interlocal agreement between the city and its Community Redevelopment Agency.",
+    "The amendment, sponsored by Council Member Charles Bare, would have given the CRA Administrator sole supervisory authority over CRA staff under the CRA Chair, restoring language from before a 2016 reorganization placed staff oversight in the mayor's office.",
+    "Council members Jennifer Brahier and Bare voted yes. President Jared Moore, Allison Patton, Teniade Broughton, Casey Jones and Delarian Wiggins voted no."
   ],
-  body: `<p class="article-lede">Pensacola's City Council approved an updated administrative services agreement between the city and its Community Redevelopment Agency on April 23, formalizing how city departments support CRA operations following a decade of incremental changes in both organizations.</p>
+  body: `<div class="article-correction" style="border:2px solid #d4952b; background:#fdf6e8; padding:1rem; margin-bottom:1.5rem;">
+<p><strong>Correction posted April 30, 2026:</strong> An earlier version of this article, published April 24, incorrectly reported that the City Council approved Amendment No. 2 to the City-CRA interlocal agreement without discussion. The council in fact <em>rejected</em> the amendment by a 5-2 vote after 42 minutes of debate. The earlier version also misidentified the subject of the amendment, miscredited its sponsor, and described a "companion action" at the April 6 CRA meeting that does not appear in the record. The article below is a complete rewrite from the primary documents — the agenda packet, the memorandum (File 26-486), and the CivicClerk vote panel for Item 6 of the April 23 City Council Regular Meeting. The Flightline regrets the error.</p>
+</div>
 
-<p>The action, Item 6 on the regular agenda, authorized Amendment No. 2 to the 2016 interlocal agreement. Supporting documents posted to the city's CivicClerk portal included the amendment text, the 2019 first amendment and the original 2016 interlocal.</p>
+<p class="article-lede">Pensacola's City Council voted 5-2 on April 23 to reject a proposed amendment that would have removed supervision of Community Redevelopment Agency staff from the mayor's office and returned it to the CRA Administrator and the CRA Chair, leaving in place a 2019 arrangement that critics on the council have argued gives the mayor too much influence over an agency that legally operates as a separate entity.</p>
 
-<p>Florida law treats community redevelopment agencies as separate legal entities from the municipalities that create them, even when, as in Pensacola, the governing body of the CRA is composed of the same members as the City Council sitting in a different legal capacity. That separation means the CRA does not directly employ staff. Instead, the city provides administrative support under the interlocal — planning review, finance and accounting, legal services, procurement, project management and records retention — and the CRA reimburses the city under a formula set out in the agreement.</p>
+<p>The motion was Item 6 on the regular agenda, sponsored by Council Member Charles Bare. Council Member Jennifer Brahier joined Bare in voting yes. Council President Jared Moore — who serves concurrently as Chair of the CRA Board — joined Council Members Allison Patton, Teniade Broughton, Casey Jones and Delarian Wiggins in voting no. The discussion ran roughly 42 minutes on the meeting recording, from 1:28:22 to 2:10:09.</p>
 
-<p>The 2016 base agreement established the original framework. A first amendment in 2019 updated cost-allocation provisions and adjusted which departments carried which responsibilities as CRA project activity grew. The April 23 amendment is the second substantive update and reflects further evolution in how city and CRA work flows intersect, including expanded CRA responsibilities around affordable housing programs and property disposition.</p>
+<p>Florida law treats community redevelopment agencies as separate legal entities from the municipalities that create them. In Pensacola, the seven members of the City Council also sit as the CRA Board in a different legal capacity. The CRA does not directly employ staff. City employees handle planning review, finance, legal services and project management for the agency, and the CRA reimburses the city under terms set out in the interlocal agreement.</p>
 
-<p>The amendment does not create new CRA spending authority. It clarifies the rules governing how existing CRA tax-increment-financing revenue is charged for city staff time and overhead, a routine but substantial line in CRA budgets. Staff said in the accompanying memorandum that the revised language is intended to support cleaner year-end reconciliation between the two entities' books.</p>
+<p>The current arrangement traces to Amendment No. 1, adopted in August 2019. That amendment shifted day-to-day oversight of CRA staff into the mayor's office. Bare's Amendment No. 2 would have rewritten Article 2.2 of the interlocal to put the CRA Administrator back in sole charge of hiring, firing and supervising CRA staff, "under the direction and supervision of the Chair of the Agency." The accompanying memorandum from Council Executive Don Kraher, dated April 13 and reviewed as to form by the city attorney's office, framed the proposal as a return to 2016 and 2017 language, when the CRA Chair and Board — not the mayor — guided the administrator.</p>
 
-<p>Pensacola's CRA operates three redevelopment districts: Urban Core, Eastside and Westside. Tax-increment-financing revenue from property within each district is captured for reinvestment in that district's redevelopment plan. The agency has funded major projects including streetscape work, facade improvement grants, affordable housing programs, parks and public realm investments, and its share of the Community Maritime Park bond.</p>
+<h2>What Was at Stake</h2>
 
-<p>Victoria D'Angelo serves as the CRA's administrator and oversees day-to-day agency operations under the interlocal framework. The CRA also contracts with outside counsel and consultants for specialized work, including the Lambert Advisory review that featured in recent discussion of the Reverb by Hard Rock rebate application.</p>
+<p>The structural question underneath the vote is who effectively controls the people who do the day-to-day work of the CRA. Under the current Amendment No. 1, CRA Administrator Victoria D'Angelo reports up through the city's executive structure. Under Bare's proposal, she would have reported to the CRA Chair — currently Moore — and the CRA Board.</p>
 
-<p>The council approved the amendment without discussion. CRA board approval, separately required for the agreement to take effect on the agency's side, was processed at the April 6 CRA meeting through a companion action.</p>`
+<p>The change would have mattered for any CRA decision in which the mayor's preferences and the council's preferences diverge. Recent examples include the CRA's Lambert Advisory review of the proposed Reverb by Hard Rock tax-rebate application, the structuring of the Maritime Park Lot 5 rebate now under review, and CRA-controlled aspects of the Baptist Hospital redevelopment advisory contract. Staff supervision shapes how those reviews are conducted, what gets recommended to the board and how analysis is presented in public meetings.</p>
+
+<p>Bare and Brahier argued the 2019 change had the practical effect of making CRA staff answerable to the mayor in an arrangement they said the legislature did not contemplate when it created CRAs as separate entities. The five council members in the majority did not move to alter the existing structure.</p>
+
+<h2>The Vote in Context</h2>
+
+<p>The CRA operates three districts: Urban Core, Eastside and Westside. Tax-increment-financing revenue from each district is captured for reinvestment within that district under an adopted redevelopment plan. The agency funds streetscape work, facade improvement grants, affordable housing programs, parks and the city's share of the Community Maritime Park bond. Decisions about how that revenue is committed run through CRA staff before reaching the board.</p>
+
+<p>Item 6 was one of seven action items on April 23. The council also adopted Ordinance 5-26 repealing the city's corrugated cardboard provision on a split 4-3 vote, approved the disposition of the Alice S. Williams Childcare property at 1015 N E Street to the Community Action Program Committee, and joined a settlement involving six remaining opioid defendants. All other action items passed.</p>
+
+<p>Amendment No. 1 to the 2017 interlocal remains in force following Tuesday's vote.</p>`
 },
 
 "architect-advisor-brian-spencer": {
