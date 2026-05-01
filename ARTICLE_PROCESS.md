@@ -51,6 +51,27 @@ re-prompting because the work was incomplete.
 7. **If Drew asks "did you follow your instructions," the answer is almost
    always no.** That question means a corner got cut. Do not defend the
    work — restart from Step 1 and do it properly.
+8. **Never write from agenda listings or general knowledge of how things
+   "usually" work.** If a Flightline article describes what a vote did,
+   what a memo said, or what a meeting decided, those facts must come
+   from reading the actual document and the actual vote record — not
+   from the item title, not from a topic-area assumption, not from a
+   draft of a prior similar article.
+
+   **Cautionary example:** The `cra-interlocal-amendment` article,
+   published April 24, 2026, said the council approved Amendment No. 2
+   to the City-CRA interlocal "without discussion." The CivicClerk vote
+   panel for Item 6 of the April 23 meeting actually shows the motion
+   FAILED 2-5 after 42 minutes of debate. The article was drafted from
+   the agenda listing — which named the item and showed the sponsor's
+   recommendation to "adopt" — and from generic prior knowledge about
+   how city-CRA interlocals usually work. The author imagined what
+   Amendment No. 2 probably said and what the council probably did,
+   instead of opening the memo and the vote panel. Five distinct
+   factual errors made it past the writing pass and the pre-publish
+   checks. This must never happen again. Reference this example
+   explicitly in any future training pass on the Flightline workflow.
+
 
 ### Soft rules (judgment calls, but lean toward strictness)
 
@@ -474,7 +495,41 @@ If Drew approved a visual for the story, build it before finalizing the article 
 
 ## Step 12 — Pre-publish fact verification
 
-Before finalizing the article JSON, run this checklist against the source document:
+### 12A. Binary body-claim checklist (mandatory; cannot publish if any answer is "no")
+
+Before finalizing the article JSON, answer each question below with an explicit
+yes or no. Do not publish if any answer is no. Do not skip a question because
+"it obviously applies" — write the answer.
+
+- [ ] Did I open the actual PDF (or rendered text) of the memo for every
+      agenda item the article describes?
+- [ ] Did I read the actual vote panel for every vote the article describes?
+- [ ] Does every dollar figure in the article appear, in those exact digits,
+      in a primary document I read?
+- [ ] Does every vote count in the article appear, in that exact form, in
+      the vote panel I read?
+- [ ] Does every named person in the article (sponsor, mover, presenter,
+      official, applicant) appear with that name and title in a primary
+      document I read?
+- [ ] If the article uses words like "approved," "adopted," "rejected,"
+      "passed," "failed," "deferred," "withdrawn" — does the vote panel
+      confirm that exact outcome word for the corresponding motion?
+- [ ] If the article describes the discussion (e.g. "without discussion,"
+      "after a brief debate," "amid public concern"), did I confirm that
+      from the meeting media or minutes — not infer it?
+- [ ] **Inverse hypothesis check:** If I had to argue the OPPOSITE of the
+      article's lede (the council REJECTED what I said they approved; the
+      sponsor was someone OTHER than who I named; the dollar figure is
+      MORE/LESS than what I wrote), would the primary documents I have on
+      hand let me rule that out? If no — go re-read.
+
+If any answer is no, the article does not publish. The fix is to go back
+to Step 5 and read the source documents — not to re-word the article so
+the assertion sounds softer.
+
+### 12B. Standard fact-verification pass (in addition to the binary checklist)
+
+Run this checklist against the source documents:
 
 - Every named person: confirm spelling and title against the primary document.
 - Every dollar figure: confirm against the primary document — no rounding unless
@@ -485,7 +540,7 @@ Before finalizing the article JSON, run this checklist against the source docume
   statement — never paraphrase into quotation marks.
 - Article slug (id): confirm it does not already exist as a key in og-data.json.
 
-### Interactive and visual elements — additional verification required
+### 12C. Interactive and visual elements — additional verification required
 
 Every data point inside a widget, table, chart, spec card, or cluster graphic
 must pass the same standard as body copy. These elements get read closely and
