@@ -2,67 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://theflightline.news/</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://theflightline.news/?p=about</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://theflightline.news/?p=our-mission</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://theflightline.news/?p=contact</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://theflightline.news/?p=tips</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://theflightline.news/?p=letters</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://theflightline.news/?p=advertise</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://theflightline.news/?p=newsletter</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://theflightline.news/?p=subscribe</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://theflightline.news/?p=privacy</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
     <loc>https://theflightline.news/?p=terms</loc>
-    <lastmod>2026-04-27T12:00:00+00:00</lastmod>
+    <lastmod>2026-05-01T20:53:17+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -94,6 +94,96 @@
     <image:image>
       <image:loc>https://theflightline.news/images/community_food-trucks_004.jpg</image:loc>
       <image:title>Pickles and Wings Family Festival Hits Seville Square May 16</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://theflightline.news/story/planning-board-rezonings-may5</loc>
+    <lastmod>2026-05-01T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://theflightline.news/images/govt_escambia-county-facade_001.jpg</image:loc>
+      <image:title>Two Escambia rezonings would jump density six-fold on Nine Mile and Highway 29</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://theflightline.news/story/escambia-drc-pipeline-april29</loc>
+    <lastmod>2026-05-01T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://theflightline.news/images/govt_escambia-county-facade_001.jpg</image:loc>
+      <image:title>Escambia development pipeline keeps stacking: 11 subdivision filings hit one DRC cycle</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://theflightline.news/story/pensacola-bay-bridge-artificial-reef-043026</loc>
+    <lastmod>2026-05-01T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://theflightline.news/images/beach_pensacola-bay-shoreline_019.jpg</image:loc>
+      <image:title>Escambia drops 380 tons of broken Bay Fishing Bridge into the Gulf as artificial reef</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://theflightline.news/story/keyla-richardson-hometown-logistics-043026</loc>
+    <lastmod>2026-05-01T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://theflightline.news/images/community_concert_008.jpg</image:loc>
+      <image:title>Keyla Richardson hometown plans take shape: parade Wednesday, two ticket releases, no chairs</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://theflightline.news/story/sea-turtle-nesting-season-opens-050126</loc>
+    <lastmod>2026-05-01T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://theflightline.news/images/beach_emerald-water_004.jpg</image:loc>
+      <image:title>Sea turtle nesting season opens on Pensacola Beach and Perdido Key</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://theflightline.news/story/pensacola-energy-payment-system-swap-043026</loc>
+    <lastmod>2026-05-01T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://theflightline.news/images/govt_city-hall-entrance_001.jpg</image:loc>
+      <image:title>Pensacola Energy and sanitation customers can&apos;t pay online this weekend during system swap</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://theflightline.news/story/escambia-planning-board-volunteer-042926</loc>
+    <lastmod>2026-05-01T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://theflightline.news/images/govt_escambia-bcc-commissioners_001.jpg</image:loc>
+      <image:title>Escambia BCC seeks at-large volunteer for Planning Board with May 11 deadline</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://theflightline.news/story/ellison-west-main-groundbreaking-042926</loc>
+    <lastmod>2026-04-29T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>images/ellison-west-main-rendering.jpg</image:loc>
+      <image:title>Work Begins on 323 Apartments on the Long-Vacant Block Across From Maritime Park</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://theflightline.news/story/visit-pensacola-tdc-best-beach-affluent-042926</loc>
+    <lastmod>2026-04-29T12:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>images/beach_pensacola-beach-watertower_001.jpg</image:loc>
+      <image:title>Visit Pensacola wants wealthier tourists. It just voted $500K to go get them.</image:title>
     </image:image>
   </url>
   <url>
@@ -162,7 +252,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://theflightline.news/images/community_concert_008.jpg</image:loc>
+      <image:loc>https://theflightline.news/images/govt_city-hall-aerial_001.jpg</image:loc>
       <image:title>Pensacola plans free hometown concert for Keyla Richardson if she makes American Idol Top 3</image:title>
     </image:image>
   </url>
@@ -302,7 +392,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://theflightline.news/images/development_road-work_002.jpg</image:loc>
+      <image:loc>https://theflightline.news/images/govt_escambia-county-building_001.jpg</image:loc>
       <image:title>Escambia County Is Repaving 47 Roads This Year. Here&apos;s Where the Money Is Going.</image:title>
     </image:image>
   </url>
@@ -432,7 +522,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://theflightline.news/images/govt_public-hearing_009.jpg</image:loc>
+      <image:loc>https://theflightline.news/images/govt_city-hall-aerial_001.jpg</image:loc>
       <image:title>City Council and County Commission Are Meeting Together on April 16. That&apos;s Unusual.</image:title>
     </image:image>
   </url>
@@ -452,7 +542,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://theflightline.news/images/govt_office_007.jpg</image:loc>
+      <image:loc>https://theflightline.news/images/govt_city-hall-entrance_001.jpg</image:loc>
       <image:title>The City Is Donating Land on West Avery Street for a Community Health Facility</image:title>
     </image:image>
   </url>
@@ -482,7 +572,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://theflightline.news/images/govt_office_007.jpg</image:loc>
+      <image:loc>https://theflightline.news/images/govt_city-hall-entrance_001.jpg</image:loc>
       <image:title>Pensacola Is Donating City-Owned Land in West Pensacola to Bring Medical and Dental Care to the Neighborhood</image:title>
     </image:image>
   </url>
@@ -512,7 +602,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://theflightline.news/images/govt_office_007.jpg</image:loc>
+      <image:loc>https://theflightline.news/images/govt_escambia-county-building_001.jpg</image:loc>
       <image:title>In the Sunshine: What Escambia County and Pensacola&apos;s Elected Officials Actually Earn</image:title>
     </image:image>
   </url>
@@ -722,7 +812,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://theflightline.news/images/editorial_voting_010.jpg</image:loc>
+      <image:loc>https://theflightline.news/images/govt_escambia-bcc-commissioners_001.jpg</image:loc>
       <image:title>Commission Votes 4-1 to Put Superintendent Referendum on August Primary Ballot</image:title>
     </image:image>
   </url>
@@ -812,7 +902,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://theflightline.news/images/editorial_gavel_005.jpg</image:loc>
+      <image:loc>https://theflightline.news/images/govt_city-hall-entrance_001.jpg</image:loc>
       <image:title>Mayor Reeves Warns State Tax Plan Could Gut City Budget by $9M</image:title>
     </image:image>
   </url>
@@ -822,7 +912,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://theflightline.news/images/govt_public-hearing_009.jpg</image:loc>
+      <image:loc>https://theflightline.news/images/govt_escambia-bcc-commissioners_001.jpg</image:loc>
       <image:title>Escambia Commission and Clerk Childers Clash Over Funding Championship Basketball Team</image:title>
     </image:image>
   </url>
@@ -852,7 +942,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://theflightline.news/images/govt_office_007.jpg</image:loc>
+      <image:loc>https://theflightline.news/images/govt_escambia-county-building_001.jpg</image:loc>
       <image:title>Escambia County&apos;s Budget Season Starts Early — and the Numbers Are Already Hard</image:title>
     </image:image>
   </url>
