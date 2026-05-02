@@ -1,21 +1,18 @@
 User-agent: *
 Allow: /
 Disallow: /pending_articles.json
-Disallow: /og-data.json
 Disallow: /debug.txt
 Disallow: /process/
 
 User-agent: Googlebot
 Allow: /
 Disallow: /pending_articles.json
-Disallow: /og-data.json
 Disallow: /debug.txt
 Disallow: /process/
 
 User-agent: Googlebot-News
 Allow: /
 Disallow: /pending_articles.json
-Disallow: /og-data.json
 Disallow: /debug.txt
 Disallow: /process/
 
@@ -28,14 +25,12 @@ Allow: /
 User-agent: GoogleOther
 Allow: /
 Disallow: /pending_articles.json
-Disallow: /og-data.json
 Disallow: /debug.txt
 Disallow: /process/
 
 User-agent: Bingbot
 Allow: /
 Disallow: /pending_articles.json
-Disallow: /og-data.json
 Disallow: /debug.txt
 Disallow: /process/
 
