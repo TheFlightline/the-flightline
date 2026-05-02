@@ -1497,29 +1497,95 @@
 
   <div class="pay-page-wrap">
 
-    <!-- Stat callouts -->
-    <div class="pay-stat-row">
-      <div class="pay-stat-card">
-        <div class="lbl">Escambia median HH income</div>
-        <div class="val">$67,500</div>
-        <div class="src">U.S. Census ACS 2024</div>
+    <!-- Stat callouts — the gap, in three numbers -->
+    <style>
+      .pay-gap-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 24px;}
+      .pay-gap-card{position:relative;background:#fff;border:1px solid #e5e3dc;border-radius:6px;padding:22px 24px 20px;display:flex;flex-direction:column;justify-content:space-between;min-height:180px;}
+      .pay-gap-card--top{border-top:4px solid #1E2D4A;}
+      .pay-gap-card--mid{border-top:4px solid #888;}
+      .pay-gap-card--bottom{border-top:4px solid #D4871A;}
+      .pay-gap-rank{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#999;margin-bottom:14px;}
+      .pay-gap-card--top .pay-gap-rank{color:#1E2D4A;}
+      .pay-gap-card--bottom .pay-gap-rank{color:#a96a14;}
+      .pay-gap-val{font-family:'DM Sans',sans-serif;font-weight:900;font-size:38px;line-height:1;color:#1a1a1a;letter-spacing:-0.02em;margin-bottom:8px;}
+      .pay-gap-label{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#1E2D4A;line-height:1.3;margin-bottom:6px;}
+      .pay-gap-context{font-family:'DM Sans',sans-serif;font-size:12px;color:#666;line-height:1.45;margin-bottom:10px;}
+      .pay-gap-src{font-family:'DM Sans',sans-serif;font-size:10px;color:#999;letter-spacing:0.04em;border-top:1px solid #f0eee7;padding-top:8px;}
+      .pay-gap-summary{font-family:'DM Sans',sans-serif;font-size:13px;color:#666;text-align:center;margin:0 0 32px;font-style:italic;line-height:1.5;}
+      .pay-gap-summary strong{color:#1E2D4A;font-weight:700;font-style:normal;}
+      @media (max-width:780px){
+        .pay-gap-row{grid-template-columns:1fr;gap:10px;}
+        .pay-gap-card{min-height:auto;padding:18px 20px 16px;}
+        .pay-gap-val{font-size:32px;}
+      }
+    </style>
+    <div class="pay-gap-row">
+      <div class="pay-gap-card pay-gap-card--top">
+        <div>
+          <div class="pay-gap-rank">Top of the ladder</div>
+          <div class="pay-gap-val" id="payGapTopVal">$251,114</div>
+          <div class="pay-gap-label" id="payGapTopLabel">Sheriff's Office</div>
+          <div class="pay-gap-context">Highest-paid local elected office. Set by Florida statute, not local negotiation.</div>
+        </div>
+        <div class="pay-gap-src">FL EDR · FY2025-26</div>
       </div>
-      <div class="pay-stat-card">
-        <div class="lbl">Pensacola city median HH</div>
-        <div class="val">$74,212</div>
-        <div class="src">U.S. Census ACS 2024</div>
+      <div class="pay-gap-card pay-gap-card--mid">
+        <div>
+          <div class="pay-gap-rank">Middle of the ladder</div>
+          <div class="pay-gap-val">$50,299</div>
+          <div class="pay-gap-label">Median elected official</div>
+          <div class="pay-gap-context">School Board, ECUA Board, and other appointed positions earn the midpoint of the elected pay scale.</div>
+        </div>
+        <div class="pay-gap-src">FL EDR · FY2025-26</div>
       </div>
-      <div class="pay-stat-card pay-stat-card--warn">
-        <div class="lbl">City workforce pay rank</div>
-        <div class="val">21<span style="font-size:18px;font-weight:700;">st pct.</span></div>
-        <div class="src">Before 2024 pay reform</div>
-      </div>
-      <div class="pay-stat-card">
-        <div class="lbl">Metro avg hourly wage</div>
-        <div class="val">$27.13</div>
-        <div class="src">vs $32.66 national avg · BLS OEWS May 2024</div>
+      <div class="pay-gap-card pay-gap-card--bottom">
+        <div>
+          <div class="pay-gap-rank">The people paying for it</div>
+          <div class="pay-gap-val">$37,256</div>
+          <div class="pay-gap-label">Per capita income</div>
+          <div class="pay-gap-context">What the average individual Escambia resident earns. Not household — one person, working or not.</div>
+        </div>
+        <div class="pay-gap-src">U.S. Census ACS 2024 · 1-yr est.</div>
       </div>
     </div>
+    <p class="pay-gap-summary">The top elected official in Escambia County earns <strong>6.7×</strong> what the average resident makes.</p>
+
+    <script>
+      // Wire card 1 to the highest figure in the salary table at page load.
+      // Falls back gracefully if the table isn't present yet.
+      (function(){
+        function syncTop(){
+          var rows = document.querySelectorAll('.pay-tbl tbody tr');
+          if (!rows.length) return;
+          var maxVal = 0, maxLabel = '';
+          rows.forEach(function(tr){
+            if (tr.classList.contains('pay-tbl-group')) return;
+            var amtCell = tr.querySelector('.amt');
+            var labelCell = tr.querySelector('td:first-child');
+            if (!amtCell || !labelCell) return;
+            var n = parseInt(amtCell.textContent.replace(/[^0-9]/g,''),10);
+            if (!isNaN(n) && n > maxVal && amtCell.textContent.indexOf('/hr') === -1) {
+              maxVal = n;
+              maxLabel = labelCell.textContent.trim();
+            }
+          });
+          if (maxVal > 0) {
+            document.getElementById('payGapTopVal').textContent = '$' + maxVal.toLocaleString('en-US');
+            document.getElementById('payGapTopLabel').textContent = maxLabel;
+            // Update the multiplier in the summary line
+            var perCapita = 37256;
+            var mult = (maxVal / perCapita).toFixed(1);
+            var summary = document.querySelector('.pay-gap-summary strong');
+            if (summary) summary.textContent = mult + '×';
+          }
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', syncTop);
+        } else {
+          syncTop();
+        }
+      })();
+    </script>
 
     <!-- SEARCH — top of page -->
     <div style="margin-bottom:28px;">
@@ -1686,7 +1752,7 @@
         <p>If Pensacola wants qualified candidates for mayor — people with executive experience, the ability to turn down private-sector offers — $134,000 for the job of running a city with an airport, a port, a maritime park, 800 employees, and roughly $500 million in annual budget authority is arguably still not enough. The Jacksonville chief administrative officer recently earned more than $330,000. That's a different scale, but it illustrates the range of what Florida cities pay for comparable executive function.</p>
         <p>The same logic applies at every level. Paying a county sheriff $251,114 to run a law enforcement agency with hundreds of deputies is defensible. Paying elected commissioners $104,696 for what is formally a part-time position is a separate policy question worth asking. Florida's transparency infrastructure is better than most states. What it doesn't provide is context, comparison, or a single front door. The databases linked below are that front door. The data has always been public. It just hasn't been assembled this way before.</p>
 
-        <div class="sources-note">Sources: U.S. Bureau of Labor Statistics OEWS, Pensacola-Ferry Pass-Brent MSA, May 2024 (bls.gov) · U.S. Census Bureau ACS 2024 five-year estimates · FL Office of Economic and Demographic Research, <em>Salaries of Elected County Constitutional Officers and School District Officials for FY2025-26</em>, finsal25.pdf, October 2025 (edr.state.fl.us) · FL General Appropriations Act, Ch. 2025-198, s.8 (State Attorneys, Public Defenders, Judges, eff. July 1, 2025) · ECPS/EEA/ESP salary agreement, Board vote March 18, 2025 — WEAR-TV Feb. 4, 2025; WKRG Feb. 4, 2025 · City of Pensacola Ordinance (mayor salary), July 28, 2022 — WUWF Nov. 11, 2025 confirms current · City Charter amendment (council formula), eff. after 2024 election.</div>
+        <div class="sources-note">Sources: U.S. Bureau of Labor Statistics OEWS, Pensacola-Ferry Pass-Brent MSA, May 2024 (bls.gov) · U.S. Census Bureau ACS 2024 five-year estimates · U.S. Census Bureau ACS 2024 1-year estimates (per capita income, Escambia County: $37,256) · FL Office of Economic and Demographic Research, <em>Salaries of Elected County Constitutional Officers and School District Officials for FY2025-26</em>, finsal25.pdf, October 2025 (edr.state.fl.us) · FL General Appropriations Act, Ch. 2025-198, s.8 (State Attorneys, Public Defenders, Judges, eff. July 1, 2025) · ECPS/EEA/ESP salary agreement, Board vote March 18, 2025 — WEAR-TV Feb. 4, 2025; WKRG Feb. 4, 2025 · City of Pensacola Ordinance (mayor salary), July 28, 2022 — WUWF Nov. 11, 2025 confirms current · City Charter amendment (council formula), eff. after 2024 election.</div>
     </div>
 
     <!-- Full employee databases -->
