@@ -842,6 +842,15 @@
       <div class="cat-page-sub" id="cat-page-sub"></div>
     </div>
   </div>
+  <!-- Sub-nav: only shown for Government category -->
+  <div id="cat-subnav" style="display:none;background:#f8f8f5;border-bottom:1px solid #e5e3dc;padding:10px 0;">
+    <div class="container" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;">
+      <span style="color:#666;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">In this section:</span>
+      <a href="/salaries" style="color:#1e2d4a;text-decoration:none;border-bottom:2px solid #D4871A;padding-bottom:2px;">✦ Salary Database</a>
+      <a href="javascript:void(0)" onclick="goPage('community-calendar')" style="color:#666;text-decoration:none;">Meeting Calendar</a>
+      <a href="javascript:void(0)" onclick="goPage('tips')" style="color:#666;text-decoration:none;">Send a Tip</a>
+    </div>
+  </div>
   <div class="container">
     <div class="cat-card-grid" id="cat-card-grid"></div>
   </div>
@@ -1553,6 +1562,16 @@
     </div>
 
     <!-- Dashboard grid -->
+    <style>
+      /* Override two-column grid → single column for cleaner reading flow */
+      .pay-dash-grid{display:block !important;grid-template-columns:1fr !important;}
+      .pay-dash-grid > div{margin-bottom:36px;}
+      .pay-dash-grid > div:last-child{margin-bottom:0;}
+      /* Center and constrain dashboard width to article measure */
+      .pay-dash-grid{max-width:980px;margin-left:auto;margin-right:auto;}
+      /* Make the table breathe at full width */
+      .pay-tbl{width:100%;}
+    </style>
     <div class="pay-dash-grid">
       <!-- Chart column -->
       <div>
@@ -1729,7 +1748,7 @@
       </div>
     </div>
     <div class="footer-grid">
-      <div class="footer-col"><div class="footer-col-title">Coverage</div><a href="javascript:void(0)" onclick="goCategory('news')">Local News</a><a href="javascript:void(0)" onclick="goCategory('govt')">Government</a><a href="javascript:void(0)" onclick="goCategory('military')">Military</a><a href="javascript:void(0)" onclick="goCategory('dev')">Development</a><a href="javascript:void(0)" onclick="goCategory('opinion')">Opinion</a><a href="javascript:void(0)" onclick="goCategory('events')">Events</a><a href="/portofcall">Port of Call</a></div>
+      <div class="footer-col"><div class="footer-col-title">Coverage</div><a href="javascript:void(0)" onclick="goCategory('news')">Local News</a><a href="javascript:void(0)" onclick="goCategory('govt')">Government</a><a href="javascript:void(0)" onclick="goCategory('military')">Military</a><a href="javascript:void(0)" onclick="goCategory('dev')">Development</a><a href="javascript:void(0)" onclick="goCategory('opinion')">Opinion</a><a href="javascript:void(0)" onclick="goCategory('events')">Events</a><a href="/portofcall">Port of Call</a><a href="/salaries">Salary Database</a></div>
       <div class="footer-col"><div class="footer-col-title">Community</div><a href="javascript:void(0)" onclick="goPage('about')">About The Flightline</a><a href="javascript:void(0)" onclick="goPage('our-mission')">Our Mission</a><a href="javascript:void(0)" onclick="goPage('letters')">Letters to the Editor</a><a href="javascript:void(0)" onclick="goPage('community-calendar')">Community Calendar</a><a href="javascript:void(0)" onclick="goPage('tips')">Tips &amp; Story Ideas</a></div>
       <div class="footer-col"><div class="footer-col-title">Connect</div><a href="javascript:void(0)" onclick="goPage('newsletter')">Newsletter Signup</a><a href="https://x.com" target="_blank" rel="noopener">Twitter / X</a><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></div>
       <div class="footer-col"><div class="footer-col-title">Info</div><a href="javascript:void(0)" onclick="goPage('advertise')">Advertise</a><a href="javascript:void(0)" onclick="goPage('privacy')">Privacy Policy</a><a href="javascript:void(0)" onclick="goPage('terms')">Terms of Use</a><a href="javascript:void(0)" onclick="goPage('contact')">Contact</a></div>
