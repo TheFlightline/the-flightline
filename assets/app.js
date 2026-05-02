@@ -365,6 +365,9 @@ function goCategory(cat, page) {
 
   document.getElementById('cat-page-title').textContent = meta.label;
   document.getElementById('cat-page-sub').textContent = matches.length + ' ' + (matches.length === 1 ? 'story' : 'stories');
+  // Show sub-nav for Government section only
+  var subnav = document.getElementById('cat-subnav');
+  if (subnav) subnav.style.display = (cat === 'govt') ? 'block' : 'none';
 
   const catPhotos = {
     news: ['/images/downtown_pensacola-aerial-downtown_003.jpg','/images/downtown_palafox-street-clock_007.jpg','/images/community_park_003.jpg','/images/downtown_waterfront_004.jpg','/images/editorial_press_001.jpg'],
