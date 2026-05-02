@@ -3739,6 +3739,11 @@ function routeFromUrl() {
 
   // Static pages (community-calendar, about, newsletter, etc.) plus /pay
   var staticSlug = path.replace(/^\//, '').replace(/\/$/, '');
+  // /salaries is a friendly alias for the pay page
+  if (staticSlug === 'salaries') {
+    goPage('pay', true);
+    return;
+  }
   if (staticSlug && (ALL_STATIC_PAGES.indexOf(staticSlug) !== -1 || staticSlug === 'pay')) {
     // Pass true as second arg so goPage doesn't pushState a duplicate entry.
     goPage(staticSlug, true);
