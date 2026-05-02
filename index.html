@@ -1679,7 +1679,29 @@
 
       <!-- Table column -->
       <div>
-        <div class="pay-table-head">Position &amp; source year</div>
+        <style>
+          .pay-tbl-collapse{margin:0 0 8px;}
+          .pay-tbl-collapse > summary{list-style:none;cursor:pointer;background:#f8f8f5;border:1px solid #e5e3dc;border-radius:6px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;font-family:'DM Sans',sans-serif;transition:background 0.15s;}
+          .pay-tbl-collapse > summary::-webkit-details-marker{display:none;}
+          .pay-tbl-collapse > summary:hover{background:#f0eee7;}
+          .pay-tbl-collapse__title{font-size:14px;font-weight:700;color:#1E2D4A;letter-spacing:0.01em;}
+          .pay-tbl-collapse__count{font-size:12px;font-weight:500;color:#666;}
+          .pay-tbl-collapse__chev{display:inline-block;margin-left:10px;font-size:11px;color:#1E2D4A;transition:transform 0.2s;font-weight:700;}
+          .pay-tbl-collapse[open] > summary{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-color:transparent;}
+          .pay-tbl-collapse[open] .pay-tbl-collapse__chev{transform:rotate(180deg);}
+          .pay-tbl-collapse__body{border:1px solid #e5e3dc;border-top:none;border-radius:0 0 6px 6px;padding:18px 18px 14px;}
+          .pay-tbl-collapse[open] .pay-tbl-collapse__body{animation:payTblFade 0.2s ease;}
+          @keyframes payTblFade{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
+        </style>
+        <details class="pay-tbl-collapse">
+          <summary>
+            <span>
+              <span class="pay-tbl-collapse__title">Position &amp; source year</span>
+              <span class="pay-tbl-collapse__count" style="margin-left:10px;">· 28 positions across 5 employers</span>
+            </span>
+            <span class="pay-tbl-collapse__chev">▼ Expand</span>
+          </summary>
+          <div class="pay-tbl-collapse__body">
         <table class="pay-tbl">
           <thead><tr><th>Position</th><th>Salary</th><th>Yr</th></tr></thead>
           <tbody>
@@ -1718,6 +1740,8 @@
         <div class="pay-disclaimer">All elected officer figures computed from FL EDR Ch. 145 formula (FY2025-26 factors: Annual Factor 1.0286, CAF 4.2580) — source: EDR finsal25.pdf, October 2025. Mayor per City Ordinance July 28, 2022. Council per charter formula eff. after 2024 election. Teacher minimum per ECPS/EEA Board-approved agreement March 18, 2025. State officials per FL General Appropriations Act, eff. July 1, 2025. Worker wage data from U.S. BLS OEWS, Pensacola-Ferry Pass-Brent MSA, May 2024. All government salaries are public record under Florida law.</div>
         <a class="pay-db-link" href="https://myescambia.com/open-government/employee-wages" target="_blank" rel="noopener">Search Escambia wage database ↗</a>
         <a class="pay-db-link secondary" href="https://salaries.myflorida.com/" target="_blank" rel="noopener">Florida state salary database ↗</a>
+          </div>
+        </details>
       </div>
     </div>
 
@@ -1725,14 +1749,14 @@
     <div class="pay-article" style="margin-top:48px;">
       <div class="section-label" style="margin-bottom:18px;">The article</div>
 
-        <p class="lede">The room fills up. Commissioners take their seats, the gavel drops, and decisions get made — on your tax dollars, your roads, your schools, your water. Most people in those chairs earn far less than you probably think. Some earn more than most Pensacolans ever will. And for years, nobody put it all in one place.</p>
+        <p class="lede">The room fills up. Commissioners take their seats, the gavel drops, and decisions get made — on your tax dollars, your roads, your schools, your water. Most people in those chairs earn far less than you probably think. Some earn more than most Pensacolans ever will.</p>
 
         <p>Florida has one of the country's strongest government transparency laws. Salaries of government employees are public record at every level — county, municipal, state, school board, utility authority. That's the law. What the law doesn't do is make those numbers easy to find, easy to understand, or easy to compare.</p>
 
         <h3>The numbers on the ground</h3>
         <p>Start with what the average Pensacolian earns. The median household income in Pensacola was $74,212 in 2024, per the Census Bureau's American Community Survey. Across Escambia County as a whole — including communities north of downtown — the median was $67,500. The metro area's average hourly wage was $27.13 in May 2024, compared to a national average of $32.66 per the Bureau of Labor Statistics. That gap — roughly $11,000 per year — is the backdrop for every public salary conversation in this county.</p>
         <p>Now look at what the county's elected and appointed leadership earns. The county administrator is appointed, not elected, and their salary is set by contract rather than state formula — the position is not included in the EDR schedule. The sheriff earns $251,114 in FY2025-26 under the Florida EDR formula. The property appraiser earns $182,644. The supervisor of elections, $182,644. County commissioners earn $104,696 each. Those salaries don't come from local negotiation — they come from Tallahassee, set by a population-based formula in Florida Statutes Chapter 145 that the Legislature has used since the 1970s.</p>
-        <p>The mayor's office is a separate story. City Council voted in July 2022 to raise the mayor's salary from $100,000 to $134,000 — a position that had been frozen since 2010 through a decade of inflation, population growth, and rising expectations. Mayor D.C. Reeves currently earns that figure. City Council members earned $13,998 for years, until a 2024 charter amendment tied their pay to the same formula used for school board members. For FY2025-26, the council salary is $38,204 — a 44 percent increase, confirmed by a November 2025 report from Rick's Blog citing the charter formula.</p>
+        <p>The mayor's office is a separate story. City Council voted in July 2022 to raise the mayor's salary from $100,000 to $134,000 — a position that had been frozen since 2010 through a decade of inflation, population growth, and rising expectations. Mayor D.C. Reeves currently earns that figure. City Council members earned $13,998 for years, until a 2024 charter amendment tied their pay to the same formula used for school board members. For FY2025-26, the council salary is $38,204 — a 44 percent increase computed from the charter formula and the FL EDR FY2025-26 factors.</p>
 
         <h3>The workforce problem nobody advertised</h3>
         <p>The mayor's office itself put the front-line problem plainly. A salary study commissioned before the 2024 pay reform found the city ranked in the 21st percentile among municipalities in the Southeast.</p>
@@ -1746,11 +1770,10 @@
 
         <h3>Transparency as a floor, not a ceiling</h3>
         <p>Florida's Sunshine Law guarantees the right to ask. Escambia County has a searchable salary database at myescambia.com. The state maintains its own at salaries.myflorida.com. But the state database doesn't include municipal or county employees — it covers state agency employees only. Local governments post their own data in their own formats, with their own levels of accessibility. Some post it prominently. Others require a formal public records request.</p>
-        <p>Board members present a particular opacity problem. The ECUA board, the school board, the airport authority, the Community Redevelopment Authority — dozens of appointed and elected officials touching public money sit on bodies whose compensation is rarely examined collectively. Most board pay is modest. Some is nominal. But the point isn't the amount: it's the principle. Anyone drawing public funds for public duties should be findable in one search, not scattered across a dozen agency websites in different fiscal year formats.</p>
+        <p>Board members present a particular opacity problem. The ECUA board, the school board, the airport authority, the Community Redevelopment Agency — dozens of appointed and elected officials touching public money sit on bodies whose compensation is rarely examined collectively. Most board pay is modest. Some is nominal. But the point isn't the amount: it's the principle. Anyone drawing public funds for public duties should be findable in one search, not scattered across a dozen agency websites in different fiscal year formats.</p>
 
-        <h3>The honest case for paying more</h3>
-        <p>If Pensacola wants qualified candidates for mayor — people with executive experience, the ability to turn down private-sector offers — $134,000 for the job of running a city with an airport, a port, a maritime park, 800 employees, and roughly $500 million in annual budget authority is arguably still not enough. The Jacksonville chief administrative officer recently earned more than $330,000. That's a different scale, but it illustrates the range of what Florida cities pay for comparable executive function.</p>
-        <p>The same logic applies at every level. Paying a county sheriff $251,114 to run a law enforcement agency with hundreds of deputies is defensible. Paying elected commissioners $104,696 for what is formally a part-time position is a separate policy question worth asking. Florida's transparency infrastructure is better than most states. What it doesn't provide is context, comparison, or a single front door. The databases linked below are that front door. The data has always been public. It just hasn't been assembled this way before.</p>
+        <h3>What the data has always said</h3>
+        <p>Florida's transparency infrastructure is better than most states. What it doesn't provide is context, comparison, or a single front door. The databases linked below are that front door. The data has always been public. It just hasn't been assembled this way before.</p>
 
         <div class="sources-note">Sources: U.S. Bureau of Labor Statistics OEWS, Pensacola-Ferry Pass-Brent MSA, May 2024 (bls.gov) · U.S. Census Bureau ACS 2024 five-year estimates · U.S. Census Bureau ACS 2024 1-year estimates (per capita income, Escambia County: $37,256) · FL Office of Economic and Demographic Research, <em>Salaries of Elected County Constitutional Officers and School District Officials for FY2025-26</em>, finsal25.pdf, October 2025 (edr.state.fl.us) · FL General Appropriations Act, Ch. 2025-198, s.8 (State Attorneys, Public Defenders, Judges, eff. July 1, 2025) · ECPS/EEA/ESP salary agreement, Board vote March 18, 2025 — WEAR-TV Feb. 4, 2025; WKRG Feb. 4, 2025 · City of Pensacola Ordinance (mayor salary), July 28, 2022 — WUWF Nov. 11, 2025 confirms current · City Charter amendment (council formula), eff. after 2024 election.</div>
     </div>
