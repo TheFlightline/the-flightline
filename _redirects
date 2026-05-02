@@ -2,9 +2,8 @@
 /images/*  /images/:splat  200
 /assets/*  /assets/:splat  200
 
-# Block internal data files from public access (defense-in-depth)
+# Block internal data files from public access
 /pending_articles.json  /  404
-/og-data.json           /  404
 /debug.txt              /  404
 /process/*              /  404
 
